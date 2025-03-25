@@ -69,9 +69,14 @@ crashlytics-build.properties
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
 .idea/
-
+Library/
 Temp/
 Logs/
+obj/
+Build/
+Builds/
+Logs/
+UserSettings/
 
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
