@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
 using Assets.Scripting.Models;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,41 +14,45 @@ public class ScoreTable : MonoBehaviour
     private Transform scoreBodyContainer;
     private Transform scoreEntry;
     
+    public GameObject scoreEntryPrefab;
+    
+    private List<GameObject> scoreEntryList = new List<GameObject>();
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        scoreBodyContainer = transform.Find("ScoreTableBody");
-        scoreEntry = scoreBodyContainer.Find("ScoreEntry");
-        foreach (var player in Players.ActivePlayers)
+        // Create Entries
+        var scoreTableContainer = transform.Find("ScoreTableContainer");
+        scoreBodyContainer = scoreTableContainer.Find("ScoreTableBody");
+        for (var i = 0; i < Players.ActivePlayers.Count; i++)
         {
-            var entry = Instantiate(scoreEntry, scoreBodyContainer);
-            entry.Find("ScoreEntryNameText").GetComponent<Text>().text = player.PlayerName;
-            entry.Find("ScoreEntryScoreText").GetComponent<Text>().text = player.PlayerScore.ToString();
+            var player = Players.ActivePlayers[i];
+            var entry = Instantiate(scoreEntryPrefab, scoreBodyContainer);
+            var rect = entry.GetComponent<RectTransform>();
+            rect.anchoredPosition = new Vector2(0, -100 * (i + 1));
+            rect.pivot = new Vector2(1, 1);
+            rect.anchorMin = new Vector2(0, 1);
+            rect.anchorMax = new Vector2(1, 1);
+            
+            scoreEntryList.Add(entry);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreBodyContainer = transform.Find("ScoreTableBody");
-        scoreEntry = scoreBodyContainer.Find("ScoreEntry");
-        foreach (var player in Players.ActivePlayers)
+        // Updates all scores
+        for (var i = 0; i < Players.ActivePlayers.Count; i++)
         {
-            var entry = Instantiate(scoreEntry, scoreBodyContainer);
-            entry.Find("ScoreEntryNameText").GetComponent<Text>().text = player.PlayerName;
-            entry.Find("ScoreEntryScoreText").GetComponent<Text>().text = player.PlayerScore.ToString();
-        }
-    }
-
-    private void Awake()
-    {
-        scoreBodyContainer = transform.Find("ScoreTableBody");
-        scoreEntry = scoreBodyContainer.Find("ScoreEntry");
-        foreach (var player in Players.ActivePlayers)
-        {
-            var entry = Instantiate(scoreEntry, scoreBodyContainer);
-            entry.Find("ScoreEntryNameText").GetComponent<Text>().text = player.PlayerName;
-            entry.Find("ScoreEntryScoreText").GetComponent<Text>().text = player.PlayerScore.ToString();
+            var player = Players.ActivePlayers[i];
+            var entry = scoreEntryList[i];
+            var container = entry.transform.Find("ScoreEntryBackground");
+            
+            var nameContainer = container.Find("ScoreEntryNameContainer").Find("ScoreEntryNameText");
+            var scoreContainer = container.Find("ScoreEntryScoreContainer").Find("ScoreEntryScoreText");
+            
+            nameContainer.GetComponent<TextMeshProUGUI>().text = player.PlayerName;
+            scoreContainer.GetComponent<TextMeshProUGUI>().text = player.PlayerScore.ToString();
         }
     }
 }
