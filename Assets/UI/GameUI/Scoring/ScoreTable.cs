@@ -16,7 +16,7 @@ public class ScoreTable : MonoBehaviour
     
     public GameObject scoreEntryPrefab;
     
-    private List<GameObject> scoreEntryList = new List<GameObject>();
+    private List<GameObject> scoreEntryList = new();
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +26,6 @@ public class ScoreTable : MonoBehaviour
         scoreBodyContainer = scoreTableContainer.Find("ScoreTableBody");
         for (var i = 0; i < Players.ActivePlayers.Count; i++)
         {
-            var player = Players.ActivePlayers[i];
             var entry = Instantiate(scoreEntryPrefab, scoreBodyContainer);
             var rect = entry.GetComponent<RectTransform>();
             rect.anchoredPosition = new Vector2(0, -100 * (i + 1));
