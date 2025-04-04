@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Card
+public class Card: MonoBehaviour
 {
     public string country;
     public string gender; 
