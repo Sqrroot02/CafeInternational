@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Assets.Scripting.Models;
+using Assets.Scripts.Models;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;

@@ -1,4 +1,4 @@
-namespace Assets.Scripting.Models
+namespace Assets.Scripts.Models
 {
     public class Player
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Assets.Scripting.TestHelper;
+using Assets.Scripts.TestHelper;
 
-namespace Assets.Scripting.Models
+namespace Assets.Scripts.Models
 {
 	public class Players
 	{
