@@ -27,11 +27,16 @@ public class Deck : MonoBehaviour
         {
             foreach (Gender gender in Enum.GetValues(typeof(Gender)))
             {
-                CardData newCard = ScriptableObject.CreateInstance<CardData>();
-                newCard.gender = gender;
-                newCard.nationality = nationality;
-                newCard.cardSprite = GetSpriteForCountry(nationality, gender);
-                deckStack.Push(newCard);
+                // Every card is 4x in the deck, except for the jokers with 2 instances for male and female
+                int repeatCount = nationality != Nationality.Joker ? 4 : 2;
+                for (int i = 0; i < repeatCount; i++)
+                {
+                    CardData newCard = ScriptableObject.CreateInstance<CardData>();
+                    newCard.gender = gender;
+                    newCard.nationality = nationality;
+                    newCard.cardSprite = GetSpriteForCountry(nationality, gender);
+                    deckStack.Push(newCard);
+                }
             }
         }
     }
