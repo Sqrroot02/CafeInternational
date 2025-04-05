@@ -1,16 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Assets.Scripts.Models;
 
 public class Deck : MonoBehaviour
 {
-
-
-    public enum availableCountries { }//TO BE FILLED
-    public enum genders { MAN, WOMAN }
     public List<Sprite> countrySprites; //TODO: add sprites with Country, Gender Name
 
-    private Stack<Card> deckStack;
+    private Stack<CardData> deckStack;
 
     public GameObject cardPrefab; 
     public Transform cardSpawnArea;
@@ -26,69 +23,55 @@ public class Deck : MonoBehaviour
 
     void GenerateDeck()
     {
-
-        Debug.Log("Generate");
-        //deckStack = new Stack<Card>();
-
-        //foreach (availableCountries country in Enum.GetValues(typeof(availableCountries)))
-        //{
-        //    foreach (genders gender in Enum.GetValues(typeof(genders)))
-        //    {
-        //        Sprite sprite = GetSpriteForCountry(country.ToString(), gender.ToString());
-        //        Card newCard = new Card(country.ToString(), gender.ToString(), sprite);
-        //        deckStack.Push(newCard);
-        //    }
-        //}
-    }
-
-    Sprite GetSpriteForCountry(string country, string gender)
-    {
-        string targetName = gender + "_" + country;
-
-        foreach (Sprite sprite in countrySprites)
+        deckStack = new Stack<CardData>();
+        foreach (Nationality nationality in Enum.GetValues(typeof(Nationality)))
         {
-            if (sprite.name == targetName)
+            foreach (Gender gender in Enum.GetValues(typeof(Gender)))
             {
-                return sprite;
+                CardData newCard = ScriptableObject.CreateInstance<CardData>();
+                newCard.gender = gender;
+                newCard.nationality = nationality;
+                newCard.cardSprite = GetSpriteForCountry(nationality, gender);
+                deckStack.Push(newCard);
             }
         }
-        return null;
+    }
+
+    Sprite GetSpriteForCountry(Nationality nationality, Gender gender)
+    {
+        string spriteName = "Cards/" + gender + "_" + nationality;
+        return Resources.Load<Sprite>(spriteName);
     }
 
     void ShuffleDeck()
     {
-        Debug.Log("Shuffle");
-        //List<Card> tempDeck = new List<Card>(deckStack);
-        //deckStack.Clear();
+        List<CardData> tempDeck = new List<CardData>(deckStack);
+        deckStack.Clear();
 
-        //while (tempDeck.Count > 0)
-        //{
-        //    int index = UnityEngine.Random.Range(0, tempDeck.Count);
-        //    deckStack.Push(tempDeck[index]);
-        //    tempDeck.RemoveAt(index);
-        //}
+        while (tempDeck.Count > 0)
+        {
+            int index = UnityEngine.Random.Range(0, tempDeck.Count);
+            deckStack.Push(tempDeck[index]);
+            tempDeck.RemoveAt(index);
+        }
     }
 
     public void DrawCard()
     {
-        Debug.Log("DrawCard :)");
-        //Debug.Log("Card will be drawn");
-        //if (deckStack.Count > 0)
-        //{
-        //    Card drawnCard = deckStack.Pop();
+        if (deckStack.Count > 0)
+        {
+            CardData cardData = deckStack.Pop();
 
-        //    Vector3 spawnPosition = cardSpawnArea.position + spawnOffset * cardCount;
-        //    GameObject newCardObject = Instantiate(cardPrefab, spawnPosition, Quaternion.identity);
-        //    newCardObject.GetComponent<SpriteRenderer>().sprite = drawnCard.sprite;
+            Vector3 spawnPosition = cardSpawnArea.position + spawnOffset * cardCount;
+            GameObject newCardObject = Instantiate(cardPrefab, spawnPosition, Quaternion.identity);
+            newCardObject.GetComponent<Card>().SetCardData(cardData);
 
-        //    cardCount++;
-
-        //    Debug.Log("Gezogene Karte: " + drawnCard.country + " - " + drawnCard.gender);
-        //}
-        //else
-        //{
-        //    Debug.Log("Der Kartenstapel ist leer!");
-        //}
+            cardCount++;
+        }
+        else
+        {
+            Debug.Log("Der Kartenstapel ist leer!");
+        }
     }
 }
 

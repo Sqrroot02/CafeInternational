@@ -1,21 +1,19 @@
+using Assets.Scripts.Models;
 using UnityEngine;
 using UnityEngine.UI;
-using static Nationality;
+using static Assets.Scripts.Models.Nationality;
 
 public class Table : MonoBehaviour
 {
-    public Nationality Nationality;
-    private Image tableImage;
+    public Nationality nationality;
+    private Image _tableImage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        tableImage = GetComponent<Image>();
-        if (Nationality != Nationality.None)
-        {
-            string spriteName = "Flags/" + Nationality.ToString() + " Flag";
-            tableImage.sprite = Resources.Load<Sprite>(spriteName);
-        }
+        _tableImage = GetComponent<Image>();
+        string spriteName = "Flags/" + nationality.ToString() + " Flag";
+        _tableImage.sprite = Resources.Load<Sprite>(spriteName);
     }
 
     // Update is called once per frame

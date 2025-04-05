@@ -8,7 +8,6 @@ public class DeckStapel : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData) 
     {
-        Debug.Log("Onclicked");
         deck.DrawCard();
     }
 }

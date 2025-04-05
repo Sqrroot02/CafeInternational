@@ -1,16 +1,16 @@
+using System;
+using Assets.Scripts.Models;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Card: MonoBehaviour
 {
-    public string country;
-    public string gender; 
-    public Sprite sprite;
+    public CardData cardData;
 
-    public Card(string country, string gender, Sprite sprite)
+    public void SetCardData(CardData cardData)
     {
-        this.country = country;
-        this.gender = gender;
-        this.sprite = sprite;
+        this.cardData = cardData;
+        GetComponent<SpriteRenderer>().sprite = cardData.cardSprite;
     }
 }
