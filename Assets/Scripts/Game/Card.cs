@@ -7,10 +7,9 @@ using UnityEngine.UI;
 public class Card: MonoBehaviour
 {
     public CardData cardData;
-
     public void SetCardData(CardData cardData)
     {
         this.cardData = cardData;
-        GetComponent<SpriteRenderer>().sprite = cardData.cardSprite;
+        GetComponent<Image>().sprite = cardData.cardSprite;
     }
 }

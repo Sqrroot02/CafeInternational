@@ -11,9 +11,8 @@ public class Deck : MonoBehaviour
 
     public GameObject cardPrefab; 
     public Transform cardSpawnArea;
-    private Vector3 spawnOffset = new Vector3(0.5f, 0, 0);
+    private Vector3 spawnOffset = new Vector3(1.25f, 0, 0);
 
-    private int cardCount = 0;
 
     void Start()
     {
@@ -62,11 +61,8 @@ public class Deck : MonoBehaviour
         {
             CardData cardData = deckStack.Pop();
 
-            Vector3 spawnPosition = cardSpawnArea.position + spawnOffset * cardCount;
-            GameObject newCardObject = Instantiate(cardPrefab, spawnPosition, Quaternion.identity);
+            GameObject newCardObject = Instantiate(cardPrefab, cardSpawnArea);
             newCardObject.GetComponent<Card>().SetCardData(cardData);
-
-            cardCount++;
         }
         else
         {
