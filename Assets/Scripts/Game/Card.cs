@@ -24,6 +24,11 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     {
         _isPlaced = true;
     }
+
+    public bool GetIsPlaced()
+    {
+        return _isPlaced;
+    }
     
     public void SetCardData(CardData cardData)
     {

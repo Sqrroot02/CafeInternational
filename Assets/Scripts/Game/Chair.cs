@@ -46,7 +46,7 @@ public class Chair : MonoBehaviour
 
     public bool PlaceCard(Card card)
     {
-        if (CheckPlaceCard(card))
+        if (CheckPlaceCard(card) && !card.GetIsPlaced())
         {
             card.UpdateIsPlaced();
             _firstTable.AddPlacedCard(card.cardData);
