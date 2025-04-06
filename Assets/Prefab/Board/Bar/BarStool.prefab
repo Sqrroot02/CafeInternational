@@ -103,3 +103,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afbe7edc0c4fbe64aad031b785e6ce00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlinePrefab: {fileID: 3496307039000346501, guid: 17acd2437309f704fa5f7feb7d7006a0, type: 3}
