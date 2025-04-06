@@ -24,12 +24,18 @@ public class ScoreTable : MonoBehaviour
         // Create Entries
         var scoreTableContainer = transform.Find("ScoreTableContainer");
         scoreBodyContainer = scoreTableContainer.Find("ScoreTableBody");
+
+        var countPlayers = Players.ActivePlayers.Count;
+        var scaler = 1 / countPlayers;
+        var pivotSteps = 1 / (countPlayers - 1);
+        
         for (var i = 0; i < Players.ActivePlayers.Count; i++)
         {
             var entry = Instantiate(scoreEntryPrefab, scoreBodyContainer);
             var rect = entry.GetComponent<RectTransform>();
-            rect.anchoredPosition = new Vector2(0, -100 * (i + 1));
-            rect.pivot = new Vector2(1, 1);
+            //rect.anchoredPosition = new Vector2(0, -100 * (i + 1));
+            rect.localScale = new Vector3(1, scaler, 1);
+            rect.pivot = new Vector2(1, 1 - pivotSteps * i);
             rect.anchorMin = new Vector2(0, 1);
             rect.anchorMax = new Vector2(1, 1);
             
