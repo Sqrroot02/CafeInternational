@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Row
   - Chair
+  - BarStool
   layers:
   - Default
   - TransparentFX

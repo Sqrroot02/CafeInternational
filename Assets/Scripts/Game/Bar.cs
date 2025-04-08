@@ -26,20 +26,26 @@ public class Bar : MonoBehaviour
             {
                 foreach (Transform slot in row)
                 {
+                    slot.gameObject.GetComponent<BarStool>().SetIndex(cardSlots.Count);
                     cardSlots.Add(slot);
                 }
             }
         }
     }
 
-    public void AddCard(GameObject card)
+/// <summary>
+/// Checks if the stool is the next in line and if so increases the nextSlotIndex
+/// </summary>
+/// <param name="stoolIndex">The index of the stool that is checked</param>
+/// <returns>True if the stool is the next in line</returns>
+    public bool AddCard(int stoolIndex)
     {
-        nextSlotIntex++;
-    }
+        if (stoolIndex == nextSlotIntex)
+        {
+            nextSlotIntex++;
+            return true;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return false;
     }
 }

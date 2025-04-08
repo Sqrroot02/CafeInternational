@@ -9,6 +9,9 @@ public class DropCard : MonoBehaviour, IDropHandler
 
         if (droppedObject != null && Place(droppedObject.GetComponent<Card>()))
         {
+            CanvasGroup canvasGroup = droppedObject.GetComponent<Card>().GetComponent<CanvasGroup>();
+            canvasGroup.alpha = 1f;
+            
             RectTransform droppedRect = droppedObject.GetComponent<RectTransform>();
             droppedRect.SetParent(transform, false);
 
@@ -27,7 +30,7 @@ public class DropCard : MonoBehaviour, IDropHandler
         {
             return PlaceChair(card);
         }
-        else if (CompareTag("BarStool"))
+        if (CompareTag("BarStool"))
         {
             return CheckPlaceableBarStool(card);
         }
@@ -41,6 +44,6 @@ public class DropCard : MonoBehaviour, IDropHandler
 
     private bool CheckPlaceableBarStool(Card card)
     {
-        return true;
+        return GetComponent<BarStool>().PlaceCard(card);
     }
 }
