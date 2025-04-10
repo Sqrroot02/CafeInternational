@@ -5,13 +5,11 @@ public class BarStool : MonoBehaviour
 {
     public int Value; // The value of the chair that is added to the points of the one placing a card here // Negative scores are also added and not implemented seperately
     public Image stoolSprite; // The image on the stool // the number of points added
-    private bool stoolTaken; // stoolTaken is a flag to mark if the stool is available or not // Standard is false, so a card can be placed
     private int _index = 0;
 
     // Awake is called once even before Start
     private void Awake()
     {
-        stoolTaken = false;
         stoolSprite = GetComponent<Image>();
     }
 
@@ -28,6 +26,7 @@ public class BarStool : MonoBehaviour
         if (transform.parent.transform.parent.gameObject.GetComponent<Bar>().AddCard(_index) && !card.GetIsPlaced())
         {
             card.UpdateIsPlaced();
+            GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
             return true;
         }
         return false;

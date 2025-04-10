@@ -13,6 +13,11 @@ public class Outline : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         _outline.GetComponent<Image>().sprite = GetComponent<Image>().sprite;
         _outline.SetActive(false);
     }
+
+    public void UpdateOutlineSprite(Sprite sprite)
+    {
+        _outline.GetComponent<Image>().sprite = sprite;
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (_outline != null)
