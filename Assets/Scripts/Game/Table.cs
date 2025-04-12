@@ -22,8 +22,26 @@ public class Table : MonoBehaviour
     public int AddPlacedCard(CardData card)
     {
         placedCards.Add(card);
-        // TODO return points
-        return 0;
+        return GetTablePoints();
+    }
+
+    private int GetTablePoints()
+    {
+        bool nationalityMatchesTable = true;
+        foreach (var card in placedCards)
+        {
+            if (card.nationality != nationality)
+            {
+                nationalityMatchesTable = false;
+                break;
+            } 
+        }
+
+        if (placedCards.Count == 4 && nationalityMatchesTable)
+        {
+            return 8;
+        }
+        return placedCards.Count;
     }
 
     public bool CheckGenderPlaceable(Gender gender)

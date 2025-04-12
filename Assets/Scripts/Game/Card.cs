@@ -1,3 +1,4 @@
+using Assets.Scripts.Models;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,14 +13,21 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     private Canvas _canvas;
     private Transform _originalParent;
     private bool _isPlaced = false;
+    public Player Player { get; set; }
+    private PlayerManager _playerManager;
 
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvas = GetComponentInParent<Canvas>();
+        _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
 
+    public void Start()
+    {
+        Player = _playerManager.CurrentPlayer;
+    }
     public void UpdateIsPlaced()
     {
         _isPlaced = true;
@@ -38,7 +46,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!_isPlaced) {
+        if (!_isPlaced && _playerManager.CurrentPlayer == Player) {
             _originalParent = transform.parent;
             transform.SetParent(_canvas.transform);
             _canvasGroup.blocksRaycasts = false;
@@ -48,6 +56,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!_isPlaced && _playerManager.CurrentPlayer == Player)
         {
             _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
         }
@@ -55,7 +64,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!_isPlaced)
+        if (!_isPlaced && _playerManager.CurrentPlayer == Player)
         {
             _canvasGroup.blocksRaycasts = true;
             _canvasGroup.alpha = 1f;

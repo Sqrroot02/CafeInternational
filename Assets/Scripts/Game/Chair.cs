@@ -50,10 +50,10 @@ public class Chair : MonoBehaviour
         {
             card.UpdateIsPlaced();
             GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
-            _firstTable.AddPlacedCard(card.cardData);
+            card.Player.UpdatePlayerScore(_firstTable.AddPlacedCard(card.cardData));
             if (_secondTable != null)
             {
-                _secondTable.AddPlacedCard(card.cardData);
+                card.Player.UpdatePlayerScore(_secondTable.AddPlacedCard(card.cardData));
             }
             return true;
         }
