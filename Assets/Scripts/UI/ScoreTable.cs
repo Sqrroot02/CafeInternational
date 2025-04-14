@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using Assets.Scripts.Models;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Behaviour of Score Table
