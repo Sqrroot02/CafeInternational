@@ -27,16 +27,16 @@ public class ScoreTable : MonoBehaviour
 
         var countPlayers = Players.ActivePlayers.Count;
         var scaler = 1 / countPlayers;
-        var pivotSteps = 1 / (countPlayers - 1);
+        var pivotSteps = countPlayers <= 1 ? 1 : 1 / (countPlayers - 1);
         
         for (var i = 0; i < Players.ActivePlayers.Count; i++)
         {
+            Debug.Log($"Visualize Player-Score: {Players.ActivePlayers[i].PlayerName}");
             var entry = Instantiate(scoreEntryPrefab, scoreBodyContainer);
             var rect = entry.GetComponent<RectTransform>();
-            //rect.anchoredPosition = new Vector2(0, -100 * (i + 1));
-            rect.localScale = new Vector3(1, scaler, 1);
+            rect.localScale = new Vector2(1, scaler);
             rect.pivot = new Vector2(1, 1 - pivotSteps * i);
-            rect.anchorMin = new Vector2(0, 1);
+            rect.anchorMin = new Vector2(0, 0);
             rect.anchorMax = new Vector2(1, 1);
             
             scoreEntryList.Add(entry);
