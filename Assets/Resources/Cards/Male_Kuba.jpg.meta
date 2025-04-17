@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Male_Kuba_0: -5490816579865832571
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

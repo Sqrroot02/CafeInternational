@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Female_Kuba_0: 4715947852074171440
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

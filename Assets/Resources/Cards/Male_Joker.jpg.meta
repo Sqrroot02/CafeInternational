@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Male_Joker_0: 257293465398729619
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

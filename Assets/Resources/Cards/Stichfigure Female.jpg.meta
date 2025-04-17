@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Stichfigure Female_0: 695730104589856842
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

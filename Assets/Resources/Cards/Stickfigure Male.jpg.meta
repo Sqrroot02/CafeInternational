@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Stickfigure Male_0: 6368815573408097929
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
