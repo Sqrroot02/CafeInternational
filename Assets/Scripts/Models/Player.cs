@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Assets.Scripts.Models
 {
     public class Player
@@ -9,7 +11,13 @@ namespace Assets.Scripts.Models
         }
     
         public string PlayerName { get; set; }
-        public int PlayerScore { get; set; }
+        public int PlayerScore { get; private set; }
+
+        public void UpdatePlayerScore(int points)
+        {
+            PlayerScore += points;
+            Debug.Log(PlayerName + " " + PlayerScore);
+        }
     }
 }
 

@@ -1,31 +1,36 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class Outline : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private GameObject outline;
+    private GameObject _outline;
+    public GameObject outlinePrefab;
 
     public void Awake()
     {
-        outline = this.gameObject.transform.GetChild(0).gameObject;
-        if (outline != null)
-        {
-            outline.SetActive(false);
-        }
+        _outline = Instantiate(outlinePrefab, transform);
+        _outline.GetComponent<Image>().sprite = GetComponent<Image>().sprite;
+        _outline.SetActive(false);
+    }
+
+    public void UpdateOutlineSprite(Sprite sprite)
+    {
+        _outline.GetComponent<Image>().sprite = sprite;
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (outline != null)
+        if (_outline != null)
         {
-            outline.SetActive(true);
+            _outline.SetActive(true);
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (outline != null)
+        if (_outline != null)
         {
-            outline.SetActive(false);
+            _outline.SetActive(false);
         }
     }
 }

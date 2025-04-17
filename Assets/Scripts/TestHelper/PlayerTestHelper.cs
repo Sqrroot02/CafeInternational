@@ -7,10 +7,10 @@ namespace Assets.Scripts.TestHelper
 	{
 		public static List<Player> Players = new()
 		{
-			new("Test-Player", 10),
-			new("Alex", 3),
-			new("Meef", 2),
-			new("Huso", 20000)
+			new("Test-Player", 0),
+			new("Alex", 0),
+			new("Meef", 0),
+			new("Huso", 0)
 		};
 	}
 }

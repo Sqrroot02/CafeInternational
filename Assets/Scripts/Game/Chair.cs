@@ -1,19 +1,62 @@
+using Assets.Scripts.Models;
 using UnityEngine;
 
 public class Chair : MonoBehaviour
 {
-    public GameObject FirstTable;
-    public GameObject SecondTable; // Can be null
+    public GameObject FirstTableGO;
+    public GameObject SecondTableGO; // Can be null
+    private Table _firstTable;
+    private Table _secondTable;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
-        
+        _firstTable = FirstTableGO.GetComponent<Table>();
+        if (SecondTableGO != null)
+        {
+            _secondTable = SecondTableGO.GetComponent<Table>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private bool HasPlaceableNationality(Nationality nationality)
     {
-        
+        return nationality == Nationality.Joker || _firstTable.nationality == nationality || (_secondTable != null && _secondTable.nationality == nationality);
+    }
+
+    private bool CheckPlaceCard(Card card)
+    {
+        // Check nationality matches the chair
+        if (HasPlaceableNationality(card.cardData.nationality))
+        {   // Check the first table is placeable
+            if (_firstTable.CheckGenderPlaceable(card.cardData.gender))
+            {
+                // If the chair is only at one table the gendercheck of the first table is enough
+                if (_secondTable == null)
+                {
+                    return true;
+                }
+                // Otherwise the gender has to be checked for the second gender
+                return _secondTable.CheckGenderPlaceable(card.cardData.gender);
+            }
+            Debug.Log("Table 1 Gender Fail");
+        }
+        else 
+            Debug.Log("No placable nationality");
+        return false;
+    }
+
+    public bool PlaceCard(Card card)
+    {
+        if (CheckPlaceCard(card) && !card.GetIsPlaced())
+        {
+            card.UpdateIsPlaced();
+            GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
+            card.Player.UpdatePlayerScore(_firstTable.AddPlacedCard(card.cardData));
+            if (_secondTable != null)
+            {
+                card.Player.UpdatePlayerScore(_secondTable.AddPlacedCard(card.cardData));
+            }
+            return true;
+        }
+        return false;
     }
 }

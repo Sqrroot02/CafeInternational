@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5026687379019126504}
   - component: {fileID: 1528450322454650146}
   - component: {fileID: -4173170702549698614}
+  - component: {fileID: -4457870594095122842}
   m_Layer: 0
   m_Name: BarStool
-  m_TagString: Untagged
+  m_TagString: BarStool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 2792882850126855977}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,5 +102,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afbe7edc0c4fbe64aad031b785e6ce00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlinePrefab: {fileID: 3496307039000346501, guid: 17acd2437309f704fa5f7feb7d7006a0, type: 3}
+--- !u!114 &-4457870594095122842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792882850126855977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7e51396f70c144e8c1da1684d8516f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
