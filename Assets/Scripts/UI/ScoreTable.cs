@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class ScoreTable : MonoBehaviour
 {
-    private Transform scoreBodyContainer;
+    private VerticalLayoutGroup scoreBodyContainer;
     private Transform scoreEntry;
     
     public GameObject scoreEntryPrefab;
@@ -20,22 +20,11 @@ public class ScoreTable : MonoBehaviour
     {
         // Create Entries
         var scoreTableContainer = transform.Find("ScoreTableContainer");
-        scoreBodyContainer = scoreTableContainer.Find("ScoreTableBody");
-
-        var countPlayers = Players.ActivePlayers.Count;
-        var scaler = 1 / countPlayers;
-        var pivotSteps = 1 / (countPlayers - 1);
-        
+        scoreBodyContainer = scoreTableContainer.GetComponent<VerticalLayoutGroup>();
         for (var i = 0; i < Players.ActivePlayers.Count; i++)
         {
-            var entry = Instantiate(scoreEntryPrefab, scoreBodyContainer);
-            var rect = entry.GetComponent<RectTransform>();
-            //rect.anchoredPosition = new Vector2(0, -100 * (i + 1));
-            rect.localScale = new Vector3(1, scaler, 1);
-            rect.pivot = new Vector2(1, 1 - pivotSteps * i);
-            rect.anchorMin = new Vector2(0, 1);
-            rect.anchorMax = new Vector2(1, 1);
-            
+            Debug.Log($"Visualize Player-Score: {Players.ActivePlayers[i].PlayerName}");
+            var entry = Instantiate(scoreEntryPrefab, scoreBodyContainer.transform);
             scoreEntryList.Add(entry);
         }
     }
