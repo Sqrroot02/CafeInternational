@@ -12,7 +12,7 @@ public class DropCard : MonoBehaviour, IDropHandler
             CanvasGroup canvasGroup = droppedObject.GetComponent<Card>().GetComponent<CanvasGroup>();
             canvasGroup.alpha = 1f;
             
-            RectTransform droppedRect = droppedObject.GetComponent<RectTransform>();
+            RectTransform droppedRect = droppedObject.GetComponent<RectTransform>(); 
             droppedRect.SetParent(transform, false);
 
             droppedRect.anchoredPosition = Vector2.zero;
@@ -20,6 +20,9 @@ public class DropCard : MonoBehaviour, IDropHandler
             droppedRect.anchorMin = new Vector2(0.5f, 0.5f);
             droppedRect.anchorMax = new Vector2(0.5f, 0.5f);
             droppedRect.pivot = new Vector2(0.5f, 0.5f);
+            droppedRect.sizeDelta = GetComponent<RectTransform>().sizeDelta;
+            droppedRect.localScale = new Vector3(1, 1, 1);
+
         }
     }
 

@@ -23,11 +23,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         _canvas = GetComponentInParent<Canvas>();
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
-
-    public void Start()
-    {
-        Player = _playerManager.CurrentPlayer;
-    }
+    
     public void UpdateIsPlaced()
     {
         _isPlaced = true;
