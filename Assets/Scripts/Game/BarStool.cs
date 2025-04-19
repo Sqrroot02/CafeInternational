@@ -23,12 +23,15 @@ public class BarStool : MonoBehaviour
     /// </summary>
     public bool PlaceCard(Card card)
     {
-        if (transform.parent.transform.parent.gameObject.GetComponent<Bar>().AddCard(_index) && !card.GetIsPlaced())
+        if (!card.GetIsPlaced() && transform.parent.transform.parent.gameObject.GetComponent<Bar>().CheckAddCard(_index))
         {
-            card.UpdateIsPlaced();
-            GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
-            card.Player.UpdatePlayerScore(Value);
-            return true;
+            if (card.UpdateIsPlaced(2))
+            {
+                transform.parent.transform.parent.gameObject.GetComponent<Bar>().AddCard();
+                GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
+                card.Player.UpdatePlayerScore(Value);
+                return true;
+            }
         }
         return false;
     }

@@ -55,7 +55,7 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public void DrawCard(Player player)
+    public Card DrawCard(Player player)
     {
         if (deckStack.Count > 0)
         {
@@ -65,11 +65,10 @@ public class Deck : MonoBehaviour
             newCardObject.GetComponent<RectTransform>().localScale = new Vector3(0.85f, 0.85f, 1);
             newCardObject.GetComponent<Card>().SetCardData(cardData);
             newCardObject.GetComponent<Card>().Player = player;
+            return newCardObject.GetComponent<Card>();
         }
-        else
-        {
-            Debug.Log("Der Kartenstapel ist leer!");
-        }
+        Debug.Log("Der Kartenstapel ist leer!");
+        return null;
     }
 }
 

@@ -38,11 +38,15 @@ public class Bar : MonoBehaviour
 /// </summary>
 /// <param name="stoolIndex">The index of the stool that is checked</param>
 /// <returns>True if the stool is the next in line</returns>
-    public bool AddCard(int stoolIndex)
+    public void AddCard()
+    {
+        nextSlotIntex++;
+    }
+
+    public bool CheckAddCard(int stoolIndex)
     {
         if (stoolIndex == nextSlotIntex)
         {
-            nextSlotIntex++;
             return true;
         }
 

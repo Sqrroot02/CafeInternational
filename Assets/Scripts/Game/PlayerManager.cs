@@ -13,7 +13,12 @@ public class PlayerManager : MonoBehaviour
 
     private Deck _deck;
 
+    public int CountCardsPlayed { get; private set; }
+    
+    public int TableNationalitiesCompleted { get; set; }
 
+
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +27,7 @@ public class PlayerManager : MonoBehaviour
         ShufflePlayers();
         UpdatePlayerGameBars();
         DrawInitialCards();
+        CountCardsPlayed = 0;
         CurrentPlayerIndex = 0;
         CurrentPlayer = players[CurrentPlayerIndex];
         CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
@@ -38,7 +44,18 @@ public class PlayerManager : MonoBehaviour
             players.Insert(Random.Range(0, players.Count + 1), playersStack.Pop());
         }
     }
-
+    
+    /// <summary>
+    /// Gives the players the initial 5 start cards
+    /// </summary>
+    private void DrawInitialCards()
+    {
+        foreach (var player in players)
+        {
+            FillPlayerHand(player);
+        }
+    }
+    
     /// <summary>
     /// Updates the names of the player gamebars to the order of the players
     /// </summary>
@@ -51,25 +68,37 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void DrawInitialCards()
+    public void IncrementCountCardsPlayed(int increment)
     {
-        for (int i = 0; i < players.Count; i++)
+        CountCardsPlayed += increment;
+        if (CountCardsPlayed == 2)
         {
-            for (int j = 0; j < 5; j++)
-            {
-                _deck.DrawCard(players[i]);
-            }
+            UpdatePlayer();
         }
     }
-
+    
     /// <summary>
     /// Updates the current Player and changes the color of the current player to red. Is invoked by END TURN 
     /// </summary>
     public void UpdatePlayer()
     {
-        CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-        CurrentPlayerIndex = (CurrentPlayerIndex + 1) % players.Count;
-        CurrentPlayer = players[CurrentPlayerIndex];
-        CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+        if (CountCardsPlayed != 0)
+        {
+            FillPlayerHand(CurrentPlayer);
+            CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            CurrentPlayerIndex = (CurrentPlayerIndex + 1) % players.Count;
+            CurrentPlayer = players[CurrentPlayerIndex];
+            CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+            CountCardsPlayed = 0;
+        }
+    }
+
+    private void FillPlayerHand(Player player)
+    {
+        int toCreate = player.MaxCardCount - player.PlayerHand.Count;
+        for (int i = 0; i < toCreate; i++)
+        {
+            player.PlayerHand.Add(_deck.DrawCard(player));
+        }
     }
 }

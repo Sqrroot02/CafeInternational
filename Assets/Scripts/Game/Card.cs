@@ -24,9 +24,20 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
     }
     
-    public void UpdateIsPlaced()
+    /// <summary>
+    /// Updates the _isPlaced value and increments the cardcount for the current turn. Checks if the card is placeable -> No Card on a chair and a barstool
+    /// </summary>
+    /// <param name="increment">Increments by one when placed on a chair and by two for a barstool</param>
+    public bool UpdateIsPlaced(int increment)
     {
+        if (_playerManager.CountCardsPlayed > 1)
+        {
+            return false;
+        } 
         _isPlaced = true;
+        Player.PlayerHand.Remove(this);
+        _playerManager.IncrementCountCardsPlayed(increment);
+        return true;
     }
 
     public bool GetIsPlaced()

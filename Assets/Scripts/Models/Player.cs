@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Models
@@ -5,6 +6,9 @@ namespace Assets.Scripts.Models
     public class Player
     {
         private GameObject playerGameBar; // The Gamebar itself is of no use so we always take the inner wrapper layer
+        public int MaxCardCount = 5;
+        public List<Card> PlayerHand = new();
+        
         public Player(string playerName, int playerScore)
         {
             PlayerName = playerName;
@@ -19,6 +23,11 @@ namespace Assets.Scripts.Models
         public void UpdatePlayerScore(int points)
         {
             PlayerScore += points;
+            if (points == 8)
+            {
+                MaxCardCount--;
+            }
+            // TODO Was passiert bei 0 Karten? Hat der Spieler gewonnen?
             Debug.Log(PlayerName + " " + PlayerScore);
         }
 
