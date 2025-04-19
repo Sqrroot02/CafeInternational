@@ -19,13 +19,12 @@ public class Table : MonoBehaviour
         _tableImage.sprite = Resources.Load<Sprite>(spriteName);
     }
 
-    public int AddPlacedCard(CardData card)
+    public void AddPlacedCard(CardData card)
     {
         placedCards.Add(card);
-        return GetTablePoints();
     }
 
-    private int GetTablePoints()
+    public int GetTablePoints()
     {
         bool nationalityMatchesTable = true;
         foreach (var card in placedCards)

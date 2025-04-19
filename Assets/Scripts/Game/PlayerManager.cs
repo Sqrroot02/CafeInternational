@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Models;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -12,13 +13,16 @@ public class PlayerManager : MonoBehaviour
     public GameObject deckManager;
 
     private Deck _deck;
-
+    
     public int CountCardsPlayed { get; private set; }
-    
-    public int TableNationalitiesCompleted { get; set; }
 
+    private Button EndTurnButton;
 
-    
+    private void Awake()
+    {
+        EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+        EndTurnButton.interactable = false;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -75,21 +79,28 @@ public class PlayerManager : MonoBehaviour
         {
             UpdatePlayer();
         }
+        else
+        {
+            EndTurnButton.interactable = true;
+        }
     }
     
     /// <summary>
-    /// Updates the current Player and changes the color of the current player to red. Is invoked by END TURN 
+    /// Updates the current Player and changes the color of the current player to red. Is invoked by END TURN and when the max number of cards has been placed
     /// </summary>
     public void UpdatePlayer()
     {
         if (CountCardsPlayed != 0)
         {
+            CurrentPlayer.CountPlayerScore();
             FillPlayerHand(CurrentPlayer);
+            
             CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
             CurrentPlayerIndex = (CurrentPlayerIndex + 1) % players.Count;
             CurrentPlayer = players[CurrentPlayerIndex];
             CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
             CountCardsPlayed = 0;
+            EndTurnButton.interactable = false;
         }
     }
 

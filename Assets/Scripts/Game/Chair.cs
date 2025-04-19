@@ -49,12 +49,12 @@ public class Chair : MonoBehaviour
         if (CheckPlaceCard(card) && !card.GetIsPlaced())
         {
             GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
-            var points = _firstTable.AddPlacedCard(card.cardData);
-            card.Player.UpdatePlayerScore(points);
+            _firstTable.AddPlacedCard(card.cardData);
+            card.Player.Tables.Add(_firstTable);
             if (_secondTable != null)
             {
-                points = _secondTable.AddPlacedCard(card.cardData);
-                card.Player.UpdatePlayerScore(points);
+                _secondTable.AddPlacedCard(card.cardData);
+                card.Player.Tables.Add(_secondTable);
             }
             card.UpdateIsPlaced(1);
             return true;

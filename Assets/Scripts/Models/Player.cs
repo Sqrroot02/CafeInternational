@@ -8,6 +8,8 @@ namespace Assets.Scripts.Models
         private GameObject playerGameBar; // The Gamebar itself is of no use so we always take the inner wrapper layer
         public int MaxCardCount = 5;
         public List<Card> PlayerHand = new();
+        public HashSet<Table> Tables = new(); // A collection of the tables that need to be counted for the points
+
         
         public Player(string playerName, int playerScore)
         {
@@ -19,6 +21,19 @@ namespace Assets.Scripts.Models
         public int PlayerScore { get; private set; }
         
         public GameObject PlayerGameBar { get; set; }
+
+        /// <summary>
+        /// Counts the tables the player has placed cards at and sums up the points.
+        /// Clears the tables collection afterward.
+        /// </summary>
+        public void CountPlayerScore()
+        {
+            foreach (var table in Tables)
+            {
+                UpdatePlayerScore(table.GetTablePoints());
+            }
+            Tables.Clear();
+        }
 
         public void UpdatePlayerScore(int points)
         {
