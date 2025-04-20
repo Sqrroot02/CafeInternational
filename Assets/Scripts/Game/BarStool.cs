@@ -6,6 +6,7 @@ public class BarStool : MonoBehaviour
     public int Value; // The value of the chair that is added to the points of the one placing a card here // Negative scores are also added and not implemented separately
     public Image stoolSprite; // The image on the stool // the number of points added
     private int _index = 0;
+    public Card PlacedCard;
 
     // Awake is called once even before Start
     private void Awake()
@@ -29,7 +30,8 @@ public class BarStool : MonoBehaviour
             {
                 transform.parent.transform.parent.gameObject.GetComponent<Bar>().AddCard();
                 GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
-                card.Player.UpdatePlayerScore(Value);
+                card.Player.BarStool = this;
+                PlacedCard = card;
                 return true;
             }
         }

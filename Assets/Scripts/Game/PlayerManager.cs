@@ -17,6 +17,8 @@ public class PlayerManager : MonoBehaviour
     public int CountCardsPlayed { get; private set; }
 
     private Button EndTurnButton;
+    
+    private bool _firstTurn = true;
 
     private void Awake()
     {
@@ -75,14 +77,7 @@ public class PlayerManager : MonoBehaviour
     public void IncrementCountCardsPlayed(int increment)
     {
         CountCardsPlayed += increment;
-        if (CountCardsPlayed == 2)
-        {
-            UpdatePlayer();
-        }
-        else
-        {
-            EndTurnButton.interactable = true;
-        }
+        EndTurnButton.interactable = true;
     }
     
     /// <summary>
@@ -92,15 +87,24 @@ public class PlayerManager : MonoBehaviour
     {
         if (CountCardsPlayed != 0)
         {
-            CurrentPlayer.CountPlayerScore();
-            FillPlayerHand(CurrentPlayer);
-            
-            CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-            CurrentPlayerIndex = (CurrentPlayerIndex + 1) % players.Count;
-            CurrentPlayer = players[CurrentPlayerIndex];
-            CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-            CountCardsPlayed = 0;
-            EndTurnButton.interactable = false;
+            if (CurrentPlayer.IsMoveValid(_firstTurn))
+            {
+                CurrentPlayer.CountPlayerScore();
+                FillPlayerHand(CurrentPlayer);
+
+                CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+                CurrentPlayerIndex = (CurrentPlayerIndex + 1) % players.Count;
+                CurrentPlayer = players[CurrentPlayerIndex];
+                CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                CountCardsPlayed = 0;
+                EndTurnButton.interactable = false;
+                _firstTurn = false;
+            }
+            else
+            {
+                CountCardsPlayed = 0;
+                CurrentPlayer.ResetCards();
+            }
         }
     }
 

@@ -3,11 +3,19 @@ using UnityEngine.EventSystems;
 
 public class DropCard : MonoBehaviour, IDropHandler
 {
+    private PlayerManager _playerManager;
+    
+    private void Awake()
+    {
+        _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+
+    }
+    
     public void OnDrop(PointerEventData eventData)
     {
         GameObject droppedObject = eventData.pointerDrag;
 
-        if (droppedObject != null && Place(droppedObject.GetComponent<Card>()))
+        if (droppedObject != null && droppedObject.GetComponent<Card>().Player == _playerManager.CurrentPlayer && Place(droppedObject.GetComponent<Card>()))
         {
             CanvasGroup canvasGroup = droppedObject.GetComponent<Card>().GetComponent<CanvasGroup>();
             canvasGroup.alpha = 1f;

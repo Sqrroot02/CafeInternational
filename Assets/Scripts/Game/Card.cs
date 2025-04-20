@@ -16,26 +16,28 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     public Player Player { get; set; }
     private PlayerManager _playerManager;
 
+    private Transform _playerBarSlot;
+
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvas = GetComponentInParent<Canvas>();
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        _playerBarSlot = transform.parent;
     }
     
     /// <summary>
-    /// Updates the _isPlaced value and increments the cardcount for the current turn. Checks if the card is placeable -> No Card on a chair and a barstool
+    /// Updates the _isPlaced value and increments the cardcount for the current turn. Checks if the card is placeable -> No/One Card on a chair and none on a barstool
     /// </summary>
     /// <param name="increment">Increments by one when placed on a chair and by two for a barstool</param>
     public bool UpdateIsPlaced(int increment)
     {
-        if (_playerManager.CountCardsPlayed > 1)
+        if (_playerManager.CountCardsPlayed + increment > 2)
         {
             return false;
         } 
         _isPlaced = true;
-        Player.PlayerHand.Remove(this);
         _playerManager.IncrementCountCardsPlayed(increment);
         return true;
     }
@@ -57,7 +59,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
             _originalParent = transform.parent;
             transform.SetParent(_canvas.transform);
             _canvasGroup.blocksRaycasts = false;
-            _canvasGroup.alpha = 0.6f; // Transparent while draging
+            _canvasGroup.alpha = 0.6f; // Transparent while dragging
         }
     }
 
@@ -82,5 +84,20 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
                 _rectTransform.anchoredPosition = Vector2.zero;
             }
         }
+    }
+
+    /// <summary>
+    /// Reverts the position of the card back to the original spot in the playerbar
+    /// </summary>
+    public void ResetCardPosition()
+    {
+        _isPlaced = false;
+        _canvasGroup.blocksRaycasts = true;
+        transform.SetParent(_playerBarSlot);
+        _rectTransform.anchorMin = Vector2.zero;
+        _rectTransform.anchorMax = Vector2.one;
+        _rectTransform.sizeDelta = Vector2.zero;
+        _rectTransform.anchoredPosition = Vector2.zero;
+        _rectTransform.localScale = new Vector3(0.85f, 0.85f, 1);
     }
 }
