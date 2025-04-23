@@ -102,6 +102,7 @@ public class PlayerManager : MonoBehaviour
             }
             else
             {
+                EndTurnButton.interactable = false;
                 CountCardsPlayed = 0;
                 CurrentPlayer.ResetCards();
             }
