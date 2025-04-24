@@ -9,8 +9,8 @@ namespace Assets.Scripts.TestHelper
 		{
 			new("Test-Player", 0),
 			new("Alex", 0),
-			new("Meef", 0),
-			new("Huso", 0)
+			new("Joel", 0),
+			new("Lars", 0)
 		};
 	}
 }
