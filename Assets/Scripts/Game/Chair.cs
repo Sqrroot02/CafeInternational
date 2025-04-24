@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Models;
 using UnityEngine;
 
@@ -7,6 +9,7 @@ public class Chair : MonoBehaviour
     public GameObject SecondTableGO; // Can be null
     private Table _firstTable;
     private Table _secondTable;
+    public Card PlacedCard { private set; get; }
 
     private void Awake()
     {
@@ -16,6 +19,17 @@ public class Chair : MonoBehaviour
             _secondTable = SecondTableGO.GetComponent<Table>();
         }
     }
+
+    public List<Table> GetTables()
+    {
+        var tables = new List<Table>();
+        tables.Add(_firstTable);
+        if (_secondTable != null)
+        {
+            tables.Add(_secondTable);
+        }
+        return tables;
+    } 
 
     private bool HasPlaceableNationality(Nationality nationality)
     {
@@ -48,15 +62,47 @@ public class Chair : MonoBehaviour
     {
         if (CheckPlaceCard(card) && !card.GetIsPlaced())
         {
-            card.UpdateIsPlaced();
-            GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
-            card.Player.UpdatePlayerScore(_firstTable.AddPlacedCard(card.cardData));
-            if (_secondTable != null)
+            if (card.UpdateIsPlaced(1))
             {
-                card.Player.UpdatePlayerScore(_secondTable.AddPlacedCard(card.cardData));
+                PlacedCard = card;
+                card.Player.Chairs.Add(this);
+                GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
+                
+                _firstTable.AddPlacedCard(card.cardData);
+                if (_secondTable != null)
+                {
+                    _secondTable.AddPlacedCard(card.cardData);
+                }
+                return true;
             }
-            return true;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Checks if the chair is the only that placed a card at either one or both tables.
+    /// Only invoke after a card is placed on this 
+    /// </summary>
+    /// <returns>True if the card on the chair sits alone</returns>
+    public bool OnlyCardAtTheTable()
+    {
+        bool onlyCard = _firstTable.placedCards.Count == 1;
+        if (_secondTable != null && onlyCard && _secondTable.placedCards.Count != 1)
+        {
+            onlyCard = false;
+        }
+        
+        return onlyCard;
+    }
+
+    public void RemovePlacedCard()
+    {
+        _firstTable.placedCards.Remove(PlacedCard.cardData);
+        if (_secondTable != null)
+        {
+            _secondTable.placedCards.Remove(PlacedCard.cardData);
+        }
+        PlacedCard = null;
+        GetComponent<Outline>().UpdateOutlineSprite(null); // TODO Needs to be changed if the actual images of the chairs are implemented -> Change to the original image of the chair
     }
 }
