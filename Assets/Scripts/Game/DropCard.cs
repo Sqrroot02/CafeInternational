@@ -25,11 +25,11 @@ public class DropCard : MonoBehaviour, IDropHandler
 
             droppedRect.anchoredPosition = Vector2.zero;
             
-            droppedRect.anchorMin = new Vector2(0.5f, 0.5f);
-            droppedRect.anchorMax = new Vector2(0.5f, 0.5f);
+            droppedRect.anchorMin = Vector2.zero;
+            droppedRect.anchorMax = Vector2.one;
             droppedRect.pivot = new Vector2(0.5f, 0.5f);
-            droppedRect.sizeDelta = GetComponent<RectTransform>().sizeDelta;
-            droppedRect.localScale = new Vector3(1, 1, 1);
+            droppedRect.sizeDelta = Vector2.zero;
+            droppedRect.localScale = Vector3.one;
 
         }
     }

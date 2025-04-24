@@ -60,23 +60,61 @@ public class Chair : MonoBehaviour
 
     public bool PlaceCard(Card card)
     {
-        if (CheckPlaceCard(card) && !card.GetIsPlaced())
+        if (!card.GetIsPlaced())
         {
-            if (card.UpdateIsPlaced(1))
+            if (PlacedCard ==null)
             {
-                PlacedCard = card;
-                card.Player.Chairs.Add(this);
-                GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
-                
-                _firstTable.AddPlacedCard(card.cardData);
-                if (_secondTable != null)
+                if (CheckPlaceCard(card))
                 {
-                    _secondTable.AddPlacedCard(card.cardData);
+                    if (card.UpdateIsPlaced(1))
+                    {
+                        PlacedCard = card;
+                        card.Player.Chairs.Add(this);
+                        GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
+
+                        _firstTable.AddPlacedCard(card.cardData);
+                        if (_secondTable != null)
+                        {
+                            _secondTable.AddPlacedCard(card.cardData);
+                        }
+
+                        return true;
+                    }
                 }
+            }
+            else if (PlacedCard.cardData.nationality == Nationality.Joker 
+                 && card.cardData.nationality != Nationality.Joker 
+                 && PlacedCard.cardData.gender == card.cardData.gender 
+                 && HasPlaceableNationality(card.cardData.nationality)
+                 && card.UpdateIsPlaced(2))
+            { // Placing a card that matches the field at the jokers spot and is not a joker
+                Debug.Log("Replace by Joker");
+                ReplaceJoker(card);
                 return true;
             }
         }
         return false;
+    }
+
+    private void ReplaceJoker(Card card)
+    {
+        GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
+        _firstTable.placedCards.Remove(PlacedCard.cardData);
+        _firstTable.AddPlacedCard(card.cardData);
+        if (_secondTable != null)
+        {
+            _secondTable.placedCards.Remove(PlacedCard.cardData);
+            _secondTable.AddPlacedCard(card.cardData);
+        }
+
+        PlacedCard.PlayerBarSlot = card.PlayerBarSlot;
+        PlacedCard.ResetCardPosition();
+        card.Player.PlayerHand.Add(PlacedCard);
+        card.Player.PlayerHand.Remove(card);
+        PlacedCard.Player = card.Player;
+        
+
+        PlacedCard = card;
     }
 
     /// <summary>

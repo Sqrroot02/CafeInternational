@@ -16,7 +16,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     public Player Player { get; set; }
     private PlayerManager _playerManager;
 
-    private Transform _playerBarSlot;
+    public Transform PlayerBarSlot { get; set; }
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvas = GetComponentInParent<Canvas>();
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
-        _playerBarSlot = transform.parent;
+        PlayerBarSlot = transform.parent;
     }
     
     /// <summary>
@@ -45,6 +45,11 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     public bool GetIsPlaced()
     {
         return _isPlaced;
+    }
+
+    public PlayerManager GetPlayerManager()
+    {
+        return _playerManager;
     }
     
     public void SetCardData(CardData cardData)
@@ -85,7 +90,8 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
             }
         }
     }
-
+    
+    
     /// <summary>
     /// Reverts the position of the card back to the original spot in the playerbar
     /// </summary>
@@ -93,11 +99,14 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
     {
         _isPlaced = false;
         _canvasGroup.blocksRaycasts = true;
-        transform.SetParent(_playerBarSlot);
+        transform.SetParent(PlayerBarSlot);
         _rectTransform.anchorMin = Vector2.zero;
         _rectTransform.anchorMax = Vector2.one;
         _rectTransform.sizeDelta = Vector2.zero;
         _rectTransform.anchoredPosition = Vector2.zero;
         _rectTransform.localScale = new Vector3(0.85f, 0.85f, 1);
+        
+        _canvasGroup = GetComponent<CanvasGroup>();
+        _canvas = GetComponentInParent<Canvas>();
     }
 }
