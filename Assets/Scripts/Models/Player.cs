@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -63,15 +64,39 @@ namespace Assets.Scripts.Models
         public void CountPlayerScore()
         {
             //Chairs
-            HashSet<Table> tables = new(); // Find all tables that have cards placed at them
-            foreach (Chair chair in Chairs)
+            Dictionary<Table, int> tables = new(); // Find all tables that have cards placed at them and the amount of cards at the table
+            for (int i = 0; i < Chairs.Count; i++)
             {
-                PlayerHand.Remove(chair.PlacedCard); // Remove the placed cards from the list of cards in the playerhand for the refilling
-                tables.AddRange(chair.GetTables());
+                PlayerHand.Remove(Chairs[i].PlacedCard); // Remove the placed cards from the list of cards in the playerhand for the refilling
+                foreach (var table in Chairs[i].GetTables())
+                {
+                    if (!tables.TryAdd(table, 0))
+                    {
+                        tables[table]++;
+                    }
+                }
             }
-            foreach (var table in tables)
+
+            for (int i = 0; i < Chairs.Count; i++)
             {
-                UpdatePlayerScore(table.GetTablePoints());
+                PlayerHand.Remove(Chairs[i].PlacedCard); // Remove the placed cards from the list of cards in the playerhand for the refilling
+                foreach (var table in Chairs[i].GetTables())
+                {
+                    // The upper bound for the check is decreased by the number of cards placed on the table for the first card. That ensures, that the list of the cards at the table is only checked up to the point of the card
+                    // For the second placed card that is no longer necessary
+                    int maxIndex = table.placedCards.Count - math.max(tables[table] - i, 0);
+                    if (maxIndex > 1)
+                    {
+                        if (table.isOneNationality(maxIndex)) // Double points
+                        {
+                            UpdatePlayerScore(2 * maxIndex);
+                        }
+                        else
+                        {
+                            UpdatePlayerScore(maxIndex);
+                        }
+                    }
+                }
             }
             Chairs.Clear();
             

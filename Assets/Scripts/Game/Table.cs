@@ -24,23 +24,19 @@ public class Table : MonoBehaviour
         placedCards.Add(card);
     }
 
-    public int GetTablePoints()
+    public bool isOneNationality(int upperBounds)
     {
         bool nationalityMatchesTable = true;
-        foreach (var card in placedCards)
+        for (int i = 0; i < upperBounds; i++)
         {
-            if (card.nationality != nationality)
+            if (placedCards[i].nationality != nationality)
             {
                 nationalityMatchesTable = false;
                 break;
             } 
         }
 
-        if (placedCards.Count == 4 && nationalityMatchesTable)
-        {
-            return 8;
-        }
-        return placedCards.Count;
+        return nationalityMatchesTable;
     }
 
     public bool CheckGenderPlaceable(Gender gender)
