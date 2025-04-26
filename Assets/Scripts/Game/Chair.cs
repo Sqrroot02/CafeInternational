@@ -60,7 +60,7 @@ public class Chair : MonoBehaviour
 
     public bool PlaceCard(Card card)
     {
-        if (!card.GetIsPlaced())
+        if (!card.GetIsPlaced() && !card.Player.GetPlayerBlockedByJokerIdentitySelection())
         {
             if (PlacedCard ==null)
             {
@@ -72,12 +72,23 @@ public class Chair : MonoBehaviour
                         card.Player.Chairs.Add(this);
                         GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
 
-                        _firstTable.AddPlacedCard(card.cardData);
+                        _firstTable.AddPlacedCard(card);
                         if (_secondTable != null)
                         {
-                            _secondTable.AddPlacedCard(card.cardData);
+                            _secondTable.AddPlacedCard(card);
                         }
 
+                        if (card.cardData.nationality == Nationality.Joker)
+                        {
+                            if (_secondTable != null && _firstTable.nationality != _secondTable.nationality)
+                            {
+                                SelectJokerIndentity();
+                            }
+                            else
+                            {
+                                PlacedCard.JokerIdentity = _firstTable.nationality;
+                            }
+                        }
                         return true;
                     }
                 }
@@ -96,15 +107,26 @@ public class Chair : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Open the UI for the selection of the joker identity if necessary
+    /// </summary>
+    public void SelectJokerIndentity()
+    {
+        PlacedCard.Player.SetPlayerBlockedByJokerIdentitySelection(true);
+        GameObject identitySelection = Instantiate(PlacedCard.GetPlayerManager().JokerIdentitySelectionPrefab, transform);
+        identitySelection.transform.GetChild(0).GetComponent<JokerIdentitySelection>().SetUp(PlacedCard, _firstTable.nationality);
+        identitySelection.transform.GetChild(1).GetComponent<JokerIdentitySelection>().SetUp(PlacedCard, _secondTable.nationality);
+    }
+
     private void ReplaceJoker(Card card)
     {
         GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
-        _firstTable.placedCards.Remove(PlacedCard.cardData);
-        _firstTable.AddPlacedCard(card.cardData);
+        _firstTable.placedCards.Remove(PlacedCard);
+        _firstTable.AddPlacedCard(card);
         if (_secondTable != null)
         {
-            _secondTable.placedCards.Remove(PlacedCard.cardData);
-            _secondTable.AddPlacedCard(card.cardData);
+            _secondTable.placedCards.Remove(PlacedCard);
+            _secondTable.AddPlacedCard(card);
         }
 
         PlacedCard.PlayerBarSlot = card.PlayerBarSlot;
@@ -135,10 +157,10 @@ public class Chair : MonoBehaviour
 
     public void RemovePlacedCard()
     {
-        _firstTable.placedCards.Remove(PlacedCard.cardData);
+        _firstTable.placedCards.Remove(PlacedCard);
         if (_secondTable != null)
         {
-            _secondTable.placedCards.Remove(PlacedCard.cardData);
+            _secondTable.placedCards.Remove(PlacedCard);
         }
         PlacedCard = null;
         GetComponent<Outline>().UpdateOutlineSprite(null); // TODO Needs to be changed if the actual images of the chairs are implemented -> Change to the original image of the chair

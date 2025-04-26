@@ -11,6 +11,8 @@ namespace Assets.Scripts.Models
         public List<Card> PlayerHand = new();
         public List<Chair> Chairs = new();
         public BarStool BarStool;
+        private bool _playerBlockedByJokerIdentitySelection = false;
+        private PlayerManager _playerManager;
         
         public Player(string playerName, int playerScore)
         {
@@ -22,6 +24,22 @@ namespace Assets.Scripts.Models
         public int PlayerScore { get; private set; }
         
         public GameObject PlayerGameBar { get; set; }
+
+        public void SetPlayerManager(PlayerManager playerManager)
+        {
+            _playerManager = playerManager;
+        }
+
+        public void SetPlayerBlockedByJokerIdentitySelection(bool state)
+        {
+            _playerBlockedByJokerIdentitySelection = state;
+            _playerManager.SetEndTurnButtonInteractable(!_playerBlockedByJokerIdentitySelection);
+        }
+
+        public bool GetPlayerBlockedByJokerIdentitySelection()
+        {
+            return _playerBlockedByJokerIdentitySelection;
+        }
 
         /// <summary>
         /// Checks if the combination of cards the player played match the rules of the Game.

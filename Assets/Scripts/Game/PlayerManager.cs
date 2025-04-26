@@ -20,6 +20,8 @@ public class PlayerManager : MonoBehaviour
     
     private bool _firstTurn = true;
 
+    public GameObject JokerIdentitySelectionPrefab;
+
     private void Awake()
     {
         EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
@@ -37,7 +39,10 @@ public class PlayerManager : MonoBehaviour
         CurrentPlayerIndex = 0;
         CurrentPlayer = players[CurrentPlayerIndex];
         CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-
+        foreach (var player in players)
+        {
+            player.SetPlayerManager(this);
+        }
     }
 
     private void ShufflePlayers()
@@ -116,5 +121,10 @@ public class PlayerManager : MonoBehaviour
         {
             player.PlayerHand.Add(_deck.DrawCard(player));
         }
+    }
+
+    public void SetEndTurnButtonInteractable(bool interactable)
+    {
+        EndTurnButton.interactable = interactable;
     }
 }

@@ -36,7 +36,7 @@ public class Deck : MonoBehaviour
         }
     }
 
-    Sprite GetSpriteForCountry(Nationality nationality, Gender gender)
+    public Sprite GetSpriteForCountry(Nationality nationality, Gender gender)
     {
         string spriteName = "Cards/" + gender + "_" + nationality;
         return Resources.Load<Sprite>(spriteName);

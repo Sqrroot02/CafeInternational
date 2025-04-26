@@ -5070,6 +5070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckManager: {fileID: 619394800}
+  JokerIdentitySelectionPrefab: {fileID: 8508475330023844187, guid: 8be581a57fd16314abde479ad9440c1a, type: 3}
 --- !u!1001 &613749522
 PrefabInstance:
   m_ObjectHideFlags: 0

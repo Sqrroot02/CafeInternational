@@ -8,18 +8,18 @@ public class Table : MonoBehaviour
 {
     public Nationality nationality;
     private Image _tableImage;
-    public List<CardData> placedCards;
+    public List<Card> placedCards;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        placedCards = new List<CardData>();
+        placedCards = new List<Card>();
         _tableImage = GetComponent<Image>();
-        string spriteName = "Flags/" + nationality.ToString() + " Flag";
+        string spriteName = "Flags/" + nationality + " Flag";
         _tableImage.sprite = Resources.Load<Sprite>(spriteName);
     }
 
-    public void AddPlacedCard(CardData card)
+    public void AddPlacedCard(Card card)
     {
         placedCards.Add(card);
     }
@@ -29,7 +29,9 @@ public class Table : MonoBehaviour
         bool nationalityMatchesTable = true;
         for (int i = 0; i < upperBounds; i++)
         {
-            if (placedCards[i].nationality != nationality)
+            if (placedCards[i].cardData.nationality != nationality &&
+                (placedCards[i].cardData.nationality != Joker ||
+                 placedCards[i].JokerIdentity != nationality))
             {
                 nationalityMatchesTable = false;
                 break;
@@ -46,9 +48,9 @@ public class Table : MonoBehaviour
             return true;
         }
         int countMale = 0, countFemale = 0;
-        foreach (CardData card in placedCards)
+        foreach (Card card in placedCards)
         {
-            if (card.gender == Gender.Male)
+            if (card.cardData.gender == Gender.Male)
             {
                 countMale++;
             }
