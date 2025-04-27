@@ -42,7 +42,8 @@ public class PlayerManager : MonoBehaviour
         CurrentPlayerIndex = 0;
         CurrentPlayer = players[CurrentPlayerIndex];
         CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-        
+        CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 3;
+
         _scoreTable.UpdateScores(players);
         
         foreach (var player in players)
@@ -104,9 +105,12 @@ public class PlayerManager : MonoBehaviour
                 FillPlayerHand(CurrentPlayer);
 
                 CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+                CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 2;
+                
                 CurrentPlayerIndex = (CurrentPlayerIndex + 1) % players.Count;
                 CurrentPlayer = players[CurrentPlayerIndex];
                 CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 3;
                 CountCardsPlayed = 0;
                 
                 _endTurnButton.interactable = false;
