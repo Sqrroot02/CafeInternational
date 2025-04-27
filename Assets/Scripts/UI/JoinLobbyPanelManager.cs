@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -40,7 +41,12 @@ public class JoinLobbyPanelManager : MonoBehaviour
         {
             Debug.Log("Entered port: " + enteredPort);
         }
-
+        
+        // Establish connection
+        NetworkClientAdapter.Instance.IpAddress = enteredIp;
+        NetworkClientAdapter.Instance.Port = Convert.ToUInt16(enteredPort);
+        NetworkClientAdapter.Instance.Connect("Your mum fucks my bandwidth");
+        
         MainMenuManager.Instance.lobbyPort = enteredPort;
         MainMenuManager.Instance.lobbyIP = enteredIp;
         MainMenuManager.Instance.lobbyName = "Dummy Lobby Name from Join";

@@ -26,7 +26,7 @@ public class CreateLobbyPanelManager : MonoBehaviour
     public void CreateLobby()
     {
         string enteredName = lobbyNameInput.text;
-
+        
         MainMenuManager.Instance.lobbyName = enteredName;
         Debug.Log("Saved Lobbyname: " + enteredName);
     }

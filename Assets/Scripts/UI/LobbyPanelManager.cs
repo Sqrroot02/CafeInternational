@@ -47,6 +47,7 @@ public class LobbyPanelManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Game", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("MainMenu");
     }
 }
