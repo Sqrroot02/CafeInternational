@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Models;
 using TMPro;
 using UnityEngine;
@@ -9,42 +10,22 @@ using UnityEngine.UI;
 /// </summary>
 public class ScoreTable : MonoBehaviour
 {
-    private VerticalLayoutGroup scoreBodyContainer;
-    private Transform scoreEntry;
-    
-    public GameObject scoreEntryPrefab;
-    
-    private List<GameObject> scoreEntryList = new();
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public List<GameObject> ScoreEntries;
+
+    public void UpdateScores(List<Player> players)
     {
-        // Create Entries
-        var scoreTableContainer = transform.Find("ScoreTableContainer");
-        scoreBodyContainer = scoreTableContainer.GetComponent<VerticalLayoutGroup>();
-        for (var i = 0; i < Players.ActivePlayers.Count; i++)
+        List<Player> sortedByScore = players
+            .OrderByDescending(player => player.PlayerScore)
+            .ToList();
+        for (int i = 0; i < ScoreEntries.Count; i++)
         {
-            Debug.Log($"Visualize Player-Score: {Players.ActivePlayers[i].PlayerName}");
-            var entry = Instantiate(scoreEntryPrefab, scoreBodyContainer.transform);
-            scoreEntryList.Add(entry);
+            UpdateScoreEntry(ScoreEntries[i], sortedByScore[i]);    
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void UpdateScoreEntry(GameObject scoreEntry, Player player)
     {
-        // Updates all scores
-        for (var i = 0; i < Players.ActivePlayers.Count; i++)
-        {
-            var player = Players.ActivePlayers[i];
-            var entry = scoreEntryList[i];
-            var container = entry.transform.Find("ScoreEntryBackground");
-            
-            var nameContainer = container.Find("ScoreEntryNameContainer").Find("ScoreEntryNameText");
-            var scoreContainer = container.Find("ScoreEntryScoreContainer").Find("ScoreEntryScoreText");
-            
-            nameContainer.GetComponent<TextMeshProUGUI>().text = player.PlayerName;
-            scoreContainer.GetComponent<TextMeshProUGUI>().text = player.PlayerScore.ToString();
-        }
+        scoreEntry.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = player.PlayerName;
+        scoreEntry.transform.GetChild(0).GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = player.PlayerScore.ToString();;
     }
 }

@@ -16,7 +16,9 @@ public class PlayerManager : MonoBehaviour
     
     public int CountCardsPlayed { get; private set; }
 
-    private Button EndTurnButton;
+    private Button _endTurnButton;
+    
+    private ScoreTable _scoreTable;
     
     private bool _firstTurn = true;
 
@@ -24,8 +26,9 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
-        EndTurnButton.interactable = false;
+        _endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+        _endTurnButton.interactable = false;
+        _scoreTable = GameObject.Find("ScoreTable").GetComponent<ScoreTable>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,6 +42,9 @@ public class PlayerManager : MonoBehaviour
         CurrentPlayerIndex = 0;
         CurrentPlayer = players[CurrentPlayerIndex];
         CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+        
+        _scoreTable.UpdateScores(players);
+        
         foreach (var player in players)
         {
             player.SetPlayerManager(this);
@@ -82,7 +88,7 @@ public class PlayerManager : MonoBehaviour
     public void IncrementCountCardsPlayed(int increment)
     {
         CountCardsPlayed += increment;
-        EndTurnButton.interactable = true;
+        _endTurnButton.interactable = true;
     }
     
     /// <summary>
@@ -102,12 +108,14 @@ public class PlayerManager : MonoBehaviour
                 CurrentPlayer = players[CurrentPlayerIndex];
                 CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
                 CountCardsPlayed = 0;
-                EndTurnButton.interactable = false;
+                
+                _endTurnButton.interactable = false;
+                _scoreTable.UpdateScores(players);
                 _firstTurn = false;
             }
             else
             {
-                EndTurnButton.interactable = false;
+                _endTurnButton.interactable = false;
                 CountCardsPlayed = 0;
                 CurrentPlayer.ResetCards();
             }
@@ -125,6 +133,6 @@ public class PlayerManager : MonoBehaviour
 
     public void SetEndTurnButtonInteractable(bool interactable)
     {
-        EndTurnButton.interactable = interactable;
+        _endTurnButton.interactable = interactable;
     }
 }
