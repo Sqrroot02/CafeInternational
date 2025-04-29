@@ -7,8 +7,13 @@ public class Bar : MonoBehaviour
     public List<Transform> cardSlots; // List with all cards
     public GameObject cardPrefab;
     private int nextSlotIntex = 0;
+    private PlayerManager _playerManager;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+    }
+    
     void Start()
     {
         InitializeSlots();
@@ -41,6 +46,11 @@ public class Bar : MonoBehaviour
     public void AddCard()
     {
         nextSlotIntex++;
+        // If all 20 barslots are taken the game ends
+        if (nextSlotIntex == 20)
+        {
+            _playerManager.GameEnded();
+        }
     }
 
     public bool CheckAddCard(int stoolIndex)

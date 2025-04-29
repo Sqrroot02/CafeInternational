@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Update = UnityEngine.PlayerLoop.Update;
 
 namespace Assets.Scripts.Models
 {
@@ -133,8 +134,12 @@ namespace Assets.Scripts.Models
             if (points == 8)
             {
                 MaxCardCount--;
+                // If a player has no cards left the game ends
+                if (MaxCardCount == 0)
+                {
+                    _playerManager.GameEnded();
+                }
             }
-            // TODO Was passiert bei 0 Karten? Hat der Spieler gewonnen?
             Debug.Log(PlayerName + " " + PlayerScore);
         }
 
@@ -148,6 +153,17 @@ namespace Assets.Scripts.Models
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// Subtract 5 Points for every normal card and 10 Points for every Joker remaining in the players hand at the end of the game
+        /// </summary>
+        public void SubtractPointsForRemainingCards()
+        {
+            foreach (var card in PlayerHand)
+            {
+                UpdatePlayerScore(card.cardData.nationality == Nationality.Joker ? -10 : -5);
+            }
         }
     }
 }

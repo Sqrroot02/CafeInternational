@@ -7,10 +7,13 @@ public class Deck : MonoBehaviour
 {
     private Stack<CardData> deckStack;
 
-    public GameObject cardPrefab; 
+    public GameObject cardPrefab;
+    
+    private PlayerManager _playerManager; 
 
     private void Awake()
     {
+        _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         GenerateDeck();
         ShuffleDeck();
     }
@@ -57,7 +60,7 @@ public class Deck : MonoBehaviour
 
     public Card DrawCard(Player player)
     {
-        if (deckStack.Count > 0)
+        if (deckStack.Count > 4)
         {
             CardData cardData = deckStack.Pop();
             
@@ -67,7 +70,8 @@ public class Deck : MonoBehaviour
             newCardObject.GetComponent<Card>().Player = player;
             return newCardObject.GetComponent<Card>();
         }
-        Debug.Log("Der Kartenstapel ist leer!");
+        // The Game Ends if the 4th last card in the stack is drawn
+        _playerManager.GameEnded();
         return null;
     }
 }

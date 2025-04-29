@@ -23,12 +23,33 @@ public class PlayerManager : MonoBehaviour
     private bool _firstTurn = true;
 
     public GameObject JokerIdentitySelectionPrefab;
+    
+    private bool _gameOver = false;
+    
+    private Chair[] _chairs;
+
+    public void GameEnded()
+    {
+        Debug.Log("Game ended");
+        _gameOver = true;
+        
+        SubtractPlayerCardPoints();
+    }
+
+    private void SubtractPlayerCardPoints()
+    {
+        foreach (Player player in players)
+        {
+            player.SubtractPointsForRemainingCards();
+        }
+    }
 
     private void Awake()
     {
         _endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
         _endTurnButton.interactable = false;
         _scoreTable = GameObject.Find("ScoreTable").GetComponent<ScoreTable>();
+        _chairs = GameObject.Find("Chairs").transform.GetComponentsInChildren<Chair>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -101,6 +122,11 @@ public class PlayerManager : MonoBehaviour
         {
             if (CurrentPlayer.IsMoveValid(_firstTurn))
             {
+                if (!CheckChairsHaveFreeSpots())
+                {
+                    GameEnded();
+                }
+                
                 CurrentPlayer.CountPlayerScore();
                 FillPlayerHand(CurrentPlayer);
 
@@ -138,5 +164,21 @@ public class PlayerManager : MonoBehaviour
     public void SetEndTurnButtonInteractable(bool interactable)
     {
         _endTurnButton.interactable = interactable;
+    }
+
+    /// <summary>
+    /// Checks if a there are empty chairs left
+    /// </summary>
+    /// <returns>True if empty chairs remain, otherwise false</returns>
+    private bool CheckChairsHaveFreeSpots()
+    {
+        foreach (var chair in _chairs)
+        {
+            if (chair.PlacedCard == null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
