@@ -128,12 +128,28 @@ public class PlayerManager : MonoBehaviour
                 }
                 
                 CurrentPlayer.CountPlayerScore();
-                FillPlayerHand(CurrentPlayer);
+                if (!CurrentPlayer.IsPlayerEliminated()) // Only fill the players cards if the player is not eliminated
+                {
+                    FillPlayerHand(CurrentPlayer);
+                }
 
                 CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
                 CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 2;
+
+                for (int i = 0; i < players.Count; i++)
+                {
+                    CurrentPlayerIndex = (CurrentPlayerIndex + 1) % players.Count;
+                    if (!players[CurrentPlayerIndex].IsPlayerEliminated()) // Check if the player is eliminated and only continue if not
+                    {
+                        break;
+                    }
+
+                    if (i == players.Count - 1) // If the 4th player is reached and also eliminated the game ends because no active players remain
+                    {
+                        GameEnded();
+                    }
+                }
                 
-                CurrentPlayerIndex = (CurrentPlayerIndex + 1) % players.Count;
                 CurrentPlayer = players[CurrentPlayerIndex];
                 CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
                 CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 3;

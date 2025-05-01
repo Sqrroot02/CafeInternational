@@ -14,6 +14,7 @@ namespace Assets.Scripts.Models
         public BarStool BarStool;
         private bool _playerBlockedByJokerIdentitySelection = false;
         private PlayerManager _playerManager;
+        private bool _playerEliminated = false;
         
         public Player(string playerName, int playerScore)
         {
@@ -23,12 +24,16 @@ namespace Assets.Scripts.Models
     
         public string PlayerName { get; set; }
         public int PlayerScore { get; private set; }
-        
         public GameObject PlayerGameBar { get; set; }
 
         public void SetPlayerManager(PlayerManager playerManager)
         {
             _playerManager = playerManager;
+        }
+
+        public bool IsPlayerEliminated()
+        {
+            return _playerEliminated;
         }
 
         public void SetPlayerBlockedByJokerIdentitySelection(bool state)
@@ -126,6 +131,12 @@ namespace Assets.Scripts.Models
                 UpdatePlayerScore(BarStool.Value);
             }
             BarStool =  null;
+
+            if (PlayerScore < 0)
+            {
+                _playerEliminated = true;
+                PlayerGameBar.GetComponentInParent<CanvasGroup>().alpha = 0.6f;
+            }
         }
 
         public void UpdatePlayerScore(int points)
