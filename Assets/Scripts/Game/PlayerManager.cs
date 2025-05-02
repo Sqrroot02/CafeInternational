@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Models;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -34,6 +35,15 @@ public class PlayerManager : MonoBehaviour
         _gameOver = true;
         
         SubtractPlayerCardPoints();
+        var x = GameObject.Find("EndScreenManager");
+        EndScreenHelper endScreenHelper = GameObject.Find("EndScreenManager").GetComponent<EndScreenHelper>();
+        endScreenHelper.PlayerScores.Clear(); // Clear any remaining scores from prior rounds
+        foreach (Player player in players)
+        {
+            endScreenHelper.PlayerScores.Add(new PlayerScore(player.PlayerName, player.PlayerScore));
+        }
+        
+        SceneManager.LoadScene("EndScreen");
     }
 
     private void SubtractPlayerCardPoints()
