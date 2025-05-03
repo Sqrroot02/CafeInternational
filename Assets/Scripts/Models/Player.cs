@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,6 +20,11 @@ namespace Assets.Scripts.Models
     
         public string PlayerName { get; set; }
         public int PlayerScore { get; private set; }
+        
+        /// <summary>
+        /// The identifier of the Player
+        /// </summary>
+        public Guid PlayerId { get; set; }
         
         public GameObject PlayerGameBar { get; set; }
 

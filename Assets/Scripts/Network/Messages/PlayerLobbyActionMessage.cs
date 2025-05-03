@@ -1,25 +1,25 @@
-using Riptide;
+﻿using Riptide;
 
 namespace Assets.Scripts.Network.Messages
 {
 	/// <summary>
-	/// Represents a message that contains a salutation from a player, including their PlayerName.
+	/// Represents a message type used for player actions in a lobby.
 	/// </summary>
-	public class PlayerSalutationMessage : IMessageSerializable
+	public class PlayerLobbyActionMessage : IMessageSerializable
 	{
-		public string PlayerName { get; set; }
 		public string PlayerId { get; set; }
+		public string Action { get; set; }
 		
 		public void Serialize(Message message)
 		{
-			message.AddString(PlayerName);
 			message.AddString(PlayerId);
+			message.AddString(Action);
 		}
 
 		public void Deserialize(Message message)
 		{
-			PlayerName = message.GetString();
 			PlayerId = message.GetString();
+			Action = message.GetString();
 		}
 	}
 }

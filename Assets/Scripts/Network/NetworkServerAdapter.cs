@@ -1,4 +1,6 @@
+using Assets.Scripts.Models;
 using Assets.Scripts.Network;
+using Assets.Scripts.Network.Messages;
 using Riptide;
 using Riptide.Utils;
 using UnityEngine;
@@ -66,18 +68,37 @@ public class NetworkServerAdapter : MonoBehaviour
 	{	
 		// Enable Logging for Riptide 
 		RiptideLogger.Initialize(Debug.Log, Debug.Log, Debug.LogWarning, Debug.LogError, false);
+		Debug.Log("NetworkServerAdapter 'Start()' has been called");
 		
 		Server = new Server();
 		Server.ClientConnected += OnPlayerConnected;
+		Server.MessageReceived += Distribute;
 		Server.Start(Port, MaxClient);
+	}
+
+	/// <summary>
+	/// Performs Broadcast to other Players if MSG-ID is over 1000
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	private void Distribute(object sender, MessageReceivedEventArgs e)
+	{
+		if (e.MessageId > 1000)
+			Server.SendToAll(e.Message, NetworkClientAdapter.Instance.Client.Id);
 	}
 
 	private void OnPlayerConnected(object sender, ServerConnectedEventArgs e)
 	{
-		Session.Players.Add(new PlayerConnection()
+		Debug.Log($"Player Connected: {e.Client.Id}!");
+	}
+
+	private void FixedUpdate()
+	{
+		if (Server == null)
 		{
-			ClientConnection = e.Client
-		});
+			Debug.LogError("No Server available!");
+		}
+		Server?.Update();
 	}
 
 	/// <summary>
@@ -86,6 +107,20 @@ public class NetworkServerAdapter : MonoBehaviour
 	private void OnApplicationQuit()
 	{
 		Server.Stop();
+	}
+
+	/// <summary>
+	/// Handles player salutation
+	/// </summary>
+	/// <param name="fromClientId"></param>
+	/// <param name="message"></param>
+	[MessageHandler(1)]
+	private static void HandlePlayerSalutationMessage(ushort fromClientId, Message message)
+	{
+		Debug.Log($"Received player salutation from {fromClientId}");
+		var payload = message.GetSerializable<PlayerSalutationMessage>();
+		var player = new Player(payload.PlayerName, 0);
+		_instance.Session.Players.Add(player);
 	}
 	
 }
