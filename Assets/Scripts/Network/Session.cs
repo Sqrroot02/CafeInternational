@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics;
+using System.Linq;
 using Assets.Scripts.Models;
 using Assets.Scripts.Network.Messages;
 using Debug = UnityEngine.Debug;
@@ -20,7 +19,7 @@ namespace Assets.Scripts.Network
 		/// <summary>
 		/// The name of the opened Session
 		/// </summary>
-		public string Name { get; set; }
+		public string Name { get; set; } = "Empty Session Name";
 		
 		public Session()
 		{
@@ -28,6 +27,11 @@ namespace Assets.Scripts.Network
 			Players.CollectionChanged += OnPlayersChanged;
 		}
 
+		/// <summary>
+		/// Perform update to all session participants when the player has connected 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void OnPlayersChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			Debug.Log("Players Collection has been changed");	
@@ -36,8 +40,8 @@ namespace Assets.Scripts.Network
 				Debug.Log($"Player {e.NewItems[0]} has been added to the session");
 				var lobbyActionMessage = new PlayerLobbyActionMessage()
 				{
-					Action = "add",
-					PlayerId = (e.NewItems[0] as Player)?.PlayerId.ToString(),
+					Players = Players.ToArray(),
+					LobbyName = Name
 				};
 				NetworkRouter.Broadcast(lobbyActionMessage, MessageType.PlayerLobbyAction);
 			}

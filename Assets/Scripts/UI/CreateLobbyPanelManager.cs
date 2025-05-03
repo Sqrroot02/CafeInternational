@@ -23,12 +23,21 @@ public class CreateLobbyPanelManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Creates a new lobby using the name entered the input field.
+    /// </summary>
+    /// <remarks>
+    /// This method retrieves the text entered in the <see cref="TMP_InputField"/> associated with the create lobby panel
+    /// and assigns it as the session name. The name is also stored in the main menu manager for further reference.
+    /// Debug messages are logged to confirm the entered lobby name.
+    /// </remarks>
     public void CreateLobby()
     {
-        string enteredName = lobbyNameInput.text;
+        var enteredName = lobbyNameInput.text;
         
+        NetworkServerAdapter.Instance.Session.Name = enteredName;
         MainMenuManager.Instance.lobbyName = enteredName;
-        Debug.Log("Saved Lobbyname: " + enteredName);
+        Debug.Log($"Saved Lobbyname: {enteredName}");
     }
 
     public void ResetLobbyName()

@@ -1,16 +1,22 @@
 using System;
 using System.Collections.Generic;
+using Riptide;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Scripts.Models
 {
-    public class Player
+    public class Player : IMessageSerializable
     {
         public int MaxCardCount = 5;
         public List<Card> PlayerHand = new();
         public List<Chair> Chairs = new();
         public BarStool BarStool;
+
+        public Player()
+        {
+            
+        }
         
         public Player(string playerName, int playerScore)
         {
@@ -111,6 +117,20 @@ namespace Assets.Scripts.Models
                 }
             }
             return null;
+        }
+
+        public void Serialize(Message message)
+        {
+            message.AddString(PlayerName);
+            message.AddInt(PlayerScore);
+            message.AddString(PlayerId.ToString());
+        }
+
+        public void Deserialize(Message message)
+        {
+            PlayerName = message.GetString();
+            PlayerScore = message.GetInt();
+            PlayerId = Guid.Parse(message.GetString());
         }
     }
 }

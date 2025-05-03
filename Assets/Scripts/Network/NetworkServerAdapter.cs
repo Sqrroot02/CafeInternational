@@ -84,7 +84,7 @@ public class NetworkServerAdapter : MonoBehaviour
 	private void Distribute(object sender, MessageReceivedEventArgs e)
 	{
 		if (e.MessageId > 1000)
-			Server.SendToAll(e.Message, NetworkClientAdapter.Instance.Client.Id);
+			Server.SendToAll(e.Message);
 	}
 
 	private void OnPlayerConnected(object sender, ServerConnectedEventArgs e)

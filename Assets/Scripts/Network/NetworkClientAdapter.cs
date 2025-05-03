@@ -1,9 +1,7 @@
 using System;
-using Assets.Scripts.Network.Messages;
 using Riptide;
 using Riptide.Utils;
 using UnityEngine;
-using MessageSendMode = Riptide.MessageSendMode;
 
 /// <summary>
 /// Singleton class that provides networking features to the Game as single client

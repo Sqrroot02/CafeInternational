@@ -1,25 +1,27 @@
-﻿using Riptide;
+﻿using Assets.Scripts.Models;
+using Riptide;
 
 namespace Assets.Scripts.Network.Messages
 {
 	/// <summary>
-	/// Represents a message type used for player actions in a lobby.
+	/// Represents a message for performing player-related actions in a lobby.
+	/// Used to communicate actions like adding players to a lobby.
 	/// </summary>
 	public class PlayerLobbyActionMessage : IMessageSerializable
 	{
-		public string PlayerId { get; set; }
-		public string Action { get; set; }
+		public Player[] Players { get; set; }
+		public string LobbyName { get; set; }
 		
 		public void Serialize(Message message)
 		{
-			message.AddString(PlayerId);
-			message.AddString(Action);
+			message.AddSerializables(Players);
+			message.AddString(LobbyName);
 		}
 
 		public void Deserialize(Message message)
 		{
-			PlayerId = message.GetString();
-			Action = message.GetString();
+			Players = message.GetSerializables<Player>();
+			LobbyName = message.GetString();
 		}
 	}
 }
