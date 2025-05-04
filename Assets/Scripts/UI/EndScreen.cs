@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndScreen : MonoBehaviour
 {
@@ -64,5 +65,11 @@ public class EndScreen : MonoBehaviour
         
         scoreBox.GetChild(2).GetComponent<TextMeshProUGUI>().text = _endScreenHelper.PlayerScores[index].Score.ToString();
         scoreBox.GetChild(2).GetComponent<TextMeshProUGUI>().color = rowColor;
+    }
+
+    public void ExitToMainMenu()
+    {
+        Debug.Log("Exiting to main menu");
+        SceneManager.LoadScene("MainMenu");
     }
 }

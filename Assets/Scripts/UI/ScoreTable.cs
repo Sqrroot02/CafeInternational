@@ -3,7 +3,6 @@ using System.Linq;
 using Assets.Scripts.Models;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Behaviour of Score Table
