@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Network.Messages
+﻿namespace Assets.Scripts.Network.Messages.TurnCommit
 {
 	/// <summary>
 	/// Represents the actions a player can commit during their turn.

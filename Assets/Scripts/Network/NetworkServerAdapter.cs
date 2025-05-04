@@ -77,14 +77,21 @@ public class NetworkServerAdapter : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Performs Broadcast to other Players if MSG-ID is over 1000
+	/// Performs Broadcast to other Players if MSG-ID is over 1000 or Multicast on over 3000
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
 	private void Distribute(object sender, MessageReceivedEventArgs e)
 	{
-		if (e.MessageId > 1000)
-			Server.SendToAll(e.Message);
+		switch (e.MessageId)
+		{
+			case > 3000:
+				Server.SendToAll(e.Message, e.FromConnection.Id);
+				break;
+			case > 1000:
+				Server.SendToAll(e.Message);
+				break;
+		}
 	}
 
 	private void OnPlayerConnected(object sender, ServerConnectedEventArgs e)

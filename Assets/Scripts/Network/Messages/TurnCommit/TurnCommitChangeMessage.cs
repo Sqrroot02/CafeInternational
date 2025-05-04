@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using Riptide;
 using UnityEngine;
 
-namespace Assets.Scripts.Network.Messages
+namespace Assets.Scripts.Network.Messages.TurnCommit
 {
 	/// <summary>
 	/// Message that notifies about a single change during a player's turn

@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Models;
 using Riptide;
 
-namespace Assets.Scripts.Network.Messages
+namespace Assets.Scripts.Network.Messages.TurnCommit
 {
 	/// <summary>
 	/// Represents a message used to commit the actions of the current player's turn and
