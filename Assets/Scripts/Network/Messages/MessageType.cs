@@ -21,6 +21,11 @@ namespace Assets.Scripts.Network.Messages
 		/// <summary>
 		/// A user has started the game 
 		/// </summary>
-		StartGame = 1002 
+		StartGame = 1002 ,
+		
+		/// <summary>
+		/// The current player has committed his turn
+		/// </summary>
+		TurnCommit = 1003,
 	}
 }

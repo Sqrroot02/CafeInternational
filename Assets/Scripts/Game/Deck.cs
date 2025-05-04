@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Assets.Scripts.Models;
+using Riptide;
 
-public class Deck : MonoBehaviour
+public class Deck : MonoBehaviour, IMessageSerializable
 {
     private Stack<CardData> deckStack;
 
@@ -69,6 +70,16 @@ public class Deck : MonoBehaviour
         }
         Debug.Log("Der Kartenstapel ist leer!");
         return null;
+    }
+
+    public void Serialize(Message message)
+    {
+        message.AddSerializables(deckStack.ToArray());
+    }
+
+    public void Deserialize(Message message)
+    {
+        deckStack = new Stack<CardData>(message.GetSerializables<CardData>());
     }
 }
 

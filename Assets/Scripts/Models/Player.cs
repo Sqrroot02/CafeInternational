@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Models
 {
+    /// <summary>
+    /// Represents a player in the game, including their properties, cards, and score management.
+    /// </summary>
     public class Player : IMessageSerializable
     {
         public int MaxCardCount = 5;

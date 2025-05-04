@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Models;
+﻿using System.Linq;
+using Assets.Scripts.Models;
 using Riptide;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,6 +41,8 @@ namespace Assets.Scripts.Network.Messages
 			
 			SceneManager.LoadScene("Game", LoadSceneMode.Additive);
 			SceneManager.UnloadSceneAsync("MainMenu");
+			
+			Models.PlayersGameUtil.ActivePlayers = obj.Players.ToList();
 		}
 	}
 }

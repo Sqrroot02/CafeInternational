@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Models;
+using Riptide;
 using UnityEngine;
 
-public class Chair : MonoBehaviour
+public class Chair : MonoBehaviour, IMessageSerializable
 {
     public GameObject FirstTableGO;
     public GameObject SecondTableGO; // Can be null
@@ -142,5 +143,19 @@ public class Chair : MonoBehaviour
         }
         PlacedCard = null;
         GetComponent<Outline>().UpdateOutlineSprite(null); // TODO Needs to be changed if the actual images of the chairs are implemented -> Change to the original image of the chair
+    }
+
+    public void Serialize(Message message)
+    {
+        message.AddSerializable(_firstTable);
+        message.AddSerializable(_secondTable);
+        message.AddSerializable(PlacedCard);
+    }
+
+    public void Deserialize(Message message)
+    {
+        _firstTable = message.GetSerializable<Table>();
+        _secondTable = message.GetSerializable<Table>();
+        PlacedCard = message.GetSerializable<Card>();
     }
 }
