@@ -50,18 +50,15 @@ public class LobbyPanelManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    private void SetLobbyNameText(string text)
-    {
-        lobbyNameTMP.text = text;
-    }
+    public void SetLobbyNameLabel(string text) => MainMenuHelper.SetLabelText(lobbyNameTMP, text);
+    public void SetLobbyPortLabel(string text) => MainMenuHelper.SetLabelText(lobbyPortTMP, text);
+    public void SetLobbyIPLabel(string text) => MainMenuHelper.SetLabelText(lobbyIPTMP, text);
 
-    private void SetLobbyPortText(string text)
-    {
-        lobbyPortTMP.text = text;
-    }
+    public string GetLobbyNameLabel() => MainMenuHelper.GetLabelText(lobbyNameTMP);
+    public string GetLobbyPortLabel() => MainMenuHelper.GetLabelText(lobbyPortTMP);
+    public string GetLobbyIPLabel() => MainMenuHelper.GetLabelText(lobbyIPTMP);
 
-    private void SetLobbyIPText(string text)
-    {
-        lobbyIPTMP.text = text;
-    }
+    public void ResetLobbyNameLabel() => MainMenuHelper.ResetLabelText(lobbyNameTMP);
+    public void ResetLobbyPortLabel() => MainMenuHelper.ResetLabelText(lobbyPortTMP);
+    public void ResetLobbyIPLabel() => MainMenuHelper.ResetLabelText(lobbyIPTMP);
 }

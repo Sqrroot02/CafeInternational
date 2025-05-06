@@ -46,9 +46,8 @@ public class MainMenuManager : MonoBehaviour
         mainMenuContainer.SetActive(true);
         lobbyPanel.SetActive(false);
         joinLobbyPanel.SetActive(false);
-        createLobbyPanelManager.ResetLobbyName();
-        lobbyPanelManager.ResetLobbyTMPs();
         joinLobbyPanelManager.ResetJoinLobbyTMPs();
+        createLobbyPanelManager.ResetCreateLobbyPanel();
         Debug.Log("Show Main Menu");
 
     }

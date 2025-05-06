@@ -23,9 +23,9 @@ public class JoinLobbyPanelManager : MonoBehaviour
 
     void Start()
     {
-        SetLobbyIPPlaceholder();
-        SetLobbyPortPlaceholder();
-        SetLobbyUserNicknamePlaceholder();
+        SetLobbyIPPlaceholder(lobbyIpTMPStandardValue);
+        SetLobbyPortPlaceholder(lobbyPortTMPStandardValue);
+        SetLobbyUserNicknamePlaceholder(lobbyUserNicknameValue);
 
         lobbyIPTMP.onValueChanged.AddListener(LobbyIPInput_TMP_ValueChanged);
         DisableCreateLobbyButton();
@@ -59,9 +59,9 @@ public class JoinLobbyPanelManager : MonoBehaviour
     public void ResetJoinLobbyTMPs()
     {
         Debug.Log("Reset Join Lobby Panel");
-        SetLobbyIPPlaceholder();
-        SetLobbyPortPlaceholder();
-        SetLobbyUserNicknamePlaceholder();
+        ResetLobbyUserNicknameText();
+        ResetLobbyIPText();
+        ResetLobbyPortText();
         DisableCreateLobbyButton();
     }
 
@@ -91,21 +91,16 @@ public class JoinLobbyPanelManager : MonoBehaviour
     }
 
 
-    private void SetLobbyIPPlaceholder()
-    {
-        if (lobbyIPTMP.placeholder is TextMeshProUGUI placeholder)
-            placeholder.text = lobbyIpTMPStandardValue;
-    }
+    
+    public void SetLobbyIPPlaceholder(string text) => MainMenuHelper.SetPlaceholder(lobbyIPTMP, text);
+    public void SetLobbyPortPlaceholder(string text) => MainMenuHelper.SetPlaceholder(lobbyPortTMP, text);
+    public void SetLobbyUserNicknamePlaceholder(string text) => MainMenuHelper.SetPlaceholder(lobbyUserNickname, text);
 
-    private void SetLobbyPortPlaceholder()
-    {
-        if (lobbyPortTMP.placeholder is TextMeshProUGUI placeholder)
-            placeholder.text = lobbyPortTMPStandardValue;
-    }
+    public string GetLobbyIPText() => MainMenuHelper.GetInputText(lobbyIPTMP);
+    public string GetLobbyPortText() => MainMenuHelper.GetInputText(lobbyPortTMP);
+    public string GetLobbyUserNicknameText() => MainMenuHelper.GetInputText(lobbyUserNickname);
 
-    private void SetLobbyUserNicknamePlaceholder()
-    {
-        if (lobbyUserNickname.placeholder is TextMeshProUGUI placeholder)
-            placeholder.text = lobbyUserNicknameValue;
-    }
+    public void ResetLobbyIPText() => MainMenuHelper.ResetInputText(lobbyIPTMP);
+    public void ResetLobbyPortText() => MainMenuHelper.ResetInputText(lobbyPortTMP);
+    public void ResetLobbyUserNicknameText() => MainMenuHelper.ResetInputText(lobbyUserNickname);
 }
