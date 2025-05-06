@@ -49,4 +49,19 @@ public class LobbyPanelManager : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+
+    private void SetLobbyNameText(string text)
+    {
+        lobbyNameTMP.text = text;
+    }
+
+    private void SetLobbyPortText(string text)
+    {
+        lobbyPortTMP.text = text;
+    }
+
+    private void SetLobbyIPText(string text)
+    {
+        lobbyIPTMP.text = text;
+    }
 }

@@ -6,10 +6,13 @@ public class CreateLobbyPanelManager : MonoBehaviour
 {
     public TMP_InputField lobbyNameInput;
 
+    private string lobbyNamePlaceholderValue = "Enter Lobby Name...";
+
     public Button createLobbyButton;
 
     void Start()
     {
+        SetLobbyNamePlaceholder();
         lobbyNameInput.onValueChanged.AddListener(LobbyNameInput_TMP_ValueChanged);
         DisableCreateLobbyButton();
     }
@@ -34,7 +37,7 @@ public class CreateLobbyPanelManager : MonoBehaviour
     public void ResetLobbyName()
     {
         Debug.Log("Reset Lobbyname");
-        lobbyNameInput.text = "Enter Lobbyname...";
+        SetLobbyNamePlaceholder();
         DisableCreateLobbyButton();
     }
 
@@ -42,5 +45,11 @@ public class CreateLobbyPanelManager : MonoBehaviour
     {
         createLobbyButton.interactable = false;
         Debug.Log("Disable Create Lobby Button");
+    }
+
+    private void SetLobbyNamePlaceholder()
+    {
+        if (lobbyNameInput.placeholder is TextMeshProUGUI placeholder)
+            placeholder.text = lobbyNamePlaceholderValue;
     }
 }

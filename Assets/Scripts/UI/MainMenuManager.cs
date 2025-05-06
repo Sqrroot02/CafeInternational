@@ -25,19 +25,6 @@ public class MainMenuManager : MonoBehaviour
 
     public LobbyPanelManager lobbyPanelManager;
 
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public void QuitGame()
     {
         Application.Quit();
@@ -61,7 +48,7 @@ public class MainMenuManager : MonoBehaviour
         joinLobbyPanel.SetActive(false);
         createLobbyPanelManager.ResetLobbyName();
         lobbyPanelManager.ResetLobbyTMPs();
-        joinLobbyPanelManager.ResetJoinLobbyTMDs();
+        joinLobbyPanelManager.ResetJoinLobbyTMPs();
         Debug.Log("Show Main Menu");
 
     }
@@ -72,7 +59,6 @@ public class MainMenuManager : MonoBehaviour
         mainMenuContainer.SetActive(false);
         lobbyPanel.SetActive(true);
         joinLobbyPanel.SetActive(false);
-        lobbyPanelManager.initiateLobby();
         Debug.Log("Show Lobby Panel");
     }
 
