@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Bar : MonoBehaviour
 {
@@ -8,15 +8,21 @@ public class Bar : MonoBehaviour
     public GameObject cardPrefab;
     private int nextSlotIntex = 0;
     private PlayerManager _playerManager;
+    public List<BarStool> BarStools = new ();
 
     private void Awake()
     {
         _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        foreach (var row in GameObject.FindGameObjectsWithTag("Row"))
+        {
+            BarStools.AddRange(row.GetComponentsInChildren<BarStool>().ToList());
+        }
     }
     
     void Start()
     {
         InitializeSlots();
+        BarStools = BarStools.OrderBy(barStool => barStool.GetIndex()).ToList();
     }
 
     /// <summary>
@@ -61,5 +67,10 @@ public class Bar : MonoBehaviour
         }
 
         return false;
+    }
+
+    public int GetNextIndex()
+    {
+        return nextSlotIntex;
     }
 }

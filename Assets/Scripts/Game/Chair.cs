@@ -112,10 +112,13 @@ public class Chair : MonoBehaviour
     /// </summary>
     public void SelectJokerIndentity()
     {
-        PlacedCard.Player.SetPlayerBlockedByJokerIdentitySelection(true);
-        GameObject identitySelection = Instantiate(PlacedCard.GetPlayerManager().JokerIdentitySelectionPrefab, transform);
-        identitySelection.transform.GetChild(0).GetComponent<JokerIdentitySelection>().SetUp(PlacedCard, _firstTable.nationality);
-        identitySelection.transform.GetChild(1).GetComponent<JokerIdentitySelection>().SetUp(PlacedCard, _secondTable.nationality);
+        if (!PlacedCard.Player.IsBot)
+        {
+            PlacedCard.Player.SetPlayerBlockedByJokerIdentitySelection(true);
+            GameObject identitySelection = Instantiate(PlacedCard.GetPlayerManager().JokerIdentitySelectionPrefab, transform);
+            identitySelection.transform.GetChild(0).GetComponent<JokerIdentitySelection>().SetUp(PlacedCard, _firstTable.nationality);
+            identitySelection.transform.GetChild(1).GetComponent<JokerIdentitySelection>().SetUp(PlacedCard, _secondTable.nationality);
+        }
     }
 
     private void ReplaceJoker(Card card)
@@ -154,6 +157,16 @@ public class Chair : MonoBehaviour
         
         return onlyCard;
     }
+    
+    public bool NoCardAtTheTable()
+    {
+        bool noCard = _firstTable.placedCards.Count == 0;
+        if (_secondTable != null &&_secondTable.placedCards.Count != 0)
+        {
+            noCard = false;
+        }
+        return noCard;
+    }
 
     public void RemovePlacedCard()
     {
@@ -164,5 +177,15 @@ public class Chair : MonoBehaviour
         }
         PlacedCard = null;
         GetComponent<Outline>().UpdateOutlineSprite(null); // TODO Needs to be changed if the actual images of the chairs are implemented -> Change to the original image of the chair
+    }
+
+    public (Nationality, Nationality?) GetNationalities()
+    {
+        return (_firstTable.nationality, _secondTable?.nationality);
+    }
+
+    public Nationality GetFirstTableNationality()
+    {
+        return _firstTable.nationality;
     }
 }

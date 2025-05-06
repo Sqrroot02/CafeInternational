@@ -16,14 +16,16 @@ namespace Assets.Scripts.Models
         private PlayerManager _playerManager;
         private bool _playerEliminated = false;
         
-        public Player(string playerName, int playerScore)
+        public Player(string playerName, int playerScore, bool isBot)
         {
             PlayerName = playerName;
             PlayerScore = playerScore;
+            IsBot = isBot;
         }
     
         public string PlayerName { get; set; }
         public int PlayerScore { get; private set; }
+        public bool IsBot { get; private set; }
         public GameObject PlayerGameBar { get; set; }
 
         public void SetPlayerManager(PlayerManager playerManager)

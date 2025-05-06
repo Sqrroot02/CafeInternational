@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Models;
+using Game.BotBehaviour;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,6 +30,7 @@ public class PlayerManager : MonoBehaviour
     private bool _gameOver = false;
     
     private Chair[] _chairs;
+    private EasyBotBehaviour _easyBotBehaviour;
 
     public void GameEnded()
     {
@@ -60,6 +63,7 @@ public class PlayerManager : MonoBehaviour
         _endTurnButton.interactable = false;
         _scoreTable = GameObject.Find("ScoreTable").GetComponent<ScoreTable>();
         _chairs = GameObject.Find("Chairs").transform.GetComponentsInChildren<Chair>();
+        _easyBotBehaviour = EasyBotBehaviour.GetInstance();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -81,6 +85,13 @@ public class PlayerManager : MonoBehaviour
         {
             player.SetPlayerManager(this);
         }
+        
+        if (CurrentPlayer.IsBot)
+        {
+            StartCoroutine(WaitForBotPlay(4));
+            StartCoroutine(WaitForUpdate(5));
+        }                    
+
     }
 
     private void ShufflePlayers()
@@ -168,6 +179,11 @@ public class PlayerManager : MonoBehaviour
                 _endTurnButton.interactable = false;
                 _scoreTable.UpdateScores(players);
                 _firstTurn = false;
+                if (CurrentPlayer.IsBot)
+                {
+                    StartCoroutine(WaitForBotPlay());
+                    StartCoroutine(WaitForUpdate());
+                }
             }
             else
             {
@@ -206,5 +222,17 @@ public class PlayerManager : MonoBehaviour
             }
         }
         return false;
+    }
+    
+    IEnumerator WaitForBotPlay(int seconds = 2)
+    {
+        yield return new WaitForSeconds(seconds);
+        _easyBotBehaviour.Play(CurrentPlayer);
+    }
+    
+    IEnumerator WaitForUpdate(int seconds = 5)
+    {
+        yield return new WaitForSeconds(seconds);
+        UpdatePlayer();
     }
 }

@@ -20,6 +20,11 @@ public class BarStool : MonoBehaviour
         _index = index;
     }
 
+    public int GetIndex()
+    {
+        return _index; 
+    }
+
     /// <summary>
     /// Placed the given Card on the stool if possible
     /// </summary>
