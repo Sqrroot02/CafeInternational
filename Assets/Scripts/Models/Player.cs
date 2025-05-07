@@ -10,11 +10,13 @@ namespace Assets.Scripts.Models
         public List<Card> PlayerHand = new();
         public List<Chair> Chairs = new();
         public BarStool BarStool;
+        public bool IsHuman = false;
         
-        public Player(string playerName, int playerScore)
+        public Player(string playerName, int playerScore, bool isHuman)
         {
             PlayerName = playerName;
             PlayerScore = playerScore;
+            IsHuman = isHuman;
         }
     
         public string PlayerName { get; set; }

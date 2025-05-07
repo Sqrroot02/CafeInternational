@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class CreateLobbyPanelManager : MonoBehaviour
 {
+    public MainMenuManager mainMenuManager;
+
     public TMP_InputField lobbyNameInput;
 
     public TMP_InputField nicknameInputField;
@@ -18,25 +20,21 @@ public class CreateLobbyPanelManager : MonoBehaviour
     {
         SetLobbyNamePlaceholder(lobbyNamePlaceholderValue);
         SetNicknamePlaceholder(nickNamePlacerholderValue);
-        lobbyNameInput.onValueChanged.AddListener(LobbyNameInput_TMP_ValueChanged);
-        DisableCreateLobbyButton();
-    }
 
-    void LobbyNameInput_TMP_ValueChanged(string newValue)
-    {
-        if (newValue != "Enter Lobby Name...".Trim() && !string.IsNullOrEmpty(newValue))
-        {
-            createLobbyButton.interactable = true;
-            Debug.Log("Enable Create Lobby Button");
-        }
+        MainMenuHelper.SetupButtonActivationValidation(createLobbyButton, nicknameInputField, lobbyNameInput);
     }
 
     public void CreateLobby()
     {
-        string enteredName = lobbyNameInput.text;
+        string enteredLobbyName = lobbyNameInput.text;
+        string enteredNickname = nicknameInputField.text;
 
-        MainMenuManager.Instance.lobbyName = enteredName;
-        Debug.Log("Saved Lobbyname: " + enteredName);
+        if (MainMenuHelper.IsValidNicknameOrLobbyName(enteredLobbyName) && MainMenuHelper.IsValidNicknameOrLobbyName(enteredNickname))
+        {
+            LobbyStorage.Instance.InitializeLobby(enteredNickname, enteredLobbyName);
+
+            mainMenuManager.ShowLobby();
+        }
     }
 
     public void ResetCreateLobbyPanel()
@@ -44,13 +42,6 @@ public class CreateLobbyPanelManager : MonoBehaviour
         Debug.Log("Reset Create Lobby Panel");
         ResetLobbyNameText();
         ResetNicknameText();
-        DisableCreateLobbyButton();
-    }
-
-    private void DisableCreateLobbyButton()
-    {
-        createLobbyButton.interactable = false;
-        Debug.Log("Disable Create Lobby Button");
     }
 
     public void SetLobbyNamePlaceholder(string text) => MainMenuHelper.SetPlaceholder(lobbyNameInput, text);

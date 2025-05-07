@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class LobbyPanelManager : MonoBehaviour
 {
@@ -10,44 +11,41 @@ public class LobbyPanelManager : MonoBehaviour
 
     public TMP_Text lobbyIPTMP;
 
-    public void initiateLobby()
+    public List<TMP_Text> playerNameTexts;
+
+    public void InitiateLobby()
     {
-        SetLobbyName();
-        SetLobbyPortIPTMP();
-    }
-
-    private void SetLobbyName()
-    {
-        string lobbyName = MainMenuManager.Instance.lobbyName;
-        Debug.Log($"Set Lobbyname to {lobbyName}" );
-        lobbyNameTMP.text = "Lobby: " + lobbyName;
-    }
-
-    private void SetLobbyPortIPTMP()
-    {
-        string lobbyIP = MainMenuManager.Instance.lobbyIP;
-        string lobbyPort = MainMenuManager.Instance.lobbyPort;
-
-        if (!string.IsNullOrEmpty(lobbyPort))
-        {
-            lobbyPortTMP.text = "Port: " + lobbyPort;
-
-        }
-
-        Debug.Log("Set Lobby Port: " + lobbyPort + " Lobby IP: " + lobbyIP);
-        lobbyIPTMP.text = "IP: " + lobbyIP;
+        SetLobbyIPLabel("Lobby Ip: Dummy Value");
+        SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.GlobalLobbyName);
+        SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.GlobalLobbyPort.ToString());
+        SetPlayerNames();
     }
 
     public void ResetLobbyTMPs()
     {
-        lobbyNameTMP.text = string.Empty;
-        lobbyPortTMP.text = string.Empty;
-        lobbyIPTMP.text = string.Empty;
+        ResetLobbyIPLabel();
+        ResetLobbyNameLabel();
+        ResetLobbyPortLabel();
     }
 
     public void StartGame()
     {
         SceneManager.LoadScene("Game");
+    }
+
+    public void AddLocalPlayer()
+    {
+        LobbyStorage.Instance.ReplaceBotWithHuman(MainMenuHelper.GenerateName());
+    }
+
+    public void SetPlayerNames()
+    {
+        var players = LobbyStorage.Instance.ActivePlayers;
+
+        for (int i = 0; i < Mathf.Min(players.Count, playerNameTexts.Count); i++)
+        {
+            playerNameTexts[i].text = players[i].PlayerName;
+        }
     }
 
     public void SetLobbyNameLabel(string text) => MainMenuHelper.SetLabelText(lobbyNameTMP, text);

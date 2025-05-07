@@ -3,8 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public static MainMenuManager Instance;
-
     public string lobbyName;
 
     public string lobbyPort;
@@ -48,6 +46,7 @@ public class MainMenuManager : MonoBehaviour
         joinLobbyPanel.SetActive(false);
         joinLobbyPanelManager.ResetJoinLobbyTMPs();
         createLobbyPanelManager.ResetCreateLobbyPanel();
+        lobbyPanelManager.ResetLobbyTMPs();
         Debug.Log("Show Main Menu");
 
     }
@@ -58,6 +57,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenuContainer.SetActive(false);
         lobbyPanel.SetActive(true);
         joinLobbyPanel.SetActive(false);
+        lobbyPanelManager.InitiateLobby();
         Debug.Log("Show Lobby Panel");
     }
 

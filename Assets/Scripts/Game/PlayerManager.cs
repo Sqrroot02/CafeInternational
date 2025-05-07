@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour
 
     private void ShufflePlayers()
     {
-        Stack<Player> playersStack = new Stack<Player>(Players.ActivePlayers);
+        Stack<Player> playersStack = new Stack<Player>(LobbyStorage.Instance.ActivePlayers);
         players.Add(playersStack.Pop());
 
         while (playersStack.Count > 0)
