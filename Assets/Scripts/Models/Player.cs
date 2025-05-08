@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Update = UnityEngine.PlayerLoop.Update;
 
 namespace Assets.Scripts.Models
 {
@@ -10,17 +12,42 @@ namespace Assets.Scripts.Models
         public List<Card> PlayerHand = new();
         public List<Chair> Chairs = new();
         public BarStool BarStool;
+        private bool _playerBlockedByJokerIdentitySelection = false;
+        private PlayerManager _playerManager;
+        private bool _playerEliminated = false;
         
-        public Player(string playerName, int playerScore)
+        public Player(string playerName, int playerScore, bool isBot)
         {
             PlayerName = playerName;
             PlayerScore = playerScore;
+            IsBot = isBot;
         }
     
         public string PlayerName { get; set; }
         public int PlayerScore { get; private set; }
-        
+        public bool IsBot { get; private set; }
         public GameObject PlayerGameBar { get; set; }
+
+        public void SetPlayerManager(PlayerManager playerManager)
+        {
+            _playerManager = playerManager;
+        }
+
+        public bool IsPlayerEliminated()
+        {
+            return _playerEliminated;
+        }
+
+        public void SetPlayerBlockedByJokerIdentitySelection(bool state)
+        {
+            _playerBlockedByJokerIdentitySelection = state;
+            _playerManager.SetEndTurnButtonInteractable(!_playerBlockedByJokerIdentitySelection);
+        }
+
+        public bool GetPlayerBlockedByJokerIdentitySelection()
+        {
+            return _playerBlockedByJokerIdentitySelection;
+        }
 
         /// <summary>
         /// Checks if the combination of cards the player played match the rules of the Game.
@@ -63,15 +90,39 @@ namespace Assets.Scripts.Models
         public void CountPlayerScore()
         {
             //Chairs
-            HashSet<Table> tables = new(); // Find all tables that have cards placed at them
-            foreach (Chair chair in Chairs)
+            Dictionary<Table, int> tables = new(); // Find all tables that have cards placed at them and the amount of cards at the table
+            for (int i = 0; i < Chairs.Count; i++)
             {
-                PlayerHand.Remove(chair.PlacedCard); // Remove the placed cards from the list of cards in the playerhand for the refilling
-                tables.AddRange(chair.GetTables());
+                PlayerHand.Remove(Chairs[i].PlacedCard); // Remove the placed cards from the list of cards in the playerhand for the refilling
+                foreach (var table in Chairs[i].GetTables())
+                {
+                    if (!tables.TryAdd(table, 0))
+                    {
+                        tables[table]++;
+                    }
+                }
             }
-            foreach (var table in tables)
+
+            for (int i = 0; i < Chairs.Count; i++)
             {
-                UpdatePlayerScore(table.GetTablePoints());
+                PlayerHand.Remove(Chairs[i].PlacedCard); // Remove the placed cards from the list of cards in the playerhand for the refilling
+                foreach (var table in Chairs[i].GetTables())
+                {
+                    // The upper bound for the check is decreased by the number of cards placed on the table for the first card. That ensures, that the list of the cards at the table is only checked up to the point of the card
+                    // For the second placed card that is no longer necessary
+                    int maxIndex = table.placedCards.Count - math.max(tables[table] - i, 0);
+                    if (maxIndex > 1)
+                    {
+                        if (table.isOneNationality(maxIndex)) // Double points
+                        {
+                            UpdatePlayerScore(2 * maxIndex);
+                        }
+                        else
+                        {
+                            UpdatePlayerScore(maxIndex);
+                        }
+                    }
+                }
             }
             Chairs.Clear();
             
@@ -82,6 +133,12 @@ namespace Assets.Scripts.Models
                 UpdatePlayerScore(BarStool.Value);
             }
             BarStool =  null;
+
+            if (PlayerScore < 0)
+            {
+                _playerEliminated = true;
+                PlayerGameBar.GetComponentInParent<CanvasGroup>().alpha = 0.6f;
+            }
         }
 
         public void UpdatePlayerScore(int points)
@@ -90,8 +147,12 @@ namespace Assets.Scripts.Models
             if (points == 8)
             {
                 MaxCardCount--;
+                // If a player has no cards left the game ends
+                if (MaxCardCount == 0)
+                {
+                    _playerManager.GameEnded();
+                }
             }
-            // TODO Was passiert bei 0 Karten? Hat der Spieler gewonnen?
             Debug.Log(PlayerName + " " + PlayerScore);
         }
 
@@ -105,6 +166,17 @@ namespace Assets.Scripts.Models
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// Subtract 5 Points for every normal card and 10 Points for every Joker remaining in the players hand at the end of the game
+        /// </summary>
+        public void SubtractPointsForRemainingCards()
+        {
+            foreach (var card in PlayerHand)
+            {
+                UpdatePlayerScore(card.cardData.nationality == Nationality.Joker ? -10 : -5);
+            }
         }
     }
 }

@@ -1,7 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Models;
+using Game.BotBehaviour;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -16,14 +19,51 @@ public class PlayerManager : MonoBehaviour
     
     public int CountCardsPlayed { get; private set; }
 
-    private Button EndTurnButton;
+    private Button _endTurnButton;
+    
+    private ScoreTable _scoreTable;
     
     private bool _firstTurn = true;
 
+    public GameObject JokerIdentitySelectionPrefab;
+    
+    private bool _gameOver = false;
+    
+    private Chair[] _chairs;
+    private EasyBotBehaviour _easyBotBehaviour;
+
+    public void GameEnded()
+    {
+        Debug.Log("Game ended");
+        _gameOver = true;
+        
+        SubtractPlayerCardPoints();
+        var x = GameObject.Find("EndScreenManager");
+        EndScreenHelper endScreenHelper = GameObject.Find("EndScreenManager").GetComponent<EndScreenHelper>();
+        endScreenHelper.PlayerScores.Clear(); // Clear any remaining scores from prior rounds
+        foreach (Player player in players)
+        {
+            endScreenHelper.PlayerScores.Add(new PlayerScore(player.PlayerName, player.PlayerScore));
+        }
+        
+        SceneManager.LoadScene("EndScreen");
+    }
+
+    private void SubtractPlayerCardPoints()
+    {
+        foreach (Player player in players)
+        {
+            player.SubtractPointsForRemainingCards();
+        }
+    }
+
     private void Awake()
     {
-        EndTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
-        EndTurnButton.interactable = false;
+        _endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
+        _endTurnButton.interactable = false;
+        _scoreTable = GameObject.Find("ScoreTable").GetComponent<ScoreTable>();
+        _chairs = GameObject.Find("Chairs").transform.GetComponentsInChildren<Chair>();
+        _easyBotBehaviour = EasyBotBehaviour.GetInstance();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,6 +77,20 @@ public class PlayerManager : MonoBehaviour
         CurrentPlayerIndex = 0;
         CurrentPlayer = players[CurrentPlayerIndex];
         CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+        CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 3;
+
+        _scoreTable.UpdateScores(players);
+        
+        foreach (var player in players)
+        {
+            player.SetPlayerManager(this);
+        }
+        
+        if (CurrentPlayer.IsBot)
+        {
+            StartCoroutine(WaitForBotPlay(4));
+            StartCoroutine(WaitForUpdate(5));
+        }                    
 
     }
 
@@ -77,7 +131,7 @@ public class PlayerManager : MonoBehaviour
     public void IncrementCountCardsPlayed(int increment)
     {
         CountCardsPlayed += increment;
-        EndTurnButton.interactable = true;
+        _endTurnButton.interactable = true;
     }
     
     /// <summary>
@@ -89,20 +143,51 @@ public class PlayerManager : MonoBehaviour
         {
             if (CurrentPlayer.IsMoveValid(_firstTurn))
             {
+                if (!CheckChairsHaveFreeSpots())
+                {
+                    GameEnded();
+                }
+                
                 CurrentPlayer.CountPlayerScore();
-                FillPlayerHand(CurrentPlayer);
+                if (!CurrentPlayer.IsPlayerEliminated()) // Only fill the players cards if the player is not eliminated
+                {
+                    FillPlayerHand(CurrentPlayer);
+                }
 
                 CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-                CurrentPlayerIndex = (CurrentPlayerIndex + 1) % players.Count;
+                CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 2;
+
+                for (int i = 0; i < players.Count; i++)
+                {
+                    CurrentPlayerIndex = (CurrentPlayerIndex + 1) % players.Count;
+                    if (!players[CurrentPlayerIndex].IsPlayerEliminated()) // Check if the player is eliminated and only continue if not
+                    {
+                        break;
+                    }
+
+                    if (i == players.Count - 1) // If the 4th player is reached and also eliminated the game ends because no active players remain
+                    {
+                        GameEnded();
+                    }
+                }
+                
                 CurrentPlayer = players[CurrentPlayerIndex];
                 CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 3;
                 CountCardsPlayed = 0;
-                EndTurnButton.interactable = false;
+                
+                _endTurnButton.interactable = false;
+                _scoreTable.UpdateScores(players);
                 _firstTurn = false;
+                if (CurrentPlayer.IsBot)
+                {
+                    StartCoroutine(WaitForBotPlay());
+                    StartCoroutine(WaitForUpdate());
+                }
             }
             else
             {
-                EndTurnButton.interactable = false;
+                _endTurnButton.interactable = false;
                 CountCardsPlayed = 0;
                 CurrentPlayer.ResetCards();
             }
@@ -116,5 +201,38 @@ public class PlayerManager : MonoBehaviour
         {
             player.PlayerHand.Add(_deck.DrawCard(player));
         }
+    }
+
+    public void SetEndTurnButtonInteractable(bool interactable)
+    {
+        _endTurnButton.interactable = interactable;
+    }
+
+    /// <summary>
+    /// Checks if a there are empty chairs left
+    /// </summary>
+    /// <returns>True if empty chairs remain, otherwise false</returns>
+    private bool CheckChairsHaveFreeSpots()
+    {
+        foreach (var chair in _chairs)
+        {
+            if (chair.PlacedCard == null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    IEnumerator WaitForBotPlay(int seconds = 2)
+    {
+        yield return new WaitForSeconds(seconds);
+        _easyBotBehaviour.Play(CurrentPlayer);
+    }
+    
+    IEnumerator WaitForUpdate(int seconds = 5)
+    {
+        yield return new WaitForSeconds(seconds);
+        UpdatePlayer();
     }
 }

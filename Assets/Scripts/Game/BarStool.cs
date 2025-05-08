@@ -1,3 +1,4 @@
+using Assets.Scripts.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,12 +20,17 @@ public class BarStool : MonoBehaviour
         _index = index;
     }
 
+    public int GetIndex()
+    {
+        return _index; 
+    }
+
     /// <summary>
     /// Placed the given Card on the stool if possible
     /// </summary>
     public bool PlaceCard(Card card)
     {
-        if (!card.GetIsPlaced() && transform.parent.transform.parent.gameObject.GetComponent<Bar>().CheckAddCard(_index))
+        if (card.cardData.nationality != Nationality.Joker && !card.GetIsPlaced() && transform.parent.transform.parent.gameObject.GetComponent<Bar>().CheckAddCard(_index))
         {
             if (card.UpdateIsPlaced(2))
             {

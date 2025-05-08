@@ -18,6 +18,8 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public Transform PlayerBarSlot { get; set; }
 
+    public Nationality JokerIdentity = ; // Only set if card is a joker and is placed on a Chair that is at two tables
+
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();

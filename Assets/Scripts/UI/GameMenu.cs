@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI
@@ -9,35 +10,32 @@ namespace Assets.Scripts.UI
 	/// </summary>
 	public class GameMenu : MonoBehaviour
 	{
+		public GameObject EscapeMenuUI;
+
 		private Button _resumeButton;
 
 		/// <summary>
 		/// Hides the menu
 		/// </summary>
-		public void HideMenu()
+		public void Resume()
 		{
-			Debug.Log("GameMenu-Enabled: New State -> HIDDEN");
-			enabled = false;
-			gameObject.SetActive(false);
-		}
-		
-		/// <summary>
-		/// Init components
-		/// </summary>
-		void Start()
-		{
-			Debug.Log("Init Game Menu");
-			InitResumeButton();
+			EscapeMenuUI.SetActive(false);
 		}
 
 		/// <summary>
-		/// Init resume button
+		/// Quits back to the Main Menu
 		/// </summary>
-		void InitResumeButton()
+		public void Quit()
 		{
-			Debug.Log("Init Game Menu -> Resume Button");
-			_resumeButton = transform.Find("GameMenuBackground").Find("ResumeButton").GetComponent<Button>();
-			_resumeButton.onClick.AddListener(HideMenu);
+			SceneManager.LoadScene("MainMenu");
+		}
+
+		void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				EscapeMenuUI.SetActive(!EscapeMenuUI.activeSelf);
+			}
 		}
 	}
 }

@@ -1,17 +1,28 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Bar : MonoBehaviour
 {
     public List<Transform> cardSlots; // List with all cards
     public GameObject cardPrefab;
     private int nextSlotIntex = 0;
+    private PlayerManager _playerManager;
+    public List<BarStool> BarStools = new ();
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        _playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        foreach (var row in GameObject.FindGameObjectsWithTag("Row"))
+        {
+            BarStools.AddRange(row.GetComponentsInChildren<BarStool>().ToList());
+        }
+    }
+    
     void Start()
     {
         InitializeSlots();
+        BarStools = BarStools.OrderBy(barStool => barStool.GetIndex()).ToList();
     }
 
     /// <summary>
@@ -41,6 +52,11 @@ public class Bar : MonoBehaviour
     public void AddCard()
     {
         nextSlotIntex++;
+        // If all 20 barslots are taken the game ends
+        if (nextSlotIntex == 20)
+        {
+            _playerManager.GameEnded();
+        }
     }
 
     public bool CheckAddCard(int stoolIndex)
@@ -51,5 +67,10 @@ public class Bar : MonoBehaviour
         }
 
         return false;
+    }
+
+    public int GetNextIndex()
+    {
+        return nextSlotIntex;
     }
 }
