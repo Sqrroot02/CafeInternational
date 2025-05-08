@@ -12,15 +12,18 @@ namespace Assets.Scripts.Models
         public List<Card> PlayerHand = new();
         public List<Chair> Chairs = new();
         public BarStool BarStool;
+        public bool IsHuman = false;
+        public bool LobbyHost = false;
         private bool _playerBlockedByJokerIdentitySelection = false;
         private PlayerManager _playerManager;
         private bool _playerEliminated = false;
         
-        public Player(string playerName, int playerScore, bool isBot)
+        public Player(string playerName, int playerScore, bool isHuman, bool lobbyHost)
         {
             PlayerName = playerName;
             PlayerScore = playerScore;
-            IsBot = isBot;
+            IsHuman = isHuman;
+            LobbyHost = lobbyHost;
         }
     
         public string PlayerName { get; set; }

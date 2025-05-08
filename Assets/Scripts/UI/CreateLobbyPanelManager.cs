@@ -4,43 +4,52 @@ using UnityEngine.UI;
 
 public class CreateLobbyPanelManager : MonoBehaviour
 {
+    public MainMenuManager mainMenuManager;
+
     public TMP_InputField lobbyNameInput;
+
+    public TMP_InputField nicknameInputField;
+
+    private string nickNamePlacerholderValue = "Enter Nickname...";
+
+    private string lobbyNamePlaceholderValue = "Enter Lobby Name...";
 
     public Button createLobbyButton;
 
     void Start()
     {
-        lobbyNameInput.onValueChanged.AddListener(LobbyNameInput_TMP_ValueChanged);
-        DisableCreateLobbyButton();
-    }
+        SetLobbyNamePlaceholder(lobbyNamePlaceholderValue);
+        SetNicknamePlaceholder(nickNamePlacerholderValue);
 
-    void LobbyNameInput_TMP_ValueChanged(string newValue)
-    {
-        if (newValue != "Enter Lobby Name...".Trim() && !string.IsNullOrEmpty(newValue))
-        {
-            createLobbyButton.interactable = true;
-            Debug.Log("Enable Create Lobby Button");
-        }
+        MainMenuHelper.SetupButtonActivationValidation(createLobbyButton, nicknameInputField, lobbyNameInput);
     }
 
     public void CreateLobby()
     {
-        string enteredName = lobbyNameInput.text;
+        string enteredLobbyName = lobbyNameInput.text;
+        string enteredNickname = nicknameInputField.text;
 
-        MainMenuManager.Instance.lobbyName = enteredName;
-        Debug.Log("Saved Lobbyname: " + enteredName);
+        if (MainMenuHelper.IsValidNicknameOrLobbyName(enteredLobbyName) && MainMenuHelper.IsValidNicknameOrLobbyName(enteredNickname))
+        {
+            LobbyStorage.Instance.InitializeLobby(enteredNickname, enteredLobbyName);
+
+            mainMenuManager.ShowLobby();
+        }
     }
 
-    public void ResetLobbyName()
+    public void ResetCreateLobbyPanel()
     {
-        Debug.Log("Reset Lobbyname");
-        lobbyNameInput.text = "Enter Lobbyname...";
-        DisableCreateLobbyButton();
+        Debug.Log("Reset Create Lobby Panel");
+        ResetLobbyNameText();
+        ResetNicknameText();
     }
 
-    private void DisableCreateLobbyButton()
-    {
-        createLobbyButton.interactable = false;
-        Debug.Log("Disable Create Lobby Button");
-    }
+    public void SetLobbyNamePlaceholder(string text) => MainMenuHelper.SetPlaceholder(lobbyNameInput, text);
+    public void SetNicknamePlaceholder(string text) => MainMenuHelper.SetPlaceholder(nicknameInputField, text);
+
+    public string GetLobbyNameText() => MainMenuHelper.GetInputText(lobbyNameInput);
+    public string GetNicknameText() => MainMenuHelper.GetInputText(nicknameInputField);
+
+    public void ResetLobbyNameText() => MainMenuHelper.ResetInputText(lobbyNameInput);
+    public void ResetNicknameText() => MainMenuHelper.ResetInputText(nicknameInputField);
 }

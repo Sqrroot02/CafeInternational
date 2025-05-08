@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7454187426556561403}
   - component: {fileID: 1447683799923356654}
   - component: {fileID: 160572065044287826}
+  - component: {fileID: 5886509717362934938}
   m_Layer: 5
   m_Name: BackToMenuButton
   m_TagString: Untagged
@@ -26,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3141406982448391891}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34,9 +35,9 @@ RectTransform:
   - {fileID: 7769363741322200385}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -200}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -215}
   m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7454187426556561403
@@ -121,7 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 2d757a4379c8e3943976283a63808b1e, type: 3}
+      - m_Target: {fileID: 5886509717362934938}
         m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 1
@@ -133,6 +134,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5886509717362934938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3141406982448391891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d757a4379c8e3943976283a63808b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lobbyName: 
+  lobbyPort: 
+  lobbyIP: 
+  createLobbyPanel: {fileID: 0}
+  mainMenuContainer: {fileID: 0}
+  lobbyPanel: {fileID: 0}
+  joinLobbyPanel: {fileID: 0}
+  joinLobbyPanelManager: {fileID: 0}
+  createLobbyPanelManager: {fileID: 0}
+  lobbyPanelManager: {fileID: 0}
 --- !u!1 &7840677969092815590
 GameObject:
   m_ObjectHideFlags: 0
