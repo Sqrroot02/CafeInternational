@@ -1,6 +1,7 @@
 using UnityEngine;
 using Assets.Scripts.Models;
 using System.Collections.Generic;
+using Assets.Scripts.UI;
 
 public class LobbyStorage : MonoBehaviour
 {

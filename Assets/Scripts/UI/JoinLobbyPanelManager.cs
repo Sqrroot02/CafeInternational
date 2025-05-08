@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Net;
 using System.Net.Sockets;
+using Assets.Scripts.UI;
 
 
 public class JoinLobbyPanelManager : MonoBehaviour

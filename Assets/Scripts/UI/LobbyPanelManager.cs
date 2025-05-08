@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using Assets.Scripts.UI;
 
 public class LobbyPanelManager : MonoBehaviour
 {
