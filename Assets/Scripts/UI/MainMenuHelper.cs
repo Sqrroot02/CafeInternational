@@ -87,21 +87,16 @@ public static class MainMenuHelper
         ValidateFieldsAndToggleButton(button, fields);
     }
 
-    private static readonly string[] FunnyNameAdjectives = {
-        "Fluffy", "Wurst", "Lustig", "Kicher", "Laser", "Zappel", "Mega", "Käse", "Knall", "Turbo"
-    };
-
     private static readonly string[] FunncyNameNouns = {
-        "Toast", "König", "Gurke", "Banane", "Hamster", "Wolke", "Tornado", "Roboter", "Schnitzel", "Rakete"
+        "Candamir", "Hildegard", "Jean", "Franz", "LarsiHasi", "AlexPatüla", "Wolli"
     };
 
     private static readonly System.Random random = new();
 
     public static string GenerateName()
     {
-        string adjective = FunnyNameAdjectives[random.Next(FunnyNameAdjectives.Length)];
         string noun = FunncyNameNouns[random.Next(FunncyNameNouns.Length)];
 
-        return $"{adjective}{noun}";
+        return $"{noun}";
     }
 }

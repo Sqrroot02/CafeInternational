@@ -46,6 +46,7 @@ public class JoinLobbyPanelManager : MonoBehaviour
 
         if (ValidateIp(enteredIp) && MainMenuHelper.IsValidNicknameOrLobbyName(nickname) && MainMenuHelper.IsValidUserPort(intLobbyPort)) {
             Debug.Log("JoinLobby TMP input is valid");
+            LobbyStorage.Instance.InitializeLobby("Lobby Host", intLobbyPort.ToString());
             mainMenuManager.ShowLobby();
         }
     }

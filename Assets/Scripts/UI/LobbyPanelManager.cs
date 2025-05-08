@@ -15,7 +15,7 @@ public class LobbyPanelManager : MonoBehaviour
 
     public void InitiateLobby()
     {
-        SetLobbyIPLabel("Lobby Ip: Dummy Value");
+        SetLobbyIPLabel("Lobby Ip: 1.1.1.1");
         SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.GlobalLobbyName);
         SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.GlobalLobbyPort.ToString());
         SetPlayerNames();

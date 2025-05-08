@@ -22,9 +22,9 @@ public class ScoreTable : MonoBehaviour
         // Create Entries
         var scoreTableContainer = transform.Find("ScoreTableContainer");
         scoreBodyContainer = scoreTableContainer.GetComponent<VerticalLayoutGroup>();
-        for (var i = 0; i < Players.ActivePlayers.Count; i++)
+        for (var i = 0; i < LobbyStorage.Instance.ActivePlayers.Count; i++)
         {
-            Debug.Log($"Visualize Player-Score: {Players.ActivePlayers[i].PlayerName}");
+            Debug.Log($"Visualize Player-Score: {LobbyStorage.Instance.ActivePlayers[i].PlayerName}");
             var entry = Instantiate(scoreEntryPrefab, scoreBodyContainer.transform);
             scoreEntryList.Add(entry);
         }
@@ -34,9 +34,9 @@ public class ScoreTable : MonoBehaviour
     void Update()
     {
         // Updates all scores
-        for (var i = 0; i < Players.ActivePlayers.Count; i++)
+        for (var i = 0; i < LobbyStorage.Instance.ActivePlayers.Count; i++)
         {
-            var player = Players.ActivePlayers[i];
+            var player = LobbyStorage.Instance.ActivePlayers[i];
             var entry = scoreEntryList[i];
             var container = entry.transform.Find("ScoreEntryBackground");
             
