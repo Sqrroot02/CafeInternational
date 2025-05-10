@@ -132,7 +132,7 @@ namespace Game.BotBehaviour
             }
         }
 
-        private static void PlacePlayerCard(GameObject card, GameObject placeGameObject)
+        public static void PlacePlayerCard(GameObject card, GameObject placeGameObject)
         {
             CanvasGroup canvasGroup = card.GetComponent<CanvasGroup>();
             canvasGroup.alpha = 1f;

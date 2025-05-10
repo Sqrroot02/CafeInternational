@@ -10,52 +10,21 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     List<Player> players = new();
+    
     public Player CurrentPlayer { get; set; }
-    public int CurrentPlayerIndex { get; set; }
-
+    
     public GameObject deckManager;
-
-    private Deck _deck;
-    
     public int CountCardsPlayed { get; private set; }
-
-    private Button _endTurnButton;
-    
-    private ScoreTable _scoreTable;
-    
-    private bool _firstTurn = true;
-
     public GameObject JokerIdentitySelectionPrefab;
     
-    private bool _gameOver = false;
-    
+    private int CurrentPlayerIndex { get; set; }
+    private Deck _deck;
+    private Button _endTurnButton;
+    private ScoreTable _scoreTable;
+    private bool _firstTurn = true;
     private Chair[] _chairs;
     private EasyBotBehaviour _easyBotBehaviour;
-
-    public void GameEnded()
-    {
-        Debug.Log("Game ended");
-        _gameOver = true;
-        
-        SubtractPlayerCardPoints();
-        var x = GameObject.Find("EndScreenManager");
-        EndScreenHelper endScreenHelper = GameObject.Find("EndScreenManager").GetComponent<EndScreenHelper>();
-        endScreenHelper.PlayerScores.Clear(); // Clear any remaining scores from prior rounds
-        foreach (Player player in players)
-        {
-            endScreenHelper.PlayerScores.Add(new PlayerScore(player.PlayerName, player.PlayerScore));
-        }
-        
-        SceneManager.LoadScene("EndScreen");
-    }
-
-    private void SubtractPlayerCardPoints()
-    {
-        foreach (Player player in players)
-        {
-            player.SubtractPointsForRemainingCards();
-        }
-    }
+    private Bar _bar;
 
     private void Awake()
     {
@@ -63,6 +32,7 @@ public class PlayerManager : MonoBehaviour
         _endTurnButton.interactable = false;
         _scoreTable = GameObject.Find("ScoreTable").GetComponent<ScoreTable>();
         _chairs = GameObject.Find("Chairs").transform.GetComponentsInChildren<Chair>();
+        _bar = GameObject.Find("Bar").GetComponent<Bar>();
         _easyBotBehaviour = EasyBotBehaviour.GetInstance();
     }
 
@@ -91,9 +61,8 @@ public class PlayerManager : MonoBehaviour
             StartCoroutine(WaitForBotPlay(4));
             StartCoroutine(WaitForUpdate(5));
         }                    
-
     }
-
+    
     private void ShufflePlayers()
     {
         Stack<Player> playersStack = new Stack<Player>(LobbyStorage.Instance.ActivePlayers);
@@ -104,7 +73,7 @@ public class PlayerManager : MonoBehaviour
             players.Insert(Random.Range(0, players.Count + 1), playersStack.Pop());
         }
     }
-    
+
     /// <summary>
     /// Gives the players the initial 5 start cards
     /// </summary>
@@ -126,12 +95,6 @@ public class PlayerManager : MonoBehaviour
             players[i].PlayerGameBar = GameObject.Find("PlayerGameBarPlayer" + (i + 1)).transform.GetChild(0).gameObject;
             players[i].PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().text = players[i].PlayerName;
         }
-    }
-
-    public void IncrementCountCardsPlayed(int increment)
-    {
-        CountCardsPlayed += increment;
-        _endTurnButton.interactable = true;
     }
     
     /// <summary>
@@ -193,7 +156,13 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
-
+    
+    public void IncrementCountCardsPlayed(int increment)
+    {
+        CountCardsPlayed += increment;
+        _endTurnButton.interactable = true;
+    }
+    
     private void FillPlayerHand(Player player)
     {
         int toCreate = player.MaxCardCount - player.PlayerHand.Count;
@@ -202,10 +171,34 @@ public class PlayerManager : MonoBehaviour
             player.PlayerHand.Add(_deck.DrawCard(player));
         }
     }
-
+    
     public void SetEndTurnButtonInteractable(bool interactable)
     {
         _endTurnButton.interactable = interactable;
+    }
+    
+    public void GameEnded()
+    {
+        Debug.Log("Game ended");
+        
+        SubtractPlayerCardPoints();
+        var x = GameObject.Find("EndScreenManager");
+        EndScreenHelper endScreenHelper = GameObject.Find("EndScreenManager").GetComponent<EndScreenHelper>();
+        endScreenHelper.PlayerScores.Clear(); // Clear any remaining scores from prior rounds
+        foreach (Player player in players)
+        {
+            endScreenHelper.PlayerScores.Add(new PlayerScore(player.PlayerName, player.PlayerScore));
+        }
+        
+        SceneManager.LoadScene("EndScreen");
+    }
+
+    private void SubtractPlayerCardPoints()
+    {
+        foreach (Player player in players)
+        {
+            player.SubtractPointsForRemainingCards();
+        }
     }
 
     /// <summary>
@@ -234,5 +227,58 @@ public class PlayerManager : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         UpdatePlayer();
+    }
+
+    public void PlayCard(int cardId, int chairId, int barStoolId)
+    {
+        Card card = GetCardFromId(cardId);
+        if (chairId >= 0)
+        {
+            Chair chair = GetChairFromId(chairId);
+            chair.PlaceCard(card);
+            EasyBotBehaviour.PlacePlayerCard(card.gameObject, chair.gameObject);
+        }
+        else if (barStoolId >= 0)
+        {
+            BarStool barStool = GetBarStoolFromId(barStoolId);
+            barStool.PlaceCard(card);
+            EasyBotBehaviour.PlacePlayerCard(card.gameObject, barStool.gameObject);
+        }
+        else
+        {
+            Debug.Log($"The call of PlayCard was invalid with ChairId {chairId} and BarStoolId {barStoolId} for CardId {cardId}");
+        }
+    }
+
+    public Card GetCardFromId(int id)
+    {
+        foreach (var player in players)
+        {
+            foreach (var card in player.PlayerHand)
+            {
+                if (card.cardData.cardID == id)
+                {
+                    return card;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Chair GetChairFromId(int id)
+    {
+        foreach (var chair in _chairs)
+        {
+            if (chair.ChairID == id)
+            {
+                return chair;
+            }
+        }
+        return null;
+    }
+
+    public BarStool GetBarStoolFromId(int id)
+    {
+        return _bar.BarStools[id];
     }
 }

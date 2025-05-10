@@ -12,17 +12,16 @@ namespace Assets.Scripts.Models
         public List<Card> PlayerHand = new();
         public List<Chair> Chairs = new();
         public BarStool BarStool;
-        public bool IsHuman = false;
         public bool LobbyHost = false;
         private bool _playerBlockedByJokerIdentitySelection = false;
         private PlayerManager _playerManager;
         private bool _playerEliminated = false;
         
-        public Player(string playerName, int playerScore, bool isHuman, bool lobbyHost)
+        public Player(string playerName, int playerScore, bool isBot, bool lobbyHost)
         {
             PlayerName = playerName;
             PlayerScore = playerScore;
-            IsHuman = isHuman;
+            IsBot = isBot;
             LobbyHost = lobbyHost;
         }
     
@@ -151,10 +150,10 @@ namespace Assets.Scripts.Models
             {
                 MaxCardCount--;
                 // If a player has no cards left the game ends
-                if (MaxCardCount == 0)
-                {
-                    _playerManager.GameEnded();
-                }
+            }
+            if (MaxCardCount == 0 && PlayerHand.Count == 0) // Check that the player has no more cards and cant have any more -> two tables can be completed at once so one card remains in the hand while the maxCards is already 0
+            {
+                _playerManager.GameEnded();
             }
             Debug.Log(PlayerName + " " + PlayerScore);
         }

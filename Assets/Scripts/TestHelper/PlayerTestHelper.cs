@@ -10,7 +10,7 @@ namespace Assets.Scripts.TestHelper
 			new("Test-Player", 0, true, false),
 			new("Alex", 0, true, false),
 			new("Joel", 0, true, false),
-			new("Lars", 0, true, false)
+			new("Lars", 0, false, false)
 		};
 	}
 }

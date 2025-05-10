@@ -32,12 +32,12 @@ public class LobbyStorage : MonoBehaviour
         GlobalLobbyName = lobbyName;
 
         ActivePlayers.Clear();
-        ActivePlayers.Add(new Player(localPlayerName, 0, true, true));
+        ActivePlayers.Add(new Player(localPlayerName, 0, false, true));
 
         for (int i = 1; i < 4; i++)
         {
             string botName = MainMenuHelper.GenerateName();
-            ActivePlayers.Add(new Player($"Bot {botName}", 0, false, false));
+            ActivePlayers.Add(new Player($"Bot {botName}", 0, true, false));
         }
     }
 
@@ -45,9 +45,9 @@ public class LobbyStorage : MonoBehaviour
     {
         for (int i = 0; i < ActivePlayers.Count; i++)
         {
-            if (!ActivePlayers[i].IsHuman)
+            if (!ActivePlayers[i].IsBot)
             {
-                ActivePlayers[i] = new Player(playerName, 0, true, false);
+                ActivePlayers[i] = new Player(playerName, 0, false, false);
                 return;
             }
         }
@@ -57,10 +57,10 @@ public class LobbyStorage : MonoBehaviour
     {
         for (int i = 0; i < ActivePlayers.Count; i++)
         {
-            if (ActivePlayers[i].PlayerName == playerName && ActivePlayers[i].IsHuman)
+            if (ActivePlayers[i].PlayerName == playerName && ActivePlayers[i].IsBot)
             {
                 string botName = MainMenuHelper.GenerateName();
-                ActivePlayers[i] = new Player($"Bot {botName}", 0, false, false);
+                ActivePlayers[i] = new Player($"Bot {botName}", 0, true, false);
                 Debug.Log($"{playerName} has been replaced with a bot");
                 return;
             }

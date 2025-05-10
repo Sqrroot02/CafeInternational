@@ -7,4 +7,5 @@ public class CardData : ScriptableObject
     public Gender gender;
     public Nationality nationality;
     public Sprite cardSprite;
+    public int cardID;
 }

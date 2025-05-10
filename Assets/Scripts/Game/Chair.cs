@@ -7,6 +7,7 @@ public class Chair : MonoBehaviour
 {
     public GameObject FirstTableGO;
     public GameObject SecondTableGO; // Can be null
+    public int ChairID;
     private Table _firstTable;
     private Table _secondTable;
     public Card PlacedCard { private set; get; }

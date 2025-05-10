@@ -33,6 +33,7 @@ public class Deck : MonoBehaviour
                     newCard.gender = gender;
                     newCard.nationality = nationality;
                     newCard.cardSprite = GetSpriteForCountry(nationality, gender);
+                    newCard.cardID = deckStack.Count;
                     deckStack.Push(newCard);
                 }
             }
