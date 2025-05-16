@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
     private Deck _deck;
     private Button _endTurnButton;
     private ScoreTable _scoreTable;
-    private bool _firstTurn = true;
+    private bool _firstMove = true;
     private Chair[] _chairs;
     private EasyBotBehaviour _easyBotBehaviour;
     private Bar _bar;
@@ -104,7 +104,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (CountCardsPlayed != 0)
         {
-            if (CurrentPlayer.IsMoveValid(_firstTurn))
+            if (CurrentPlayer.IsMoveValid(_firstMove))
             {
                 if (!CheckChairsHaveFreeSpots())
                 {
@@ -141,7 +141,7 @@ public class PlayerManager : MonoBehaviour
                 
                 _endTurnButton.interactable = false;
                 _scoreTable.UpdateScores(players);
-                _firstTurn = false;
+                _firstMove = false;
                 if (CurrentPlayer.IsBot)
                 {
                     StartCoroutine(WaitForBotPlay());
@@ -220,7 +220,7 @@ public class PlayerManager : MonoBehaviour
     IEnumerator WaitForBotPlay(int seconds = 2)
     {
         yield return new WaitForSeconds(seconds);
-        _easyBotBehaviour.Play(CurrentPlayer);
+        _easyBotBehaviour.Play(CurrentPlayer, _firstMove);
     }
     
     IEnumerator WaitForUpdate(int seconds = 5)
