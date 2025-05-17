@@ -16,6 +16,8 @@ namespace Assets.Scripts.Models
         public List<Chair> Chairs = new();
         public BarStool BarStool;
 
+        
+        
         public Player()
         {
             

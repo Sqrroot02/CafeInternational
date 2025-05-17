@@ -29,14 +29,14 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		public void Serialize(Message message)
 		{
 			message.AddSerializable(Player);
-			message.AddSerializable(NextPlayer);
+			//message.AddSerializable(NextPlayer);
 			message.AddSerializables(Changes);
 		}
 
 		public void Deserialize(Message message)
 		{
 			Player = message.GetSerializable<Player>();
-			NextPlayer = message.GetSerializable<Player>();
+			//NextPlayer = message.GetSerializable<Player>();
 			Changes = message.GetSerializables<TurnCommitChangeMessage>();
 		}
 	}

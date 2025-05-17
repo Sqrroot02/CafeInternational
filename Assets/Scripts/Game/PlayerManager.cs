@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Assets.Scripts.Models;
+using Assets.Scripts.Network.Messages;
+using Assets.Scripts.Network.Messages.TurnCommit;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -89,6 +91,8 @@ public class PlayerManager : MonoBehaviour
         {
             if (CurrentPlayer.IsMoveValid(_firstTurn))
             {
+                // Send Commit Message to other players
+                SendEndTurnMessage();
                 CurrentPlayer.CountPlayerScore();
                 FillPlayerHand(CurrentPlayer);
 
@@ -107,6 +111,51 @@ public class PlayerManager : MonoBehaviour
                 CurrentPlayer.ResetCards();
             }
         }
+    }
+
+    public static void HandleEndTurnMessage()
+    {
+        
+    }
+
+    /// <summary>
+    /// Sends a message to the server to commit the current player's turn, including all actions performed,
+    /// such as placing cards on chairs and the bar stool.
+    /// </summary>
+    public void SendEndTurnMessage()
+    {
+        var changes = new List<TurnCommitChangeMessage>();
+        
+        // Build Chair Change Messages
+        foreach (var chair in CurrentPlayer.Chairs)
+        {
+            var chairChangeMessage = new TurnCommitChangeMessage()
+            {
+                Action = TurnCommitAction.PlaceCardOnChair,
+                CardContext = chair.PlacedCard,
+                ChairContext = chair,
+            };
+            changes.Add(chairChangeMessage);
+        }
+
+        // Build Bar Stool Change Message
+        if (CurrentPlayer.BarStool != null)
+        {
+            var barStoolMessage = new TurnCommitChangeMessage
+            {
+                Action = TurnCommitAction.PlaceCardOnBar,
+                BarStoolContext = CurrentPlayer.BarStool,
+                CardContext = CurrentPlayer.BarStool.PlacedCard,
+            };
+            changes.Add(barStoolMessage);
+        }
+
+        var message = new TurnCommitMessage()
+        {
+            Changes = changes.ToArray(),
+            Player = CurrentPlayer,
+        };
+        NetworkRouter.SendToServer(message, MessageType.TurnCommit);
     }
 
     private void FillPlayerHand(Player player)

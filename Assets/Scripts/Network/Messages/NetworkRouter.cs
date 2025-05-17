@@ -1,4 +1,5 @@
 ﻿using Riptide;
+using UnityEngine;
 
 namespace Assets.Scripts.Network.Messages
 {
@@ -33,6 +34,7 @@ namespace Assets.Scripts.Network.Messages
 		public static void SendToServer(IMessageSerializable message, MessageType messageType)
 		{
 			var msg = CreateMessage(message, messageType);
+			Debug.Log($"Sending message to server ({msg.BytesInUse} B)...");
 			NetworkClientAdapter.Instance.SendMessage(msg);
 		}
 

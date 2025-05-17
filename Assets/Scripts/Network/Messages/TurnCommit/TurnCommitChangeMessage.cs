@@ -86,7 +86,6 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		private void DeserializeActionCardOnChair(Message message)
 		{
 			CardContext = message.GetSerializable<Card>();
-			TableContext = message.GetSerializable<Table>();
 			ChairContext = message.GetSerializable<Chair>();
 		}
 
@@ -118,17 +117,16 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		/// </summary>
 		private void SerializeActionCardOnChair(Message message)
 		{
-			if (CardContext != null && ChairContext != null && TableContext != null)
+			if (CardContext != null && ChairContext != null)
 			{
 				message.AddSerializable(CardContext);
-				message.AddSerializable(TableContext);
 				message.AddSerializable(ChairContext);
 			}
 			else
 			{
 				const string msg = "TurnCommitAction.PlaceCardOnChair required CardContext and TableContext";
 				Debug.LogError(msg);
-				throw new ArgumentNullException($"{nameof(CardContext)} and {nameof(TableContext)}", msg);
+				throw new ArgumentNullException($"{nameof(CardContext)} and {nameof(ChairContext)}", msg);
 			}
 		}
 
