@@ -1922,6 +1922,8 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420034}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2047,6 +2049,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f70eb71d0e856b34b90920d2d4f7d8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IpAddress: 127.0.0.1
+  Port: 57967
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8722b3d0a8da8924f9f3df6eb526d056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxClient: 4
+  Port: 57967
 --- !u!1 &521441810
 GameObject:
   m_ObjectHideFlags: 0
@@ -3534,7 +3564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1886983498559765345, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1886983498559765345, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3542,7 +3572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1886983498559765345, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1886983498559765345, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3582,11 +3612,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1886983498559765345, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1886983498559765345, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -215
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1886983498559765345, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -1,10 +1,11 @@
 using Assets.Scripts.Models;
+using Riptide;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IMessageSerializable
 {
     public CardData cardData;
     
@@ -110,5 +111,15 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvas = GetComponentInParent<Canvas>();
+    }
+
+    public void Serialize(Message message)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Deserialize(Message message)
+    {
+        throw new System.NotImplementedException();
     }
 }

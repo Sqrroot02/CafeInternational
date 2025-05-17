@@ -6,14 +6,7 @@ using Assets.Scripts.UI;
 public class LobbyStorage : MonoBehaviour
 {
     public static LobbyStorage Instance { get; private set; }
-
-    private string globalLobbyName;
-
-    private int globalLobbyPort;
-
-    private string globalLobbyIp;
-
-    public List<Player> ActivePlayers { get; private set; } = new();
+    public List<Player> ActivePlayers { get; set; } = new();
 
     void Awake()
     {
@@ -29,14 +22,14 @@ public class LobbyStorage : MonoBehaviour
 
     public void InitializeLobby(string localPlayerName, string lobbyName)
     {
-        GlobalLobbyName = lobbyName;
-
+        LobbyName = lobbyName;
+        
         ActivePlayers.Clear();
         ActivePlayers.Add(new Player(localPlayerName, 0, false, true));
 
-        for (int i = 1; i < 4; i++)
+        for (var i = 1; i < 4; i++)
         {
-            string botName = MainMenuHelper.GenerateName();
+            var botName = MainMenuHelper.GenerateName();
             ActivePlayers.Add(new Player($"Bot {botName}", 0, true, false));
         }
     }
@@ -69,21 +62,7 @@ public class LobbyStorage : MonoBehaviour
         Debug.Log($"No Player with naem:  {playerName} found.");
     }
 
-    public string GlobalLobbyName
-    {
-        get => globalLobbyName;
-        set => globalLobbyName = value;
-    }
-
-    public int GlobalLobbyPort
-    {
-        get => globalLobbyPort;
-        set => globalLobbyPort = value;
-    }
-
-    public string GlobalLobbyIp
-    {
-        get => globalLobbyIp;
-        set => globalLobbyIp = value;
-    }
+    public string LobbyName { get; set; }
+    public int LobbyPort { get; set; } = 57967;
+    public string LobbyIp { get; set; }
 }

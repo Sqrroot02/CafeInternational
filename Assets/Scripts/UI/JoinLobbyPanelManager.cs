@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Net;
 using System.Net.Sockets;
+using Assets.Scripts.Network;
+using Assets.Scripts.Network.Messages;
+using Assets.Scripts.Network.Messages.PlayerSalutation;
 using Assets.Scripts.UI;
 
 
@@ -37,9 +41,9 @@ public class JoinLobbyPanelManager : MonoBehaviour
 
     public void JoinLobby()
     {
-        string enteredIp = lobbyIPTMP.text;
-        int intLobbyPort = GetNumberFromLobbyPortTMP();
-        string nickname = lobbyUserNickname.text;
+        var enteredIp = lobbyIPTMP.text;
+        var intLobbyPort = GetNumberFromLobbyPortTMP();
+        var nickname = lobbyUserNickname.text;
 
         if (intLobbyPort == 0) { 
             intLobbyPort = lobbyPortTMPStandardValue;
@@ -47,9 +51,44 @@ public class JoinLobbyPanelManager : MonoBehaviour
 
         if (ValidateIp(enteredIp) && MainMenuHelper.IsValidNicknameOrLobbyName(nickname) && MainMenuHelper.IsValidUserPort(intLobbyPort)) {
             Debug.Log("JoinLobby TMP input is valid");
-            LobbyStorage.Instance.InitializeLobby("Lobby Host", "lobby name");
-            mainMenuManager.ShowLobby();
+            //LobbyStorage.Instance.InitializeLobby("Lobby Host", "lobby name");
+            
+            // Establish connection
+            NetworkClientAdapter.Instance.IpAddress = enteredIp;
+            NetworkClientAdapter.Instance.Port = Convert.ToUInt16(intLobbyPort);
+		
+            NetworkClientAdapter.Instance.Connected += OnConnected;    
+            NetworkClientAdapter.Instance.Connect();
         }
+    }
+    
+    /// <summary>
+    /// Handles the event triggered when the client successfully connects to the server.
+    /// Updates the lobby connection details within the `MainMenuManager`, logs the connection
+    /// details, and displays the lobby menu UI.
+    /// </summary>
+    /// <param name="sender">The source of the event. Typically, this is the instance of the `NetworkClientAdapter` that triggered the event.</param>
+    /// <param name="e">The event arguments containing details about the connection event.</param>
+    private void OnConnected(object sender, EventArgs e)
+    {
+        var ip = NetworkClientAdapter.Instance.IpAddress;
+        var port = NetworkClientAdapter.Instance.Port;
+		
+        // Switch to Lobby Menu when a connection has been established to the selected Game-Server
+        Debug.Log($"Connection Established to Server {ip}:{port}");
+        mainMenuManager.ShowLobby();
+		
+        // Unsubscribe on connected
+        NetworkClientAdapter.Instance.Connected -= OnConnected;  
+		
+        // Send Salutation Message for updating Lobby on Server
+        Debug.Log("Sending Salutation Message");
+        var msg = new PlayerSalutationMessage
+        {
+            PlayerName = lobbyUserNickname.text,
+            PlayerId = Guid.NewGuid().ToString(),
+        };
+        NetworkRouter.SendToServer(msg, MessageType.PlayerSalutation);
     }
 
     public void ResetJoinLobbyTMPs()
@@ -81,7 +120,8 @@ public class JoinLobbyPanelManager : MonoBehaviour
                 Debug.Log("Valid ipv4 as join lobby input");
                 return true;
             }
-            else if (address.AddressFamily == AddressFamily.InterNetworkV6)
+
+            if (address.AddressFamily == AddressFamily.InterNetworkV6)
             {
                 Debug.Log("Valid ipv6 as join lobby input");
                 return true;
@@ -98,11 +138,9 @@ public class JoinLobbyPanelManager : MonoBehaviour
         {
             return result;
         }
-        else
-        {
-            Debug.LogWarning("Invalid Port Input");
-            return 0;
-        }
+
+        Debug.LogWarning("Invalid Port Input");
+        return 0;
     }
 
     public void SetLobbyIPPlaceholder(string text) => MainMenuHelper.SetPlaceholder(lobbyIPTMP, text);

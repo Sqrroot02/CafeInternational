@@ -1,3 +1,7 @@
+using System;
+using System.Collections.ObjectModel;
+using Assets.Scripts.Models;
+using Assets.Scripts.Network;
 using Assets.Scripts.UI;
 using UnityEngine;
 using TMPro;
@@ -27,15 +31,46 @@ public class CreateLobbyPanelManager : MonoBehaviour
 
     public void CreateLobby()
     {
-        string enteredLobbyName = lobbyNameInput.text;
-        string enteredNickname = nicknameInputField.text;
+        var enteredLobbyName = lobbyNameInput.text;
+        var enteredNickname = nicknameInputField.text;
 
         if (MainMenuHelper.IsValidNicknameOrLobbyName(enteredLobbyName) && MainMenuHelper.IsValidNicknameOrLobbyName(enteredNickname))
         {
+            LobbyStorage.Instance.LobbyName = enteredLobbyName;
+            LobbyStorage.Instance.LobbyIp = NetworkUtil.PublicIpAddress();
+            
             LobbyStorage.Instance.InitializeLobby(enteredNickname, enteredLobbyName);
-
-            mainMenuManager.ShowLobby();
+            InitAndRunServerSession();
         }
+    }
+
+    /// <summary>
+    /// Initializes the server session and runs the server
+    /// </summary>
+    private void InitAndRunServerSession()
+    {
+        // Build session
+        var session = new Session(lobbyNameInput.text, new ObservableCollection<Player>(LobbyStorage.Instance.ActivePlayers));
+            
+        // Run Server
+        NetworkServerAdapter.Instance.RunServer(session);
+        while (!NetworkServerAdapter.Instance.Server.IsRunning)
+        {
+            // Host pressed Escape during the Server establishment 
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Debug.Log("Server initialization cancelled!!!");
+                return;
+            }
+        }
+        
+        // Connect Local client to server
+        NetworkClientAdapter.Instance.Port = Convert.ToUInt16(LobbyStorage.Instance.LobbyPort);
+        NetworkClientAdapter.Instance.IpAddress = "127.0.0.1";
+        NetworkClientAdapter.Instance.Connect();
+        
+        // Show Lobby after the Server establishment
+        mainMenuManager.ShowLobby();
     }
 
     public void ResetCreateLobbyPanel()

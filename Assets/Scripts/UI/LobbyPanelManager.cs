@@ -2,7 +2,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.Network.Handlers;
+using Assets.Scripts.Network.Messages.PlayerLobbyAction;
 using Assets.Scripts.UI;
+using Riptide;
 
 public class LobbyPanelManager : MonoBehaviour
 {
@@ -14,11 +18,16 @@ public class LobbyPanelManager : MonoBehaviour
 
     public List<TMP_Text> playerNameTexts;
 
+    void Awake()
+    {
+        PlayerLobbyActionHandler.Manager = this;
+    }
+    
     public void InitiateLobby()
     {
-        SetLobbyIPLabel("Lobby Ip: 1.1.1.1");
-        SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.GlobalLobbyName);
-        SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.GlobalLobbyPort.ToString());
+        SetLobbyIPLabel($"Lobby Ip: {LobbyStorage.Instance.LobbyIp}");
+        SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.LobbyName);
+        SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.LobbyPort);
         SetPlayerNames();
     }
 
@@ -39,11 +48,33 @@ public class LobbyPanelManager : MonoBehaviour
         LobbyStorage.Instance.ReplaceBotWithHuman(MainMenuHelper.GenerateName());
     }
 
+    /// <summary>
+    /// Will be invoked if a new user joins the session
+    /// </summary>
+    /// <param name="message"></param>
+    public void LobbyUpdate(PlayerLobbyActionMessage message)
+    {
+        // Update player names
+        LobbyStorage.Instance.ActivePlayers = message.Players.ToList();
+        SetPlayerNames();
+        
+        // Update lobby name
+        LobbyStorage.Instance.LobbyName = message.LobbyName;
+        RefreshLobbyNameLabel();
+        
+        // Update Lobby port
+        LobbyStorage.Instance.LobbyPort = message.LobbyPort;
+        RefreshLobbyPortLabel();
+        
+        // Update Lobby IP
+        LobbyStorage.Instance.LobbyIp = message.LobbyIp;
+        ResetLobbyIPLabel();
+    }
+
     public void SetPlayerNames()
     {
         var players = LobbyStorage.Instance.ActivePlayers;
-
-        for (int i = 0; i < Mathf.Min(players.Count, playerNameTexts.Count); i++)
+        for (var i = 0; i < Mathf.Min(players.Count, playerNameTexts.Count); i++)
         {
             playerNameTexts[i].text = players[i].PlayerName;
         }
@@ -53,6 +84,10 @@ public class LobbyPanelManager : MonoBehaviour
     public void SetLobbyPortLabel(string text) => MainMenuHelper.SetLabelText(lobbyPortTMP, text);
     public void SetLobbyIPLabel(string text) => MainMenuHelper.SetLabelText(lobbyIPTMP, text);
 
+    public void RefreshLobbyNameLabel() => MainMenuHelper.SetLabelText(lobbyNameTMP, LobbyStorage.Instance.LobbyName);
+    public void RefreshLobbyPortLabel() => MainMenuHelper.SetLabelText(lobbyPortTMP, LobbyStorage.Instance.LobbyPort.ToString());
+    public void RefreshLobbyIpLabel() => MainMenuHelper.SetLabelText(lobbyIPTMP, LobbyStorage.Instance.LobbyIp);
+    
     public string GetLobbyNameLabel() => MainMenuHelper.GetLabelText(lobbyNameTMP);
     public string GetLobbyPortLabel() => MainMenuHelper.GetLabelText(lobbyPortTMP);
     public string GetLobbyIPLabel() => MainMenuHelper.GetLabelText(lobbyIPTMP);

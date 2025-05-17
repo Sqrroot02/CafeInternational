@@ -1,8 +1,9 @@
 using Assets.Scripts.Models;
+using Riptide;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BarStool : MonoBehaviour
+public class BarStool : MonoBehaviour, IMessageSerializable
 {
     public int Value; // The value of the chair that is added to the points of the one placing a card here // Negative scores are also added and not implemented separately
     public Image stoolSprite; // The image on the stool // the number of points added
@@ -42,5 +43,15 @@ public class BarStool : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void Serialize(Message message)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Deserialize(Message message)
+    {
+        throw new System.NotImplementedException();
     }
 }

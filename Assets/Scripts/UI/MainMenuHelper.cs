@@ -98,8 +98,7 @@ namespace Assets.Scripts.UI
 
         public static string GenerateName()
         {
-            string noun = FunncyNameNouns[random.Next(FunncyNameNouns.Length)];
-
+            var noun = FunncyNameNouns[random.Next(FunncyNameNouns.Length)];
             return $"{noun}";
         }
     }

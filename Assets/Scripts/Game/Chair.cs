@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Models;
+using Riptide;
 using UnityEngine;
 
-public class Chair : MonoBehaviour
+public class Chair : MonoBehaviour, IMessageSerializable
 {
     public GameObject FirstTableGO;
     public GameObject SecondTableGO; // Can be null
@@ -188,5 +189,15 @@ public class Chair : MonoBehaviour
     public Nationality GetFirstTableNationality()
     {
         return _firstTable.nationality;
+    }
+
+    public void Serialize(Message message)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Deserialize(Message message)
+    {
+        throw new System.NotImplementedException();
     }
 }

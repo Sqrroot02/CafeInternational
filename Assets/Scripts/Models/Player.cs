@@ -1,13 +1,13 @@
 using System.Collections.Generic;
+using Riptide;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using Update = UnityEngine.PlayerLoop.Update;
 
 namespace Assets.Scripts.Models
 {
-    public class Player
+    public class Player : IMessageSerializable
     {
+        public int ClientId;
         public int MaxCardCount = 5;
         public List<Card> PlayerHand = new();
         public List<Chair> Chairs = new();
@@ -16,6 +16,11 @@ namespace Assets.Scripts.Models
         private bool _playerBlockedByJokerIdentitySelection = false;
         private PlayerManager _playerManager;
         private bool _playerEliminated = false;
+
+        public Player()
+        {
+            
+        }
         
         public Player(string playerName, int playerScore, bool isBot, bool lobbyHost)
         {
@@ -27,7 +32,7 @@ namespace Assets.Scripts.Models
     
         public string PlayerName { get; set; }
         public int PlayerScore { get; private set; }
-        public bool IsBot { get; private set; }
+        public bool IsBot { get; set; }
         public GameObject PlayerGameBar { get; set; }
 
         public void SetPlayerManager(PlayerManager playerManager)
@@ -179,6 +184,26 @@ namespace Assets.Scripts.Models
             {
                 UpdatePlayerScore(card.cardData.nationality == Nationality.Joker ? -10 : -5);
             }
+        }
+
+        public void Serialize(Message message)
+        {
+            message.AddString(PlayerName);
+            message.AddInt(PlayerScore);
+            message.AddBool(LobbyHost);
+            message.AddBool(_playerBlockedByJokerIdentitySelection);
+            message.AddBool(_playerEliminated);
+            message.AddBool(IsBot);
+        }
+
+        public void Deserialize(Message message)
+        {
+            PlayerName = message.GetString();
+            PlayerScore = message.GetInt();
+            LobbyHost = message.GetBool();
+            _playerBlockedByJokerIdentitySelection = message.GetBool();
+            _playerEliminated = message.GetBool();
+            IsBot = message.GetBool();
         }
     }
 }
