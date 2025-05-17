@@ -33,12 +33,12 @@ public class PlayerManager : MonoBehaviour
         _scoreTable = GameObject.Find("ScoreTable").GetComponent<ScoreTable>();
         _chairs = GameObject.Find("Chairs").transform.GetComponentsInChildren<Chair>();
         _bar = GameObject.Find("Bar").GetComponent<Bar>();
-        _easyBotBehaviour = EasyBotBehaviour.GetInstance();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _easyBotBehaviour = EasyBotBehaviour.GetInstance();
         _deck = deckManager.GetComponent<Deck>();
         ShufflePlayers();
         UpdatePlayerGameBars();
