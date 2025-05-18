@@ -21,7 +21,7 @@ namespace Assets.Scripts.Network.Messages.PlayerLobbyAction
 		{
 			if (Manager == null)
 			{
-				Debug.Log("Cannot find LobbyPanelManager. Message will be ignored.");
+				Debug.Log($"Cannot find LobbyPanelManager. Message with {message.BytesInUse} Bytes will be ignored.");
 				return;
 			}
 			

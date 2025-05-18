@@ -1,10 +1,15 @@
+using System;
+using Assets.Scripts.Game;
 using Assets.Scripts.Models;
 using Riptide;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[System.Serializable]
+/// <summary>
+/// Contains Card associated Data like gender or nationality
+/// </summary>
+[Serializable]
 public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IMessageSerializable
 {
     public CardData cardData;
@@ -115,11 +120,27 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void Serialize(Message message)
     {
-        throw new System.NotImplementedException();
+        message.AddString(cardData.name);
+        message.AddString(cardData.gender.ToString());
+        message.AddString(cardData.nationality.ToString());
+        message.AddInt(cardData.cardID);
+        
+        message.AddBool(_isPlaced);
+        message.AddString(JokerIdentity.ToString());
     }
 
     public void Deserialize(Message message)
     {
-        throw new System.NotImplementedException();
+        var cardDate = new CardData
+        {
+            name = message.GetString(),
+            gender = Enum.Parse<Gender>(message.GetString()),
+            nationality = Enum.Parse<Nationality>(message.GetString()),
+            cardID = message.GetInt()
+        };
+        cardData = cardDate;
+        
+        _isPlaced = message.GetBool();
+        JokerIdentity = Enum.Parse<Nationality>(message.GetString());
     }
 }

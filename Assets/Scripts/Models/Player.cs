@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Assets.Scripts.Game;
 using Riptide;
 using Unity.Mathematics;
 using UnityEngine;
@@ -17,6 +18,26 @@ namespace Assets.Scripts.Models
         private PlayerManager _playerManager;
         private bool _playerEliminated = false;
 
+        /// <summary>
+        /// The name of the player
+        /// </summary>
+        public string PlayerName { get; set; }
+        
+        /// <summary>
+        /// The current score of the player
+        /// </summary>
+        public int PlayerScore { get; private set; }
+        
+        /// <summary>
+        /// Determines if the player is a bot or not
+        /// </summary>
+        public bool IsBot { get; set; }
+        
+        /// <summary>
+        /// The associated Game bar of the player
+        /// </summary>
+        public GameObject PlayerGameBar { get; set; }
+        
         public Player()
         {
             
@@ -29,11 +50,6 @@ namespace Assets.Scripts.Models
             IsBot = isBot;
             LobbyHost = lobbyHost;
         }
-    
-        public string PlayerName { get; set; }
-        public int PlayerScore { get; private set; }
-        public bool IsBot { get; set; }
-        public GameObject PlayerGameBar { get; set; }
 
         public void SetPlayerManager(PlayerManager playerManager)
         {
@@ -54,6 +70,15 @@ namespace Assets.Scripts.Models
         public bool GetPlayerBlockedByJokerIdentitySelection()
         {
             return _playerBlockedByJokerIdentitySelection;
+        }
+
+        /// <summary>
+        /// Checks if the client is allowed to perform a turn
+        /// </summary>
+        /// <returns></returns>
+        public bool IsClientTurn()
+        {
+            return LobbyStorage.Instance.ClientPlayer.ClientId == ClientId;
         }
 
         /// <summary>

@@ -193,11 +193,15 @@ public class Chair : MonoBehaviour, IMessageSerializable
 
     public void Serialize(Message message)
     {
-        throw new System.NotImplementedException();
+        message.AddInt(ChairID);
+        message.AddSerializable(_firstTable);
+        message.AddSerializable(_secondTable);
     }
 
     public void Deserialize(Message message)
     {
-        throw new System.NotImplementedException();
+        ChairID = message.GetInt();
+        _firstTable = message.GetSerializable<Table>();
+        _secondTable = message.GetSerializable<Table>();
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Models;
 using Riptide;
 using UnityEngine;
@@ -77,11 +79,13 @@ public class Table : MonoBehaviour, IMessageSerializable
 
     public void Serialize(Message message)
     {
-        throw new System.NotImplementedException();
+        message.AddString(nationality.ToString());
+        message.AddSerializables(placedCards.ToArray());
     }
 
     public void Deserialize(Message message)
     {
-        throw new System.NotImplementedException();
+        nationality = Enum.Parse<Nationality>(message.GetString());
+        placedCards = message.GetSerializables<Card>().ToList();
     }
 }

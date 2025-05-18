@@ -1,4 +1,5 @@
 using Assets.Scripts.Models;
+using Riptide;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CardData", menuName = "Scriptable Objects/CardData")]

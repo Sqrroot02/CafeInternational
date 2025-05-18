@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Models;
 using Assets.Scripts.Network;
 using Assets.Scripts.Network.Messages;
 using Assets.Scripts.Network.Messages.PlayerLobbyAction;

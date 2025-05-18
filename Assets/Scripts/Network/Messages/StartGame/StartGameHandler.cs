@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Assets.Scripts.Models;
 using Riptide;
 using UnityEngine;
 using UnityEngine.SceneManagement;

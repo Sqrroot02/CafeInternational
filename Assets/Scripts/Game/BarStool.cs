@@ -47,11 +47,15 @@ public class BarStool : MonoBehaviour, IMessageSerializable
 
     public void Serialize(Message message)
     {
-        throw new System.NotImplementedException();
+        message.AddInt(Value);
+        message.AddInt(_index);
+        message.AddSerializable(PlacedCard);
     }
 
     public void Deserialize(Message message)
     {
-        throw new System.NotImplementedException();
+        Value = message.GetInt();
+        _index = message.GetInt();
+        PlacedCard = message.GetSerializable<Card>();
     }
 }

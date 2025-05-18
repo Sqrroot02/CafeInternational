@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Assets.Scripts.Game;
 using Assets.Scripts.Models;
 
 public class Deck : MonoBehaviour
