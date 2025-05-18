@@ -2,6 +2,7 @@
 using System.Linq;
 using Assets.Scripts.Models;
 using Assets.Scripts.Network.Messages.TurnCommit;
+using UnityEngine;
 
 namespace Assets.Scripts.Game
 {
@@ -14,12 +15,12 @@ namespace Assets.Scripts.Game
 		/// Contains the current History
 		/// </summary>
 		public static TurnHistory CurrentTurnHistory { get; set; } = new();
-		
+
 		/// <summary>
 		/// Contains all placed cards on a chair
 		/// </summary>
 		public List<Chair> UpdateChair { get; } = new();
-		
+
 		/// <summary>
 		/// Contains all placed cards on bar stools
 		/// </summary>
@@ -49,14 +50,16 @@ namespace Assets.Scripts.Game
 			UpdateChair.Select(x => new TurnCommitChangeMessage()
 			{
 				Action = TurnCommitAction.PlaceCardOnChair,
-				ChairContext = x
+				ChairContext = x.ChairID,
+				CardContext = x.PlacedCard?.cardData?.cardID ?? -1
 			}).ToList();
-		
+
 		public List<TurnCommitChangeMessage> MessagesOfBarStool =>
 			UpdateBarStool.Select(x => new TurnCommitChangeMessage()
 			{
 				Action = TurnCommitAction.PlaceCardOnBar,
-				BarStoolContext = x
+				BarStoolContext = x.GetIndex(),
+				CardContext = x.PlacedCard?.cardData?.cardID ?? -1
 			}).ToList();
 
 		/// <summary>
@@ -69,6 +72,13 @@ namespace Assets.Scripts.Game
 		{
 			var changes = CurrentTurnHistory.MessagesOfBarStool;
 			changes.AddRange(CurrentTurnHistory.MessagesOfChair);
+			
+			// Log changes
+			Debug.Log($"Number of Changes: {changes.Count}");
+			var changesString = string.Join('\n',
+				changes.Select(x =>
+					$"{x.Action} -> [BarStool: {x.BarStoolContext}] [Chair: {x.ChairContext}] [Card: {x.CardContext}]"));
+			Debug.Log($"Changes: {changesString}");
 			
 			// Clear History
 			CurrentTurnHistory = new TurnHistory();

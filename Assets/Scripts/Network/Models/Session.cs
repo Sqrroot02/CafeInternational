@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using Assets.Scripts.Models;
 using Assets.Scripts.Network.Messages;
@@ -7,7 +6,7 @@ using Assets.Scripts.Network.Messages.PlayerLobbyAction;
 using Assets.Scripts.UI;
 using Debug = UnityEngine.Debug;
 
-namespace Assets.Scripts.Network
+namespace Assets.Scripts.Network.Models
 {
 	/// <summary>
 	/// Represents a network session containing a list of connected players.
@@ -27,7 +26,6 @@ namespace Assets.Scripts.Network
 		{
 			Players = players;
 			Name = name;
-			Players.CollectionChanged += OnPlayersChanged;
 			Debug.Log("Session has been created");
 		}
 
@@ -43,6 +41,20 @@ namespace Assets.Scripts.Network
 				var firstBot = Players.IndexOf(Players.First(x => x.IsBot));
 				Players[firstBot] = player;	
 			}
+			SendUpdate();
+		}
+
+		public void SendUpdate()
+		{
+			Debug.Log($"The current Session:\n {string.Join("\n", Players.Select(x => $"{x.PlayerName} [{x.PlayerId}]"))}");
+			var lobbyActionMessage = new PlayerLobbyActionMessage()
+			{
+				Players = Players.ToArray(),
+				LobbyName = Name,
+				LobbyPort = LobbyStorage.Instance.LobbyPort,
+				LobbyIp = LobbyStorage.Instance.LobbyIp
+			};
+			NetworkRouter.Broadcast(lobbyActionMessage, MessageType.PlayerLobbyAction);
 		}
 
 		/// <summary>
@@ -58,30 +70,10 @@ namespace Assets.Scripts.Network
 				var newBot = new Player($"Bot {botName}", 0, true, false);
 				Players[indexPlayer] = newBot;
 			}
+			
+			SendUpdate();
 		}
-
-		/// <summary>
-		/// Perform update to all session participants when the player has connected 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void OnPlayersChanged(object sender, NotifyCollectionChangedEventArgs e)
-		{
-			Debug.Log("Players Collection has been changed");	
-			if (e.Action is NotifyCollectionChangedAction.Add or NotifyCollectionChangedAction.Replace or NotifyCollectionChangedAction.Remove)
-			{
-				Debug.Log($"Player {e.NewItems[0]} has been added to the session");
-				var lobbyActionMessage = new PlayerLobbyActionMessage()
-				{
-					Players = Players.ToArray(),
-					LobbyName = Name,
-					LobbyPort = LobbyStorage.Instance.LobbyPort,
-					LobbyIp = LobbyStorage.Instance.LobbyIp
-				};
-				NetworkRouter.Broadcast(lobbyActionMessage, MessageType.PlayerLobbyAction);
-			}
-		}
-
+		
 		/// <summary>
 		/// Gets or sets the collection of players in the current session.
 		/// </summary>

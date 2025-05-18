@@ -122,26 +122,14 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void Serialize(Message message)
     {
-        message.AddString(cardData.name);
-        message.AddString(cardData.gender.ToString());
-        message.AddString(cardData.nationality.ToString());
-        message.AddInt(cardData.cardID);
-        
+        message.AddSerializable(cardData);
         message.AddBool(_isPlaced);
         message.AddString(JokerIdentity.ToString());
     }
 
     public void Deserialize(Message message)
     {
-        var cardDate = new CardData
-        {
-            name = message.GetString(),
-            gender = Enum.Parse<Gender>(message.GetString()),
-            nationality = Enum.Parse<Nationality>(message.GetString()),
-            cardID = message.GetInt()
-        };
-        cardData = cardDate;
-        
+        cardData = message.GetSerializable<CardData>();
         _isPlaced = message.GetBool();
         JokerIdentity = Enum.Parse<Nationality>(message.GetString());
     }

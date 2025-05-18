@@ -17,23 +17,23 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		/// </summary>
 		/// <param name="message"></param>
 		[MessageHandler(1003)]
-		private static void TurnCommitMessageHandler(Message message)
+		public static void TurnCommitMessageHandler(Message message)
 		{
 			var obj = message.GetSerializable<TurnCommitMessage>();
 			Debug.Log("TurnCommitMessage has arrived. Game-Field will be updated with changed");
 
 			foreach (var change in obj.Changes)
 			{
-				if (change.Action == TurnCommitAction.PlaceCardOnChair && change.ChairContext != null)
+				if (change.Action == TurnCommitAction.PlaceCardOnChair)
 				{
-					if (change.ChairContext.PlacedCard != null)
-						Manager.PlayCard(change.ChairContext.PlacedCard.cardData.cardID, change.ChairContext.ChairID, -1);
+					if (change.ChairContext > -1 && change.CardContext > -1)
+						Manager.PlayCard(change.CardContext, change.ChairContext, -1, obj.Player.PlayerId);
 				}
 
-				if (change.Action == TurnCommitAction.PlaceCardOnBar && change.BarStoolContext != null)
+				if (change.Action == TurnCommitAction.PlaceCardOnBar)
 				{
-					if (change.BarStoolContext.PlacedCard != null)
-						Manager.PlayCard(-1, -1, change.BarStoolContext.GetIndex());
+					if (change.BarStoolContext > -1 && change.ChairContext > -1)
+						Manager.PlayCard(change.CardContext, -1, change.BarStoolContext, obj.Player.PlayerId);
 				}
 			}
 		}

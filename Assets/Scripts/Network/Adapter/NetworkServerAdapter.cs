@@ -1,8 +1,10 @@
 using System;
 using Assets.Scripts.Models;
 using Assets.Scripts.Network;
+using Assets.Scripts.Network.Adapter;
 using Assets.Scripts.Network.Messages;
 using Assets.Scripts.Network.Messages.PlayerSalutation;
+using Assets.Scripts.Network.Models;
 using JetBrains.Annotations;
 using Riptide;
 using Riptide.Utils;
@@ -125,13 +127,14 @@ public class NetworkServerAdapter : MonoBehaviour
 	/// <param name="e"></param>
 	private void Distribute(object sender, MessageReceivedEventArgs e)
 	{
-		Debug.Log($"Distribute Data: [MessageID = {e.MessageId}]");
 		switch (e.MessageId)
 		{
 			case > 3000:
+				Debug.Log($"Distribute Data: [MessageID = {e.MessageId}]");
 				Server.SendToAll(e.Message, e.FromConnection.Id);
 				break;
 			case > 1000:
+				Debug.Log($"Distribute Data: [MessageID = {e.MessageId}]");
 				Server.SendToAll(e.Message);
 				break;
 		}
@@ -171,8 +174,11 @@ public class NetworkServerAdapter : MonoBehaviour
 			PlayerName = payload.PlayerName,
 			ClientId = fromClientId,
 			LobbyHost = false,
-			IsBot = false
+			IsBot = false,
+			PlayerId = Guid.NewGuid().ToString()
 		};
+		
+		Debug.Log($"Player {player.PlayerName} [{player.PlayerId}] will be added to session");
 		_instance.Session?.AddPlayer(player);
 	}
 	

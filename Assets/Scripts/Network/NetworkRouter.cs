@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Network.Messages;
+﻿using Assets.Scripts.Network.Adapter;
+using Assets.Scripts.Network.Messages;
 using Riptide;
 using UnityEngine;
 

@@ -202,7 +202,11 @@ public class Chair : MonoBehaviour, IMessageSerializable
     {
         message.AddInt(ChairID);
         message.AddSerializable(_firstTable);
-        message.AddSerializable(_secondTable);
+        
+        message.AddBool(_secondTable != null);
+        if (_secondTable != null)
+            message.AddSerializable(_secondTable);
+        
         message.AddBool(PlacedCard != null);
         if (PlacedCard != null)
             message.AddSerializable(PlacedCard);
@@ -212,7 +216,10 @@ public class Chair : MonoBehaviour, IMessageSerializable
     {
         ChairID = message.GetInt();
         _firstTable = message.GetSerializable<Table>();
-        _secondTable = message.GetSerializable<Table>();
+
+        if (message.GetBool())
+            _secondTable = message.GetSerializable<Table>();
+        
         if (message.GetBool())
             PlacedCard = message.GetSerializable<Card>();
     }

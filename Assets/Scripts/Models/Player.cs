@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Assets.Scripts.Game;
 using Riptide;
@@ -18,6 +19,11 @@ namespace Assets.Scripts.Models
         private PlayerManager _playerManager;
         private bool _playerEliminated = false;
 
+        /// <summary>
+        /// The ID of the player
+        /// </summary>
+        public string PlayerId { get; set; } = Guid.NewGuid().ToString();
+        
         /// <summary>
         /// The name of the player
         /// </summary>
@@ -220,6 +226,7 @@ namespace Assets.Scripts.Models
             message.AddBool(_playerBlockedByJokerIdentitySelection);
             message.AddBool(_playerEliminated);
             message.AddBool(IsBot);
+            message.AddString(PlayerId);
         }
 
         public void Deserialize(Message message)
@@ -230,6 +237,7 @@ namespace Assets.Scripts.Models
             _playerBlockedByJokerIdentitySelection = message.GetBool();
             _playerEliminated = message.GetBool();
             IsBot = message.GetBool();
+            PlayerId = message.GetString();
         }
     }
 }

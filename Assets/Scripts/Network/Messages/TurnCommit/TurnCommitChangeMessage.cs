@@ -14,112 +14,36 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		/// The performed action 
 		/// </summary>
 		public TurnCommitAction Action { get; set; }
-		
+
 		/// <summary>
 		/// Context of a related chair
 		/// </summary>
-		[CanBeNull]
-		public Chair ChairContext { get; set; }
-		
+		public int ChairContext { get; set; } = -1;
+
 		/// <summary>
 		/// Context of a related bar stool
 		/// </summary>
-		[CanBeNull]
-		public BarStool BarStoolContext { get; set; }
+		public int BarStoolContext { get; set; } = -1;
 		
 		/// <summary>
-		/// Context of a related table 
+		/// Context of an affected card
 		/// </summary>
-		[CanBeNull]
-		public Table TableContext { get; set; }
+		public int CardContext { get; set; } = -1;
 		
 		public void Serialize(Message message)
 		{
 			message.AddString(Action.ToString());
-			switch (Action)
-			{
-				case TurnCommitAction.PlaceCardOnBar:
-					SerializeActionCardOnBar(message);
-					break;
-				case TurnCommitAction.PlaceCardOnChair:
-					SerializeActionCardOnChair(message);
-					break;
-			}
+			message.AddInt(ChairContext);
+			message.AddInt(BarStoolContext);
+			message.AddInt(CardContext);
 		}
 
 		public void Deserialize(Message message)
 		{
 			Action = Enum.Parse<TurnCommitAction>(message.GetString());
-			switch (Action)
-			{
-				case TurnCommitAction.PlaceCardOnBar:
-					DeserializeActionCardOnBar(message);
-					break;
-				case TurnCommitAction.PlaceCardOnChair:
-					DeserializeActionCardOnChair(message);
-					break;
-			}
+			ChairContext = message.GetInt();
+			BarStoolContext = message.GetInt();
+			CardContext = message.GetInt();
 		}
-
-		#region Deserialization
-
-		/// <summary>
-		/// Handles deserialization for Action <see cref="TurnCommitAction"/>.PlaceCardOnBar.
-		/// </summary>
-		/// <param name="message">The message containing serialized data for the PlaceCardOnBar action.</param>
-		private void DeserializeActionCardOnBar(Message message)
-		{
-			BarStoolContext = message.GetSerializable<BarStool>();
-		}
-
-		/// <summary>
-		/// Handles deserialization for Action <see cref="TurnCommitAction"/>.PlaceCardOnChair.
-		/// </summary>
-		/// <param name="message">The message containing serialized data for the PlaceCardOnChair action.</param>
-		private void DeserializeActionCardOnChair(Message message)
-		{
-			ChairContext = message.GetSerializable<Chair>();
-		}
-
-		#endregion
-		
-
-		#region Serialization
-
-		/// <summary>
-		/// Handles serialization for Action <see cref="TurnCommitAction"/>.PlaceCardOnBar
-		/// </summary>
-		private void SerializeActionCardOnBar(Message message)
-		{
-			if (BarStoolContext != null)
-			{
-				message.AddSerializable(BarStoolContext);
-			}
-			else
-			{
-				const string msg = "TurnCommitAction.PlaceCardOnBar required CardContext and BarStoolContext";
-				Debug.LogError(msg);
-				throw new ArgumentNullException($"{nameof(BarStoolContext)}", msg);
-			}
-		}
-		
-		/// <summary>
-		/// Handles serialization for Action <see cref="TurnCommitAction"/>.PlaceCardOnChair
-		/// </summary>
-		private void SerializeActionCardOnChair(Message message)
-		{
-			if (ChairContext != null)
-			{
-				message.AddSerializable(ChairContext);
-			}
-			else
-			{
-				const string msg = "TurnCommitAction.PlaceCardOnChair required CardContext and TableContext";
-				Debug.LogError(msg);
-				throw new ArgumentNullException($"{nameof(ChairContext)}", msg);
-			}
-		}
-
-		#endregion
 	}
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Models;
 using Assets.Scripts.Network;
 using Assets.Scripts.Network.Messages;
@@ -112,10 +113,11 @@ namespace Assets.Scripts.Game
         /// </summary>
         public void UpdatePlayer()
         {
+            Debug.Log($"Current Player: {CurrentPlayer.PlayerName} [{CurrentPlayer.ClientId}]");
             if (CountCardsPlayed != 0)
             {
                 // Check if the move is valid by game-rule and current player is client player
-                if (CurrentPlayer.IsMoveValid(_firstTurn) && CurrentPlayer.ClientId == ClientPlayer.ClientId) 
+                if (CurrentPlayer.IsMoveValid(_firstTurn)) 
                 {
                     if (!CheckChairsHaveFreeSpots())
                     {
@@ -248,10 +250,22 @@ namespace Assets.Scripts.Game
             UpdatePlayer();
         }
 
-        public void PlayCard(int cardId, int chairId, int barStoolId)
+        public void PlayCard(int cardId, int chairId, int barStoolId, string playerId)
         {
-            Debug.Log($"PlayCard: [CardID: {cardId}], [ChairID: {chairId}], [BarStoolID: {barStoolId}]");
             var card = GetCardFromId(cardId);
+            if (card == null)
+                Debug.LogError($"Cannot find Card: {cardId}");
+            
+            var player = LobbyStorage.Instance.ActivePlayers.FirstOrDefault(x => x.PlayerId == playerId);
+            if (player == null)
+                Debug.LogError($"Cannot find player with ID: {playerId}");
+            
+            Debug.Log($"Play-Card: [CardID: {cardId}], [ChairID: {chairId}], [BarStoolID: {barStoolId}], " +
+                      $"[PlayerId: {playerId}], [Card-Gender: {card.cardData.gender}], [Card-Nationality: {card.cardData.nationality}]," +
+                      $"[PlayerName: {player.PlayerName}], [PlayerScore: {player.PlayerScore}]");
+            
+            card.Player = player;
+            
             if (chairId >= 0)
             {
                 var chair = GetChairFromId(chairId);
@@ -270,18 +284,17 @@ namespace Assets.Scripts.Game
             }
         }
 
+        /// <summary>
+        /// Iterates through all players and finds the requested card
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Card GetCardFromId(int id)
         {
             foreach (var player in Players)
-            {
                 foreach (var card in player.PlayerHand)
-                {
                     if (card.cardData.cardID == id)
-                    {
                         return card;
-                    }
-                }
-            }
             return null;
         }
 

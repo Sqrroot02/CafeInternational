@@ -1,3 +1,5 @@
+using System;
+using Assets.Scripts.Network.Adapter;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +25,14 @@ public class MainMenuManager : MonoBehaviour
 
     public LobbyPanelManager lobbyPanelManager;
 
+
+    void Awake()
+    {
+        NetworkClientAdapter.Instance.Disconnected += InstanceOnDisconnected;
+    }
+
+    private void InstanceOnDisconnected(object sender, EventArgs e) => ShowMainMenu();
+
     public void QuitGame()
     {
         Application.Quit();
@@ -45,7 +55,8 @@ public class MainMenuManager : MonoBehaviour
     {
         Debug.Log("Disconnect Lobby");
         NetworkClientAdapter.Instance.Disconnect();
-        ShowMainMenu();
+        if (NetworkServerAdapter.Instance.Server.IsRunning)
+            NetworkServerAdapter.Instance.TearDown();
     }
     
     public void ShowMainMenu()

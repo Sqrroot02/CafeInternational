@@ -5,6 +5,7 @@ using TMPro;
 using System.Net;
 using System.Net.Sockets;
 using Assets.Scripts.Network;
+using Assets.Scripts.Network.Adapter;
 using Assets.Scripts.Network.Messages;
 using Assets.Scripts.Network.Messages.PlayerSalutation;
 using Assets.Scripts.UI;
