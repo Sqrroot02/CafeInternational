@@ -1,9 +1,8 @@
-﻿using Assets.Scripts.Network.Messages.PlayerLobbyAction;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Riptide;
 using UnityEngine;
 
-namespace Assets.Scripts.Network.Handlers
+namespace Assets.Scripts.Network.Messages.PlayerLobbyAction
 {
 	/// <summary>
 	/// Handler for player lobby actions

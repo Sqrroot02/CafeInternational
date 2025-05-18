@@ -5,6 +5,10 @@ namespace Assets.Scripts.Network
 {
 	public class NetworkUtil
 	{
+		/// <summary>
+		/// Queries the public IP address of host
+		/// </summary>
+		/// <returns></returns>
 		public static string PublicIpAddress()
 		{
 			var result = Task.Run(async () =>
