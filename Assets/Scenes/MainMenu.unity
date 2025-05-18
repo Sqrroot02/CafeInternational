@@ -3386,7 +3386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 160572065044287826, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowMainMenu
+      value: DisconnectLobby
       objectReference: {fileID: 0}
     - target: {fileID: 160572065044287826, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

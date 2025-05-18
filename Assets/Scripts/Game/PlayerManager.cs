@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
     {
         _easyBotBehaviour = EasyBotBehaviour.GetInstance();
         _deck = deckManager.GetComponent<Deck>();
-        ShufflePlayers();
+        players = LobbyStorage.Instance.ActivePlayers;
         UpdatePlayerGameBars();
         DrawInitialCards();
         CountCardsPlayed = 0;
@@ -61,17 +61,6 @@ public class PlayerManager : MonoBehaviour
             StartCoroutine(WaitForBotPlay(4));
             StartCoroutine(WaitForUpdate(5));
         }                    
-    }
-    
-    private void ShufflePlayers()
-    {
-        Stack<Player> playersStack = new Stack<Player>(LobbyStorage.Instance.ActivePlayers);
-        players.Add(playersStack.Pop());
-
-        while (playersStack.Count > 0)
-        {
-            players.Insert(Random.Range(0, players.Count + 1), playersStack.Pop());
-        }
     }
 
     /// <summary>

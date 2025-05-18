@@ -61,6 +61,20 @@ public class LobbyStorage : MonoBehaviour
 
         Debug.Log($"No Player with naem:  {playerName} found.");
     }
+    
+    /// <summary>
+    /// Shuffles the players turn sequence  
+    /// </summary>
+    public void ShufflePlayers()
+    {
+        var playersStack = new Stack<Player>(LobbyStorage.Instance.ActivePlayers);
+        
+        ActivePlayers.Clear();
+        ActivePlayers.Add(playersStack.Pop());
+
+        while (playersStack.Count > 0)
+            ActivePlayers.Insert(Random.Range(0, ActivePlayers.Count + 1), playersStack.Pop());
+    }
 
     public string LobbyName { get; set; }
     public int LobbyPort { get; set; } = 57967;

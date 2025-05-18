@@ -45,6 +45,10 @@ public class LobbyPanelManager : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
+        // Shuffle players sequence before start
+        LobbyStorage.Instance.ShufflePlayers();
+        
+        // Build and send Message for initializing game 
         var message = new StartGameMessage
         {
             LobbyName = LobbyStorage.Instance.LobbyName,
@@ -54,6 +58,7 @@ public class LobbyPanelManager : MonoBehaviour
         NetworkRouter.SendToServer(message, MessageType.StartGame);
     }
 
+    
     public void AddLocalPlayer()
     {
         LobbyStorage.Instance.ReplaceBotWithHuman(MainMenuHelper.GenerateName());

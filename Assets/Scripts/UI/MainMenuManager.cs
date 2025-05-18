@@ -38,6 +38,16 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log("Show Create Lobby Panel");
     }
 
+    /// <summary>
+    /// Disconnects from the current lobby
+    /// </summary>
+    public void DisconnectLobby()
+    {
+        Debug.Log("Disconnect Lobby");
+        NetworkClientAdapter.Instance.Disconnect();
+        ShowMainMenu();
+    }
+    
     public void ShowMainMenu()
     {
         createLobbyPanel.SetActive(false);

@@ -18,12 +18,15 @@ namespace Assets.Scripts.Network.Messages.StartGame
 		private static void StartGameMessageHandler(Message message)
 		{
 			var obj = message.GetSerializable<StartGameMessage>();
-			Debug.Log($"Starting the Game. Lobby: {obj.LobbyName}");
 			
+			// Init Players
+			LobbyStorage.Instance.ActivePlayers = obj.Players.ToList();
+			Debug.Log($"Start Game with players: : {string.Join(',', obj.Players.Select(x => x.PlayerName))}");
+			
+			// Start Game
+			Debug.Log($"Starting the Game. Lobby: {obj.LobbyName}");
 			SceneManager.LoadScene("Game", LoadSceneMode.Additive);
 			SceneManager.UnloadSceneAsync("MainMenu");
-			
-			Models.PlayersGameUtil.ActivePlayers = obj.Players.ToList();
 		}
 	}
 }
