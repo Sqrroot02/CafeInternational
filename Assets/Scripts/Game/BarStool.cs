@@ -1,3 +1,4 @@
+using Assets.Scripts.Game;
 using Assets.Scripts.Models;
 using Riptide;
 using UnityEngine;
@@ -39,6 +40,8 @@ public class BarStool : MonoBehaviour, IMessageSerializable
                 GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
                 card.Player.BarStool = this;
                 PlacedCard = card;
+                
+                TurnHistory.CurrentTurnHistory.AddBarStool(this);
                 return true;
             }
         }

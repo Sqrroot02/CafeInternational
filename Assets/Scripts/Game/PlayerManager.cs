@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Models;
+using Assets.Scripts.Network;
+using Assets.Scripts.Network.Messages;
+using Assets.Scripts.Network.Messages.TurnCommit;
 using Game.BotBehaviour;
 using TMPro;
 using UnityEngine;
@@ -44,6 +47,9 @@ namespace Assets.Scripts.Game
 
         private void Awake()
         {
+            // Assign TurnCommit Handler this Manager for operating after turns of other players
+            TurnCommitHandler.Manager = this;
+            
             _endTurnButton = GameObject.Find("EndTurnButton").GetComponent<Button>();
             _endTurnButton.interactable = false;
             _scoreTable = GameObject.Find("ScoreTable").GetComponent<ScoreTable>();
@@ -138,8 +144,11 @@ namespace Assets.Scripts.Game
                             GameEnded();
                         }
                     }
-                
-                    LobbyStorage.Instance.CurrentPlayer = Players[CurrentPlayerIndex];
+
+                    var lastPlayer = CurrentPlayer;
+                    var nextPlayer = Players[CurrentPlayerIndex];
+                    LobbyStorage.Instance.CurrentPlayer = nextPlayer;
+                    
                     CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
                     CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 3;
                     CountCardsPlayed = 0;
@@ -147,11 +156,16 @@ namespace Assets.Scripts.Game
                     _endTurnButton.interactable = false;
                     _scoreTable.UpdateScores(Players);
                     _firstTurn = false;
+                    
                     if (CurrentPlayer.IsBot)
                     {
                         StartCoroutine(WaitForBotPlay());
                         StartCoroutine(WaitForUpdate());
                     }
+                    
+                    // Build Message for transferring turn-updates information
+                    var message = TurnHistory.PullMessage(lastPlayer, nextPlayer);
+                    NetworkRouter.SendToServer(message, MessageType.TurnCommit);
                 }
                 else
                 {
@@ -236,16 +250,17 @@ namespace Assets.Scripts.Game
 
         public void PlayCard(int cardId, int chairId, int barStoolId)
         {
-            Card card = GetCardFromId(cardId);
+            Debug.Log($"PlayCard: [CardID: {cardId}], [ChairID: {chairId}], [BarStoolID: {barStoolId}]");
+            var card = GetCardFromId(cardId);
             if (chairId >= 0)
             {
-                Chair chair = GetChairFromId(chairId);
+                var chair = GetChairFromId(chairId);
                 chair.PlaceCard(card);
                 EasyBotBehaviour.PlacePlayerCard(card.gameObject, chair.gameObject);
             }
             else if (barStoolId >= 0)
             {
-                BarStool barStool = GetBarStoolFromId(barStoolId);
+                var barStool = GetBarStoolFromId(barStoolId);
                 barStool.PlaceCard(card);
                 EasyBotBehaviour.PlacePlayerCard(card.gameObject, barStool.gameObject);
             }

@@ -2,9 +2,11 @@ using System;
 using Assets.Scripts.Game;
 using Assets.Scripts.Models;
 using Riptide;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Player = Assets.Scripts.Models.Player;
 
 /// <summary>
 /// Contains Card associated Data like gender or nationality
@@ -86,7 +88,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!_isPlaced && _playerManager.CurrentPlayer == Player)
+        if (!_isPlaced && _playerManager.CurrentPlayer == Player && _playerManager.CurrentPlayer.ClientId == LobbyStorage.Instance.ClientPlayer.ClientId)
         {
             _canvasGroup.blocksRaycasts = true;
             _canvasGroup.alpha = 1f;

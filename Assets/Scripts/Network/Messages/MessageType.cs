@@ -27,6 +27,6 @@ namespace Assets.Scripts.Network.Messages
 		/// <summary>
 		/// The current player has committed his turn (MULTICAST)
 		/// </summary>
-		TurnCommit = 3001,
+		TurnCommit = 1003,
 	}
 }

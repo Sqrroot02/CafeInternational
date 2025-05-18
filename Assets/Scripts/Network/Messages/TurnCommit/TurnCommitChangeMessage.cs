@@ -16,12 +16,6 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		public TurnCommitAction Action { get; set; }
 		
 		/// <summary>
-		/// Context of a related card
-		/// </summary>
-		[CanBeNull]
-		public Card CardContext { get; set; }
-		
-		/// <summary>
 		/// Context of a related chair
 		/// </summary>
 		[CanBeNull]
@@ -75,7 +69,6 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		/// <param name="message">The message containing serialized data for the PlaceCardOnBar action.</param>
 		private void DeserializeActionCardOnBar(Message message)
 		{
-			CardContext = message.GetSerializable<Card>();
 			BarStoolContext = message.GetSerializable<BarStool>();
 		}
 
@@ -85,7 +78,6 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		/// <param name="message">The message containing serialized data for the PlaceCardOnChair action.</param>
 		private void DeserializeActionCardOnChair(Message message)
 		{
-			CardContext = message.GetSerializable<Card>();
 			ChairContext = message.GetSerializable<Chair>();
 		}
 
@@ -99,16 +91,15 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		/// </summary>
 		private void SerializeActionCardOnBar(Message message)
 		{
-			if (CardContext != null && BarStoolContext != null)
+			if (BarStoolContext != null)
 			{
-				message.AddSerializable(CardContext);
 				message.AddSerializable(BarStoolContext);
 			}
 			else
 			{
 				const string msg = "TurnCommitAction.PlaceCardOnBar required CardContext and BarStoolContext";
 				Debug.LogError(msg);
-				throw new ArgumentNullException($"{nameof(CardContext)}, {nameof(BarStoolContext)}", msg);
+				throw new ArgumentNullException($"{nameof(BarStoolContext)}", msg);
 			}
 		}
 		
@@ -117,16 +108,15 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		/// </summary>
 		private void SerializeActionCardOnChair(Message message)
 		{
-			if (CardContext != null && ChairContext != null)
+			if (ChairContext != null)
 			{
-				message.AddSerializable(CardContext);
 				message.AddSerializable(ChairContext);
 			}
 			else
 			{
 				const string msg = "TurnCommitAction.PlaceCardOnChair required CardContext and TableContext";
 				Debug.LogError(msg);
-				throw new ArgumentNullException($"{nameof(CardContext)} and {nameof(ChairContext)}", msg);
+				throw new ArgumentNullException($"{nameof(ChairContext)}", msg);
 			}
 		}
 

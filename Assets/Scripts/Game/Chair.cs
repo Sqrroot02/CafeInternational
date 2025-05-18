@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Game;
 using Assets.Scripts.Models;
 using Riptide;
 using UnityEngine;
@@ -64,7 +65,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
     {
         if (!card.GetIsPlaced() && !card.Player.GetPlayerBlockedByJokerIdentitySelection())
         {
-            if (PlacedCard ==null)
+            if (PlacedCard == null)
             {
                 if (CheckPlaceCard(card))
                 {
@@ -91,6 +92,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
                                 PlacedCard.JokerIdentity = _firstTable.nationality;
                             }
                         }
+                        TurnHistory.CurrentTurnHistory.AddChair(this);
                         return true;
                     }
                 }
@@ -103,6 +105,8 @@ public class Chair : MonoBehaviour, IMessageSerializable
             { // Placing a card that matches the field at the jokers spot and is not a joker
                 Debug.Log("Replace by Joker");
                 ReplaceJoker(card);
+                
+                TurnHistory.CurrentTurnHistory.AddChair(this);
                 return true;
             }
         }
@@ -125,6 +129,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
 
     private void ReplaceJoker(Card card)
     {
+        TurnHistory.CurrentTurnHistory.AddChair(this);
         GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
         _firstTable.placedCards.Remove(PlacedCard);
         _firstTable.AddPlacedCard(card);
@@ -177,6 +182,8 @@ public class Chair : MonoBehaviour, IMessageSerializable
         {
             _secondTable.placedCards.Remove(PlacedCard);
         }
+        
+        TurnHistory.CurrentTurnHistory.AddChair(this);
         PlacedCard = null;
         GetComponent<Outline>().UpdateOutlineSprite(null); // TODO Needs to be changed if the actual images of the chairs are implemented -> Change to the original image of the chair
     }
@@ -196,6 +203,9 @@ public class Chair : MonoBehaviour, IMessageSerializable
         message.AddInt(ChairID);
         message.AddSerializable(_firstTable);
         message.AddSerializable(_secondTable);
+        message.AddBool(PlacedCard != null);
+        if (PlacedCard != null)
+            message.AddSerializable(PlacedCard);
     }
 
     public void Deserialize(Message message)
@@ -203,5 +213,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
         ChairID = message.GetInt();
         _firstTable = message.GetSerializable<Table>();
         _secondTable = message.GetSerializable<Table>();
+        if (message.GetBool())
+            PlacedCard = message.GetSerializable<Card>();
     }
 }
