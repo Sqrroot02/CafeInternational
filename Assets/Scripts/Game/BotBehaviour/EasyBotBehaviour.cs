@@ -48,7 +48,7 @@ namespace Game.BotBehaviour
                     _nationalityToChairListDictionary.Add(nat1, new List<Chair>());
                 }
                 _nationalityToChairListDictionary[nat1].Add(chair);
-                if (nat2 != null)
+                if (nat2 != null && nat1 != nat2)
                 {
                     if (!_nationalityToChairListDictionary.ContainsKey(nat2.Value))
                     {

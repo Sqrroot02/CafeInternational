@@ -37,12 +37,12 @@ public class Chair : MonoBehaviour
         return nationality == Nationality.Joker || _firstTable.nationality == nationality || (_secondTable != null && _secondTable.nationality == nationality);
     }
 
-    private bool CheckPlaceCard(Card card)
+    public bool CheckPlaceCard(Card card, int additionalMale = 0, int additionalFemale = 0)
     {
         // Check nationality matches the chair
         if (HasPlaceableNationality(card.cardData.nationality))
         {   // Check the first table is placeable
-            if (_firstTable.CheckGenderPlaceable(card.cardData.gender))
+            if (_firstTable.CheckGenderPlaceable(card.cardData.gender, additionalMale, additionalFemale))
             {
                 // If the chair is only at one table the gendercheck of the first table is enough
                 if (_secondTable == null)
@@ -50,7 +50,7 @@ public class Chair : MonoBehaviour
                     return true;
                 }
                 // Otherwise the gender has to be checked for the second gender
-                return _secondTable.CheckGenderPlaceable(card.cardData.gender);
+                return _secondTable.CheckGenderPlaceable(card.cardData.gender, additionalMale, additionalFemale);
             }
             Debug.Log("Table 1 Gender Fail");
         }
@@ -63,7 +63,7 @@ public class Chair : MonoBehaviour
     {
         if (!card.GetIsPlaced() && !card.Player.GetPlayerBlockedByJokerIdentitySelection())
         {
-            if (PlacedCard ==null)
+            if (PlacedCard == null)
             {
                 if (CheckPlaceCard(card))
                 {
@@ -188,5 +188,15 @@ public class Chair : MonoBehaviour
     public Nationality GetFirstTableNationality()
     {
         return _firstTable.nationality;
+    }
+
+    /// <summary>
+    /// Checks if the given table is part of the tables the chair is placed at 
+    /// </summary>
+    /// <param name="table">The table to check</param>
+    /// <returns>true if the tables overlap</returns>
+    public bool IsInTables(Table table)
+    {
+        return _firstTable == table || _secondTable == table;
     }
 }

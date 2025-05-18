@@ -41,13 +41,12 @@ public class Table : MonoBehaviour
         return nationalityMatchesTable;
     }
 
-    public bool CheckGenderPlaceable(Gender gender)
+    public bool CheckGenderPlaceable(Gender gender, int countMale = 0, int countFemale = 0)
     {
         if (placedCards.Count == 0) // If no one sits at the table the gender does not 
         {
             return true;
         }
-        int countMale = 0, countFemale = 0;
         foreach (Card card in placedCards)
         {
             if (card.cardData.gender == Gender.Male)

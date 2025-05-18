@@ -24,6 +24,7 @@ public class PlayerManager : MonoBehaviour
     private bool _firstMove = true;
     private Chair[] _chairs;
     private EasyBotBehaviour _easyBotBehaviour;
+    private ComplexBotBehaviour _complexBotBehaviour;
     private Bar _bar;
 
     private void Awake()
@@ -34,6 +35,7 @@ public class PlayerManager : MonoBehaviour
         _chairs = GameObject.Find("Chairs").transform.GetComponentsInChildren<Chair>();
         _bar = GameObject.Find("Bar").GetComponent<Bar>();
         _easyBotBehaviour = EasyBotBehaviour.GetInstance();
+        _complexBotBehaviour = ComplexBotBehaviour.GetInstance();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -220,6 +222,7 @@ public class PlayerManager : MonoBehaviour
     IEnumerator WaitForBotPlay(int seconds = 2)
     {
         yield return new WaitForSeconds(seconds);
+        _complexBotBehaviour.MakeComplexMove(CurrentPlayer, players, _firstMove);
         _easyBotBehaviour.Play(CurrentPlayer, _firstMove);
     }
     
