@@ -18,16 +18,13 @@ namespace Assets.Scripts.Game
     /// </summary>
     public class PlayerManager : MonoBehaviour
     {
+        public static PlayerManager Instance;
+        
         /// <summary>
         /// ref. to active lobby players 
         /// </summary>
         private List<Player> Players => LobbyStorage.Instance.ActivePlayers;
-    
-        /// <summary>
-        /// ref. to the client associated player
-        /// </summary>
-        private Player ClientPlayer => LobbyStorage.Instance.ClientPlayer;
-    
+        
         /// <summary>
         /// ref. to the current player
         /// </summary>
@@ -82,7 +79,8 @@ namespace Assets.Scripts.Game
             {
                 StartCoroutine(WaitForBotPlay(4));
                 StartCoroutine(WaitForUpdate(5));
-            }                    
+            }        
+            Instance = this;
         }
 
         /// <summary>
@@ -106,6 +104,18 @@ namespace Assets.Scripts.Game
                 Players[i].PlayerGameBar = GameObject.Find("PlayerGameBarPlayer" + (i + 1)).transform.GetChild(0).gameObject;
                 Players[i].PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().text = Players[i].PlayerName;
             }
+        }
+
+        /// <summary>
+        /// Commit changes and send them to other players. Updates all players as well
+        /// </summary>
+        public void Commit()
+        {
+            UpdatePlayer();
+            
+            // Build Message for transferring turn-updates information
+            var message = TurnHistory.PullMessage(LobbyStorage.Instance.ActivePlayers.Single(x => x.PlayerId == LobbyStorage.Instance.ClientPlayerId));
+            NetworkRouter.SendToServer(message, MessageType.TurnCommit);
         }
     
         /// <summary>
@@ -146,8 +156,7 @@ namespace Assets.Scripts.Game
                             GameEnded();
                         }
                     }
-
-                    var lastPlayer = CurrentPlayer;
+                    
                     var nextPlayer = Players[CurrentPlayerIndex];
                     LobbyStorage.Instance.CurrentPlayer = nextPlayer;
                     
@@ -164,10 +173,6 @@ namespace Assets.Scripts.Game
                         StartCoroutine(WaitForBotPlay());
                         StartCoroutine(WaitForUpdate());
                     }
-                    
-                    // Build Message for transferring turn-updates information
-                    var message = TurnHistory.PullMessage(lastPlayer, nextPlayer);
-                    NetworkRouter.SendToServer(message, MessageType.TurnCommit);
                 }
                 else
                 {

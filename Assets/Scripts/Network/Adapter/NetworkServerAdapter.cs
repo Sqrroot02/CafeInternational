@@ -175,7 +175,7 @@ public class NetworkServerAdapter : MonoBehaviour
 			ClientId = fromClientId,
 			LobbyHost = false,
 			IsBot = false,
-			PlayerId = Guid.NewGuid().ToString()
+			PlayerId = payload.PlayerId,
 		};
 		
 		Debug.Log($"Player {player.PlayerName} [{player.PlayerId}] will be added to session");

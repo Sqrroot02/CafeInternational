@@ -96,8 +96,6 @@ public class CreateLobbyPanelManager : MonoBehaviour
         Debug.Log($"Server ClientID is: {NetworkClientAdapter.Instance.Client.Id}");
         Debug.Log($"The current Session:\n {string.Join("\n", NetworkServerAdapter.Instance.Session?.Players.Select(x => $"{x.PlayerName} [{x.PlayerId}]"))}");
         
-        LobbyStorage.Instance.ClientPlayer.ClientId = NetworkClientAdapter.Instance.Client.Id;
-        
         // Show Lobby after the Server establishment
         mainMenuManager.ShowLobby();
     }

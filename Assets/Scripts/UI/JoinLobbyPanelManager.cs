@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Net;
 using System.Net.Sockets;
+using Assets.Scripts.Models;
 using Assets.Scripts.Network;
 using Assets.Scripts.Network.Adapter;
 using Assets.Scripts.Network.Messages;
@@ -90,6 +91,7 @@ public class JoinLobbyPanelManager : MonoBehaviour
             PlayerId = Guid.NewGuid().ToString(),
         };
         NetworkRouter.SendToServer(msg, MessageType.PlayerSalutation);
+        LobbyStorage.Instance.ClientPlayerId = msg.PlayerId;
     }
 
     public void ResetJoinLobbyTMPs()

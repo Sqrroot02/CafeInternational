@@ -19,7 +19,7 @@ namespace Assets.Scripts.Models
         /// <summary>
         /// The client associated player a.k.a. "you"
         /// </summary>
-        public Player ClientPlayer { get; set; }
+        public string ClientPlayerId { get; set; }
 
         /// <summary>
         /// The current player that is on turn
@@ -60,9 +60,10 @@ namespace Assets.Scripts.Models
             ActivePlayers.Clear();
 
             var hostPlayer = new Player(localPlayerName, 0, false, true);
+            ClientPlayerId = hostPlayer.PlayerId;
+                
             ActivePlayers.Add(hostPlayer);
-            ClientPlayer = hostPlayer;
-
+            
             for (var i = 1; i < 4; i++)
             {
                 var botName = MainMenuHelper.GenerateName();

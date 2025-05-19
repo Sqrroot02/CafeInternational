@@ -20,8 +20,13 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 		public static void TurnCommitMessageHandler(Message message)
 		{
 			var obj = message.GetSerializable<TurnCommitMessage>();
-			Debug.Log("TurnCommitMessage has arrived. Game-Field will be updated with changed");
-
+			
+			// Ignore own message
+			if (obj.Player.PlayerId == LobbyStorage.Instance.ClientPlayerId)
+				return;
+			
+			Debug.Log($"TurnCommitMessage has arrived. Game-Field will be updated with {obj.Changes.Length} changes.");
+		
 			foreach (var change in obj.Changes)
 			{
 				if (change.Action == TurnCommitAction.PlaceCardOnChair)
@@ -32,10 +37,11 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 
 				if (change.Action == TurnCommitAction.PlaceCardOnBar)
 				{
-					if (change.BarStoolContext > -1 && change.ChairContext > -1)
+					if (change.BarStoolContext > -1 && change.CardContext > -1)
 						Manager.PlayCard(change.CardContext, -1, change.BarStoolContext, obj.Player.PlayerId);
 				}
 			}
+			PlayerManager.Instance.UpdatePlayer();
 		}
 	}
 }

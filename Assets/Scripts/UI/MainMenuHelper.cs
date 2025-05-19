@@ -94,7 +94,7 @@ namespace Assets.Scripts.UI
             "Candamir", "Hildegard", "Jean", "Franz", "LarsiHasi", "AlexPat�la", "Wolli"
         };
 
-        private static readonly System.Random random = new();
+        private static readonly System.Random random = new(31415);
 
         public static string GenerateName()
         {

@@ -88,7 +88,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!_isPlaced && _playerManager.CurrentPlayer == Player && _playerManager.CurrentPlayer.ClientId == LobbyStorage.Instance.ClientPlayer.ClientId)
+        if (!_isPlaced && _playerManager.CurrentPlayer == Player && _playerManager.CurrentPlayer.PlayerId == LobbyStorage.Instance.ClientPlayerId)
         {
             _canvasGroup.blocksRaycasts = true;
             _canvasGroup.alpha = 1f;

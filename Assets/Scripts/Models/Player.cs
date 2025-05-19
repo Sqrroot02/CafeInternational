@@ -77,15 +77,7 @@ namespace Assets.Scripts.Models
         {
             return _playerBlockedByJokerIdentitySelection;
         }
-
-        /// <summary>
-        /// Checks if the client is allowed to perform a turn
-        /// </summary>
-        /// <returns></returns>
-        public bool IsClientTurn()
-        {
-            return LobbyStorage.Instance.ClientPlayer.ClientId == ClientId;
-        }
+        
 
         /// <summary>
         /// Checks if the combination of cards the player played match the rules of the Game.
