@@ -27,6 +27,14 @@ public class BarStool : MonoBehaviour, IMessageSerializable
         return _index; 
     }
 
+    public bool PlaceAndCommit(Card card)
+    {
+        var hasPlaced = PlaceCard(card);
+        if (hasPlaced)
+            TurnHistory.CurrentTurnHistory.AddBarStool(this);
+        return hasPlaced;
+    }
+    
     /// <summary>
     /// Placed the given Card on the stool if possible
     /// </summary>
@@ -41,7 +49,6 @@ public class BarStool : MonoBehaviour, IMessageSerializable
                 card.Player.BarStool = this;
                 PlacedCard = card;
                 
-                TurnHistory.CurrentTurnHistory.AddBarStool(this);
                 return true;
             }
         }

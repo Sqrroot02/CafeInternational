@@ -61,6 +61,14 @@ public class Chair : MonoBehaviour, IMessageSerializable
         return false;
     }
 
+    public bool PlaceAndCommit(Card card)
+    {
+        var hasPlaced = PlaceCard(card);
+        if (hasPlaced)
+            TurnHistory.CurrentTurnHistory.AddChair(this);
+        return hasPlaced;
+    }
+    
     public bool PlaceCard(Card card)
     {
         if (!card.GetIsPlaced() && !card.Player.GetPlayerBlockedByJokerIdentitySelection())
@@ -92,7 +100,6 @@ public class Chair : MonoBehaviour, IMessageSerializable
                                 PlacedCard.JokerIdentity = _firstTable.nationality;
                             }
                         }
-                        TurnHistory.CurrentTurnHistory.AddChair(this);
                         return true;
                     }
                 }
@@ -105,8 +112,6 @@ public class Chair : MonoBehaviour, IMessageSerializable
             { // Placing a card that matches the field at the jokers spot and is not a joker
                 Debug.Log("Replace by Joker");
                 ReplaceJoker(card);
-                
-                TurnHistory.CurrentTurnHistory.AddChair(this);
                 return true;
             }
         }
@@ -129,7 +134,6 @@ public class Chair : MonoBehaviour, IMessageSerializable
 
     private void ReplaceJoker(Card card)
     {
-        TurnHistory.CurrentTurnHistory.AddChair(this);
         GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
         _firstTable.placedCards.Remove(PlacedCard);
         _firstTable.AddPlacedCard(card);
@@ -183,7 +187,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
             _secondTable.placedCards.Remove(PlacedCard);
         }
         
-        TurnHistory.CurrentTurnHistory.AddChair(this);
+        TurnHistory.CurrentTurnHistory.RemoveChair(this);
         PlacedCard = null;
         GetComponent<Outline>().UpdateOutlineSprite(null); // TODO Needs to be changed if the actual images of the chairs are implemented -> Change to the original image of the chair
     }

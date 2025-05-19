@@ -38,17 +38,23 @@ namespace Assets.Scripts.Game
 				Debug.Log("Add Chair Change");		
 				UpdateChair.Add(chair);
 			}
-			
+		}
+
+		public void RemoveChair(Chair chair)
+		{
+			UpdateChair.RemoveAll(x => x.ChairID == chair.ChairID);
 		}
 
 		private bool ValidateChairChange([CanBeNull] Chair chair) =>
 			chair != null && 
+			!chair.PlacedCard.Player.IsBot &&
 			chair.ChairID >= 0 && 
 			chair.PlacedCard.cardData.cardID >= 0 && 
 			UpdateChair.All(x => x.ChairID != chair.ChairID);
 		
 		private bool ValidateBarStoolChange([CanBeNull] BarStool stool) =>
 			stool != null && 
+			!stool.PlacedCard.Player.IsBot &&
 			stool.GetIndex() >= 0 && 
 			stool.PlacedCard.cardData.cardID >= 0 && 
 			UpdateChair.All(x => x.ChairID != stool.GetIndex());
