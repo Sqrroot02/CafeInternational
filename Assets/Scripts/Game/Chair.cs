@@ -32,17 +32,17 @@ public class Chair : MonoBehaviour
         return tables;
     } 
 
-    private bool HasPlaceableNationality(Nationality nationality)
+    public bool HasPlaceableNationality(Nationality nationality)
     {
         return nationality == Nationality.Joker || _firstTable.nationality == nationality || (_secondTable != null && _secondTable.nationality == nationality);
     }
 
-    public bool CheckPlaceCard(Card card, int additionalMale = 0, int additionalFemale = 0)
+    public bool CheckPlaceCard(Card card)
     {
         // Check nationality matches the chair
         if (HasPlaceableNationality(card.cardData.nationality))
         {   // Check the first table is placeable
-            if (_firstTable.CheckGenderPlaceable(card.cardData.gender, additionalMale, additionalFemale))
+            if (_firstTable.CheckGenderPlaceable(card.cardData.gender))
             {
                 // If the chair is only at one table the gendercheck of the first table is enough
                 if (_secondTable == null)
@@ -50,7 +50,7 @@ public class Chair : MonoBehaviour
                     return true;
                 }
                 // Otherwise the gender has to be checked for the second gender
-                return _secondTable.CheckGenderPlaceable(card.cardData.gender, additionalMale, additionalFemale);
+                return _secondTable.CheckGenderPlaceable(card.cardData.gender);
             }
             Debug.Log("Table 1 Gender Fail");
         }
@@ -183,6 +183,17 @@ public class Chair : MonoBehaviour
     public (Nationality, Nationality?) GetNationalities()
     {
         return (_firstTable.nationality, _secondTable?.nationality);
+    }
+
+    public List<Nationality> GetUniqueNationalities()
+    {
+        List<Nationality> nationalities = new List<Nationality>();
+        nationalities.Add(_firstTable.nationality);
+        if (_secondTable != null && _firstTable.nationality != _secondTable.nationality)
+        {
+            nationalities.Add(_secondTable.nationality);
+        }
+        return nationalities;
     }
 
     public Nationality GetFirstTableNationality()

@@ -8,4 +8,9 @@ public class CardData : ScriptableObject
     public Nationality nationality;
     public Sprite cardSprite;
     public int cardID;
+
+    public override string ToString()
+    {
+        return $"Id: {cardID}, Gender: {gender}, Nationality: {nationality}";
+    }
 }

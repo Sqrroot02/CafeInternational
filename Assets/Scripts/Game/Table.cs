@@ -43,7 +43,7 @@ public class Table : MonoBehaviour
 
     public bool CheckGenderPlaceable(Gender gender, int countMale = 0, int countFemale = 0)
     {
-        if (placedCards.Count == 0) // If no one sits at the table the gender does not 
+        if (placedCards.Count == 0 && countMale == 0 && countFemale == 0) // If no one sits at the table the gender does not matter
         {
             return true;
         }

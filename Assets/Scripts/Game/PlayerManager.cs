@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviour
         _chairs = GameObject.Find("Chairs").transform.GetComponentsInChildren<Chair>();
         _bar = GameObject.Find("Bar").GetComponent<Bar>();
         _easyBotBehaviour = EasyBotBehaviour.GetInstance();
-        _complexBotBehaviour = ComplexBotBehaviour.GetInstance();
+        _complexBotBehaviour = ComplexBotBehaviour.GetInstance(this);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -222,8 +222,9 @@ public class PlayerManager : MonoBehaviour
     IEnumerator WaitForBotPlay(int seconds = 2)
     {
         yield return new WaitForSeconds(seconds);
-        _complexBotBehaviour.MakeComplexMove(CurrentPlayer, players, _firstMove);
-        _easyBotBehaviour.Play(CurrentPlayer, _firstMove);
+        // TODO Hier Unterscheidung für Leichtes / Schweres Botverhalten?
+        _complexBotBehaviour.MakeComplexTurn(CurrentPlayer, players, _firstMove);
+        // _easyBotBehaviour.Play(CurrentPlayer, _firstMove);
     }
     
     IEnumerator WaitForUpdate(int seconds = 5)
