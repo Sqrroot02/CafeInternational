@@ -3,32 +3,8 @@ guid: 3ceb7474e67fea44d841a6ffc309afac
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4027051871510368574
-    second: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_0
-  - first:
-      213: 4356761172229921828
-    second: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_1
-  - first:
-      213: -6210206143348667358
-    second: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_2
-  - first:
-      213: 408412698139708105
-    second: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_3
-  - first:
-      213: 2732841947052121387
-    second: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_4
-  - first:
-      213: -1085654521600636427
-    second: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_5
-  - first:
-      213: -7361030955684011886
-    second: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_6
-  - first:
-      213: -1326086662355756394
-    second: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_7
-  - first:
-      213: 3944109784680978664
-    second: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_8
+      213: 8807345781473700258
+    second: France_Table_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -124,35 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_0
+      name: France_Table_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1528
-        width: 10
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e3192754756f2e730800000000000000
-      internalID: 4027051871510368574
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
+        y: 7
         width: 1024
-        height: 1531
+        height: 1004
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,162 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 42c9af9f333567c30800000000000000
-      internalID: 4356761172229921828
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1474
-        width: 15
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 22c01cb6a6ae0d9a0800000000000000
-      internalID: -6210206143348667358
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_3
-      rect:
-        serializedVersion: 2
-        x: 1015
-        y: 1506
-        width: 9
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9ca40626f29faa500800000000000000
-      internalID: 408412698139708105
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_4
-      rect:
-        serializedVersion: 2
-        x: 982
-        y: 1327
-        width: 42
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b2d145985410de520800000000000000
-      internalID: 2732841947052121387
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_5
-      rect:
-        serializedVersion: 2
-        x: 1002
-        y: 31
-        width: 22
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5f98233f6fafee0f0800000000000000
-      internalID: -1085654521600636427
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_6
-      rect:
-        serializedVersion: 2
-        x: 1015
-        y: 23
-        width: 9
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 290ecc1a85d58d990800000000000000
-      internalID: -7361030955684011886
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_7
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 9
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 69ad6ecd43bc89de0800000000000000
-      internalID: -1326086662355756394
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_8
-      rect:
-        serializedVersion: 2
-        x: 1002
-        y: 0
-        width: 22
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8e85d0fc3fa4cb630800000000000000
-      internalID: 3944109784680978664
+      spriteID: 2a966ce235af93a70800000000000000
+      internalID: 8807345781473700258
       vertices: []
       indices: 
       edges: []
@@ -334,16 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_0: 4027051871510368574
-      20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_1: 4356761172229921828
-      20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_2: -6210206143348667358
-      20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_3: 408412698139708105
-      20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_4: 2732841947052121387
-      20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_5: -1085654521600636427
-      20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_6: -7361030955684011886
-      20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_7: -1326086662355756394
-      20250519_2045_Holztisch mit Flagge_remix_01jvmxqvbzfm7ahehe23gyv8jf_8: 3944109784680978664
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

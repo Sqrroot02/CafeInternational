@@ -3,20 +3,8 @@ guid: ebe68a51dbc8bd445aba5be5bb83e44a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5543518730267564223
-    second: 20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_0
-  - first:
-      213: 5940024801469954086
-    second: 20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_1
-  - first:
-      213: -7561829811199249553
-    second: 20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_2
-  - first:
-      213: -3255305591815202220
-    second: 20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_3
-  - first:
-      213: -391532797751764823
-    second: 20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_4
+      213: -4165337296832655715
+    second: Britain_Table_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_0
+      name: Britain_Table_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
+        y: 5
         width: 1024
-        height: 1528
+        height: 1015
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,96 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fb892531ae88eec40800000000000000
-      internalID: 5543518730267564223
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_1
-      rect:
-        serializedVersion: 2
-        x: 983
-        y: 1327
-        width: 41
-        height: 209
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 62870a8d5153f6250800000000000000
-      internalID: 5940024801469954086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_2
-      rect:
-        serializedVersion: 2
-        x: 1013
-        y: 23
-        width: 11
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f63728bd9dbfe0790800000000000000
-      internalID: -7561829811199249553
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 9
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 45a1384cfc4d2d2d0800000000000000
-      internalID: -3255305591815202220
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_4
-      rect:
-        serializedVersion: 2
-        x: 1003
-        y: 0
-        width: 21
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9a85710befef09af0800000000000000
-      internalID: -391532797751764823
+      spriteID: d9e8a942ccfb136c0800000000000000
+      internalID: -4165337296832655715
       vertices: []
       indices: 
       edges: []
@@ -234,12 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_0: 5543518730267564223
-      20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_1: 5940024801469954086
-      20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_2: -7561829811199249553
-      20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_3: -3255305591815202220
-      20250519_2041_Tisch mit Britischer Flagge_remix_01jvmxgpk4ech9rpnb65vbddvt_4: -391532797751764823
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

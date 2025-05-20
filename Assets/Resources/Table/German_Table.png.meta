@@ -3,11 +3,11 @@ guid: 0696aedba11c5df4ba2e06b77dd3afce
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6435550445717528094
-    second: Holztisch mit Deutscher Flagge_0
+      213: 3309296774128037300
+    second: German_Table_0
   - first:
-      213: -3652785714058595842
-    second: Holztisch mit Deutscher Flagge_1
+      213: 34468480877540887
+    second: German_Table_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Holztisch mit Deutscher Flagge_0
+      name: German_Table_0
       rect:
         serializedVersion: 2
         x: 39
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2e166e477f450b6a0800000000000000
-      internalID: -6435550445717528094
+      spriteID: 4bd6f36f1ebfced20800000000000000
+      internalID: 3309296774128037300
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Holztisch mit Deutscher Flagge_1
+      name: German_Table_1
       rect:
         serializedVersion: 2
         x: 275
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ef17ae01fb2be4dc0800000000000000
-      internalID: -3652785714058595842
+      spriteID: 71637a696e47a7000800000000000000
+      internalID: 34468480877540887
       vertices: []
       indices: 
       edges: []
@@ -159,9 +159,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Holztisch mit Deutscher Flagge_0: -6435550445717528094
-      Holztisch mit Deutscher Flagge_1: -3652785714058595842
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

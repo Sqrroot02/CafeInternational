@@ -15,7 +15,7 @@ public class Table : MonoBehaviour
     {
         placedCards = new List<Card>();
         _tableImage = GetComponent<Image>();
-        string spriteName = "Flags/" + nationality + " Flag";
+        string spriteName = "Table/" + nationality + "_Table";
         _tableImage.sprite = Resources.Load<Sprite>(spriteName);
     }
 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a0e9475983904b94d92d0969bfb2ab28
+guid: f4c195739688fee41b870ac63a0d9003
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5134394442344254261
-    second: China_Table_0
+      213: -8355673363304588472
+    second: Kuba_Table_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: China_Table_0
+      name: Kuba_Table_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 6
+        y: 1
         width: 1024
-        height: 919
+        height: 993
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc4b4573577feb8b0800000000000000
-      internalID: -5134394442344254261
+      spriteID: 84b5909a85faa0c80800000000000000
+      internalID: -8355673363304588472
       vertices: []
       indices: 
       edges: []

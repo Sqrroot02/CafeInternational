@@ -42,9 +42,9 @@ namespace Assets.Scripts.UI
 
         public static bool IsValidNicknameOrLobbyName(string input)
         {
-            if (!string.IsNullOrEmpty(input) || input.Length < 12 && input.Length > 0)
+            if (!string.IsNullOrEmpty(input) || input.Length < 10 && input.Length > 0)
             {
-                if (Regex.IsMatch(input, "^[a-zA-Z0-9]*$"))
+                if (Regex.IsMatch(input, "^[a-zA-Z]*$"))
                 {
                     Debug.Log("Valid Nickname or LobbyName");
                     return true;

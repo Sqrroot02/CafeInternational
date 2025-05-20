@@ -1,70 +1,76 @@
 fileFormatVersion: 2
-guid: 74989b955e58d2048a2cb9269e8e3fcf
+guid: f930eacf82ae5fe45bbba5390958c1a1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9159532943490228756
-    second: Italy_Table_0
+      213: 6649325943611247595
+    second: Africa_Table_0
   - first:
-      213: -1392984787452449130
-    second: Italy_Table_1
+      213: -1680502935017642982
+    second: Africa_Table_1
   - first:
-      213: -2484202925831380130
-    second: Italy_Table_2
+      213: -4677215347857380201
+    second: Africa_Table_2
   - first:
-      213: 6230891842374717136
-    second: Italy_Table_3
+      213: -3181034469091818561
+    second: Africa_Table_3
   - first:
-      213: 8736599571762018414
-    second: Italy_Table_4
+      213: 3232554049161946715
+    second: Africa_Table_4
   - first:
-      213: 7983548606857795397
-    second: Italy_Table_5
+      213: 726169971098720404
+    second: Africa_Table_5
   - first:
-      213: 7688322791218982928
-    second: Italy_Table_6
+      213: 5998656277770753319
+    second: Africa_Table_6
   - first:
-      213: 8549399571531490956
-    second: Italy_Table_7
+      213: -1830849492290607459
+    second: Africa_Table_7
   - first:
-      213: 1072785081867321410
-    second: Italy_Table_8
+      213: 3740286090225339067
+    second: Africa_Table_8
   - first:
-      213: 8916299853988396524
-    second: Italy_Table_9
+      213: 1773544277402127835
+    second: Africa_Table_9
   - first:
-      213: -6020453795767721303
-    second: Italy_Table_10
+      213: -5578203373009851252
+    second: Africa_Table_10
   - first:
-      213: 6538310931968706965
-    second: Italy_Table_11
+      213: -297036073552604535
+    second: Africa_Table_11
   - first:
-      213: -3793820833694854
-    second: Italy_Table_12
+      213: 3121634178820399004
+    second: Africa_Table_12
   - first:
-      213: -501832299371921317
-    second: Italy_Table_13
+      213: -4608468007546622953
+    second: Africa_Table_13
   - first:
-      213: 1635045816617012366
-    second: Italy_Table_14
+      213: 4013461427668827282
+    second: Africa_Table_14
   - first:
-      213: 7500604217482767944
-    second: Italy_Table_15
+      213: 6252103896251848314
+    second: Africa_Table_15
   - first:
-      213: -1914673091997673633
-    second: Italy_Table_16
+      213: -3094604420464496613
+    second: Africa_Table_16
   - first:
-      213: 7510632373959617650
-    second: Italy_Table_17
+      213: -1635048610976061027
+    second: Africa_Table_17
   - first:
-      213: 1523973567986310953
-    second: Italy_Table_18
+      213: 6108309294523435083
+    second: Africa_Table_18
   - first:
-      213: 4699783969441978301
-    second: Italy_Table_19
+      213: -4881560400980404967
+    second: Africa_Table_19
   - first:
-      213: -495359551895233138
-    second: Italy_Table_20
+      213: 2504303518078397589
+    second: Africa_Table_20
+  - first:
+      213: 3015747939143963211
+    second: Africa_Table_21
+  - first:
+      213: 5781782350416575282
+    second: Africa_Table_22
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -160,13 +166,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Italy_Table_0
+      name: Africa_Table_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 1018
-        height: 967
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 412293dcea23d1f70800000000000000
-      internalID: 9159532943490228756
+      spriteID: bebccb057b6274c50800000000000000
+      internalID: 6649325943611247595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_1
+      name: Africa_Table_1
       rect:
         serializedVersion: 2
-        x: 220
-        y: 942
-        width: 10
-        height: 7
+        x: 174
+        y: 993
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 69eaf5657bf1bace0800000000000000
-      internalID: -1392984787452449130
+      spriteID: a14a54afb77ada8e0800000000000000
+      internalID: -1680502935017642982
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_2
+      name: Africa_Table_2
       rect:
         serializedVersion: 2
-        x: 229
-        y: 942
-        width: 33
-        height: 7
+        x: 221
+        y: 993
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,20 +225,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e53a5dfc996568dd0800000000000000
-      internalID: -2484202925831380130
+      spriteID: 79ca4fc0c61371fb0800000000000000
+      internalID: -4677215347857380201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_3
+      name: Africa_Table_3
       rect:
         serializedVersion: 2
-        x: 260
-        y: 942
-        width: 17
-        height: 7
+        x: 245
+        y: 993
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,20 +247,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0decf923e13987650800000000000000
-      internalID: 6230891842374717136
+      spriteID: fb342831102bad3d0800000000000000
+      internalID: -3181034469091818561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_4
+      name: Africa_Table_4
       rect:
         serializedVersion: 2
-        x: 300
-        y: 942
-        width: 49
-        height: 7
+        x: 254
+        y: 993
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +269,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e6874b3a503ae3970800000000000000
-      internalID: 8736599571762018414
+      spriteID: b566c89e7c65cdc20800000000000000
+      internalID: 3232554049161946715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_5
+      name: Africa_Table_5
       rect:
         serializedVersion: 2
-        x: 348
-        y: 942
-        width: 40
-        height: 8
+        x: 261
+        y: 993
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -285,20 +291,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 547d2d6c8234bce60800000000000000
-      internalID: 7983548606857795397
+      spriteID: 49815e5cdbfd31a00800000000000000
+      internalID: 726169971098720404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_6
+      name: Africa_Table_6
       rect:
         serializedVersion: 2
-        x: 388
-        y: 942
-        width: 48
-        height: 7
+        x: 268
+        y: 993
+        width: 7
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,20 +313,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 010b52918d862ba60800000000000000
-      internalID: 7688322791218982928
+      spriteID: 72551363a128f3350800000000000000
+      internalID: 5998656277770753319
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_7
+      name: Africa_Table_7
       rect:
         serializedVersion: 2
-        x: 435
-        y: 942
-        width: 17
-        height: 7
+        x: 277
+        y: 993
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -329,20 +335,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c86e2081d9195a670800000000000000
-      internalID: 8549399571531490956
+      spriteID: d9660d646148796e0800000000000000
+      internalID: -1830849492290607459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_8
+      name: Africa_Table_8
       rect:
         serializedVersion: 2
-        x: 452
-        y: 942
-        width: 9
-        height: 7
+        x: 285
+        y: 993
+        width: 7
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -351,20 +357,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2404a0d195c43ee00800000000000000
-      internalID: 1072785081867321410
+      spriteID: bba4736d16a28e330800000000000000
+      internalID: 3740286090225339067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_9
+      name: Africa_Table_9
       rect:
         serializedVersion: 2
-        x: 459
-        y: 942
-        width: 17
-        height: 7
+        x: 364
+        y: 993
+        width: 8
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -373,20 +379,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ced78d30a7f0dbb70800000000000000
-      internalID: 8916299853988396524
+      spriteID: bdd0bf7af15ec9810800000000000000
+      internalID: 1773544277402127835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_10
+      name: Africa_Table_10
       rect:
         serializedVersion: 2
-        x: 475
-        y: 942
-        width: 18
-        height: 7
+        x: 373
+        y: 993
+        width: 7
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -395,20 +401,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a2ec94ab2d037ca0800000000000000
-      internalID: -6020453795767721303
+      spriteID: c8cacda369d3692b0800000000000000
+      internalID: -5578203373009851252
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_11
+      name: Africa_Table_11
       rect:
         serializedVersion: 2
-        x: 491
-        y: 942
-        width: 10
-        height: 7
+        x: 387
+        y: 993
+        width: 7
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -417,20 +423,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5994c03b62fbcba50800000000000000
-      internalID: 6538310931968706965
+      spriteID: 9829b6ec347b0ebf0800000000000000
+      internalID: -297036073552604535
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_12
+      name: Africa_Table_12
       rect:
         serializedVersion: 2
-        x: 507
-        y: 942
-        width: 9
-        height: 7
+        x: 413
+        y: 993
+        width: 7
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -439,20 +445,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a7bbdd04a8582fff0800000000000000
-      internalID: -3793820833694854
+      spriteID: c9fde4b1fb5425b20800000000000000
+      internalID: 3121634178820399004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_13
+      name: Africa_Table_13
       rect:
         serializedVersion: 2
-        x: 522
-        y: 942
-        width: 10
-        height: 7
+        x: 429
+        y: 993
+        width: 7
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -461,20 +467,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b508e1bbe222909f0800000000000000
-      internalID: -501832299371921317
+      spriteID: 71c6e6b83ce6b00c0800000000000000
+      internalID: -4608468007546622953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_14
+      name: Africa_Table_14
       rect:
         serializedVersion: 2
-        x: 531
-        y: 942
-        width: 25
-        height: 7
+        x: 493
+        y: 993
+        width: 7
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -483,20 +489,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e8c02f2e189d0b610800000000000000
-      internalID: 1635045816617012366
+      spriteID: 29cbeeb77eda2b730800000000000000
+      internalID: 4013461427668827282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_15
+      name: Africa_Table_15
       rect:
         serializedVersion: 2
-        x: 594
-        y: 942
-        width: 33
-        height: 7
+        x: 517
+        y: 993
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -505,20 +511,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 84e6bdfbbcf771860800000000000000
-      internalID: 7500604217482767944
+      spriteID: a765dea5e5fe3c650800000000000000
+      internalID: 6252103896251848314
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_16
+      name: Africa_Table_16
       rect:
         serializedVersion: 2
-        x: 643
-        y: 942
-        width: 10
-        height: 7
+        x: 526
+        y: 993
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -527,20 +533,130 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f57da7a97f6bd65e0800000000000000
-      internalID: -1914673091997673633
+      spriteID: b103cddeca1cd05d0800000000000000
+      internalID: -3094604420464496613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Italy_Table_17
+      name: Africa_Table_17
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 993
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d99a64083f32f49e0800000000000000
+      internalID: -1635048610976061027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Africa_Table_18
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 993
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b48494ea0f215c450800000000000000
+      internalID: 6108309294523435083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Africa_Table_19
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 993
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91513fdcda6314cb0800000000000000
+      internalID: -4881560400980404967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Africa_Table_20
       rect:
         serializedVersion: 2
         x: 723
-        y: 942
+        y: 993
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59ce2d408c211c220800000000000000
+      internalID: 2504303518078397589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Africa_Table_21
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 993
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b42dac4c5c61ad920800000000000000
+      internalID: 3015747939143963211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Africa_Table_22
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 28
         width: 9
-        height: 7
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -549,74 +665,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 27c6960e9502b3860800000000000000
-      internalID: 7510632373959617650
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Italy_Table_18
-      rect:
-        serializedVersion: 2
-        x: 770
-        y: 942
-        width: 17
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 92f98eeb2ed362510800000000000000
-      internalID: 1523973567986310953
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Italy_Table_19
-      rect:
-        serializedVersion: 2
-        x: 810
-        y: 942
-        width: 18
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: db71aa3ae9cf83140800000000000000
-      internalID: 4699783969441978301
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Italy_Table_20
-      rect:
-        serializedVersion: 2
-        x: 826
-        y: 942
-        width: 17
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e8d1031bc112029f0800000000000000
-      internalID: -495359551895233138
+      spriteID: 23bf33d1a640d3050800000000000000
+      internalID: 5781782350416575282
       vertices: []
       indices: 
       edges: []

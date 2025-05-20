@@ -23,11 +23,6 @@ public class MainMenuManager : MonoBehaviour
 
     public LobbyPanelManager lobbyPanelManager;
 
-    private void Awake()
-    {
-        LobbyStorage.Instance.CardPath = "Normal/";
-    }
-
     public void QuitGame()
     {
         Application.Quit();
@@ -95,8 +90,8 @@ public class MainMenuManager : MonoBehaviour
             cardPath = "Normal/";
         }
 
-        Debug.Log("Card Path: "+ cardPath);
-
         LobbyStorage.Instance.CardPath = cardPath;
+
+        Debug.Log("Card Path: " + LobbyStorage.Instance.CardPath);
     }
 }

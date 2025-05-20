@@ -8,17 +8,16 @@ public class LobbyStorage : MonoBehaviour
     public static LobbyStorage Instance { get; private set; }
 
     private string globalLobbyName;
-
     private int globalLobbyPort;
-
     private string globalLobbyIp;
-
-    private string cardPath;
+    private string cardPath = "Normal/";
 
     public List<Player> ActivePlayers { get; private set; } = new();
 
     void Awake()
     {
+        Debug.Log("[LobbyStorage] Awake called.");
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -31,44 +30,20 @@ public class LobbyStorage : MonoBehaviour
 
     public void InitializeLobby(string localPlayerName, string lobbyName)
     {
+        Debug.Log($"[LobbyStorage] InitializeLobby called with localPlayerName: {localPlayerName}, lobbyName: {lobbyName}");
+
         GlobalLobbyName = lobbyName;
 
         ActivePlayers.Clear();
-        ActivePlayers.Add(new Player(localPlayerName, 0, false, true));
+        ActivePlayers.Add(new Player(localPlayerName, 0, false, true, false));
 
         for (int i = 1; i < 4; i++)
         {
             string botName = MainMenuHelper.GenerateName();
-            ActivePlayers.Add(new Player($"Bot {botName}", 0, true, false));
+            ActivePlayers.Add(new Player($"Bot {botName}", 0, true, false, false));
+            Debug.Log("Active Players: " + ActivePlayers[i]);
         }
-    }
-
-    public void ReplaceBotWithHuman(string playerName)
-    {
-        for (int i = 0; i < ActivePlayers.Count; i++)
-        {
-            if (!ActivePlayers[i].IsBot)
-            {
-                ActivePlayers[i] = new Player(playerName, 0, false, false);
-                return;
-            }
-        }
-    }
-
-    public void ReplacePlayerWithBot(string playerName)
-    {
-        for (int i = 0; i < ActivePlayers.Count; i++)
-        {
-            if (ActivePlayers[i].PlayerName == playerName && ActivePlayers[i].IsBot)
-            {
-                string botName = MainMenuHelper.GenerateName();
-                ActivePlayers[i] = new Player($"Bot {botName}", 0, true, false);
-                Debug.Log($"{playerName} has been replaced with a bot");
-                return;
-            }
-        }
-
-        Debug.Log($"No Player with naem:  {playerName} found.");
+        
     }
 
     public string GlobalLobbyName

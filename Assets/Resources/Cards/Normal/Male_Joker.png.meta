@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: a65446cb297b50d42a9547495161872c
+guid: 0a17b404f7363f34eb3028e0f41e2cad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 257293465398729619
-    second: Male_Joker_0
+      213: 3083091696123709485
+    second: 20250520_0744_Cartoon-Stil Transgender Mann_remix_01jvp3fhx2e6rrvk1kmaqarhss
+      (1) 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,24 +97,12 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Male_Joker_0
+      name: 20250520_0744_Cartoon-Stil Transgender Mann_remix_01jvp3fhx2e6rrvk1kmaqarhss
+        (1) 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +117,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 39bde182b07129300800000000000000
-      internalID: 257293465398729619
+      spriteID: d28096d009759ca20800000000000000
+      internalID: 3083091696123709485
       vertices: []
       indices: 
       edges: []
@@ -148,7 +137,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Male_Joker_0: 257293465398729619
+      20250520_0744_Cartoon-Stil Transgender Mann_remix_01jvp3fhx2e6rrvk1kmaqarhss (1) 1_0: 3083091696123709485
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -3,8 +3,8 @@ guid: 3b12dad3c3572504fa1759f425c207ab
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1226914548022465777
-    second: 20250519_2056_Holztisch mit Flagge_remix_01jvmydgqhe0wbe4xk5h2jpefr_0
+      213: 8554198648827630820
+    second: Russia_Table_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250519_2056_Holztisch mit Flagge_remix_01jvmydgqhe0wbe4xk5h2jpefr_0
+      name: Russia_Table_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 6
         width: 1024
-        height: 1529
+        height: 1002
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f0bac5318bf19fee0800000000000000
-      internalID: -1226914548022465777
+      spriteID: 4e45f79595e96b670800000000000000
+      internalID: 8554198648827630820
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      20250519_2056_Holztisch mit Flagge_remix_01jvmydgqhe0wbe4xk5h2jpefr_0: -1226914548022465777
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

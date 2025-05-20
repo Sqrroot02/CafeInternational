@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: d06d3af2df58c684da58dbfb03387e5a
+guid: dc7fd062a4b8a7d4fae95a26b13c9a79
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6759553944973049039
-    second: Female_France_0
+      213: -4546104943160508729
+    second: "20250520_0747_Franz\xF6sische Frau Cartoon_remix_01jvp3na15fhpbaefrm5bpsdmz
+      (1) 1_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,24 +97,12 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Female_France_0
+      name: "20250520_0747_Franz\xF6sische Frau Cartoon_remix_01jvp3na15fhpbaefrm5bpsdmz
+        (1) 1_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +117,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1338acd208d3132a0800000000000000
-      internalID: -6759553944973049039
+      spriteID: 7ce3547f3adf8e0c0800000000000000
+      internalID: -4546104943160508729
       vertices: []
       indices: 
       edges: []
@@ -148,7 +137,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Female_France_0: -6759553944973049039
+      "20250520_0747_Franz\xF6sische Frau Cartoon_remix_01jvp3na15fhpbaefrm5bpsdmz (1) 1_0": -4546104943160508729
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

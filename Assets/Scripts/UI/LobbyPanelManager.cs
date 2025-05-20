@@ -3,27 +3,27 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Assets.Scripts.UI;
+using Assets.Scripts.Models;
 
 public class LobbyPanelManager : MonoBehaviour
 {
     public TMP_Text lobbyNameTMP;
-
     public TMP_Text lobbyPortTMP;
-
     public TMP_Text lobbyIPTMP;
-
-    public List<TMP_Text> playerNameTexts;
+    public List<PlayerSlotHelper> playerSlots;
 
     public void InitiateLobby()
     {
+        Debug.Log("[LobbyPanelManager] InitiateLobby called.");
         SetLobbyIPLabel("Lobby Ip: 1.1.1.1");
         SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.GlobalLobbyName);
         SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.GlobalLobbyPort.ToString());
-        SetPlayerNames();
+        SetPlayerSlot();
     }
 
     public void ResetLobbyTMPs()
     {
+        Debug.Log("[LobbyPanelManager] ResetLobbyTMPs called.");
         ResetLobbyIPLabel();
         ResetLobbyNameLabel();
         ResetLobbyPortLabel();
@@ -31,21 +31,18 @@ public class LobbyPanelManager : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("[LobbyPanelManager] StartGame called.");
         SceneManager.LoadScene("Game");
     }
 
-    public void AddLocalPlayer()
+    public void SetPlayerSlot()
     {
-        LobbyStorage.Instance.ReplaceBotWithHuman(MainMenuHelper.GenerateName());
-    }
-
-    public void SetPlayerNames()
-    {
+        Debug.Log("[LobbyPanelManager] SetPlayerSlot called.");
         var players = LobbyStorage.Instance.ActivePlayers;
 
-        for (int i = 0; i < Mathf.Min(players.Count, playerNameTexts.Count); i++)
+        for (int i = 0; i < Mathf.Min(players.Count, playerSlots.Count); i++)
         {
-            playerNameTexts[i].text = players[i].PlayerName;
+            playerSlots[i].SetUp(players[i]);
         }
     }
 
