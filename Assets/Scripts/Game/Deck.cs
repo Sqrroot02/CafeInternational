@@ -42,7 +42,8 @@ public class Deck : MonoBehaviour
 
     public Sprite GetSpriteForCountry(Nationality nationality, Gender gender)
     {
-        string spriteName = "Cards/" + gender + "_" + nationality;
+        string spriteName = "Cards/" + LobbyStorage.Instance.CardPath + gender + "_" + nationality;
+        Debug.Log("Spritename for card: "+spriteName);
         return Resources.Load<Sprite>(spriteName);
     }
 

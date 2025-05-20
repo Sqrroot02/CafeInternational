@@ -376,6 +376,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableAfrica2
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2493201655817183519, guid: f930eacf82ae5fe45bbba5390958c1a1, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -722,6 +726,8 @@ GameObject:
   - component: {fileID: 54291717}
   - component: {fileID: 54291716}
   - component: {fileID: 54291715}
+  - component: {fileID: 54291720}
+  - component: {fileID: 54291719}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -815,6 +821,44 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &54291719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54291714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1802020633903614940, guid: a1baf403ccec9e34ead68080a731321b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &54291720
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54291714}
+  m_CullTransparentMesh: 1
 --- !u!1001 &60194039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1562,6 +1606,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableSpain2
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7568181962173592657, guid: 0ac41d39f517ca4428b1abd867c42f6d, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1938,6 +1986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableChina1
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4464764862633635418, guid: a0e9475983904b94d92d0969bfb2ab28, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2036,6 +2088,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1584381622}
     m_Modifications:
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1717656043041693273, guid: 6b34dfa9587312b4386877c828d826c3, type: 3}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 891162437709123696, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3077,6 +3145,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1584381622}
     m_Modifications:
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1717656043041693273, guid: 6b34dfa9587312b4386877c828d826c3, type: 3}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9716981
+      objectReference: {fileID: 0}
     - target: {fileID: 891162437709123696, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3220,6 +3304,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableGerman1
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6435550445717528094, guid: 0696aedba11c5df4ba2e06b77dd3afce, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4074,6 +4162,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1584381622}
     m_Modifications:
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1717656043041693273, guid: 6b34dfa9587312b4386877c828d826c3, type: 3}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8773585
+      objectReference: {fileID: 0}
     - target: {fileID: 891162437709123696, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4894,6 +4998,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableItaly1
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2957605099031664989, guid: 74989b955e58d2048a2cb9269e8e3fcf, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8957,6 +9065,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1584381622}
     m_Modifications:
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1717656043041693273, guid: 6b34dfa9587312b4386877c828d826c3, type: 3}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 891162437709123696, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9842,6 +9966,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableItaly2
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2957605099031664989, guid: 74989b955e58d2048a2cb9269e8e3fcf, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9952,6 +10080,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableIndia1
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5875903517731595043, guid: 3b56b111e1ce0604fbb0609852b4eaa8, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10454,6 +10586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableGerman2
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6435550445717528094, guid: 0696aedba11c5df4ba2e06b77dd3afce, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -11873,6 +12009,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1584381622}
     m_Modifications:
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1717656043041693273, guid: 6b34dfa9587312b4386877c828d826c3, type: 3}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 891162437709123696, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12273,6 +12425,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1584381622}
     m_Modifications:
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1717656043041693273, guid: 6b34dfa9587312b4386877c828d826c3, type: 3}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9716981
+      objectReference: {fileID: 0}
     - target: {fileID: 891162437709123696, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12913,6 +13081,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableFrance2
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4356761172229921828, guid: 3ceb7474e67fea44d841a6ffc309afac, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13460,6 +13632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableFrance1
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4356761172229921828, guid: 3ceb7474e67fea44d841a6ffc309afac, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -14773,6 +14949,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7833467258918690153, guid: 7ef01706716ff7646a14a7f68c085381, type: 3}
+      propertyPath: m_fontSize
+      value: 52.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8025966312791420794, guid: 7ef01706716ff7646a14a7f68c085381, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -14820,6 +15000,10 @@ PrefabInstance:
     - target: {fileID: 8422763006427157811, guid: 7ef01706716ff7646a14a7f68c085381, type: 3}
       propertyPath: m_Name
       value: ScoreTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568292699623694888, guid: 7ef01706716ff7646a14a7f68c085381, type: 3}
+      propertyPath: m_fontSize
+      value: 52.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 365655405265227392, guid: 7ef01706716ff7646a14a7f68c085381, type: 3}
@@ -14965,6 +15149,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1584381622}
     m_Modifications:
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1717656043041693273, guid: 6b34dfa9587312b4386877c828d826c3, type: 3}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 533370541191063650, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 891162437709123696, guid: 8f281780b8bca994d941e93ef229885d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -15332,6 +15532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableRussia2
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1226914548022465777, guid: 3b12dad3c3572504fa1759f425c207ab, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -15584,6 +15788,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableIndia2
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5875903517731595043, guid: 3b56b111e1ce0604fbb0609852b4eaa8, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -15825,6 +16033,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableChina2
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4464764862633635418, guid: a0e9475983904b94d92d0969bfb2ab28, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17028,6 +17240,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableRussia1
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1226914548022465777, guid: 3b12dad3c3572504fa1759f425c207ab, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17280,6 +17496,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableBritain1
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5543518730267564223, guid: ebe68a51dbc8bd445aba5be5bb83e44a, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17617,6 +17837,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableAfrica1
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2493201655817183519, guid: f930eacf82ae5fe45bbba5390958c1a1, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17738,6 +17962,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableSpain1
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7568181962173592657, guid: 0ac41d39f517ca4428b1abd867c42f6d, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -18919,6 +19147,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TableBritain2
       objectReference: {fileID: 0}
+    - target: {fileID: 5417646252103390928, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5543518730267564223, guid: ebe68a51dbc8bd445aba5be5bb83e44a, type: 3}
     - target: {fileID: 8528328514043209063, guid: 66a7f138e5ad94244ada816ff04cafb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

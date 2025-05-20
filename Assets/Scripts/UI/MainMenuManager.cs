@@ -23,6 +23,11 @@ public class MainMenuManager : MonoBehaviour
 
     public LobbyPanelManager lobbyPanelManager;
 
+    private void Awake()
+    {
+        LobbyStorage.Instance.CardPath = "Normal/";
+    }
+
     public void QuitGame()
     {
         Application.Quit();
@@ -75,5 +80,23 @@ public class MainMenuManager : MonoBehaviour
         lobbyName = "";
         lobbyPort = "";
         lobbyIP = "";
+    }
+
+    public void SetCardPathOnButtonClick()
+    {
+        string cardPath = LobbyStorage.Instance.CardPath;
+
+        if (cardPath == "Normal/")
+        {
+            cardPath = "StickmanCards/";
+        }
+        else if (cardPath == "StickmanCards/")
+        {
+            cardPath = "Normal/";
+        }
+
+        Debug.Log("Card Path: "+ cardPath);
+
+        LobbyStorage.Instance.CardPath = cardPath;
     }
 }

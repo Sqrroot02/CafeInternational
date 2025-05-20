@@ -13,6 +13,8 @@ public class LobbyStorage : MonoBehaviour
 
     private string globalLobbyIp;
 
+    private string cardPath;
+
     public List<Player> ActivePlayers { get; private set; } = new();
 
     void Awake()
@@ -85,5 +87,11 @@ public class LobbyStorage : MonoBehaviour
     {
         get => globalLobbyIp;
         set => globalLobbyIp = value;
+    }
+
+    public string CardPath
+    {
+        get => cardPath;
+        set => cardPath = value;
     }
 }
