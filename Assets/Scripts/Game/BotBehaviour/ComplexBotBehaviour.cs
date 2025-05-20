@@ -20,6 +20,12 @@ namespace Game.BotBehaviour
             ChairId = chairId;
             JokerIdentity = jokerIdentity;
         }
+
+        public override string ToString()
+        {
+            var s = JokerIdentity != Nationality.Joker ? $", JokerIdentity: {JokerIdentity}" : "";
+            return $"CardId: {CardId}, ChairId: {ChairId}{s}";
+        }
     }
     
     /// <summary>
@@ -148,6 +154,12 @@ namespace Game.BotBehaviour
                     }
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            var s = SecondMove != null ? $", SecondMove {SecondMove}" : "";
+            return $"SecondMove: {FirstMove}{s}, Points: {Points}, CompletedNationalities: {CompletedNationalities}";
         }
     }
     
@@ -424,13 +436,15 @@ namespace Game.BotBehaviour
                 _playerManager.PlayCard(card.cardData.cardID, -1, _bar.GetNextIndex());
             }
         }
-
+        
+        
         /// <summary>
         /// Chooses the best turn from the list of turns
         /// </summary>
         /// <param name="turns"></param>
         /// <param name="prioritizePoints">If points are prioritized a move with fewer completed nationalities can be chosen, if the total number of points + 5 * completed Nationalities is greater</param>
-        private void PlayBestMove(List<Turn> turns, bool prioritizePoints)
+        /// <returns>The best found turn for the given priority</returns>
+        private Turn FindBestTurn(List<Turn> turns, bool prioritizePoints)
         {
             List<Turn> sortedTurns;
             if (prioritizePoints)
@@ -447,7 +461,110 @@ namespace Game.BotBehaviour
             }
             
             // TODO: Random an dieser Stelle einfügen
-            PlayTurn(sortedTurns[0]);
+            return sortedTurns[0];
+        }
+
+        /// <summary>
+        /// Finds all turns that block other turns
+        /// </summary>
+        /// <param name="botTurns">The possible turns for the bot</param>
+        /// <param name="player">The player to block</param>
+        /// <returns>A list of tuples with (Blocking turn of the bot, List with blocked turns, sum of points of blocked turns, sum of completed nationalities of blocked turns)</returns>
+        private List<(Turn, List<Turn>, int, int)> FindBlockingTurns(List<Turn> botTurns, Player player)
+        {
+            List<Turn> turnsPlayer = GetAllPossibleTurns(player); // The firstTurn bool is not needed because it cant be the first turn at the point when its the next players turn
+
+            List<(Turn, List<Turn>, int, int)> blockingTurns = new(); // Blocking turn of the bot, List with blocked turns, sum of points of blocked turns, sum of completed nationalities of blocked turns
+            foreach (var botTurn in botTurns)
+            {
+                List<Turn> blockedTurns = new List<Turn>();
+                foreach (var playerTurn in turnsPlayer)
+                {
+                    if (botTurn.FirstMove.ChairId == playerTurn.FirstMove.ChairId ||
+                        (playerTurn.SecondMove != null && botTurn.FirstMove.ChairId == playerTurn.SecondMove.ChairId) ||
+                        (botTurn.SecondMove != null && botTurn.SecondMove.ChairId == playerTurn.FirstMove.ChairId)||
+                        (botTurn.SecondMove != null && playerTurn.SecondMove != null && botTurn.SecondMove.ChairId == playerTurn.SecondMove.ChairId))
+                    {
+                        blockedTurns.Add(playerTurn);
+                    }
+                }
+                if (blockedTurns.Count > 0)
+                {
+                    blockingTurns.Add((
+                        botTurn,
+                        blockedTurns,
+                        blockedTurns.Sum(turn => turn.Points),
+                        blockedTurns.Sum(turn => turn.CompletedNationalities)));
+                }
+            }
+            return blockingTurns;
+        }
+
+        /// <summary>
+        /// Checks all turns that the bot can block and evaluates the turn that blocks the highest number of complete nationalities and the highest score over all the blocked turns
+        /// </summary>
+        /// <param name="botTurns">The possible turns for the bot</param>
+        /// <param name="bot">The bot</param>
+        /// <param name="players">All players</param>
+        /// <returns>The tuple with the turn that blocks the highest cumulative number of completedNationalities, after that the highest cumulative score and after that the highest turn score</returns>
+        private (Turn, List<Turn>, int, int)? FindMostMischievousBehaviour(List<Turn> botTurns, Player bot, List<Player> players)
+        {
+            //(Blocking turn of the bot, List with blocked turns, sum of points of blocked turns, sum of completed nationalities of blocked turns)
+            List<List<(Turn, List<Turn>, int, int)>> playerBlockedTurns = new();
+            foreach (var player in players)
+            {
+                if (player != bot)
+                {
+                    playerBlockedTurns.Add(FindBlockingTurns(botTurns, player));
+                }
+            }
+
+            List<(Turn, List<Turn>, int, int)> bestTurns = new (); 
+            foreach (var t in playerBlockedTurns)
+            {
+                if (t.Count > 0)
+                {
+                    bestTurns.Add(t.OrderByDescending(turn => turn.Item4).ThenByDescending(turn => turn.Item3)
+                        .ThenByDescending(turn => turn.Item1.Points).First());
+                }
+            }
+
+            if (bestTurns.Count > 0)
+                return bestTurns.OrderByDescending(turn => turn.Item4).ThenByDescending(turn => turn.Item3)
+                    .ThenByDescending(turn => turn.Item1.Points).First();
+            else
+                return null;
+        }
+
+        /// <summary>
+        /// Decides if the options for mischief are evaluated, or if the best turn is selected from the possible turns and played instantly  
+        /// </summary>
+        /// <param name="turn">The turn that is chosen as best possible turn</param>
+        /// <returns>true if the options for mischief should be evaluated</returns>
+        private bool DecideFindMischievousBehaviour(Turn turn)
+        {
+            // TODO Implement individual bot behaviour with random value that decides to prank even if its not beneficial
+            return turn.CompletedNationalities == 0 && turn.Points <= 15;
+        }
+
+        /// <summary>
+        /// Decide if the mischievous turn is used
+        /// </summary>
+        /// <param name="bestTurn">The best turn</param>
+        /// <param name="bestMischievousTurn">The best mischievous turn</param>
+        /// <returns>true if the mischievous turn is used</returns>
+        private bool DecideUseMischievousBehaviour(Turn bestTurn, (Turn, List<Turn>, int, int) bestMischievousTurn)
+        {
+            //bestMischievousTurn = (Blocking turn of the bot, List with blocked turns, sum of points of blocked turns, sum of completed nationalities of blocked turns)
+            //if (bestTurn == bestMischievousTurn.Item1) // The decision does not make a difference if they are the same
+            //    return false;
+            //if (bestTurn.Points > 6 && bestTurn.Points >= bestMischievousTurn.Item1.Points + 2) // If the mischievous turn is close in Points to the best turn play it; Only if the best turn brings in a decent number of points
+            //    return true;
+            if (bestMischievousTurn.Item4 > 0)
+                return true;
+            // TODO Implement individual bot behaviour with random value that decides to prank even if its not beneficial
+            Debug.Log("Decided against mischievous behaviour");
+            return false;
         }
 
         /// <summary>
@@ -469,10 +586,32 @@ namespace Game.BotBehaviour
         public void MakeComplexTurn(Player bot, List<Player> players, bool firstTurn = false)
         {
             Debug.Log($"MakeComplexTurn for bot {bot.PlayerName}");
-            var turnsPlayer = GetAllPossibleTurns(bot, firstTurn);
-            if (turnsPlayer.Count > 0)
+            var turnsBot = GetAllPossibleTurns(bot, firstTurn);
+            if (turnsBot.Count > 0)
             {
-                PlayBestMove(turnsPlayer, false);
+                var bestTurn = FindBestTurn(turnsBot, false);
+                Debug.Log($"Best turn: {bestTurn}");
+                if (DecideFindMischievousBehaviour(bestTurn))
+                {
+                    Debug.Log("Decided to find mischievous behaviour");
+                    var mischiefBehaviour = FindMostMischievousBehaviour(turnsBot, bot, players);
+                    if (mischiefBehaviour != null) // If no move is found the mischief cant be played
+                    {
+                        Debug.Log(
+                            $"Found mischievous behaviour for {mischiefBehaviour.Value.Item1} with {mischiefBehaviour.Value.Item3} blocked points and {mischiefBehaviour.Value.Item4} blocked completedNationalities");
+                        PlayTurn(DecideUseMischievousBehaviour(bestTurn, mischiefBehaviour.Value)
+                            ? mischiefBehaviour.Value.Item1
+                            : bestTurn);
+                    }
+                    else
+                    {
+                        PlayTurn(bestTurn);
+                    }
+                }
+                else
+                {
+                    PlayTurn(bestTurn);
+                }
             }
             else // No playable Cards -> Replace a Joker or set a card at the bar
             {
