@@ -147,7 +147,6 @@ namespace Game.BotBehaviour
             rectTransform.pivot = new Vector2(0.5f, 0.5f);
             rectTransform.sizeDelta = Vector2.zero;
             rectTransform.localScale = Vector3.one;
-            
         }
     }
 }

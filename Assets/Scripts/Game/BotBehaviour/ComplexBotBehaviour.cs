@@ -415,7 +415,7 @@ namespace Game.BotBehaviour
                 // TODO Random an dieser Stelle einfügen
                 var move = jokerMoves[0];
                 Debug.Log($"Replaced joker at {move.ChairId} with card {move.CardId}");
-                _playerManager.PlayCard(move.CardId, move.CardId, -1);
+                _playerManager.PlayCard(move.CardId, move.ChairId, -1);
             }
             else
             {
@@ -438,12 +438,12 @@ namespace Game.BotBehaviour
                 // Add 5 points for each completed nationality in the turn
                 // Has the flaw, that joker fields cost more points at the end, but is ignored here
                 int turnMax = turns.Max(move => move.Points + move.CompletedNationalities * 5);
-                sortedTurns = turns.Where(move => move.Points + move.CompletedNationalities * 5 == turnMax).ToList();
+                sortedTurns = turns.Where(move => move.Points + move.CompletedNationalities * 5 == turnMax).OrderByDescending(move => move.CompletedNationalities).ToList();
             }
             else
             {
                 int turnMax = turns.Max(move => move.CompletedNationalities);
-                sortedTurns = turns.Where(move => move.CompletedNationalities == turnMax).ToList();
+                sortedTurns = turns.Where(move => move.CompletedNationalities == turnMax).OrderByDescending(move => move.Points).ToList();
             }
             
             // TODO: Random an dieser Stelle einfügen
@@ -457,12 +457,12 @@ namespace Game.BotBehaviour
         private void PlayTurn(Turn turn)
         {
             Debug.Log($"Placed first card at {turn.FirstMove.ChairId} with card {turn.FirstMove.CardId}");
-            _playerManager.PlayCard(turn.FirstMove.CardId, turn.FirstMove.ChairId, -1);
+            _playerManager.PlayCard(turn.FirstMove.CardId, turn.FirstMove.ChairId, -1, turn.FirstMove.JokerIdentity);
             
             if (turn.SecondMove != null)
             {
                 Debug.Log($"Placed second card at {turn.SecondMove.ChairId} with card {turn.SecondMove.CardId}");
-                _playerManager.PlayCard(turn.SecondMove.CardId, turn.SecondMove.ChairId, -1);
+                _playerManager.PlayCard(turn.SecondMove.CardId, turn.SecondMove.ChairId, -1,turn.SecondMove.JokerIdentity);
             }
         }
 

@@ -233,9 +233,20 @@ public class PlayerManager : MonoBehaviour
         UpdatePlayer();
     }
 
-    public void PlayCard(int cardId, int chairId, int barStoolId)
+    /// <summary>
+    /// Call to place a card
+    /// </summary>
+    /// <param name="cardId">The id of the card to place. Has to be in one of the players hands</param>
+    /// <param name="chairId">The id of the chair to place a card on. Set to -1 if the card is not placed on a chair</param>
+    /// <param name="barStoolId">The id of the barstool to place a card on. Set to -1 if the card is not placed on a barstool</param>
+    /// <param name="jokerIdentity">Only set if the placed card is a joker</param>
+    public void PlayCard(int cardId, int chairId, int barStoolId, Nationality jokerIdentity = Nationality.Joker)
     {
         Card card = GetCardFromId(cardId);
+        if (jokerIdentity != Nationality.Joker)
+        {
+            card.JokerIdentity = jokerIdentity;
+        }
         if (chairId >= 0)
         {
             Chair chair = GetChairFromId(chairId);
