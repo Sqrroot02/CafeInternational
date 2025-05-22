@@ -107,11 +107,11 @@ public class MainMenuManager : MonoBehaviour
 
         if (cardPath == "Normal/")
         {
-            sceneMessageHandler.ShowScene("The DLC has been deactivated. :)");
+            sceneMessageHandler.ShowScene("The DLC has been deactivated :)");
         }
         else
         {
-            sceneMessageHandler.ShowScene("The DLC has been activated. :)");
+            sceneMessageHandler.ShowScene("The DLC has been activated :)");
         }
 
 

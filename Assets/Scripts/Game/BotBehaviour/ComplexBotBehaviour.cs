@@ -166,13 +166,12 @@ namespace Game.BotBehaviour
     
     public class ComplexBotBehaviour
     {
-        private static ComplexBotBehaviour _instance;
         private Bar _bar;
         private Chair[] _chairs;
         private Dictionary<Nationality, List<Chair>> _nationalityToChairListDictionary = new ();
         private PlayerManager _playerManager;
 
-        private ComplexBotBehaviour(PlayerManager playerManager)
+        public ComplexBotBehaviour(PlayerManager playerManager)
         {
             _playerManager = playerManager;
             _bar = GameObject.Find("Bar").GetComponent<Bar>();
@@ -180,19 +179,6 @@ namespace Game.BotBehaviour
             MapNationalityToChairListDictionary();
         }
         
-        /// <summary>
-        /// Get Singleton Instance of the class
-        /// </summary>
-        /// <returns>Singleton Instance</returns>
-        public static ComplexBotBehaviour GetInstance(PlayerManager playerManager)
-        {
-            if (_instance == null)
-            {
-                _instance = new ComplexBotBehaviour(playerManager);
-            }
-            return _instance;
-        }
-
         /// <summary>
         /// Fills the dictionary _nationalityToChairListDictionary with nationalities as keys and List of Chairs as values
         /// </summary>
