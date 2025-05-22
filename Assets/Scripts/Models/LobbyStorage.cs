@@ -4,18 +4,19 @@ using UnityEngine;
 
 namespace Assets.Scripts.Models
 {
+    
     /// <summary>
     /// Represents the storage for lobby-specific data and players in an online game setting.
     /// </summary>
     public class LobbyStorage : MonoBehaviour
     {
         public static LobbyStorage Instance { get; private set; }
-    
+        
         /// <summary>
         /// All active players in the current joined session
         /// </summary>
         public List<Player> ActivePlayers { get; set; } = new();
-    
+        
         /// <summary>
         /// The client associated player a.k.a. "you"
         /// </summary>
@@ -25,49 +26,38 @@ namespace Assets.Scripts.Models
         /// The current player that is on turn
         /// </summary>
         public Player CurrentPlayer { get; set; }
-        
+            
         /// <summary>
         /// The Name of the Lobby
         /// </summary>
         public string LobbyName { get; set; }
-    
+        
         /// <summary>
         /// The Port of the game server
         /// </summary>
         public int LobbyPort { get; set; } = 57967;
-    
+        
         /// <summary>
         /// The IP Address of the game server 
         /// </summary>
         public string LobbyIp { get; set; }
-    
+
+        public string CardPath { get; set; } = "Normal/";
+
+        private string globalLobbyName;
+        private int globalLobbyPort = 57967;
+        private string globalLobbyIp;
+
+
         void Awake()
         {
+            Debug.Log("[LobbyStorage] Awake called.");
+
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
                 return;
             }
-public class LobbyStorage : MonoBehaviour
-{
-    public static LobbyStorage Instance { get; private set; }
-
-    private string globalLobbyName;
-    private int globalLobbyPort = 57967;
-    private string globalLobbyIp;
-    private string cardPath = "Normal/";
-
-    public List<Player> ActivePlayers { get; private set; } = new();
-
-    void Awake()
-    {
-        Debug.Log("[LobbyStorage] Awake called.");
-
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -78,12 +68,12 @@ public class LobbyStorage : MonoBehaviour
             Debug.Log($"[LobbyStorage] InitializeLobby called with localPlayerName: {localPlayerName}, lobbyName: {lobbyName}");
 
             LobbyName = lobbyName;
-            GlobalLobbyIp = lobbyIp;
-            GlobalLobbyPort = lobbyPort;
+            LobbyIp = lobbyIp;
+            LobbyPort = lobbyPort;
         
             ActivePlayers.Clear();
 
-            var hostPlayer = new Player(localPlayerName, 0, false, true);
+            var hostPlayer = new Player(localPlayerName, 0, false, true, false);
             ClientPlayerId = hostPlayer.PlayerId;
                 
             ActivePlayers.Add(hostPlayer);
@@ -91,7 +81,7 @@ public class LobbyStorage : MonoBehaviour
             for (var i = ActivePlayers.Count; i < 4; i++)
             {
                 var botName = MainMenuHelper.GenerateName(true);
-                ActivePlayers.Add(new Player($"Bot {botName}", 0, true, false));
+                ActivePlayers.Add(new Player($"Bot {botName}", 0, true, false, false));
             }
         }
 
@@ -101,7 +91,7 @@ public class LobbyStorage : MonoBehaviour
             {
                 if (!ActivePlayers[i].IsBot)
                 {
-                    ActivePlayers[i] = new Player(playerName, 0, false, false);
+                    ActivePlayers[i] = new Player(playerName, 0, false, false, false);
                     return;
                 }
             }
@@ -113,8 +103,8 @@ public class LobbyStorage : MonoBehaviour
             {
                 if (ActivePlayers[i].PlayerName == playerName && ActivePlayers[i].IsBot)
                 {
-                    string botName = MainMenuHelper.GenerateName();
-                    ActivePlayers[i] = new Player($"Bot {botName}", 0, true, false);
+                    string botName = MainMenuHelper.GenerateName(false);
+                    ActivePlayers[i] = new Player($"Bot {botName}", 0, true, false, false);
                     Debug.Log($"{playerName} has been replaced with a bot");
                     return;
                 }
@@ -138,11 +128,5 @@ public class LobbyStorage : MonoBehaviour
             while (playersStack.Count > 0)
                 ActivePlayers.Insert(Random.Range(0, ActivePlayers.Count + 1), playersStack.Pop());
         }
-    }
-
-    public string CardPath
-    {
-        get => cardPath;
-        set => cardPath = value;
     }
 }

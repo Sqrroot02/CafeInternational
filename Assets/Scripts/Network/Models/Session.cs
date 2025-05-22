@@ -66,8 +66,8 @@ namespace Assets.Scripts.Network.Models
 			var indexPlayer = Players.IndexOf(Players.First(x => x.ClientId == clientId));
 			if (indexPlayer > 0)
 			{
-				var botName = MainMenuHelper.GenerateName();
-				var newBot = new Player($"Bot {botName}", 0, true, false);
+				var botName = MainMenuHelper.GenerateName(true);
+				var newBot = new Player($"Bot {botName}", 0, true, false, false);
 				Players[indexPlayer] = newBot;
 			}
 			

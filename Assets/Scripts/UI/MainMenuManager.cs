@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts.Models;
 using Assets.Scripts.Network.Adapter;
 using UnityEngine;
 using UnityEngine.SceneManagement;

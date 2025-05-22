@@ -1,17 +1,13 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Models;
 using Assets.Scripts.Network;
-using Assets.Scripts.Network.Adapter;
 using Assets.Scripts.Network.Messages;
 using Assets.Scripts.Network.Messages.PlayerLobbyAction;
 using Assets.Scripts.Network.Messages.StartGame;
 using Assets.Scripts.UI;
-using Assets.Scripts.Models;
-using Riptide;
 
 public class LobbyPanelManager : MonoBehaviour
 {
@@ -64,7 +60,7 @@ public class LobbyPanelManager : MonoBehaviour
     public void SetPlayerSlot()
     {
         Debug.Log("[LobbyPanelManager] SetPlayerSlot called.");
-        LobbyStorage.Instance.ReplaceBotWithHuman(MainMenuHelper.GenerateName());
+        LobbyStorage.Instance.ReplaceBotWithHuman(MainMenuHelper.GenerateName(false));
     }
 
     /// <summary>

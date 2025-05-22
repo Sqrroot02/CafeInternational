@@ -6400,11 +6400,7 @@ MonoBehaviour:
   lobbyNameTMP: {fileID: 19673853}
   lobbyPortTMP: {fileID: 180253406}
   lobbyIPTMP: {fileID: 800990056}
-  playerSlots:
-  - {fileID: 1720505420}
-  - {fileID: 1732350338}
-  - {fileID: 464277297}
-  - {fileID: 1460702277}
+  playerSlots: []
 --- !u!1 &860275973
 GameObject:
   m_ObjectHideFlags: 0
@@ -12007,7 +12003,7 @@ MonoBehaviour:
   botStrengthDropdown: {fileID: 0}
   lobbyPanelManager: {fileID: 852812665}
   placeHolder: {fileID: 0}
-  sceneMessageHandler: {fileID: 0}
+  sceneMessageHandler: {fileID: 149616648}
 --- !u!1 &1721202501
 GameObject:
   m_ObjectHideFlags: 0

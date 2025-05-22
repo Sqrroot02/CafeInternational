@@ -59,10 +59,6 @@ namespace Assets.Scripts.Models
             IsStrongBot = isStrongBot;
         }
     
-        public string PlayerName { get; set; }
-        public int PlayerScore { get; private set; }
-        public bool IsBot { get; set; }
-        public GameObject PlayerGameBar { get; set; }
         public bool IsStrongBot { get; set; }
 
         public void SetPlayerManager(PlayerManager playerManager)

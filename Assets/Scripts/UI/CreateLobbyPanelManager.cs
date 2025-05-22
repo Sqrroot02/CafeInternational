@@ -57,19 +57,23 @@ public class CreateLobbyPanelManager : MonoBehaviour
         if (!MainMenuHelper.IsValidNicknameOrLobbyName(enteredNickname))
         {
             sceneMessageHandler.ShowScene(MainMenuHelper.CreateNicknameLobbyErrorMsg("Nickname"));
-        } else if (!MainMenuHelper.IsValidNicknameOrLobbyName(enteredLobbyName))
+        }
+        else if (!MainMenuHelper.IsValidNicknameOrLobbyName(enteredLobbyName))
         {
             sceneMessageHandler.ShowScene(MainMenuHelper.CreateNicknameLobbyErrorMsg("Lobbyname"));
-        } else if (!MainMenuHelper.ValidateIp(enteredIp))
+        }
+        else if (!MainMenuHelper.ValidateIp(enteredIp))
         {
             LobbyStorage.Instance.LobbyName = enteredLobbyName;
             LobbyStorage.Instance.LobbyIp = NetworkUtil.PublicIpAddress();
             
             sceneMessageHandler.ShowScene(MainMenuHelper.GetIPErrorMsg());
-        } else if (!MainMenuHelper.IsValidUserPort(intLobbyPort))
+        }
+        else if (!MainMenuHelper.IsValidUserPort(intLobbyPort))
         {
             sceneMessageHandler.ShowScene(MainMenuHelper.GetPortErrorMsg());
-        } else
+        }
+        else
         {
             LobbyStorage.Instance.InitializeLobby(enteredNickname, enteredLobbyName, enteredIp, intLobbyPort);
             InitAndRunServerSession();
