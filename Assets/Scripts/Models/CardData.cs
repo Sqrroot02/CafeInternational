@@ -23,4 +23,9 @@ public class CardData : ScriptableObject, IMessageSerializable
         nationality = Enum.Parse<Nationality>(message.GetString());
         cardID = message.GetInt();
     }
+
+    public override string ToString()
+    {
+        return $"Id: {cardID}, Gender: {gender}, Nationality: {nationality}";
+    }
 }

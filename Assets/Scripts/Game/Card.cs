@@ -26,6 +26,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public Transform PlayerBarSlot { get; set; }
 
+    // TODO Check if this works
     public Nationality JokerIdentity = Nationality.Joker; // Only set if card is a joker and is placed on a Chair that is at two tables
 
     private void Awake()

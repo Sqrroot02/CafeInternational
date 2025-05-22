@@ -50,7 +50,7 @@ namespace Game.BotBehaviour
                     _nationalityToChairListDictionary.Add(nat1, new List<Chair>());
                 }
                 _nationalityToChairListDictionary[nat1].Add(chair);
-                if (nat2 != null)
+                if (nat2 != null && nat1 != nat2)
                 {
                     if (!_nationalityToChairListDictionary.ContainsKey(nat2.Value))
                     {
@@ -66,7 +66,7 @@ namespace Game.BotBehaviour
         /// </summary>
         /// <param name="player">The bot that plays the move</param>
         /// <returns>True if a card was played</returns>
-        private (Card, Chair) FindMove(Player player)
+        private (Card, Chair) FindMove(Player player, bool firstMove = false)
         {
             var cards = new List<Card>(player.PlayerHand);
             for (var _ = 0; _ < player.PlayerHand.Count; _++) // Check all cards in a random order
@@ -79,7 +79,7 @@ namespace Game.BotBehaviour
                      _2++) // Check all chairs in a random order
                 {
                     var randomChairIndex = _random.Next(0, chairs.Count);
-                    if (!chairs[randomChairIndex].NoCardAtTheTable() && chairs[randomChairIndex].PlaceCard(cards[randomCardIndex])) // If the card is placeable simply place it
+                    if ((!chairs[randomChairIndex].NoCardAtTheTable() || firstMove) && chairs[randomChairIndex].PlaceCard(cards[randomCardIndex])) // If the card is placeable simply place it
                     {
                         if (cards[randomCardIndex].cardData.nationality == Nationality.Joker)
                         {
@@ -112,13 +112,13 @@ namespace Game.BotBehaviour
             return (null, null);
         }
 
-        public void Play(Player player)
+        public void Play(Player player, bool firstMove = false)
         {
-            (Card card, Chair chair) = FindMove(player);
+            (Card card, Chair chair) = FindMove(player, firstMove);
             if (card != null)
             {
                 PlacePlayerCard(card.gameObject, chair.gameObject);
-                if (_random.NextDouble() > 0.5f)
+                if (_random.NextDouble() > 0.5f && !firstMove)
                 {
                     (card, chair) = FindMove(player);
                     if (card != null)
@@ -149,7 +149,6 @@ namespace Game.BotBehaviour
             rectTransform.pivot = new Vector2(0.5f, 0.5f);
             rectTransform.sizeDelta = Vector2.zero;
             rectTransform.localScale = Vector3.one;
-            
         }
     }
 }

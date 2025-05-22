@@ -38,9 +38,10 @@ namespace Assets.Scripts.Game
         private Deck _deck;
         private Button _endTurnButton;
         private ScoreTable _scoreTable;
-        private bool _firstTurn = true;
+        private bool _firstMove = true;
         private Chair[] _chairs;
         private EasyBotBehaviour _easyBotBehaviour;
+        private ComplexBotBehaviour _complexBotBehaviour;
         private Bar _bar;
 
         private void Awake()
@@ -53,7 +54,8 @@ namespace Assets.Scripts.Game
             _scoreTable = GameObject.Find("ScoreTable").GetComponent<ScoreTable>();
             _chairs = GameObject.Find("Chairs").transform.GetComponentsInChildren<Chair>();
             _bar = GameObject.Find("Bar").GetComponent<Bar>();
-        }
+            _complexBotBehaviour = ComplexBotBehaviour.GetInstance(this);
+    }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -118,21 +120,20 @@ namespace Assets.Scripts.Game
             NetworkRouter.SendToServer(message, MessageType.TurnCommit);
         }
     
-        /// <summary>
-        /// Updates the current Player and changes the color of the current player to red. Is invoked by END TURN and when the max number of cards has been placed
-        /// </summary>
-        public void UpdatePlayer()
+    /// <summary>
+    /// Updates the current Player and changes the color of the current player to red. Is invoked by END TURN and when the max number of cards has been placed
+    /// </summary>
+    public void UpdatePlayer()
+    {
+        Debug.Log($"Current Player: {CurrentPlayer.PlayerName} [{CurrentPlayer.ClientId}]");
+        if (CountCardsPlayed != 0)
         {
-            Debug.Log($"Current Player: {CurrentPlayer.PlayerName} [{CurrentPlayer.ClientId}]");
-            if (CountCardsPlayed != 0)
+            if (CurrentPlayer.IsMoveValid(_firstMove))
             {
-                // Check if the move is valid by game-rule and current player is client player
-                if (CurrentPlayer.IsMoveValid(_firstTurn)) 
+                if (!CheckChairsHaveFreeSpots())
                 {
-                    if (!CheckChairsHaveFreeSpots())
-                    {
-                        GameEnded();
-                    }
+                    GameEnded();
+                }
                 
                     CurrentPlayer.CountPlayerScore();
                     if (!CurrentPlayer.IsPlayerEliminated()) // Only fill the players cards if the player is not eliminated
@@ -164,24 +165,23 @@ namespace Assets.Scripts.Game
                     CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 3;
                     CountCardsPlayed = 0;
                 
-                    _endTurnButton.interactable = false;
-                    _scoreTable.UpdateScores(Players);
-                    _firstTurn = false;
-                    
-                    if (CurrentPlayer.IsBot)
-                    {
-                        StartCoroutine(WaitForBotPlay());
-                        StartCoroutine(WaitForUpdate());
-                    }
-                }
-                else
+                _endTurnButton.interactable = false;
+                _scoreTable.UpdateScores(players);
+                _firstMove = false;
+                if (CurrentPlayer.IsBot)
                 {
-                    _endTurnButton.interactable = false;
-                    CountCardsPlayed = 0;
-                    CurrentPlayer.ResetCards();
+                    StartCoroutine(WaitForBotPlay());
+                    StartCoroutine(WaitForUpdate());
                 }
             }
+            else
+            {
+                _endTurnButton.interactable = false;
+                CountCardsPlayed = 0;
+                CurrentPlayer.ResetCards();
+            }
         }
+    }
     
         public void IncrementCountCardsPlayed(int increment)
         {
@@ -243,11 +243,13 @@ namespace Assets.Scripts.Game
             return false;
         }
     
-        IEnumerator WaitForBotPlay(int seconds = 2)
-        {
-            yield return new WaitForSeconds(seconds);
-            _easyBotBehaviour.Play(CurrentPlayer);
-        }
+    IEnumerator WaitForBotPlay(int seconds = 2)
+    {
+        yield return new WaitForSeconds(seconds);
+        // TODO Hier Unterscheidung für Leichtes / Schweres Botverhalten?
+        _complexBotBehaviour.MakeComplexTurn(CurrentPlayer, players, _firstMove);
+        // _easyBotBehaviour.Play(CurrentPlayer, _firstMove);
+    }
     
         IEnumerator WaitForUpdate(int seconds = 5)
         {
@@ -255,9 +257,20 @@ namespace Assets.Scripts.Game
             UpdatePlayer();
         }
 
-        public void PlayCard(int cardId, int chairId, int barStoolId, string playerId)
+        /// <summary>
+    /// Call to place a card
+    /// </summary>
+    /// <param name="cardId">The id of the card to place. Has to be in one of the players hands</param>
+    /// <param name="chairId">The id of the chair to place a card on. Set to -1 if the card is not placed on a chair</param>
+    /// <param name="barStoolId">The id of the barstool to place a card on. Set to -1 if the card is not placed on a barstool</param>
+    /// <param name="jokerIdentity">Only set if the placed card is a joker</param>
+    public void PlayCard(int cardId, int chairId, int barStoolId, Nationality jokerIdentity = Nationality.Joker, string playerId)
         {
             var card = GetCardFromId(cardId);
+            if (jokerIdentity != Nationality.Joker)
+            {
+                card.JokerIdentity = jokerIdentity;
+            }
             if (card == null)
                 Debug.LogError($"Cannot find Card: {cardId}");
             

@@ -34,12 +34,12 @@ public class Chair : MonoBehaviour, IMessageSerializable
         return tables;
     } 
 
-    private bool HasPlaceableNationality(Nationality nationality)
+    public bool HasPlaceableNationality(Nationality nationality)
     {
         return nationality == Nationality.Joker || _firstTable.nationality == nationality || (_secondTable != null && _secondTable.nationality == nationality);
     }
 
-    private bool CheckPlaceCard(Card card)
+    public bool CheckPlaceCard(Card card)
     {
         // Check nationality matches the chair
         if (HasPlaceableNationality(card.cardData.nationality))
@@ -73,6 +73,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
     {
         if (!card.GetIsPlaced() && !card.Player.GetPlayerBlockedByJokerIdentitySelection())
         {
+            if (PlacedCard == null)
             if (PlacedCard == null)
             {
                 if (CheckPlaceCard(card))
@@ -197,9 +198,30 @@ public class Chair : MonoBehaviour, IMessageSerializable
         return (_firstTable.nationality, _secondTable?.nationality);
     }
 
+    public List<Nationality> GetUniqueNationalities()
+    {
+        List<Nationality> nationalities = new List<Nationality>();
+        nationalities.Add(_firstTable.nationality);
+        if (_secondTable != null && _firstTable.nationality != _secondTable.nationality)
+        {
+            nationalities.Add(_secondTable.nationality);
+        }
+        return nationalities;
+    }
+
     public Nationality GetFirstTableNationality()
     {
         return _firstTable.nationality;
+    }
+
+    /// <summary>
+    /// Checks if the given table is part of the tables the chair is placed at 
+    /// </summary>
+    /// <param name="table">The table to check</param>
+    /// <returns>true if the tables overlap</returns>
+    public bool IsInTables(Table table)
+    {
+        return _firstTable == table || _secondTable == table;
     }
 
     public void Serialize(Message message)
