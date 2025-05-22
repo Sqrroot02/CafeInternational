@@ -8,7 +8,7 @@ public class LobbyStorage : MonoBehaviour
     public static LobbyStorage Instance { get; private set; }
 
     private string globalLobbyName;
-    private int globalLobbyPort;
+    private int globalLobbyPort = 57967;
     private string globalLobbyIp;
     private string cardPath = "Normal/";
 
@@ -28,19 +28,21 @@ public class LobbyStorage : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void InitializeLobby(string localPlayerName, string lobbyName)
+    public void InitializeLobby(string localPlayerName, string lobbyName, string lobbyIp, int lobbyPort)
     {
         Debug.Log($"[LobbyStorage] InitializeLobby called with localPlayerName: {localPlayerName}, lobbyName: {lobbyName}");
 
         GlobalLobbyName = lobbyName;
+        GlobalLobbyIp = lobbyIp;
+        GlobalLobbyPort = lobbyPort;
 
         ActivePlayers.Clear();
         ActivePlayers.Add(new Player(localPlayerName, 0, false, true, false));
 
-        for (int i = 1; i < 4; i++)
+        for (int i = ActivePlayers.Count; i < 4; i++)
         {
-            string botName = MainMenuHelper.GenerateName();
-            ActivePlayers.Add(new Player($"Bot {botName}", 0, true, false, false));
+            string botName = MainMenuHelper.GenerateName(true);
+            ActivePlayers.Add(new Player(botName, 0, true, false, false));
             Debug.Log("Active Players: " + ActivePlayers[i]);
         }
         

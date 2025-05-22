@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Net;
-using System.Net.Sockets;
 using Assets.Scripts.UI;
 
 
@@ -40,25 +38,25 @@ public class JoinLobbyPanelManager : MonoBehaviour
     public void JoinLobby()
     {
         string enteredIp = lobbyIPTMP.text;
-        int intLobbyPort = GetNumberFromLobbyPortTMP();
+        int intLobbyPort = MainMenuHelper.GetNumberFromLobbyPortTMP(lobbyPortTMP);
         string nickname = lobbyUserNickname.text;
 
         if (intLobbyPort == 0) { 
             intLobbyPort = lobbyPortTMPStandardValue;
         }
 
-        if (!ValidateIp(enteredIp))
+        if (!MainMenuHelper.IsValidNicknameOrLobbyName(nickname))
         {
-            sceneMessageHandler.ShowScene("An semantic invalid IP has beend entered.");
-        } else if (!MainMenuHelper.IsValidNicknameOrLobbyName(nickname))
+            sceneMessageHandler.ShowScene(MainMenuHelper.CreateNicknameLobbyErrorMsg("Nickname"));
+        } else if (!MainMenuHelper.ValidateIp(enteredIp))
         {
-            sceneMessageHandler.ShowScene("An invalid Nickname has been entered. Try to use a Nickname that has at least 1 and maximum 10 characters and only contains letters.");
+            sceneMessageHandler.ShowScene(MainMenuHelper.GetIPErrorMsg());
         } else if (!MainMenuHelper.IsValidUserPort(intLobbyPort))
         {
-            sceneMessageHandler.ShowScene("An invalid Port has beend entered. Enter a Port between 1024 and 65535.");
+            sceneMessageHandler.ShowScene(MainMenuHelper.GetPortErrorMsg());
         } else {
             Debug.Log("JoinLobby TMP input is valid");
-            LobbyStorage.Instance.InitializeLobby("Lobby Host", "lobby name");
+            LobbyStorage.Instance.InitializeLobby("DummyHost", "DummyLobby", enteredIp, intLobbyPort);
             mainMenuManager.ShowLobby();
         }
     }
@@ -75,45 +73,6 @@ public class JoinLobbyPanelManager : MonoBehaviour
     private void DisableCreateLobbyButton()
     {
         joinLobbyButton.interactable = false;
-    }
-
-    private bool ValidateIp(string input)
-    {
-        if (input.Length < 7)
-        {
-            Debug.LogWarning("Invalid ip join lobby input: Too short.");
-            return false;
-        }
-
-        if (IPAddress.TryParse(input, out IPAddress address))
-        {
-            if (address.AddressFamily == AddressFamily.InterNetwork)
-            {
-                Debug.Log("Valid ipv4 as join lobby input");
-                return true;
-            }
-            else if (address.AddressFamily == AddressFamily.InterNetworkV6)
-            {
-                Debug.Log("Valid ipv6 as join lobby input");
-                return true;
-            }
-        }
-
-        Debug.LogWarning("Invalid ip join lobby input.");
-        return false;
-    }
-
-    private int GetNumberFromLobbyPortTMP()
-    {
-        if (int.TryParse(lobbyPortTMP.text, out int result))
-        {
-            return result;
-        }
-        else
-        {
-            Debug.LogWarning("Invalid Port Input");
-            return 0;
-        }
     }
 
     public void SetLobbyIPPlaceholder(string text) => MainMenuHelper.SetPlaceholder(lobbyIPTMP, text);

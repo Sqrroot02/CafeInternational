@@ -12,6 +12,8 @@ public class PlayerSlotHelper : MonoBehaviour
     public Button actionButton;
     public TMP_Dropdown botStrengthDropdown;
     public LobbyPanelManager lobbyPanelManager;
+    public GameObject placeHolder;
+    public SceneMessageHandler sceneMessageHandler;
 
     private Player assignedPlayer;
 
@@ -27,6 +29,7 @@ public class PlayerSlotHelper : MonoBehaviour
             actionButton.GetComponentInChildren<TMP_Text>().text = player.IsBot ? "Add Player" : "Add Bot";
             Debug.Log("Player Bot: " + player.IsBot);
             botStrengthDropdown.gameObject.SetActive(player.IsBot);
+            placeHolder.SetActive(!player.IsBot);
         }
         
     }
@@ -58,7 +61,9 @@ public class PlayerSlotHelper : MonoBehaviour
         {
             Debug.Log(assignedPlayer.IsBot);
             string namePrefix = assignedPlayer.IsBot ? "Bot " : "";
-            assignedPlayer.PlayerName = namePrefix + MainMenuHelper.GenerateName();
+            
+            string playerName = assignedPlayer.IsBot ? MainMenuHelper.GenerateName(true) : MainMenuHelper.GenerateName(false);
+            assignedPlayer.PlayerName = playerName;
             Debug.Log($"[PlayerSlotHelper] Player name set to: {assignedPlayer.PlayerName}");
         }
 
@@ -71,14 +76,21 @@ public class PlayerSlotHelper : MonoBehaviour
 
         if (assignedPlayer != null)
         {
-            if (assignedPlayer.IsBot)
-            {
-                assignedPlayer.PlayerName = "Bot " + nameText.text;
-            } else
-            {
-                assignedPlayer.PlayerName = nameText.text;
+            string newName = nameText.text;
+
+            if (MainMenuHelper.IsValidNicknameOrLobbyName(newName)) {
+                if (assignedPlayer.IsBot)
+                {
+                    newName = "Bot " + newName;
+                }
+                
+                Debug.Log($"[PlayerSlotHelper] Name changed to: {assignedPlayer.PlayerName}");
+                assignedPlayer.PlayerName = newName;
             }
-            Debug.Log($"[PlayerSlotHelper] Name changed to: {assignedPlayer.PlayerName}");
+            else
+            {
+                sceneMessageHandler.ShowScene(MainMenuHelper.CreateNicknameLobbyErrorMsg("Nickname"));
+            }
         }
 
         nameText.text = assignedPlayer.PlayerName;

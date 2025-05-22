@@ -85,7 +85,7 @@ public class MainMenuManager : MonoBehaviour
 
         if (cardPath == "Normal/")
         {
-            sceneMessageHandler.ShowScene("The Standard Card Grafic has been activaed. :)");
+            sceneMessageHandler.ShowScene("The DLC has been deactivated. :)");
         }
         else
         {

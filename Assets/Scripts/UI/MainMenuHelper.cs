@@ -6,7 +6,8 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Models;
-
+using System.Net;
+using System.Net.Sockets;
 
 namespace Assets.Scripts.UI
 
@@ -39,23 +40,82 @@ namespace Assets.Scripts.UI
             return field.text;
         }
 
+        public static int GetNumberFromLobbyPortTMP(TMP_InputField lobbyPortTMP)
+        {
+            if (int.TryParse(lobbyPortTMP.text, out int result))
+            {
+                return result;
+            }
+            else
+            {
+                Debug.LogWarning("Invalid Port Input");
+                return 0;
+            }
+        }
+
+        public static bool ValidateIp(string input)
+        {
+            if (input.Length < 7)
+            {
+                Debug.LogWarning("Invalid ip join lobby input: Too short.");
+                return false;
+            }
+
+            if (IPAddress.TryParse(input, out IPAddress address))
+            {
+                if (address.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    Debug.Log("Valid ipv4 as join lobby input");
+                    return true;
+                }
+                else if (address.AddressFamily == AddressFamily.InterNetworkV6)
+                {
+                    Debug.Log("Valid ipv6 as join lobby input");
+                    return true;
+                }
+            }
+
+            Debug.LogWarning("Invalid ip join lobby input.");
+            return false;
+        }
+
         public static void ResetLabelText(TMP_Text field)
         {
             field.text = "";
         }
 
+        public static string CreateNicknameLobbyErrorMsg(string invalid)
+        {
+            return $"An invalid {invalid} has been entered. Try to use a {invalid} that has at least 1 and maximum 10 characters and only contains letters.";
+        }
+
+        public static string GetIPErrorMsg()
+        {
+            return "An semantic invalid IP has beend entered.";
+        }
+
+        public static string GetPortErrorMsg()
+        {
+            return "An invalid Port has beend entered. Enter a Port between 1024 and 65535.";
+        }
+
         public static bool IsValidNicknameOrLobbyName(string input)
         {
-            if (!string.IsNullOrEmpty(input) || input.Length <= 10 && input.Length > 0)
+            Debug.Log("Validate Nickname oder Lobbyname.");
+            if (string.IsNullOrEmpty(input) || input.Length > 10)
             {
-                if (Regex.IsMatch(input, "^[a-zA-Z]*$"))
-                {
-                    Debug.Log("Valid Nickname or LobbyName");
-                    return true;
-                }
+                Debug.Log("An invalid input has been entered.");
+                return false;
             }
 
-            return false;
+            foreach (char c in input)
+            {
+                if (!char.IsLetter(c))
+                    return false;
+            }
+
+            Debug.Log("Valid input.");
+            return true;
         }
 
         public static bool IsValidUserPort(int port)
@@ -95,12 +155,12 @@ namespace Assets.Scripts.UI
         }
 
         private static readonly string[] FunncyNameNouns = {
-            "Candamir", "Hildegard", "Jean", "Franz", "LarsiHasi", "AlexPat�la", "Wolli"
+            "Candamir", "Hildegard", "Jean", "Franz", "LarsiHasi", "AlexPatoli", "Wolli"
         };
 
         private static readonly System.Random random = new();
 
-        public static string GenerateName()
+        public static string GenerateName(bool isBot)
         {
             List<Player> activePlayers = LobbyStorage.Instance.ActivePlayers;
             HashSet<string> usedNames = new();
@@ -119,7 +179,8 @@ namespace Assets.Scripts.UI
             string name;
             do
             {
-                name = FunncyNameNouns[random.Next(FunncyNameNouns.Length)];
+                string generate = FunncyNameNouns[random.Next(FunncyNameNouns.Length)];
+                name = isBot ? "Bot " + generate : generate;
             } while (usedNames.Contains(name));
 
             return name;
