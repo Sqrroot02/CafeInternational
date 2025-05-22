@@ -18,8 +18,6 @@ public class CreateLobbyPanelManager : MonoBehaviour
 
     public TMP_InputField nicknameInputField;
     
-    public TMP_Text connectionInfoText;
-
     private string nickNamePlacerholderValue = "Enter Nickname...";
 
     private string lobbyNamePlaceholderValue = "Enter Lobby Name...";
@@ -60,8 +58,6 @@ public class CreateLobbyPanelManager : MonoBehaviour
         // Run Server
         
         Debug.Log("Starting Session");
-        connectionInfoText.enabled = true;
-        connectionInfoText.SetText("Initializes Server...");
         
         NetworkServerAdapter.Instance.RunServer(session);
         
@@ -70,16 +66,12 @@ public class CreateLobbyPanelManager : MonoBehaviour
             // Host pressed Escape during the Server establishment 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                connectionInfoText.enabled = true;
                 Debug.Log("Server initialization cancelled!!!");
                 return;
             }
         }
         
         // Connect Local client to server
-        
-        connectionInfoText.SetText("Connection to local Client...");
-        connectionInfoText.enabled = true;
         
         Debug.Log("Connecting server client to server");
         NetworkClientAdapter.Instance.Port = Convert.ToUInt16(LobbyStorage.Instance.LobbyPort);
@@ -91,7 +83,6 @@ public class CreateLobbyPanelManager : MonoBehaviour
     private void AfterClientConnect(object sender, EventArgs e)
     {
         NetworkClientAdapter.Instance.Connected -= AfterClientConnect;
-        connectionInfoText.enabled = false;
         
         Debug.Log($"Server ClientID is: {NetworkClientAdapter.Instance.Client.Id}");
         Debug.Log($"The current Session:\n {string.Join("\n", NetworkServerAdapter.Instance.Session?.Players.Select(x => $"{x.PlayerName} [{x.PlayerId}]"))}");
