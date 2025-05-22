@@ -3,9 +3,13 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.Models;
 
 
 namespace Assets.Scripts.UI
+
 {
     public static class MainMenuHelper
     {
@@ -42,7 +46,7 @@ namespace Assets.Scripts.UI
 
         public static bool IsValidNicknameOrLobbyName(string input)
         {
-            if (!string.IsNullOrEmpty(input) || input.Length < 10 && input.Length > 0)
+            if (!string.IsNullOrEmpty(input) || input.Length <= 10 && input.Length > 0)
             {
                 if (Regex.IsMatch(input, "^[a-zA-Z]*$"))
                 {
@@ -98,9 +102,27 @@ namespace Assets.Scripts.UI
 
         public static string GenerateName()
         {
-            string noun = FunncyNameNouns[random.Next(FunncyNameNouns.Length)];
+            List<Player> activePlayers = LobbyStorage.Instance.ActivePlayers;
+            HashSet<string> usedNames = new();
 
-            return $"{noun}";
+            if (activePlayers != null)
+            {
+                foreach (var player in activePlayers)
+                {
+                    if (!string.IsNullOrEmpty(player.PlayerName))
+                    {
+                        usedNames.Add(player.PlayerName);
+                    }
+                }
+            }
+
+            string name;
+            do
+            {
+                name = FunncyNameNouns[random.Next(FunncyNameNouns.Length)];
+            } while (usedNames.Contains(name));
+
+            return name;
         }
     }
 } 

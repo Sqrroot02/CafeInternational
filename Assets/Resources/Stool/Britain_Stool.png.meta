@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 6b34dfa9587312b4386877c828d826c3
+guid: b6f32580193a33840baf023c899d3b1f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1986203729764563543
-    second: German_Stool_0
+      213: 7018404105642231819
+    second: Britain_Stool_0
   - first:
-      213: 101910239260011260
-    second: German_Stool_1
+      213: -8445395081568091330
+    second: Britain_Stool_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,12 +103,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: German_Stool_0
+      name: Britain_Stool_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 1012
+        width: 1024
         height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,20 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a5c3db2b369f64e0800000000000000
-      internalID: -1986203729764563543
+      spriteID: b08c2f65951666160800000000000000
+      internalID: 7018404105642231819
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: German_Stool_1
+      name: Britain_Stool_1
       rect:
         serializedVersion: 2
-        x: 43
-        y: 481
-        width: 9
-        height: 10
+        x: 0
+        y: 0
+        width: 7
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cfa611a92de0a6100800000000000000
-      internalID: 101910239260011260
+      spriteID: e338d4f3bedebca80800000000000000
+      internalID: -8445395081568091330
       vertices: []
       indices: 
       edges: []

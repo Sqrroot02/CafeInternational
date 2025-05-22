@@ -3,12 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public string lobbyName;
-
-    public string lobbyPort;
-
-    public string lobbyIP;
-
     public GameObject createLobbyPanel;
 
     public GameObject mainMenuContainer;
@@ -22,6 +16,8 @@ public class MainMenuManager : MonoBehaviour
     public CreateLobbyPanelManager createLobbyPanelManager;
 
     public LobbyPanelManager lobbyPanelManager;
+
+    public SceneMessageHandler sceneMessageHandler;
 
     public void QuitGame()
     {
@@ -70,13 +66,6 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log("Show Join Lobby Panel");
     }
 
-    private void ResetGlobalVars()
-    {
-        lobbyName = "";
-        lobbyPort = "";
-        lobbyIP = "";
-    }
-
     public void SetCardPathOnButtonClick()
     {
         string cardPath = LobbyStorage.Instance.CardPath;
@@ -93,5 +82,16 @@ public class MainMenuManager : MonoBehaviour
         LobbyStorage.Instance.CardPath = cardPath;
 
         Debug.Log("Card Path: " + LobbyStorage.Instance.CardPath);
+
+        if (cardPath == "Normal/")
+        {
+            sceneMessageHandler.ShowScene("The Standard Card Grafic has been activaed. :)");
+        }
+        else
+        {
+            sceneMessageHandler.ShowScene("The DLC has been activated. :)");
+        }
+
+
     }
 }

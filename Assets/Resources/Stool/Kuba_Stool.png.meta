@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 6b34dfa9587312b4386877c828d826c3
+guid: 24f90d046d4247a4f977d8d56b6b8e49
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1986203729764563543
-    second: German_Stool_0
+      213: -8259836099542757396
+    second: Kuba_Stool_0
   - first:
-      213: 101910239260011260
-    second: German_Stool_1
+      213: 5481533792379940685
+    second: Kuba_Stool_1
+  - first:
+      213: 7000380048035225109
+    second: Kuba_Stool_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,12 +106,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: German_Stool_0
+      name: Kuba_Stool_0
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 1012
+        width: 1024
         height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,20 +121,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a5c3db2b369f64e0800000000000000
-      internalID: -1986203729764563543
+      spriteID: cef4ec774da2f5d80800000000000000
+      internalID: -8259836099542757396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: German_Stool_1
+      name: Kuba_Stool_1
       rect:
         serializedVersion: 2
-        x: 43
-        y: 481
-        width: 9
-        height: 10
+        x: 402
+        y: 0
+        width: 13
+        height: 293
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +143,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cfa611a92de0a6100800000000000000
-      internalID: 101910239260011260
+      spriteID: d4f2b1711f1521c40800000000000000
+      internalID: 5481533792379940685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kuba_Stool_2
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 15
+        width: 8
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51e1fd76098562160800000000000000
+      internalID: 7000380048035225109
       vertices: []
       indices: 
       edges: []

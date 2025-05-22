@@ -18,6 +18,8 @@ public class JoinLobbyPanelManager : MonoBehaviour
 
     public Button joinLobbyButton;
 
+    public SceneMessageHandler sceneMessageHandler;
+
     private string lobbyIpTMPStandardValue = "Enter Lobby IP...";
 
     private int lobbyPortTMPStandardValue = 57967;
@@ -45,7 +47,16 @@ public class JoinLobbyPanelManager : MonoBehaviour
             intLobbyPort = lobbyPortTMPStandardValue;
         }
 
-        if (ValidateIp(enteredIp) && MainMenuHelper.IsValidNicknameOrLobbyName(nickname) && MainMenuHelper.IsValidUserPort(intLobbyPort)) {
+        if (!ValidateIp(enteredIp))
+        {
+            sceneMessageHandler.ShowScene("An semantic invalid IP has beend entered.");
+        } else if (!MainMenuHelper.IsValidNicknameOrLobbyName(nickname))
+        {
+            sceneMessageHandler.ShowScene("An invalid Nickname has been entered. Try to use a Nickname that has at least 1 and maximum 10 characters and only contains letters.");
+        } else if (!MainMenuHelper.IsValidUserPort(intLobbyPort))
+        {
+            sceneMessageHandler.ShowScene("An invalid Port has beend entered. Enter a Port between 1024 and 65535.");
+        } else {
             Debug.Log("JoinLobby TMP input is valid");
             LobbyStorage.Instance.InitializeLobby("Lobby Host", "lobby name");
             mainMenuManager.ShowLobby();
