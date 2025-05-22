@@ -74,7 +74,6 @@ public class Chair : MonoBehaviour, IMessageSerializable
         if (!card.GetIsPlaced() && !card.Player.GetPlayerBlockedByJokerIdentitySelection())
         {
             if (PlacedCard == null)
-            if (PlacedCard == null)
             {
                 if (CheckPlaceCard(card))
                 {
