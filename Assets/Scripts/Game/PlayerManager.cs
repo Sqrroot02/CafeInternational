@@ -60,7 +60,8 @@ namespace Assets.Scripts.Game
         void Start()
         {
             _easyBotBehaviour = EasyBotBehaviour.GetInstance();
-            _complexBotBehaviour = new ComplexBotBehaviour(this);
+            _complexBotBehaviour = JokerIdentitySelectionPrefab.AddComponent<ComplexBotBehaviour>();
+            _complexBotBehaviour.Setup(this);
             
             _deck = deckManager.GetComponent<Deck>();
             UpdatePlayerGameBars();
