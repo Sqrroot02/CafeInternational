@@ -54,13 +54,14 @@ namespace Assets.Scripts.Game
             _scoreTable = GameObject.Find("ScoreTable").GetComponent<ScoreTable>();
             _chairs = GameObject.Find("Chairs").transform.GetComponentsInChildren<Chair>();
             _bar = GameObject.Find("Bar").GetComponent<Bar>();
-            _complexBotBehaviour = new ComplexBotBehaviour(this);
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             _easyBotBehaviour = EasyBotBehaviour.GetInstance();
+            _complexBotBehaviour = new ComplexBotBehaviour(this);
+            
             _deck = deckManager.GetComponent<Deck>();
             UpdatePlayerGameBars();
             DrawInitialCards();
