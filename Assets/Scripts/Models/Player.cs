@@ -19,6 +19,7 @@ namespace Assets.Scripts.Models
         private PlayerManager _playerManager;
         private bool _playerEliminated = false;
 
+        
         /// <summary>
         /// The ID of the player
         /// </summary>
@@ -49,13 +50,20 @@ namespace Assets.Scripts.Models
             
         }
         
-        public Player(string playerName, int playerScore, bool isBot, bool lobbyHost)
+        public Player(string playerName, int playerScore, bool isBot, bool lobbyHost, bool isStrongBot)
         {
             PlayerName = playerName;
             PlayerScore = playerScore;
             IsBot = isBot;
             LobbyHost = lobbyHost;
+            IsStrongBot = isStrongBot;
         }
+    
+        public string PlayerName { get; set; }
+        public int PlayerScore { get; private set; }
+        public bool IsBot { get; set; }
+        public GameObject PlayerGameBar { get; set; }
+        public bool IsStrongBot { get; set; }
 
         public void SetPlayerManager(PlayerManager playerManager)
         {

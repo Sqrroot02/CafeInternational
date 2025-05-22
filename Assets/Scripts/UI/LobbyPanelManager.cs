@@ -10,17 +10,15 @@ using Assets.Scripts.Network.Messages;
 using Assets.Scripts.Network.Messages.PlayerLobbyAction;
 using Assets.Scripts.Network.Messages.StartGame;
 using Assets.Scripts.UI;
+using Assets.Scripts.Models;
 using Riptide;
 
 public class LobbyPanelManager : MonoBehaviour
 {
     public TMP_Text lobbyNameTMP;
-
     public TMP_Text lobbyPortTMP;
-
     public TMP_Text lobbyIPTMP;
-
-    public List<TMP_Text> playerNameTexts;
+    public List<PlayerSlotHelper> playerSlots;
 
     void Awake()
     {
@@ -29,14 +27,16 @@ public class LobbyPanelManager : MonoBehaviour
     
     public void InitiateLobby()
     {
+        Debug.Log("[LobbyPanelManager] InitiateLobby called.");
         SetLobbyIPLabel($"Lobby Ip: {LobbyStorage.Instance.LobbyIp}");
         SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.LobbyName);
         SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.LobbyPort);
-        SetPlayerNames();
+        SetPlayerSlot();
     }
 
     public void ResetLobbyTMPs()
     {
+        Debug.Log("[LobbyPanelManager] ResetLobbyTMPs called.");
         ResetLobbyIPLabel();
         ResetLobbyNameLabel();
         ResetLobbyPortLabel();
@@ -61,8 +61,9 @@ public class LobbyPanelManager : MonoBehaviour
     }
 
     
-    public void AddLocalPlayer()
+    public void SetPlayerSlot()
     {
+        Debug.Log("[LobbyPanelManager] SetPlayerSlot called.");
         LobbyStorage.Instance.ReplaceBotWithHuman(MainMenuHelper.GenerateName());
     }
 
@@ -92,9 +93,10 @@ public class LobbyPanelManager : MonoBehaviour
     public void SetPlayerNames()
     {
         var players = LobbyStorage.Instance.ActivePlayers;
-        for (var i = 0; i < Mathf.Min(players.Count, playerNameTexts.Count); i++)
+
+        for (int i = 0; i < Mathf.Min(players.Count, playerSlots.Count); i++)
         {
-            playerNameTexts[i].text = players[i].PlayerName;
+            playerSlots[i].SetUp(players[i]);
         }
     }
 

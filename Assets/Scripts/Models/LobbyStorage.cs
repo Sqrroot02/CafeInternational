@@ -48,14 +48,38 @@ namespace Assets.Scripts.Models
                 Destroy(gameObject);
                 return;
             }
+public class LobbyStorage : MonoBehaviour
+{
+    public static LobbyStorage Instance { get; private set; }
+
+    private string globalLobbyName;
+    private int globalLobbyPort = 57967;
+    private string globalLobbyIp;
+    private string cardPath = "Normal/";
+
+    public List<Player> ActivePlayers { get; private set; } = new();
+
+    void Awake()
+    {
+        Debug.Log("[LobbyStorage] Awake called.");
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
 
-        public void InitializeLobby(string localPlayerName, string lobbyName)
+        public void InitializeLobby(string localPlayerName, string lobbyName, string lobbyIp, int lobbyPort)
         {
+            Debug.Log($"[LobbyStorage] InitializeLobby called with localPlayerName: {localPlayerName}, lobbyName: {lobbyName}");
+
             LobbyName = lobbyName;
+            GlobalLobbyIp = lobbyIp;
+            GlobalLobbyPort = lobbyPort;
         
             ActivePlayers.Clear();
 
@@ -64,9 +88,9 @@ namespace Assets.Scripts.Models
                 
             ActivePlayers.Add(hostPlayer);
             
-            for (var i = 1; i < 4; i++)
+            for (var i = ActivePlayers.Count; i < 4; i++)
             {
-                var botName = MainMenuHelper.GenerateName();
+                var botName = MainMenuHelper.GenerateName(true);
                 ActivePlayers.Add(new Player($"Bot {botName}", 0, true, false));
             }
         }
@@ -94,6 +118,8 @@ namespace Assets.Scripts.Models
                     Debug.Log($"{playerName} has been replaced with a bot");
                     return;
                 }
+                Debug.Log("Active Players: " + ActivePlayers[i]);
+
             }
 
             Debug.Log($"No Player with naem:  {playerName} found.");
@@ -112,5 +138,11 @@ namespace Assets.Scripts.Models
             while (playersStack.Count > 0)
                 ActivePlayers.Insert(Random.Range(0, ActivePlayers.Count + 1), playersStack.Pop());
         }
+    }
+
+    public string CardPath
+    {
+        get => cardPath;
+        set => cardPath = value;
     }
 }

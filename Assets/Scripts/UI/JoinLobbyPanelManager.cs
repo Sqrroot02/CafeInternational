@@ -24,6 +24,8 @@ public class JoinLobbyPanelManager : MonoBehaviour
 
     public Button joinLobbyButton;
 
+    public SceneMessageHandler sceneMessageHandler;
+
     private string lobbyIpTMPStandardValue = "Enter Lobby IP...";
 
     private int lobbyPortTMPStandardValue = 57967;
@@ -44,14 +46,23 @@ public class JoinLobbyPanelManager : MonoBehaviour
     public void JoinLobby()
     {
         var enteredIp = lobbyIPTMP.text;
-        var intLobbyPort = GetNumberFromLobbyPortTMP();
+        var intLobbyPort = MainMenuHelper.GetNumberFromLobbyPortTMP(lobbyPortTMP);
         var nickname = lobbyUserNickname.text;
 
         if (intLobbyPort == 0) { 
             intLobbyPort = lobbyPortTMPStandardValue;
         }
 
-        if (ValidateIp(enteredIp) && MainMenuHelper.IsValidNicknameOrLobbyName(nickname) && MainMenuHelper.IsValidUserPort(intLobbyPort)) {
+        if (!MainMenuHelper.IsValidNicknameOrLobbyName(nickname))
+        {
+            sceneMessageHandler.ShowScene(MainMenuHelper.CreateNicknameLobbyErrorMsg("Nickname"));
+        } else if (!MainMenuHelper.ValidateIp(enteredIp))
+        {
+            sceneMessageHandler.ShowScene(MainMenuHelper.GetIPErrorMsg());
+        } else if (!MainMenuHelper.IsValidUserPort(intLobbyPort))
+        {
+            sceneMessageHandler.ShowScene(MainMenuHelper.GetPortErrorMsg());
+        } else {
             Debug.Log("JoinLobby TMP input is valid");
             //LobbyStorage.Instance.InitializeLobby("Lobby Host", "lobby name");
             

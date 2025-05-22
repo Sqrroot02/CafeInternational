@@ -1,0 +1,942 @@
+fileFormatVersion: 2
+guid: ac96b6bcbe64ddb4fb8c3feb20fda6e1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3750483963769817895
+    second: Turkey_Table_0
+  - first:
+      213: -369726831122835002
+    second: Turkey_Table_1
+  - first:
+      213: -1449017926722483130
+    second: Turkey_Table_2
+  - first:
+      213: -1930620438709757683
+    second: Turkey_Table_3
+  - first:
+      213: 3530476355586273650
+    second: Turkey_Table_4
+  - first:
+      213: -5561235660816714955
+    second: Turkey_Table_5
+  - first:
+      213: -7197963970312950624
+    second: Turkey_Table_6
+  - first:
+      213: 7238071499297151951
+    second: Turkey_Table_7
+  - first:
+      213: 2225272392103632772
+    second: Turkey_Table_8
+  - first:
+      213: 4348992317302895914
+    second: Turkey_Table_9
+  - first:
+      213: 1346180625282591608
+    second: Turkey_Table_10
+  - first:
+      213: -3800129706063466172
+    second: Turkey_Table_11
+  - first:
+      213: -4508268791251452286
+    second: Turkey_Table_12
+  - first:
+      213: 4848092745125271399
+    second: Turkey_Table_13
+  - first:
+      213: -4033326983405402504
+    second: Turkey_Table_14
+  - first:
+      213: -7724331834639933404
+    second: Turkey_Table_15
+  - first:
+      213: 3952670006755247451
+    second: Turkey_Table_16
+  - first:
+      213: 7863568315735786636
+    second: Turkey_Table_17
+  - first:
+      213: 5926366989830637452
+    second: Turkey_Table_18
+  - first:
+      213: -6039098877435387094
+    second: Turkey_Table_19
+  - first:
+      213: -4058967188106666516
+    second: Turkey_Table_20
+  - first:
+      213: 1899312383601919360
+    second: Turkey_Table_21
+  - first:
+      213: 1027496083003183614
+    second: Turkey_Table_22
+  - first:
+      213: 8560496137670552060
+    second: Turkey_Table_23
+  - first:
+      213: 6066901090569288837
+    second: Turkey_Table_24
+  - first:
+      213: 8028576161821230013
+    second: Turkey_Table_25
+  - first:
+      213: 1628534404896644061
+    second: Turkey_Table_26
+  - first:
+      213: -8675901391882099164
+    second: Turkey_Table_27
+  - first:
+      213: 5568493929908369239
+    second: Turkey_Table_28
+  - first:
+      213: 5905203217857742682
+    second: Turkey_Table_29
+  - first:
+      213: 3372637438633749840
+    second: Turkey_Table_30
+  - first:
+      213: 4849973879946545429
+    second: Turkey_Table_31
+  - first:
+      213: 3773230889980309868
+    second: Turkey_Table_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Turkey_Table_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 21
+        width: 1024
+        height: 1003
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72b8c4c4b456c0430800000000000000
+      internalID: 3750483963769817895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_1
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 991
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c91efee7677edaf0800000000000000
+      internalID: -369726831122835002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_2
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 991
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64c88847fdd04ebe0800000000000000
+      internalID: -1449017926722483130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_3
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 991
+        width: 15
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d09989a90fe0535e0800000000000000
+      internalID: -1930620438709757683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_4
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 991
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 271b2a64a85cef030800000000000000
+      internalID: 3530476355586273650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_5
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 991
+        width: 19
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 533f8c491a582d2b0800000000000000
+      internalID: -5561235660816714955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_6
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 991
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0acaf6bc7e1bb1c90800000000000000
+      internalID: -7197963970312950624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_7
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 991
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcb5c7efdabc27460800000000000000
+      internalID: 7238071499297151951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_8
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 991
+        width: 15
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48f12db5371c1ee10800000000000000
+      internalID: 2225272392103632772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_9
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 991
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a25fdbb7879ba5c30800000000000000
+      internalID: 4348992317302895914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_10
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 991
+        width: 15
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87b6b7575289ea210800000000000000
+      internalID: 1346180625282591608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_11
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 991
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4417da19a2a334bc0800000000000000
+      internalID: -3800129706063466172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_12
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 991
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28e3a719b696f61c0800000000000000
+      internalID: -4508268791251452286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_13
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 991
+        width: 17
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76717575aa2e74340800000000000000
+      internalID: 4848092745125271399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_14
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 991
+        width: 15
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8768f136a7eb608c0800000000000000
+      internalID: -4033326983405402504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_15
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 991
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 420ab052f19adc490800000000000000
+      internalID: -7724331834639933404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_16
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 991
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b55ccf2dd64bad630800000000000000
+      internalID: 3952670006755247451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_17
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 991
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c84c27e58b1012d60800000000000000
+      internalID: 7863568315735786636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_18
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 991
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c87c475c06fae3250800000000000000
+      internalID: 5926366989830637452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_19
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 991
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a23e007419fc03ca0800000000000000
+      internalID: -6039098877435387094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_20
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 991
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ced9fe509d6aba7c0800000000000000
+      internalID: -4058967188106666516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_21
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 991
+        width: 17
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 085c716cc86bb5a10800000000000000
+      internalID: 1899312383601919360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_22
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 991
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef1928b5e36624e00800000000000000
+      internalID: 1027496083003183614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_23
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 991
+        width: 15
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf9e4fab1edfcc670800000000000000
+      internalID: 8560496137670552060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_24
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 991
+        width: 19
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58cffc6e566f13450800000000000000
+      internalID: 6066901090569288837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_25
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 991
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db306816b7b3b6f60800000000000000
+      internalID: 8028576161821230013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_26
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 991
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddbdd54b967b99610800000000000000
+      internalID: 1628534404896644061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_27
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 991
+        width: 25
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 426ec86a6a1099780800000000000000
+      internalID: -8675901391882099164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_28
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 991
+        width: 37
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7577b12e9b3474d40800000000000000
+      internalID: 5568493929908369239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_29
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 991
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5787ee1a0f73f150800000000000000
+      internalID: 5905203217857742682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_30
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 991
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05da2f5a1e30ece20800000000000000
+      internalID: 3372637438633749840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_31
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 991
+        width: 35
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 519032c2c819e4340800000000000000
+      internalID: 4849973879946545429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Turkey_Table_32
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 991
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c61bec4c0853d5430800000000000000
+      internalID: 3773230889980309868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

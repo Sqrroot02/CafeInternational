@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: d06d3af2df58c684da58dbfb03387e5a
+guid: 47529f1bab1683b46aa20c98daafa63e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6759553944973049039
-    second: Female_France_0
+      213: -5549170207888156163
+    second: China_Stool_0
+  - first:
+      213: 4119632056182431169
+    second: China_Stool_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +99,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Female_France_0
+      name: China_Stool_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 5
         width: 1024
-        height: 1024
+        height: 981
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1338acd208d3132a0800000000000000
-      internalID: -6759553944973049039
+      spriteID: df955a0c8136df2b0800000000000000
+      internalID: -5549170207888156163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: China_Stool_1
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 902
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cdd012478fdb2930800000000000000
+      internalID: 4119632056182431169
       vertices: []
       indices: 
       edges: []
@@ -147,8 +159,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Female_France_0: -6759553944973049039
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

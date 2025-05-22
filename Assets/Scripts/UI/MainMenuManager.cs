@@ -5,12 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public string lobbyName;
-
-    public string lobbyPort;
-
-    public string lobbyIP;
-
     public GameObject createLobbyPanel;
 
     public GameObject mainMenuContainer;
@@ -24,6 +18,8 @@ public class MainMenuManager : MonoBehaviour
     public CreateLobbyPanelManager createLobbyPanelManager;
 
     public LobbyPanelManager lobbyPanelManager;
+
+    public SceneMessageHandler sceneMessageHandler;
 
 
     void Awake()
@@ -91,10 +87,32 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log("Show Join Lobby Panel");
     }
 
-    private void ResetGlobalVars()
+    public void SetCardPathOnButtonClick()
     {
-        lobbyName = "";
-        lobbyPort = "";
-        lobbyIP = "";
+        string cardPath = LobbyStorage.Instance.CardPath;
+
+        if (cardPath == "Normal/")
+        {
+            cardPath = "StickmanCards/";
+        }
+        else if (cardPath == "StickmanCards/")
+        {
+            cardPath = "Normal/";
+        }
+
+        LobbyStorage.Instance.CardPath = cardPath;
+
+        Debug.Log("Card Path: " + LobbyStorage.Instance.CardPath);
+
+        if (cardPath == "Normal/")
+        {
+            sceneMessageHandler.ShowScene("The DLC has been deactivated. :)");
+        }
+        else
+        {
+            sceneMessageHandler.ShowScene("The DLC has been activated. :)");
+        }
+
+
     }
 }
