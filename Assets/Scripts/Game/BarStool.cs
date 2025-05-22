@@ -1,8 +1,10 @@
+using Assets.Scripts.Game;
 using Assets.Scripts.Models;
+using Riptide;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BarStool : MonoBehaviour
+public class BarStool : MonoBehaviour, IMessageSerializable
 {
     public int Value; // The value of the chair that is added to the points of the one placing a card here // Negative scores are also added and not implemented separately
     public Image stoolSprite; // The image on the stool // the number of points added
@@ -25,6 +27,14 @@ public class BarStool : MonoBehaviour
         return _index; 
     }
 
+    public bool PlaceAndCommit(Card card)
+    {
+        var hasPlaced = PlaceCard(card);
+        if (hasPlaced)
+            TurnHistory.CurrentTurnHistory.AddBarStool(this);
+        return hasPlaced;
+    }
+    
     /// <summary>
     /// Placed the given Card on the stool if possible
     /// </summary>
@@ -38,9 +48,24 @@ public class BarStool : MonoBehaviour
                 GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
                 card.Player.BarStool = this;
                 PlacedCard = card;
+                
                 return true;
             }
         }
         return false;
+    }
+
+    public void Serialize(Message message)
+    {
+        message.AddInt(Value);
+        message.AddInt(_index);
+        message.AddSerializable(PlacedCard);
+    }
+
+    public void Deserialize(Message message)
+    {
+        Value = message.GetInt();
+        _index = message.GetInt();
+        PlacedCard = message.GetSerializable<Card>();
     }
 }

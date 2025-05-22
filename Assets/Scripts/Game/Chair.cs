@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Game;
 using Assets.Scripts.Models;
+using Riptide;
 using UnityEngine;
 
-public class Chair : MonoBehaviour
+public class Chair : MonoBehaviour, IMessageSerializable
 {
     public GameObject FirstTableGO;
     public GameObject SecondTableGO; // Can be null
@@ -59,11 +61,19 @@ public class Chair : MonoBehaviour
         return false;
     }
 
+    public bool PlaceAndCommit(Card card)
+    {
+        var hasPlaced = PlaceCard(card);
+        if (hasPlaced)
+            TurnHistory.CurrentTurnHistory.AddChair(this);
+        return hasPlaced;
+    }
+    
     public bool PlaceCard(Card card)
     {
         if (!card.GetIsPlaced() && !card.Player.GetPlayerBlockedByJokerIdentitySelection())
         {
-            if (PlacedCard ==null)
+            if (PlacedCard == null)
             {
                 if (CheckPlaceCard(card))
                 {
@@ -176,6 +186,8 @@ public class Chair : MonoBehaviour
         {
             _secondTable.placedCards.Remove(PlacedCard);
         }
+        
+        TurnHistory.CurrentTurnHistory.RemoveChair(this);
         PlacedCard = null;
         GetComponent<Outline>().UpdateOutlineSprite(null); // TODO Needs to be changed if the actual images of the chairs are implemented -> Change to the original image of the chair
     }
@@ -188,5 +200,31 @@ public class Chair : MonoBehaviour
     public Nationality GetFirstTableNationality()
     {
         return _firstTable.nationality;
+    }
+
+    public void Serialize(Message message)
+    {
+        message.AddInt(ChairID);
+        message.AddSerializable(_firstTable);
+        
+        message.AddBool(_secondTable != null);
+        if (_secondTable != null)
+            message.AddSerializable(_secondTable);
+        
+        message.AddBool(PlacedCard != null);
+        if (PlacedCard != null)
+            message.AddSerializable(PlacedCard);
+    }
+
+    public void Deserialize(Message message)
+    {
+        ChairID = message.GetInt();
+        _firstTable = message.GetSerializable<Table>();
+
+        if (message.GetBool())
+            _secondTable = message.GetSerializable<Table>();
+        
+        if (message.GetBool())
+            PlacedCard = message.GetSerializable<Card>();
     }
 }

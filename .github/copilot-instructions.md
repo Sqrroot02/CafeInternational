@@ -4,11 +4,11 @@
 - Active scene:
   - Name: Game
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Row
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Row, Chair, BarStool
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Water, UI
 - Active game object:
-  - Name: GameMenu
+  - Name: EndTurnButton
   - Tag: Untagged
   - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

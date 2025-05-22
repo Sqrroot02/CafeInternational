@@ -1,10 +1,18 @@
+using System;
+using Assets.Scripts.Game;
 using Assets.Scripts.Models;
+using Riptide;
+using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Player = Assets.Scripts.Models.Player;
 
-[System.Serializable]
-public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+/// <summary>
+/// Contains Card associated Data like gender or nationality
+/// </summary>
+[Serializable]
+public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IMessageSerializable
 {
     public CardData cardData;
     
@@ -80,7 +88,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!_isPlaced && _playerManager.CurrentPlayer == Player)
+        if (!_isPlaced && _playerManager.CurrentPlayer == Player && _playerManager.CurrentPlayer.PlayerId == LobbyStorage.Instance.ClientPlayerId)
         {
             _canvasGroup.blocksRaycasts = true;
             _canvasGroup.alpha = 1f;
@@ -110,5 +118,19 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
         
         _canvasGroup = GetComponent<CanvasGroup>();
         _canvas = GetComponentInParent<Canvas>();
+    }
+
+    public void Serialize(Message message)
+    {
+        message.AddSerializable(cardData);
+        message.AddBool(_isPlaced);
+        message.AddString(JokerIdentity.ToString());
+    }
+
+    public void Deserialize(Message message)
+    {
+        cardData = message.GetSerializable<CardData>();
+        _isPlaced = message.GetBool();
+        JokerIdentity = Enum.Parse<Nationality>(message.GetString());
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Network.Adapter;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,6 +28,10 @@ namespace Assets.Scripts.UI
 		/// </summary>
 		public void Quit()
 		{
+			Debug.Log("Disconnect Lobby");
+			NetworkClientAdapter.Instance.Disconnect();
+			if (NetworkServerAdapter.Instance.Server.IsRunning)
+				NetworkServerAdapter.Instance.TearDown();
 			SceneManager.LoadScene("MainMenu");
 		}
 

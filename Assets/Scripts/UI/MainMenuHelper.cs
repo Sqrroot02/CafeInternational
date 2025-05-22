@@ -94,12 +94,11 @@ namespace Assets.Scripts.UI
             "Candamir", "Hildegard", "Jean", "Franz", "LarsiHasi", "AlexPat�la", "Wolli"
         };
 
-        private static readonly System.Random random = new();
+        private static readonly System.Random random = new(31415);
 
         public static string GenerateName()
         {
-            string noun = FunncyNameNouns[random.Next(FunncyNameNouns.Length)];
-
+            var noun = FunncyNameNouns[random.Next(FunncyNameNouns.Length)];
             return $"{noun}";
         }
     }

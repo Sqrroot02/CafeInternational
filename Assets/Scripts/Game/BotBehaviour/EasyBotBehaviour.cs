@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Assets.Scripts.Models;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Game.BotBehaviour
 {
@@ -9,6 +10,7 @@ namespace Game.BotBehaviour
     /// </summary>
     public class EasyBotBehaviour
     {
+        private readonly Random _random = new(31415);
         private static EasyBotBehaviour _instance;
         private Bar _bar;
         private Chair[] _chairs;
@@ -69,14 +71,14 @@ namespace Game.BotBehaviour
             var cards = new List<Card>(player.PlayerHand);
             for (var _ = 0; _ < player.PlayerHand.Count; _++) // Check all cards in a random order
             {
-                var randomCardIndex = Random.Range(0, cards.Count);
+                var randomCardIndex = _random.Next(0, cards.Count);
                 var chairs =
                     new List<Chair>(_nationalityToChairListDictionary[cards[randomCardIndex].cardData.nationality]);
                 for (var _2 = 0;
                      _2 < _nationalityToChairListDictionary[cards[randomCardIndex].cardData.nationality].Count;
                      _2++) // Check all chairs in a random order
                 {
-                    var randomChairIndex = Random.Range(0, chairs.Count);
+                    var randomChairIndex = _random.Next(0, chairs.Count);
                     if (!chairs[randomChairIndex].NoCardAtTheTable() && chairs[randomChairIndex].PlaceCard(cards[randomCardIndex])) // If the card is placeable simply place it
                     {
                         if (cards[randomCardIndex].cardData.nationality == Nationality.Joker)
@@ -100,7 +102,7 @@ namespace Game.BotBehaviour
             var cards = new List<Card>(player.PlayerHand);
             for (var _ = 0; _ < player.PlayerHand.Count; _++) // Check all cards in a random order
             {
-                var randomCardIndex = Random.Range(0, cards.Count);
+                var randomCardIndex = _random.Next(0, cards.Count);
                 if (_bar.BarStools[_bar.GetNextIndex()].PlaceCard(cards[randomCardIndex]))
                 {
                     return (cards[randomCardIndex], _bar.BarStools[_bar.GetNextIndex() - 1]);
@@ -116,7 +118,7 @@ namespace Game.BotBehaviour
             if (card != null)
             {
                 PlacePlayerCard(card.gameObject, chair.gameObject);
-                if (Random.value > 0.5f)
+                if (_random.NextDouble() > 0.5f)
                 {
                     (card, chair) = FindMove(player);
                     if (card != null)

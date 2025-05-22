@@ -1,3 +1,4 @@
+using Assets.Scripts.Game;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -50,11 +51,11 @@ public class DropCard : MonoBehaviour, IDropHandler
 
     private bool PlaceChair(Card card)
     { 
-        return GetComponent<Chair>().PlaceCard(card);
+        return GetComponent<Chair>().PlaceAndCommit(card);
     }
 
     private bool CheckPlaceableBarStool(Card card)
     {
-        return GetComponent<BarStool>().PlaceCard(card);
+        return GetComponent<BarStool>().PlaceAndCommit(card);
     }
 }

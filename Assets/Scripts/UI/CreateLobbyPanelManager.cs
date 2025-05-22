@@ -1,3 +1,10 @@
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Assets.Scripts.Models;
+using Assets.Scripts.Network;
+using Assets.Scripts.Network.Adapter;
+using Assets.Scripts.Network.Models;
 using Assets.Scripts.UI;
 using UnityEngine;
 using TMPro;
@@ -10,6 +17,8 @@ public class CreateLobbyPanelManager : MonoBehaviour
     public TMP_InputField lobbyNameInput;
 
     public TMP_InputField nicknameInputField;
+    
+    public TMP_Text connectionInfoText;
 
     private string nickNamePlacerholderValue = "Enter Nickname...";
 
@@ -27,15 +36,68 @@ public class CreateLobbyPanelManager : MonoBehaviour
 
     public void CreateLobby()
     {
-        string enteredLobbyName = lobbyNameInput.text;
-        string enteredNickname = nicknameInputField.text;
+        var enteredLobbyName = lobbyNameInput.text;
+        var enteredNickname = nicknameInputField.text;
 
         if (MainMenuHelper.IsValidNicknameOrLobbyName(enteredLobbyName) && MainMenuHelper.IsValidNicknameOrLobbyName(enteredNickname))
         {
+            LobbyStorage.Instance.LobbyName = enteredLobbyName;
+            LobbyStorage.Instance.LobbyIp = NetworkUtil.PublicIpAddress();
+            
             LobbyStorage.Instance.InitializeLobby(enteredNickname, enteredLobbyName);
-
-            mainMenuManager.ShowLobby();
+            InitAndRunServerSession();
         }
+    }
+
+    /// <summary>
+    /// Initializes the server session and runs the server
+    /// </summary>
+    private void InitAndRunServerSession()
+    {
+        // Build session
+        var session = new Session(lobbyNameInput.text, new ObservableCollection<Player>(LobbyStorage.Instance.ActivePlayers));
+            
+        // Run Server
+        
+        Debug.Log("Starting Session");
+        connectionInfoText.enabled = true;
+        connectionInfoText.SetText("Initializes Server...");
+        
+        NetworkServerAdapter.Instance.RunServer(session);
+        
+        while (!NetworkServerAdapter.Instance.Server.IsRunning)
+        {
+            // Host pressed Escape during the Server establishment 
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                connectionInfoText.enabled = true;
+                Debug.Log("Server initialization cancelled!!!");
+                return;
+            }
+        }
+        
+        // Connect Local client to server
+        
+        connectionInfoText.SetText("Connection to local Client...");
+        connectionInfoText.enabled = true;
+        
+        Debug.Log("Connecting server client to server");
+        NetworkClientAdapter.Instance.Port = Convert.ToUInt16(LobbyStorage.Instance.LobbyPort);
+        NetworkClientAdapter.Instance.IpAddress = "127.0.0.1";
+        NetworkClientAdapter.Instance.Connected += AfterClientConnect;
+        NetworkClientAdapter.Instance.Connect();
+    }
+
+    private void AfterClientConnect(object sender, EventArgs e)
+    {
+        NetworkClientAdapter.Instance.Connected -= AfterClientConnect;
+        connectionInfoText.enabled = false;
+        
+        Debug.Log($"Server ClientID is: {NetworkClientAdapter.Instance.Client.Id}");
+        Debug.Log($"The current Session:\n {string.Join("\n", NetworkServerAdapter.Instance.Session?.Players.Select(x => $"{x.PlayerName} [{x.PlayerId}]"))}");
+        
+        // Show Lobby after the Server establishment
+        mainMenuManager.ShowLobby();
     }
 
     public void ResetCreateLobbyPanel()

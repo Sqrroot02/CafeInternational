@@ -5782,8 +5782,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 603236046}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: UpdatePlayer
+        m_TargetAssemblyTypeName: Assets.Scripts.Game.PlayerManager, Assembly-CSharp
+        m_MethodName: Commit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

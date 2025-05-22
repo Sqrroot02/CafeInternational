@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Models;
+using Riptide;
 using UnityEngine;
 using UnityEngine.UI;
 using static Assets.Scripts.Models.Nationality;
 
-public class Table : MonoBehaviour
+public class Table : MonoBehaviour, IMessageSerializable
 {
     public Nationality nationality;
     private Image _tableImage;
@@ -72,5 +75,17 @@ public class Table : MonoBehaviour
             return false;
         }
         return true; // If gender is the gender with the lower count
+    }
+
+    public void Serialize(Message message)
+    {
+        message.AddString(nationality.ToString());
+        message.AddSerializables(placedCards.ToArray());
+    }
+
+    public void Deserialize(Message message)
+    {
+        nationality = Enum.Parse<Nationality>(message.GetString());
+        placedCards = message.GetSerializables<Card>().ToList();
     }
 }
