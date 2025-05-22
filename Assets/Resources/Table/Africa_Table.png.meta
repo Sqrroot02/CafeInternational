@@ -162,6 +162,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -684,7 +697,30 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Africa_Table_0: 6649325943611247595
+      Africa_Table_1: -1680502935017642982
+      Africa_Table_10: -5578203373009851252
+      Africa_Table_11: -297036073552604535
+      Africa_Table_12: 3121634178820399004
+      Africa_Table_13: -4608468007546622953
+      Africa_Table_14: 4013461427668827282
+      Africa_Table_15: 6252103896251848314
+      Africa_Table_16: -3094604420464496613
+      Africa_Table_17: -1635048610976061027
+      Africa_Table_18: 6108309294523435083
+      Africa_Table_19: -4881560400980404967
+      Africa_Table_2: -4677215347857380201
+      Africa_Table_20: 2504303518078397589
+      Africa_Table_21: 3015747939143963211
+      Africa_Table_22: 5781782350416575282
+      Africa_Table_3: -3181034469091818561
+      Africa_Table_4: 3232554049161946715
+      Africa_Table_5: 726169971098720404
+      Africa_Table_6: 5998656277770753319
+      Africa_Table_7: -1830849492290607459
+      Africa_Table_8: 3740286090225339067
+      Africa_Table_9: 1773544277402127835
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -192,6 +192,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -934,7 +947,40 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Turkey_Table_0: 3750483963769817895
+      Turkey_Table_1: -369726831122835002
+      Turkey_Table_10: 1346180625282591608
+      Turkey_Table_11: -3800129706063466172
+      Turkey_Table_12: -4508268791251452286
+      Turkey_Table_13: 4848092745125271399
+      Turkey_Table_14: -4033326983405402504
+      Turkey_Table_15: -7724331834639933404
+      Turkey_Table_16: 3952670006755247451
+      Turkey_Table_17: 7863568315735786636
+      Turkey_Table_18: 5926366989830637452
+      Turkey_Table_19: -6039098877435387094
+      Turkey_Table_2: -1449017926722483130
+      Turkey_Table_20: -4058967188106666516
+      Turkey_Table_21: 1899312383601919360
+      Turkey_Table_22: 1027496083003183614
+      Turkey_Table_23: 8560496137670552060
+      Turkey_Table_24: 6066901090569288837
+      Turkey_Table_25: 8028576161821230013
+      Turkey_Table_26: 1628534404896644061
+      Turkey_Table_27: -8675901391882099164
+      Turkey_Table_28: 5568493929908369239
+      Turkey_Table_29: 5905203217857742682
+      Turkey_Table_3: -1930620438709757683
+      Turkey_Table_30: 3372637438633749840
+      Turkey_Table_31: 4849973879946545429
+      Turkey_Table_32: 3773230889980309868
+      Turkey_Table_4: 3530476355586273650
+      Turkey_Table_5: -5561235660816714955
+      Turkey_Table_6: -7197963970312950624
+      Turkey_Table_7: 7238071499297151951
+      Turkey_Table_8: 2225272392103632772
+      Turkey_Table_9: 4348992317302895914
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

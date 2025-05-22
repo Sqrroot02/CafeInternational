@@ -156,6 +156,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -634,7 +647,28 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Italy_Table_0: 9159532943490228756
+      Italy_Table_1: -1392984787452449130
+      Italy_Table_10: -6020453795767721303
+      Italy_Table_11: 6538310931968706965
+      Italy_Table_12: -3793820833694854
+      Italy_Table_13: -501832299371921317
+      Italy_Table_14: 1635045816617012366
+      Italy_Table_15: 7500604217482767944
+      Italy_Table_16: -1914673091997673633
+      Italy_Table_17: 7510632373959617650
+      Italy_Table_18: 1523973567986310953
+      Italy_Table_19: 4699783969441978301
+      Italy_Table_2: -2484202925831380130
+      Italy_Table_20: -495359551895233138
+      Italy_Table_3: 6230891842374717136
+      Italy_Table_4: 8736599571762018414
+      Italy_Table_5: 7983548606857795397
+      Italy_Table_6: 7688322791218982928
+      Italy_Table_7: 8549399571531490956
+      Italy_Table_8: 1072785081867321410
+      Italy_Table_9: 8916299853988396524
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
