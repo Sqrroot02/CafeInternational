@@ -27,7 +27,7 @@ public class LobbyPanelManager : MonoBehaviour
         SetLobbyIPLabel($"Lobby Ip: {LobbyStorage.Instance.LobbyIp}");
         SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.LobbyName);
         SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.LobbyPort);
-        SetPlayerSlot();
+        SetPlayerNames();
     }
 
     public void ResetLobbyTMPs()
@@ -57,11 +57,11 @@ public class LobbyPanelManager : MonoBehaviour
     }
 
     
-    public void SetPlayerSlot()
-    {
-        Debug.Log("[LobbyPanelManager] SetPlayerSlot called.");
-        LobbyStorage.Instance.ReplaceBotWithHuman(MainMenuHelper.GenerateName(false));
-    }
+    //public void SetPlayerSlot()
+    //{
+    //    Debug.Log("[LobbyPanelManager] SetPlayerSlot called.");
+    //    LobbyStorage.Instance.ReplaceBotWithHuman(MainMenuHelper.GenerateName(false));
+    //}
 
     /// <summary>
     /// Will be invoked if a new user joins the session
@@ -88,10 +88,13 @@ public class LobbyPanelManager : MonoBehaviour
 
     public void SetPlayerNames()
     {
+        Debug.Log("[SeSetPlayerNames] called");
         var players = LobbyStorage.Instance.ActivePlayers;
-
+        Debug.Log(players.Count);
+        Debug.Log(playerSlots.Count);
         for (int i = 0; i < Mathf.Min(players.Count, playerSlots.Count); i++)
         {
+            Debug.Log(players[i]);
             playerSlots[i].SetUp(players[i]);
         }
     }

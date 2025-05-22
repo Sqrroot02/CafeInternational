@@ -6400,7 +6400,11 @@ MonoBehaviour:
   lobbyNameTMP: {fileID: 19673853}
   lobbyPortTMP: {fileID: 180253406}
   lobbyIPTMP: {fileID: 800990056}
-  playerSlots: []
+  playerSlots:
+  - {fileID: 1720505420}
+  - {fileID: 1732350338}
+  - {fileID: 464277297}
+  - {fileID: 1460702277}
 --- !u!1 &860275973
 GameObject:
   m_ObjectHideFlags: 0

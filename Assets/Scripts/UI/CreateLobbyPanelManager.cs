@@ -29,8 +29,10 @@ public class CreateLobbyPanelManager : MonoBehaviour
     private string lobbyNamePlaceholderValue = "Enter Lobby Name...";
 
     private string ipPlaceHolderValue = "Enter IP...";
+   
+    private string portPlayholderValue = "57967";
 
-    private string portPlayholderValue = "Enter Port...";
+    private int lobbyPortTMPStandardValue = 57967;
 
     public Button createLobbyButton;
 
@@ -51,8 +53,10 @@ public class CreateLobbyPanelManager : MonoBehaviour
         string enteredIp = ipInputField.text;
         int intLobbyPort = MainMenuHelper.GetNumberFromLobbyPortTMP(portInputField);
 
-        string invalid = null;
-
+        if (intLobbyPort == 0)
+        {
+            intLobbyPort = lobbyPortTMPStandardValue;
+        }
 
         if (!MainMenuHelper.IsValidNicknameOrLobbyName(enteredNickname))
         {

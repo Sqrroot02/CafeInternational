@@ -81,7 +81,7 @@ namespace Assets.Scripts.Models
             for (var i = ActivePlayers.Count; i < 4; i++)
             {
                 var botName = MainMenuHelper.GenerateName(true);
-                ActivePlayers.Add(new Player($"Bot {botName}", 0, true, false, false));
+                ActivePlayers.Add(new Player(botName, 0, true, false, false));
             }
         }
 
