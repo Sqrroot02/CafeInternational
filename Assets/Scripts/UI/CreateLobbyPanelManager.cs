@@ -18,21 +18,12 @@ public class CreateLobbyPanelManager : MonoBehaviour
 
     public TMP_InputField nicknameInputField;
 
-    public TMP_InputField ipInputField;
-
-    public TMP_InputField portInputField;
-
     public SceneMessageHandler sceneMessageHandler;
 
     private string nickNamePlacerholderValue = "Enter Nickname...";
 
     private string lobbyNamePlaceholderValue = "Enter Lobby Name...";
 
-    private string ipPlaceHolderValue = "Enter IP...";
-   
-    private string portPlayholderValue = "57967";
-
-    private int lobbyPortTMPStandardValue = 57967;
 
     public Button createLobbyButton;
 
@@ -40,8 +31,6 @@ public class CreateLobbyPanelManager : MonoBehaviour
     {
         SetLobbyNamePlaceholder(lobbyNamePlaceholderValue);
         SetNicknamePlaceholder(nickNamePlacerholderValue);
-        SetIPPlaceholder(ipPlaceHolderValue);
-        SetPortPlaceholder(portPlayholderValue);  
 
         MainMenuHelper.SetupButtonActivationValidation(createLobbyButton, nicknameInputField, lobbyNameInput);
     }
@@ -50,13 +39,6 @@ public class CreateLobbyPanelManager : MonoBehaviour
     {
         var enteredLobbyName = lobbyNameInput.text;
         var enteredNickname = nicknameInputField.text;
-        string enteredIp = ipInputField.text;
-        int intLobbyPort = MainMenuHelper.GetNumberFromLobbyPortTMP(portInputField);
-
-        if (intLobbyPort == 0)
-        {
-            intLobbyPort = lobbyPortTMPStandardValue;
-        }
 
         if (!MainMenuHelper.IsValidNicknameOrLobbyName(enteredNickname))
         {
@@ -66,20 +48,9 @@ public class CreateLobbyPanelManager : MonoBehaviour
         {
             sceneMessageHandler.ShowScene(MainMenuHelper.CreateNicknameLobbyErrorMsg("Lobbyname"));
         }
-        else if (!MainMenuHelper.ValidateIp(enteredIp))
-        {
-            LobbyStorage.Instance.LobbyName = enteredLobbyName;
-            LobbyStorage.Instance.LobbyIp = NetworkUtil.PublicIpAddress();
-            
-            sceneMessageHandler.ShowScene(MainMenuHelper.GetIPErrorMsg());
-        }
-        else if (!MainMenuHelper.IsValidUserPort(intLobbyPort))
-        {
-            sceneMessageHandler.ShowScene(MainMenuHelper.GetPortErrorMsg());
-        }
         else
         {
-            LobbyStorage.Instance.InitializeLobby(enteredNickname, enteredLobbyName, enteredIp, intLobbyPort);
+            LobbyStorage.Instance.InitializeLobby(enteredNickname, enteredLobbyName);
             InitAndRunServerSession();
         }
     }
@@ -134,25 +105,16 @@ public class CreateLobbyPanelManager : MonoBehaviour
         Debug.Log("Reset Create Lobby Panel");
         ResetLobbyNameText();
         ResetNicknameText();
-        ResetIPText();
-        ResetPortText();
     }
 
     public void SetLobbyNamePlaceholder(string text) => MainMenuHelper.SetPlaceholder(lobbyNameInput, text);
     public void SetNicknamePlaceholder(string text) => MainMenuHelper.SetPlaceholder(nicknameInputField, text);
-    public void SetIPPlaceholder(string text) => MainMenuHelper.SetPlaceholder(ipInputField, text);
-    public void SetPortPlaceholder(string text) => MainMenuHelper.SetPlaceholder(portInputField, text);
 
     public string GetLobbyNameText() => MainMenuHelper.GetInputText(lobbyNameInput);
     public string GetNicknameText() => MainMenuHelper.GetInputText(nicknameInputField);
-    public string GetIPText() => MainMenuHelper.GetInputText(ipInputField);
-    public string GetPortText() => MainMenuHelper.GetInputText(portInputField);
+
 
     public void ResetLobbyNameText() => MainMenuHelper.ResetInputText(lobbyNameInput);
     public void ResetNicknameText() => MainMenuHelper.ResetInputText(nicknameInputField);
-    public void ResetIPText() => MainMenuHelper.ResetInputText(ipInputField);
-    public void ResetPortText() => MainMenuHelper.ResetInputText(portInputField);
-
-
 
 }

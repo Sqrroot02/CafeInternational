@@ -45,7 +45,6 @@ namespace Assets.Scripts.Models
         public string CardPath { get; set; } = "Normal/";
 
         private string globalLobbyName;
-        private int globalLobbyPort = 57967;
         private string globalLobbyIp;
 
 
@@ -63,13 +62,11 @@ namespace Assets.Scripts.Models
             DontDestroyOnLoad(gameObject);
         }
 
-        public void InitializeLobby(string localPlayerName, string lobbyName, string lobbyIp, int lobbyPort)
+        public void InitializeLobby(string localPlayerName, string lobbyName)
         {
             Debug.Log($"[LobbyStorage] InitializeLobby called with localPlayerName: {localPlayerName}, lobbyName: {lobbyName}");
 
             LobbyName = lobbyName;
-            LobbyIp = lobbyIp;
-            LobbyPort = lobbyPort;
         
             ActivePlayers.Clear();
 
