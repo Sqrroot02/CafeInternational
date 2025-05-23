@@ -44,7 +44,9 @@ namespace Assets.Scripts.Models
         /// The associated Game bar of the player
         /// </summary>
         public GameObject PlayerGameBar { get; set; }
-        
+
+        public string playerSpritePath { get; set; }
+
         public Player()
         {
             

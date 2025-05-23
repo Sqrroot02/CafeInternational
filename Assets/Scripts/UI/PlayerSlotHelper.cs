@@ -34,6 +34,13 @@ public class PlayerSlotHelper : MonoBehaviour
         
     }
 
+    public void ResetBotStrengthDropDown()
+    {
+        Debug.Log("Reset Bot Strength");
+        botStrengthDropdown.value = 0;
+        botStrengthDropdown.RefreshShownValue();
+    }
+
     public void OnBotStrengthChanged()
     {
         Debug.Log($"[PlayerSlotHelper] OnBotStrengthChanged called.");

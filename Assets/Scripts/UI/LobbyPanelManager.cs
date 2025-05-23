@@ -36,6 +36,12 @@ public class LobbyPanelManager : MonoBehaviour
         ResetLobbyIPLabel();
         ResetLobbyNameLabel();
         ResetLobbyPortLabel();
+
+        foreach (var slot in playerSlots) {
+            if (slot.botStrengthDropdown != null) {
+                slot.ResetBotStrengthDropDown();
+            }
+        }
     }
     
     /// <summary>
