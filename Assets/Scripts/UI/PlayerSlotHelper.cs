@@ -14,6 +14,7 @@ public class PlayerSlotHelper : MonoBehaviour
     public LobbyPanelManager lobbyPanelManager;
     public GameObject placeHolder;
     public SceneMessageHandler sceneMessageHandler;
+    public Image playerPicture;
 
     private Player assignedPlayer;
 
@@ -22,6 +23,8 @@ public class PlayerSlotHelper : MonoBehaviour
         Debug.Log($"[PlayerSlotHelper] SetUp called for player: {player.PlayerName}");
         assignedPlayer = player;
         Debug.Log("Assgined Playername:" + assignedPlayer.PlayerName);
+
+        playerPicture.sprite = Resources.Load<Sprite>(player.PlayerSpritePath);
 
         nameText.text = player.PlayerName;
         if (!assignedPlayer.LobbyHost)
@@ -93,6 +96,9 @@ public class PlayerSlotHelper : MonoBehaviour
                 
                 Debug.Log($"[PlayerSlotHelper] Name changed to: {assignedPlayer.PlayerName}");
                 assignedPlayer.PlayerName = newName;
+                MainMenuHelper.AssignPlayerSprite(assignedPlayer, LobbyStorage.Instance.ActivePlayers.IndexOf(assignedPlayer));
+                playerPicture.sprite = Resources.Load<Sprite>(player.PlayerSpritePath);
+
             }
             else
             {

@@ -105,6 +105,7 @@ namespace Assets.Scripts.Game
             {
                 Players[i].PlayerGameBar = GameObject.Find("PlayerGameBarPlayer" + (i + 1)).transform.GetChild(0).gameObject;
                 Players[i].PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().text = Players[i].PlayerName;
+                Players[i].PlayerGameBar.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(Players[i].PlayerSpritePath);
             }
         }
 

@@ -154,9 +154,54 @@ namespace Assets.Scripts.UI
             ValidateFieldsAndToggleButton(button, fields);
         }
 
-        private static readonly string[] FunncyNameNouns = {
+        public static readonly string[] RandomPlayerNames = {
             "Candamir", "Hildegard", "Jean", "Franz", "LarsiHasi", "AlexPatoli", "Wolli"
         };
+
+        public static readonly string[] FunnyBotNames = {
+            "Botzilla",
+            "KaffeeKarl",
+            "LatteLarry",
+            "Espressina",
+            "Toastinator",
+            "SchnitzelBot",
+            "BrötchenBob",
+            "WurstWilli",
+            "Botfried",
+            "Kekskrümel",
+            "MokkaManni"
+        };
+
+
+        public static void AssignPlayerSprite(Player player, int playerIndex)
+        {
+            if (player.IsBot)
+            {
+                // Feste Bilder für Bot 0 bis Bot 3
+                player.PlayerSpritePath = $"{SymbolSprites}/Bot_{playerIndex + 1}";
+            }
+            else
+            {
+                // Spezielle Spielernamen
+                switch (player.PlayerName)
+                {
+                    case "LarsiHasi":
+                        player.PlayerSpritePath = $"{SymbolSprites}/LarsiHasi";
+                        break;
+                    case "AlexPatoli":
+                        player.PlayerSpritePath = $"{SymbolSprites}/AlexPatoli";
+                        break;
+                    case "Wolli":
+                        player.PlayerSpritePath = $"{SymbolSprites}/Wolli";
+                        break;
+                    default:
+                        player.PlayerSpritePath = $"{SymbolSprites}/Player_{playerIndex + 1}";
+                        break;
+                }
+            }
+        }
+
+        private static string SymbolSprites = "Assets/Ressources/MainMenu/PlayerSymbols";
 
         private static readonly System.Random random = new(31415);
 
@@ -179,8 +224,7 @@ namespace Assets.Scripts.UI
             string name;
             do
             {
-                string generate = FunncyNameNouns[random.Next(FunncyNameNouns.Length)];
-                name = isBot ? "Bot " + generate : generate;
+                name = isBot ? "Bot " + FunnyBotNames[random.Next(FunnyBotNames.Length)] : RandomPlayerNames[random.Next(RandomPlayerNames.Length)];
             } while (usedNames.Contains(name));
 
             return name;

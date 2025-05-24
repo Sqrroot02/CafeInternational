@@ -74,42 +74,14 @@ namespace Assets.Scripts.Models
             ClientPlayerId = hostPlayer.PlayerId;
                 
             ActivePlayers.Add(hostPlayer);
-            
+
+            MainMenuHelper.AssignPlayerSprite(hostPlayer, ActivePlayers.IndexOf(hostPlayer));
+
             for (var i = ActivePlayers.Count; i < 4; i++)
             {
                 var botName = MainMenuHelper.GenerateName(true);
                 ActivePlayers.Add(new Player(botName, 0, true, false, false));
             }
-        }
-
-        public void ReplaceBotWithHuman(string playerName)
-        {
-            for (var i = 0; i < ActivePlayers.Count; i++)
-            {
-                if (!ActivePlayers[i].IsBot)
-                {
-                    ActivePlayers[i] = new Player(playerName, 0, false, false, false);
-                    return;
-                }
-            }
-        }
-
-        public void ReplacePlayerWithBot(string playerName)
-        {
-            for (var i = 0; i < ActivePlayers.Count; i++)
-            {
-                if (ActivePlayers[i].PlayerName == playerName && ActivePlayers[i].IsBot)
-                {
-                    string botName = MainMenuHelper.GenerateName(false);
-                    ActivePlayers[i] = new Player($"Bot {botName}", 0, true, false, false);
-                    Debug.Log($"{playerName} has been replaced with a bot");
-                    return;
-                }
-                Debug.Log("Active Players: " + ActivePlayers[i]);
-
-            }
-
-            Debug.Log($"No Player with naem:  {playerName} found.");
         }
     
         /// <summary>

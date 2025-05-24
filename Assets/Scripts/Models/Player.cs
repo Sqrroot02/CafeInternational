@@ -45,7 +45,7 @@ namespace Assets.Scripts.Models
         /// </summary>
         public GameObject PlayerGameBar { get; set; }
 
-        public string playerSpritePath { get; set; }
+        public string PlayerSpritePath { get; set; }
 
         public Player()
         {
@@ -60,7 +60,7 @@ namespace Assets.Scripts.Models
             LobbyHost = lobbyHost;
             IsStrongBot = isStrongBot;
         }
-    
+
         public bool IsStrongBot { get; set; }
 
         public void SetPlayerManager(PlayerManager playerManager)
