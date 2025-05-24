@@ -10,150 +10,9 @@ using System.Net;
 using System.Net.Sockets;
 
 namespace Assets.Scripts.UI
-
 {
     public static class MainMenuHelper
     {
-        public static void SetPlaceholder(TMP_InputField field, string text)
-        {
-            if (field.placeholder is TextMeshProUGUI placeholder)
-                placeholder.text = text;
-        }
-
-        public static string GetInputText(TMP_InputField field)
-        {
-            return field.text;
-        }
-
-        public static void ResetInputText(TMP_InputField field)
-        {
-            field.text = "";
-        }
-
-        public static void SetLabelText(TMP_Text field, string text)
-        {
-            field.text = text;
-        }
-
-        public static string GetLabelText(TMP_Text field)
-        {
-            return field.text;
-        }
-
-        public static int GetNumberFromLobbyPortTMP(TMP_InputField lobbyPortTMP)
-        {
-            if (int.TryParse(lobbyPortTMP.text, out int result))
-            {
-                return result;
-            }
-            else
-            {
-                Debug.LogWarning("Invalid Port Input");
-                return 0;
-            }
-        }
-
-        public static bool ValidateIp(string input)
-        {
-            if (input.Length < 7)
-            {
-                Debug.LogWarning("Invalid ip join lobby input: Too short.");
-                return false;
-            }
-
-            if (IPAddress.TryParse(input, out IPAddress address))
-            {
-                if (address.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    Debug.Log("Valid ipv4 as join lobby input");
-                    return true;
-                }
-                else if (address.AddressFamily == AddressFamily.InterNetworkV6)
-                {
-                    Debug.Log("Valid ipv6 as join lobby input");
-                    return true;
-                }
-            }
-
-            Debug.LogWarning("Invalid ip join lobby input.");
-            return false;
-        }
-
-        public static void ResetLabelText(TMP_Text field)
-        {
-            field.text = "";
-        }
-
-        public static string CreateNicknameLobbyErrorMsg(string invalid)
-        {
-            return $"An invalid {invalid} has been entered. Try to use a {invalid} that has at least 1 and maximum 10 characters and only contains letters.";
-        }
-
-        public static string GetIPErrorMsg()
-        {
-            return "An semantic invalid IP has beend entered.";
-        }
-
-        public static string GetPortErrorMsg()
-        {
-            return "An invalid Port has beend entered. Enter a Port between 1024 and 65535.";
-        }
-
-        public static bool IsValidNicknameOrLobbyName(string input)
-        {
-            Debug.Log("Validate Nickname oder Lobbyname.");
-            if (string.IsNullOrEmpty(input) || input.Length > 10)
-            {
-                Debug.Log("An invalid input has been entered.");
-                return false;
-            }
-
-            foreach (char c in input)
-            {
-                if (!char.IsLetter(c))
-                    return false;
-            }
-
-            Debug.Log("Valid input.");
-            return true;
-        }
-
-        public static bool IsValidUserPort(int port)
-        {
-            if (port >= 1024 && port <= 65535)
-            {
-                Debug.Log("Valid port");
-                return true;
-            }
-
-            Debug.Log("invalid Port");
-            return false;
-        }
-
-        private static void ValidateFieldsAndToggleButton(Button button, params TMP_InputField[] fields)
-        {
-            bool allFilled = true;
-            foreach (var field in fields)
-            {
-                if (string.IsNullOrWhiteSpace(field.text))
-                {
-                    allFilled = false;
-                    break;
-                }
-            }
-            button.interactable = allFilled;
-        }
-
-        public static void SetupButtonActivationValidation(Button button, params TMP_InputField[] fields)
-        {
-            foreach (var field in fields)
-            {
-                field.onValueChanged.AddListener((_) => ValidateFieldsAndToggleButton(button, fields));
-            }
-            // Initial check
-            ValidateFieldsAndToggleButton(button, fields);
-        }
-
         public static readonly string[] RandomPlayerNames = {
             "Candamir", "Hildegard", "Jean", "Franz", "LarsiHasi", "AlexPatoli", "Wolli"
         };
@@ -172,17 +31,179 @@ namespace Assets.Scripts.UI
             "MokkaManni"
         };
 
+        private static readonly System.Random random = new(31415);
+
+        private static string SymbolSprites = "MainMenu/PlayerSymbols";
+
+        public static void SetPlaceholder(TMP_InputField field, string text)
+        {
+            if (field.placeholder is TextMeshProUGUI placeholder)
+            {
+                placeholder.text = text;
+                Debug.Log($"[MainMenuHelper] Placeholder set to: '{text}'");
+            }
+        }
+
+        public static string GetInputText(TMP_InputField field)
+        {
+            Debug.Log($"[MainMenuHelper] Retrieved input text: '{field.text}'");
+            return field.text;
+        }
+
+        public static void ResetInputText(TMP_InputField field)
+        {
+            Debug.Log($"[MainMenuHelper] Reset input field.");
+            field.text = "";
+        }
+
+        public static void SetLabelText(TMP_Text field, string text)
+        {
+            Debug.Log($"[MainMenuHelper] Set label text to: '{text}'");
+            field.text = text;
+        }
+
+        public static string GetLabelText(TMP_Text field)
+        {
+            Debug.Log($"[MainMenuHelper] Retrieved label text: '{field.text}'");
+            return field.text;
+        }
+
+        public static int GetNumberFromLobbyPortTMP(TMP_InputField lobbyPortTMP)
+        {
+            if (int.TryParse(lobbyPortTMP.text, out int result))
+            {
+                Debug.Log($"[MainMenuHelper] Parsed lobby port: {result}");
+                return result;
+            }
+            else
+            {
+                Debug.LogWarning("[MainMenuHelper] Invalid lobby port input.");
+                return 0;
+            }
+        }
+
+        public static bool ValidateIp(string input)
+        {
+            if (input.Length < 7)
+            {
+                Debug.LogWarning("[MainMenuHelper] IP input too short.");
+                return false;
+            }
+
+            if (IPAddress.TryParse(input, out IPAddress address))
+            {
+                if (address.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    Debug.Log("[MainMenuHelper] Valid IPv4 address.");
+                    return true;
+                }
+                else if (address.AddressFamily == AddressFamily.InterNetworkV6)
+                {
+                    Debug.Log("[MainMenuHelper] Valid IPv6 address.");
+                    return true;
+                }
+            }
+
+            Debug.LogWarning("[MainMenuHelper] Invalid IP input.");
+            return false;
+        }
+
+        public static void ResetLabelText(TMP_Text field)
+        {
+            Debug.Log("[MainMenuHelper] Label text reset.");
+            field.text = "";
+        }
+
+        public static string CreateNicknameLobbyErrorMsg(string invalid)
+        {
+            string msg = $"An invalid {invalid} has been entered. Try to use a {invalid} that has at least 1 and maximum 10 characters and only contains letters.";
+            Debug.Log($"[MainMenuHelper] Created error message: {msg}");
+            return msg;
+        }
+
+        public static string GetIPErrorMsg()
+        {
+            const string msg = "An semantic invalid IP has been entered.";
+            Debug.Log($"[MainMenuHelper] IP error message: {msg}");
+            return msg;
+        }
+
+        public static string GetPortErrorMsg()
+        {
+            const string msg = "An invalid Port has been entered. Enter a Port between 1024 and 65535.";
+            Debug.Log($"[MainMenuHelper] Port error message: {msg}");
+            return msg;
+        }
+
+        public static bool IsValidNicknameOrLobbyName(string input)
+        {
+            Debug.Log("[MainMenuHelper] Validating nickname or lobby name.");
+
+            if (string.IsNullOrEmpty(input) || input.Length > 10)
+            {
+                Debug.LogWarning("[MainMenuHelper] Input is null, empty or too long.");
+                return false;
+            }
+
+            foreach (char c in input)
+            {
+                if (!char.IsLetter(c))
+                {
+                    Debug.LogWarning("[MainMenuHelper] Input contains non-letter characters.");
+                    return false;
+                }
+            }
+
+            Debug.Log("[MainMenuHelper] Valid nickname or lobby name.");
+            return true;
+        }
+
+        public static bool IsValidUserPort(int port)
+        {
+            bool isValid = port >= 1024 && port <= 65535;
+            Debug.Log($"[MainMenuHelper] Port validation result: {isValid} for port {port}");
+            return isValid;
+        }
+
+        private static void ValidateFieldsAndToggleButton(Button button, params TMP_InputField[] fields)
+        {
+            bool allFilled = true;
+            foreach (var field in fields)
+            {
+                if (string.IsNullOrWhiteSpace(field.text))
+                {
+                    allFilled = false;
+                    break;
+                }
+            }
+
+            button.interactable = allFilled;
+            Debug.Log($"[MainMenuHelper] Button interactivity set to: {allFilled}");
+        }
+
+        public static void SetupButtonActivationValidation(Button button, params TMP_InputField[] fields)
+        {
+            foreach (var field in fields)
+            {
+                field.onValueChanged.AddListener((_) =>
+                {
+                    Debug.Log($"[MainMenuHelper] Input field changed, revalidating...");
+                    ValidateFieldsAndToggleButton(button, fields);
+                });
+            }
+
+            ValidateFieldsAndToggleButton(button, fields);
+        }
 
         public static void AssignPlayerSprite(Player player, int playerIndex)
         {
             if (player.IsBot)
             {
-                // Feste Bilder für Bot 0 bis Bot 3
                 player.PlayerSpritePath = $"{SymbolSprites}/Bot_{playerIndex + 1}";
+                Debug.Log($"[MainMenuHelper] Assigned Bot sprite path: {player.PlayerSpritePath}");
             }
             else
             {
-                // Spezielle Spielernamen
                 switch (player.PlayerName)
                 {
                     case "LarsiHasi":
@@ -198,12 +219,9 @@ namespace Assets.Scripts.UI
                         player.PlayerSpritePath = $"{SymbolSprites}/Player_{playerIndex + 1}";
                         break;
                 }
+                Debug.Log($"[MainMenuHelper] Assigned Player sprite path: {player.PlayerSpritePath} for name {player.PlayerName}");
             }
         }
-
-        private static string SymbolSprites = "Assets/Ressources/MainMenu/PlayerSymbols";
-
-        private static readonly System.Random random = new(31415);
 
         public static string GenerateName(bool isBot)
         {
@@ -224,10 +242,13 @@ namespace Assets.Scripts.UI
             string name;
             do
             {
-                name = isBot ? "Bot " + FunnyBotNames[random.Next(FunnyBotNames.Length)] : RandomPlayerNames[random.Next(RandomPlayerNames.Length)];
+                name = isBot
+                    ? "Bot " + FunnyBotNames[random.Next(FunnyBotNames.Length)]
+                    : RandomPlayerNames[random.Next(RandomPlayerNames.Length)];
             } while (usedNames.Contains(name));
 
+            Debug.Log($"[MainMenuHelper] Generated {(isBot ? "bot" : "player")} name: {name}");
             return name;
         }
     }
-} 
+}

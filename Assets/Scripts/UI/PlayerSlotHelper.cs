@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using Assets.Scripts.UI;
 using Assets.Scripts.Models;
 using UnityEngine.UI;
+using UnityEngine.UI;
+using Player = Assets.Scripts.Models.Player;
 
 public class PlayerSlotHelper : MonoBehaviour
 {
@@ -20,92 +22,107 @@ public class PlayerSlotHelper : MonoBehaviour
 
     public void SetUp(Player player)
     {
-        Debug.Log($"[PlayerSlotHelper] SetUp called for player: {player.PlayerName}");
+        Debug.Log($"[PlayerSlotHelper] SetUp: Initializing slot for player '{player.PlayerName}'");
         assignedPlayer = player;
-        Debug.Log("Assgined Playername:" + assignedPlayer.PlayerName);
 
-        playerPicture.sprite = Resources.Load<Sprite>(player.PlayerSpritePath);
+        Sprite sprite = Resources.Load<Sprite>(player.PlayerSpritePath);
+        if (sprite == null)
+        {
+            Debug.LogWarning($"[PlayerSlotHelper] SetUp: Could not load sprite at path '{player.PlayerSpritePath}'");
+        }
+        playerPicture.sprite = sprite;
 
         nameText.text = player.PlayerName;
+        Debug.Log($"[PlayerSlotHelper] SetUp: Assigned name '{assignedPlayer.PlayerName}'");
+
         if (!assignedPlayer.LobbyHost)
         {
             actionButton.GetComponentInChildren<TMP_Text>().text = player.IsBot ? "Add Player" : "Add Bot";
-            Debug.Log("Player Bot: " + player.IsBot);
+            Debug.Log($"[PlayerSlotHelper] SetUp: Action button set to '{actionButton.GetComponentInChildren<TMP_Text>().text}'");
             botStrengthDropdown.gameObject.SetActive(player.IsBot);
             placeHolder.SetActive(!player.IsBot);
+            Debug.Log($"[PlayerSlotHelper] SetUp: Bot dropdown active = {player.IsBot}, Placeholder active = {!player.IsBot}");
         }
-        
     }
 
     public void ResetBotStrengthDropDown()
     {
-        Debug.Log("Reset Bot Strength");
+        Debug.Log("[PlayerSlotHelper] ResetBotStrengthDropDown: Resetting dropdown to default value.");
         botStrengthDropdown.value = 0;
         botStrengthDropdown.RefreshShownValue();
     }
 
     public void OnBotStrengthChanged()
     {
-        Debug.Log($"[PlayerSlotHelper] OnBotStrengthChanged called.");
+        Debug.Log("[PlayerSlotHelper] OnBotStrengthChanged: Called.");
 
         if (assignedPlayer != null && assignedPlayer.IsBot)
         {
             string selected = botStrengthDropdown.options[botStrengthDropdown.value].text;
             assignedPlayer.IsStrongBot = selected == "Strong";
-            Debug.Log($"[PlayerSlotHelper] Bot strength set to: {assignedPlayer.IsStrongBot}");
+            Debug.Log($"[PlayerSlotHelper] OnBotStrengthChanged: Strength set to '{selected}', IsStrongBot = {assignedPlayer.IsStrongBot}");
         }
     }
 
     public void OnActionButtonClicked()
     {
-        Debug.Log("[PlayerSlotHelper] OnActionButtonClicked called.");
-
-        if (assignedPlayer.IsBot) {
-            Debug.Log("Player ist set to non bot.");
-            assignedPlayer.IsBot = false;
-        } else {
-            assignedPlayer.IsBot = true;
-        }
+        Debug.Log("[PlayerSlotHelper] OnActionButtonClicked: Called.");
 
         if (assignedPlayer != null)
         {
-            Debug.Log(assignedPlayer.IsBot);
-            string namePrefix = assignedPlayer.IsBot ? "Bot " : "";
-            
-            string playerName = assignedPlayer.IsBot ? MainMenuHelper.GenerateName(true) : MainMenuHelper.GenerateName(false);
-            assignedPlayer.PlayerName = playerName;
-            Debug.Log($"[PlayerSlotHelper] Player name set to: {assignedPlayer.PlayerName}");
-        }
+            assignedPlayer.IsBot = !assignedPlayer.IsBot;
+            Debug.Log($"[PlayerSlotHelper] OnActionButtonClicked: Bot status toggled to {assignedPlayer.IsBot}");
 
-        SetUp(assignedPlayer);
+            string playerName = MainMenuHelper.GenerateName(assignedPlayer.IsBot);
+            assignedPlayer.PlayerName = playerName;
+            Debug.Log($"[PlayerSlotHelper] OnActionButtonClicked: New name assigned: '{assignedPlayer.PlayerName}'");
+
+            MainMenuHelper.AssignPlayerSprite(assignedPlayer, LobbyStorage.Instance.ActivePlayers.IndexOf(assignedPlayer));
+            playerPicture.sprite = Resources.Load<Sprite>(assignedPlayer.PlayerSpritePath);
+
+            SetUp(assignedPlayer);
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerSlotHelper] OnActionButtonClicked: No player assigned.");
+        }
     }
 
     public void OnNameChanged()
     {
-        Debug.Log("[PlayerSlotHelper] OnNameChanged called.");
+        Debug.Log("[PlayerSlotHelper] OnNameChanged: Called.");
 
         if (assignedPlayer != null)
         {
             string newName = nameText.text;
 
-            if (MainMenuHelper.IsValidNicknameOrLobbyName(newName)) {
+            if (MainMenuHelper.IsValidNicknameOrLobbyName(newName))
+            {
                 if (assignedPlayer.IsBot)
                 {
                     newName = "Bot " + newName;
                 }
-                
-                Debug.Log($"[PlayerSlotHelper] Name changed to: {assignedPlayer.PlayerName}");
-                assignedPlayer.PlayerName = newName;
-                MainMenuHelper.AssignPlayerSprite(assignedPlayer, LobbyStorage.Instance.ActivePlayers.IndexOf(assignedPlayer));
-                playerPicture.sprite = Resources.Load<Sprite>(player.PlayerSpritePath);
 
+                Debug.Log($"[PlayerSlotHelper] OnNameChanged: Valid name entered: '{newName}'");
+                assignedPlayer.PlayerName = newName;
+
+                MainMenuHelper.AssignPlayerSprite(assignedPlayer, LobbyStorage.Instance.ActivePlayers.IndexOf(assignedPlayer));
+                playerPicture.sprite = Resources.Load<Sprite>(assignedPlayer.PlayerSpritePath);
+
+                Debug.Log($"[PlayerSlotHelper] OnNameChanged: Updated sprite and name to '{assignedPlayer.PlayerName}'");
             }
             else
             {
+                Debug.LogWarning($"[PlayerSlotHelper] OnNameChanged: Invalid name entered: '{newName}'");
                 sceneMessageHandler.ShowScene(MainMenuHelper.CreateNicknameLobbyErrorMsg("Nickname"));
             }
-        }
 
-        nameText.text = assignedPlayer.PlayerName;
+            // Update field visually to current name (in case of rejection)
+            nameText.text = assignedPlayer.PlayerName;
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerSlotHelper] OnNameChanged: No player assigned.");
+        }
     }
 }

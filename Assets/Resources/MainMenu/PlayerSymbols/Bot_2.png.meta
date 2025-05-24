@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5e1012301a96eb946a837bab362c28a3
+guid: 32dd9b5fef77eed47843e10a5f71db50
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5567519405336215172
-    second: 20250506_0955_Liebenswerter Rosa Roboter_remix_01jtj9dpsge4d9zxc0zzj363k8-modified_0
+      213: -2168397037705100118
+    second: 20250505_1928_Lieblicher Cartoon-Roboter_simple_compose_01jtgqvspvf8z8y8ax2h0d1k60-modified_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250506_0955_Liebenswerter Rosa Roboter_remix_01jtj9dpsge4d9zxc0zzj363k8-modified_0
+      name: 20250505_1928_Lieblicher Cartoon-Roboter_simple_compose_01jtgqvspvf8z8y8ax2h0d1k60-modified_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c7147dc49923cb2b0800000000000000
-      internalID: -5567519405336215172
+      spriteID: aa40493026e48e1e0800000000000000
+      internalID: -2168397037705100118
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      20250506_0955_Liebenswerter Rosa Roboter_remix_01jtj9dpsge4d9zxc0zzj363k8-modified_0: -5567519405336215172
+      20250505_1928_Lieblicher Cartoon-Roboter_simple_compose_01jtgqvspvf8z8y8ax2h0d1k60-modified_0: -2168397037705100118
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

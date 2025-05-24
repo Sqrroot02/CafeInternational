@@ -18,12 +18,14 @@ public class LobbyPanelManager : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("[LobbyPanelManager] Awake: Assigning self to PlayerLobbyActionHandler");
         PlayerLobbyActionHandler.Manager = this;
     }
-    
+
     public void InitiateLobby()
     {
-        Debug.Log("[LobbyPanelManager] InitiateLobby called.");
+        Debug.Log("[LobbyPanelManager] InitiateLobby: Initializing lobby display");
+
         SetLobbyIPLabel($"Lobby Ip: {LobbyStorage.Instance.LobbyIp}");
         SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.LobbyName);
         SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.LobbyPort);
@@ -32,92 +34,142 @@ public class LobbyPanelManager : MonoBehaviour
 
     public void ResetLobbyTMPs()
     {
-        Debug.Log("[LobbyPanelManager] ResetLobbyTMPs called.");
+        Debug.Log("[LobbyPanelManager] ResetLobbyTMPs: Resetting all lobby UI fields");
+
         ResetLobbyIPLabel();
         ResetLobbyNameLabel();
         ResetLobbyPortLabel();
 
-        foreach (var slot in playerSlots) {
-            if (slot.botStrengthDropdown != null) {
+        foreach (var slot in playerSlots)
+        {
+            if (slot.botStrengthDropdown != null)
+            {
+                Debug.Log("[LobbyPanelManager] ResetLobbyTMPs: Resetting bot strength dropdown");
                 slot.ResetBotStrengthDropDown();
             }
         }
     }
-    
-    /// <summary>
-    /// Starts the Game
-    /// </summary>
+
     public void StartGame()
     {
-        // Shuffle players sequence before start
+        Debug.Log("[LobbyPanelManager] StartGame: Preparing and sending start game message");
+
         LobbyStorage.Instance.ShufflePlayers();
-        
-        // Build and send Message for initializing game 
+        Debug.Log("[LobbyPanelManager] StartGame: Players shuffled");
+
         var message = new StartGameMessage
         {
             LobbyName = LobbyStorage.Instance.LobbyName,
             Players = LobbyStorage.Instance.ActivePlayers.ToArray(),
             Starter = LobbyStorage.Instance.ActivePlayers[0]
         };
+
+        Debug.Log($"[LobbyPanelManager] StartGame: Sending StartGameMessage for lobby '{message.LobbyName}' with {message.Players.Length} players.");
         NetworkRouter.SendToServer(message, MessageType.StartGame);
     }
 
-    
-    //public void SetPlayerSlot()
-    //{
-    //    Debug.Log("[LobbyPanelManager] SetPlayerSlot called.");
-    //    LobbyStorage.Instance.ReplaceBotWithHuman(MainMenuHelper.GenerateName(false));
-    //}
-
-    /// <summary>
-    /// Will be invoked if a new user joins the session
-    /// </summary>
-    /// <param name="message"></param>
     public void LobbyUpdate(PlayerLobbyActionMessage message)
     {
-        // Update player names
+        Debug.Log("[LobbyPanelManager] LobbyUpdate: Received new lobby state from server");
+
+        // Update player list
         LobbyStorage.Instance.ActivePlayers = message.Players.ToList();
+        Debug.Log($"[LobbyPanelManager] LobbyUpdate: Updated active players list, count = {message.Players.Length}");
         SetPlayerNames();
-        
-        // Update lobby name
+
+        // Update lobby metadata
         LobbyStorage.Instance.LobbyName = message.LobbyName;
-        RefreshLobbyNameLabel();
-        
-        // Update Lobby port
         LobbyStorage.Instance.LobbyPort = message.LobbyPort;
-        RefreshLobbyPortLabel();
-        
-        // Update Lobby IP
         LobbyStorage.Instance.LobbyIp = message.LobbyIp;
+
+        Debug.Log($"[LobbyPanelManager] LobbyUpdate: LobbyName='{message.LobbyName}', Port='{message.LobbyPort}', IP='{message.LobbyIp}'");
+
+        RefreshLobbyNameLabel();
+        RefreshLobbyPortLabel();
         RefreshLobbyIpLabel();
     }
 
     public void SetPlayerNames()
     {
-        Debug.Log("[SeSetPlayerNames] called");
+        Debug.Log("[LobbyPanelManager] SetPlayerNames: Updating UI with player data");
+
         var players = LobbyStorage.Instance.ActivePlayers;
-        Debug.Log(players.Count);
-        Debug.Log(playerSlots.Count);
-        for (int i = 0; i < Mathf.Min(players.Count, playerSlots.Count); i++)
+        int limit = Mathf.Min(players.Count, playerSlots.Count);
+        Debug.Log($"[LobbyPanelManager] SetPlayerNames: Mapping {limit} players to UI slots");
+
+        for (int i = 0; i < limit; i++)
         {
-            Debug.Log(players[i]);
-            playerSlots[i].SetUp(players[i]);
+            if (players[i] != null)
+            {
+                Debug.Log($"[LobbyPanelManager] SetPlayerNames: Setting up slot {i} for player '{players[i].PlayerName}'");
+                playerSlots[i].SetUp(players[i]);
+            }
+            else
+            {
+                Debug.LogWarning($"[LobbyPanelManager] SetPlayerNames: Player at index {i} is null");
+            }
         }
     }
 
-    public void SetLobbyNameLabel(string text) => MainMenuHelper.SetLabelText(lobbyNameTMP, text);
-    public void SetLobbyPortLabel(string text) => MainMenuHelper.SetLabelText(lobbyPortTMP, text);
-    public void SetLobbyIPLabel(string text) => MainMenuHelper.SetLabelText(lobbyIPTMP, text);
+    // UI Label setters using MainMenuHelper
+    public void SetLobbyNameLabel(string text)
+    {
+        Debug.Log($"[LobbyPanelManager] SetLobbyNameLabel: '{text}'");
+        MainMenuHelper.SetLabelText(lobbyNameTMP, text);
+    }
 
-    public void RefreshLobbyNameLabel() => MainMenuHelper.SetLabelText(lobbyNameTMP, $"Lobby: {LobbyStorage.Instance.LobbyName}");
-    public void RefreshLobbyPortLabel() => MainMenuHelper.SetLabelText(lobbyPortTMP, $"Port: {LobbyStorage.Instance.LobbyPort}");
-    public void RefreshLobbyIpLabel() => MainMenuHelper.SetLabelText(lobbyIPTMP, $"IP: {LobbyStorage.Instance.LobbyIp}");
-    
+    public void SetLobbyPortLabel(string text)
+    {
+        Debug.Log($"[LobbyPanelManager] SetLobbyPortLabel: '{text}'");
+        MainMenuHelper.SetLabelText(lobbyPortTMP, text);
+    }
+
+    public void SetLobbyIPLabel(string text)
+    {
+        Debug.Log($"[LobbyPanelManager] SetLobbyIPLabel: '{text}'");
+        MainMenuHelper.SetLabelText(lobbyIPTMP, text);
+    }
+
+    public void RefreshLobbyNameLabel()
+    {
+        string label = $"Lobby: {LobbyStorage.Instance.LobbyName}";
+        Debug.Log($"[LobbyPanelManager] RefreshLobbyNameLabel: '{label}'");
+        MainMenuHelper.SetLabelText(lobbyNameTMP, label);
+    }
+
+    public void RefreshLobbyPortLabel()
+    {
+        string label = $"Port: {LobbyStorage.Instance.LobbyPort}";
+        Debug.Log($"[LobbyPanelManager] RefreshLobbyPortLabel: '{label}'");
+        MainMenuHelper.SetLabelText(lobbyPortTMP, label);
+    }
+
+    public void RefreshLobbyIpLabel()
+    {
+        string label = $"IP: {LobbyStorage.Instance.LobbyIp}";
+        Debug.Log($"[LobbyPanelManager] RefreshLobbyIpLabel: '{label}'");
+        MainMenuHelper.SetLabelText(lobbyIPTMP, label);
+    }
+
     public string GetLobbyNameLabel() => MainMenuHelper.GetLabelText(lobbyNameTMP);
     public string GetLobbyPortLabel() => MainMenuHelper.GetLabelText(lobbyPortTMP);
     public string GetLobbyIPLabel() => MainMenuHelper.GetLabelText(lobbyIPTMP);
 
-    public void ResetLobbyNameLabel() => MainMenuHelper.ResetLabelText(lobbyNameTMP);
-    public void ResetLobbyPortLabel() => MainMenuHelper.ResetLabelText(lobbyPortTMP);
-    public void ResetLobbyIPLabel() => MainMenuHelper.ResetLabelText(lobbyIPTMP);
+    public void ResetLobbyNameLabel()
+    {
+        Debug.Log("[LobbyPanelManager] ResetLobbyNameLabel: Resetting lobby name field");
+        MainMenuHelper.ResetLabelText(lobbyNameTMP);
+    }
+
+    public void ResetLobbyPortLabel()
+    {
+        Debug.Log("[LobbyPanelManager] ResetLobbyPortLabel: Resetting lobby port field");
+        MainMenuHelper.ResetLabelText(lobbyPortTMP);
+    }
+
+    public void ResetLobbyIPLabel()
+    {
+        Debug.Log("[LobbyPanelManager] ResetLobbyIPLabel: Resetting lobby IP field");
+        MainMenuHelper.ResetLabelText(lobbyIPTMP);
+    }
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e6a14615bc1a5714ca0bb5350eaac2f1
+guid: 5e1012301a96eb946a837bab362c28a3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6754128020979028317
-    second: Red_Robot-modified (1)_0
+      213: -5567519405336215172
+    second: 20250506_0955_Liebenswerter Rosa Roboter_remix_01jtj9dpsge4d9zxc0zzj363k8-modified_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Red_Robot-modified (1)_0
+      name: 20250506_0955_Liebenswerter Rosa Roboter_remix_01jtj9dpsge4d9zxc0zzj363k8-modified_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3ae680e89548442a0800000000000000
-      internalID: -6754128020979028317
+      spriteID: c7147dc49923cb2b0800000000000000
+      internalID: -5567519405336215172
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Red_Robot-modified (1)_0: -6754128020979028317
+      20250506_0955_Liebenswerter Rosa Roboter_remix_01jtj9dpsge4d9zxc0zzj363k8-modified_0: -5567519405336215172
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

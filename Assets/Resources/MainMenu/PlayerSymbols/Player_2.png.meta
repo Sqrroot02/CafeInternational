@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1c3f071129b2c6a4590e52aa24682cf0
+guid: a7a072b4d0e2b2344a6dca0445141699
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7027233817194021080
-    second: "20250524_1652_Braunh\xE4utige Frau im Fokus_remix_01jw1cegxvf0ta0jrdfecaj7g1_0"
+      213: -1888267537485228240
+    second: 20250524_1655_Frau mit Brille_remix_01jw1ckjsffp9s12ej2520n9ze_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "20250524_1652_Braunh\xE4utige Frau im Fokus_remix_01jw1cegxvf0ta0jrdfecaj7g1_0"
+      name: 20250524_1655_Frau mit Brille_remix_01jw1ckjsffp9s12ej2520n9ze_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8d04673ccefb58160800000000000000
-      internalID: 7027233817194021080
+      spriteID: 0379a4bdda68bc5e0800000000000000
+      internalID: -1888267537485228240
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "20250524_1652_Braunh\xE4utige Frau im Fokus_remix_01jw1cegxvf0ta0jrdfecaj7g1_0": 7027233817194021080
+      20250524_1655_Frau mit Brille_remix_01jw1ckjsffp9s12ej2520n9ze_0: -1888267537485228240
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

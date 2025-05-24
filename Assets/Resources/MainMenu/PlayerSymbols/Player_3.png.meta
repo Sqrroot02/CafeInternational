@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 923701d16b774cb4fb26c7efc5d3e452
+guid: 1c3f071129b2c6a4590e52aa24682cf0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6703066410606442706
-    second: 20250524_1729_Roten Hintergrund_remix_01jw1eh315e0xazxx8zbf10bwv (1)_0
+      213: 7027233817194021080
+    second: "20250524_1652_Braunh\xE4utige Frau im Fokus_remix_01jw1cegxvf0ta0jrdfecaj7g1_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250524_1729_Roten Hintergrund_remix_01jw1eh315e0xazxx8zbf10bwv (1)_0
+      name: "20250524_1652_Braunh\xE4utige Frau im Fokus_remix_01jw1cegxvf0ta0jrdfecaj7g1_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2d8bc06d263160d50800000000000000
-      internalID: 6703066410606442706
+      spriteID: 8d04673ccefb58160800000000000000
+      internalID: 7027233817194021080
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      20250524_1729_Roten Hintergrund_remix_01jw1eh315e0xazxx8zbf10bwv (1)_0: 6703066410606442706
+      "20250524_1652_Braunh\xE4utige Frau im Fokus_remix_01jw1cegxvf0ta0jrdfecaj7g1_0": 7027233817194021080
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
