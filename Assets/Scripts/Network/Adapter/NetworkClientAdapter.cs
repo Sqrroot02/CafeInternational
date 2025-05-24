@@ -1,4 +1,6 @@
 using System;
+using System.Net;
+using System.Net.Sockets;
 using Riptide;
 using Riptide.Utils;
 using UnityEngine;
@@ -52,7 +54,13 @@ namespace Assets.Scripts.Network.Adapter
 		/// <summary>
 		/// Returns the Address of the socket as a connection string
 		/// </summary>
-		protected string SocketAddress => $"{IpAddress}:{Port}";
+		protected string SocketAddress ()
+		{
+			if (IPAddress.TryParse(IpAddress, out IPAddress address))
+				if (address.AddressFamily == AddressFamily.InterNetworkV6)
+					return $"[{IpAddress}]:{Port}";
+			return $"{IpAddress}:{Port}";
+		}
     
 		/// <summary>
 		/// Client Socket of the game participant
@@ -75,18 +83,18 @@ namespace Assets.Scripts.Network.Adapter
 		private void ClientOnDisconnected(object sender, DisconnectedEventArgs e)
 		{
 			Disconnected?.Invoke(sender, e);
-			Debug.Log($"Client connection to server: {SocketAddress} has been disconnected");
+			Debug.Log($"Client connection to server: {SocketAddress()} has been disconnected");
 		}
 
 		private void ClientOnConnectionFailed(object sender, ConnectionFailedEventArgs e)
 		{
-			Debug.LogError($"Client failed connection to server: {SocketAddress}");
+			Debug.LogError($"Client failed connection to server: {SocketAddress()}");
 		}
     
 		private void ClientOnConnected(object sender, EventArgs e)
 		{
 			Connected?.Invoke(this, EventArgs.Empty);
-			Debug.Log($"Client connected to server: {SocketAddress}");
+			Debug.Log($"Client connected to server: {SocketAddress()}");
 		
 		}
 
@@ -95,8 +103,8 @@ namespace Assets.Scripts.Network.Adapter
 		/// </summary>
 		public void Connect()
 		{
-			Debug.Log($"Connect NetworkClientAdapter to {SocketAddress}");
-			Client.Connect(SocketAddress);
+			Debug.Log($"Connect NetworkClientAdapter to {SocketAddress()}");
+			Client.Connect(SocketAddress());
 		}
 
 		/// <summary>
@@ -116,11 +124,11 @@ namespace Assets.Scripts.Network.Adapter
 			if (Client.IsConnected)
 			{
 				Client.Send(message);
-				Debug.Log($"Sent message to server: {SocketAddress}");
+				Debug.Log($"Sent message to server: {SocketAddress()}");
 			}
 			else
 			{
-				Debug.LogError($"No Connection to server: {SocketAddress} has been established. Message has been refused");
+				Debug.LogError($"No Connection to server: {SocketAddress()} has been established. Message has been refused");
 			}
 		}
 

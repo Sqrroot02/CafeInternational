@@ -3,8 +3,8 @@ guid: 5a9ac103f2c146e4da91c3f765219043
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6625730243281182746
-    second: 20250506_1539_Netter Blauer Roboter_remix_01jtjx32yxf10vckw0r9347hjs-modified_0
+      213: 2114939304942317460
+    second: Blue_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250506_1539_Netter Blauer Roboter_remix_01jtjx32yxf10vckw0r9347hjs-modified_0
+      name: Blue_1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a1066583d8253fb50800000000000000
-      internalID: 6625730243281182746
+      spriteID: 49f2998a716c95d10800000000000000
+      internalID: 2114939304942317460
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      20250506_1539_Netter Blauer Roboter_remix_01jtjx32yxf10vckw0r9347hjs-modified_0: 6625730243281182746
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

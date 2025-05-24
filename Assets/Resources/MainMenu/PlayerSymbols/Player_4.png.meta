@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 923701d16b774cb4fb26c7efc5d3e452
+guid: 1fd91e4bf312a7a40a7a0f2c0489874b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6703066410606442706
-    second: 20250524_1729_Roten Hintergrund_remix_01jw1eh315e0xazxx8zbf10bwv (1)_0
+      213: -352834096698846491
+    second: Player_4-modified_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250524_1729_Roten Hintergrund_remix_01jw1eh315e0xazxx8zbf10bwv (1)_0
+      name: Player_4-modified_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2d8bc06d263160d50800000000000000
-      internalID: 6703066410606442706
+      spriteID: 5e29e99224b7a1bf0800000000000000
+      internalID: -352834096698846491
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      20250524_1729_Roten Hintergrund_remix_01jw1eh315e0xazxx8zbf10bwv (1)_0: 6703066410606442706
+      Player_4-modified_0: -352834096698846491
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

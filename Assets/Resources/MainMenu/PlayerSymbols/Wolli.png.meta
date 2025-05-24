@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 25a057b1ba2bf0d43b13fa76e382d011
+guid: 1775df577980da2449d4feac0ad3efba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -789802967536295850
-    second: 20250524_1724_Lustiger Cartoon-Hintergrund_remix_01jw1e7c7nfwtavzcgvebmwqnh_0
+      213: -1608172361044540827
+    second: Wolli-modified_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250524_1724_Lustiger Cartoon-Hintergrund_remix_01jw1e7c7nfwtavzcgvebmwqnh_0
+      name: Wolli-modified_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6502375b26e0a05f0800000000000000
-      internalID: -789802967536295850
+      spriteID: 562c65212cf9ea9e0800000000000000
+      internalID: -1608172361044540827
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      20250524_1724_Lustiger Cartoon-Hintergrund_remix_01jw1e7c7nfwtavzcgvebmwqnh_0: -789802967536295850
+      Wolli-modified_0: -1608172361044540827
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

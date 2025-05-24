@@ -26,8 +26,8 @@ namespace Assets.Scripts.Network.Messages.StartGame
 			
 			// Start Game
 			Debug.Log($"Starting the Game. Lobby: {obj.LobbyName}");
-			SceneManager.LoadScene("Game", LoadSceneMode.Additive);
-			SceneManager.UnloadSceneAsync("MainMenu");
+			SceneManager.LoadScene("Game");
+			// SceneManager.UnloadSceneAsync("MainMenu");
 		}
 	}
 }

@@ -54,13 +54,15 @@ namespace Assets.Scripts.Game
             _scoreTable = GameObject.Find("ScoreTable").GetComponent<ScoreTable>();
             _chairs = GameObject.Find("Chairs").transform.GetComponentsInChildren<Chair>();
             _bar = GameObject.Find("Bar").GetComponent<Bar>();
-            _complexBotBehaviour = new ComplexBotBehaviour(this);
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             _easyBotBehaviour = EasyBotBehaviour.GetInstance();
+            _complexBotBehaviour = JokerIdentitySelectionPrefab.AddComponent<ComplexBotBehaviour>();
+            _complexBotBehaviour.Setup(this);
+            
             _deck = deckManager.GetComponent<Deck>();
             UpdatePlayerGameBars();
             DrawInitialCards();
@@ -105,7 +107,11 @@ namespace Assets.Scripts.Game
             {
                 Players[i].PlayerGameBar = GameObject.Find("PlayerGameBarPlayer" + (i + 1)).transform.GetChild(0).gameObject;
                 Players[i].PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().text = Players[i].PlayerName;
-                Players[i].PlayerGameBar.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(Players[i].PlayerSpritePath);
+
+                Image img = Players[i].PlayerGameBar.GetComponentsInChildren<Image>(true).FirstOrDefault(x => x.name == "PlayerSymbol");
+
+                if (img != null)
+                    img.sprite = Resources.Load<Sprite>(Players[i].PlayerSpritePath);
             }
         }
 

@@ -225,6 +225,8 @@ namespace Assets.Scripts.Models
             message.AddBool(_playerEliminated);
             message.AddBool(IsBot);
             message.AddString(PlayerId);
+            message.AddBool(IsStrongBot);
+            message.AddString(PlayerSpritePath);
         }
 
         public void Deserialize(Message message)
@@ -236,6 +238,8 @@ namespace Assets.Scripts.Models
             _playerEliminated = message.GetBool();
             IsBot = message.GetBool();
             PlayerId = message.GetString();
+            IsStrongBot = message.GetBool();
+            PlayerSpritePath = message.GetString();
         }
     }
 }

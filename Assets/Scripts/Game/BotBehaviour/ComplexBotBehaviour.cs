@@ -164,14 +164,14 @@ namespace Game.BotBehaviour
         }
     }
     
-    public class ComplexBotBehaviour
+    public class ComplexBotBehaviour : MonoBehaviour
     {
         private Bar _bar;
         private Chair[] _chairs;
         private Dictionary<Nationality, List<Chair>> _nationalityToChairListDictionary = new ();
         private PlayerManager _playerManager;
 
-        public ComplexBotBehaviour(PlayerManager playerManager)
+        public void Setup(PlayerManager playerManager)
         {
             _playerManager = playerManager;
             _bar = GameObject.Find("Bar").GetComponent<Bar>();

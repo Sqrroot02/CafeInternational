@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0805b125409ab984f9a910501075cd68
+guid: 8728435aa67590346bd0789f8abbb197
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2060574905866425951
-    second: 20250524_1650_Mann mit Brille_remix_01jw1c9jysept81gdkn4nv1sd7_0
+      213: -6132190428984538795
+    second: Player_1-modified_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250524_1650_Mann mit Brille_remix_01jw1c9jysept81gdkn4nv1sd7_0
+      name: Player_1-modified_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a96fbe5a0e5763e0800000000000000
-      internalID: -2060574905866425951
+      spriteID: 55983596b4516eaa0800000000000000
+      internalID: -6132190428984538795
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      20250524_1650_Mann mit Brille_remix_01jw1c9jysept81gdkn4nv1sd7_0: -2060574905866425951
+      Player_1-modified_0: -6132190428984538795
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 51b173f3e2c11af4a93b65e6b3bffa6a
+guid: 92c6cf2fc1fcb694fba4ae99cd2d91c4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6688144066064857747
-    second: 20250524_1718_Person als Hase geschminkt_remix_01jw1dxd58fwbaezzevk512rkn_0
+      213: -5489003986219956603
+    second: LarsiHasi-modified_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250524_1718_Person als Hase geschminkt_remix_01jw1dxd58fwbaezzevk512rkn_0
+      name: LarsiHasi-modified_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d65419f3860fe23a0800000000000000
-      internalID: -6688144066064857747
+      spriteID: 58608aed4f323d3b0800000000000000
+      internalID: -5489003986219956603
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      20250524_1718_Person als Hase geschminkt_remix_01jw1dxd58fwbaezzevk512rkn_0: -6688144066064857747
+      LarsiHasi-modified_0: -5489003986219956603
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

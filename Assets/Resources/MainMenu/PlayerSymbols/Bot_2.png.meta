@@ -3,8 +3,8 @@ guid: 32dd9b5fef77eed47843e10a5f71db50
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2168397037705100118
-    second: 20250505_1928_Lieblicher Cartoon-Roboter_simple_compose_01jtgqvspvf8z8y8ax2h0d1k60-modified_0
+      213: -4157051724057166213
+    second: Bot_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250505_1928_Lieblicher Cartoon-Roboter_simple_compose_01jtgqvspvf8z8y8ax2h0d1k60-modified_0
+      name: Bot_2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa40493026e48e1e0800000000000000
-      internalID: -2168397037705100118
+      spriteID: b7eb5a26b7f2f46c0800000000000000
+      internalID: -4157051724057166213
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      20250505_1928_Lieblicher Cartoon-Roboter_simple_compose_01jtgqvspvf8z8y8ax2h0d1k60-modified_0: -2168397037705100118
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

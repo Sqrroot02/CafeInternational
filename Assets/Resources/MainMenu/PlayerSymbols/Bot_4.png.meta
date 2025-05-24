@@ -3,8 +3,8 @@ guid: e6a14615bc1a5714ca0bb5350eaac2f1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6754128020979028317
-    second: Red_Robot-modified (1)_0
+      213: -7280761416375073655
+    second: Bot_4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Red_Robot-modified (1)_0
+      name: Bot_4_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3ae680e89548442a0800000000000000
-      internalID: -6754128020979028317
+      spriteID: 9840892211a85fa90800000000000000
+      internalID: -7280761416375073655
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Red_Robot-modified (1)_0: -6754128020979028317
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
