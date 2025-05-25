@@ -116,6 +116,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
                                 PlacedCard.JokerIdentity = _firstTable.nationality;
                             }
                         }
+                        PlaySound.Instance.PlaySoundPlaceCard();
                         return true;
                     }
                     if (displayErrorMessages)
@@ -130,6 +131,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
             { // Placing a card that matches the field at the jokers spot and is not a joker
                 Debug.Log("Replace by Joker");
                 ReplaceJoker(card);
+                PlaySound.Instance.PlaySoundPlaceCard();
                 return true;
             }
             else if (displayErrorMessages)

@@ -46,7 +46,7 @@ namespace Assets.Scripts.Models
         public GameObject PlayerGameBar { get; set; }
         
         public Player()
-        {
+        { 
             
         }
         
@@ -103,6 +103,8 @@ namespace Assets.Scripts.Models
                 {
                     if (chair.OnlyCardAtTheTable())
                     {
+                        var sceneMessageHandler = GameObject.Find("Overlay").GetComponentInChildren<SceneMessageHandler>(true);
+                        sceneMessageHandler.ShowScene($"The move is invalid because the card {chair.PlacedCard.cardData.nationality} {chair.PlacedCard.cardData.gender} is placed with no neighbours");
                         return false;
                     }
                 }
@@ -180,6 +182,8 @@ namespace Assets.Scripts.Models
                 PlayerGameBar.GetComponentInParent<CanvasGroup>().alpha = 0.6f;
                 var sceneMessageHandler = GameObject.Find("Overlay").GetComponentInChildren<SceneMessageHandler>(true);
                 sceneMessageHandler.ShowScene($"Player {PlayerName} has no more points left to pay the bar fee and will be terminated");
+                
+                PlaySound.Instance.PlaySoundTerminated();
             }
         }
 

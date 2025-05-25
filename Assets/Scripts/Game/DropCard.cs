@@ -31,7 +31,6 @@ public class DropCard : MonoBehaviour, IDropHandler
             droppedRect.pivot = new Vector2(0.5f, 0.5f);
             droppedRect.sizeDelta = Vector2.zero;
             droppedRect.localScale = Vector3.one;
-
         }
     }
 

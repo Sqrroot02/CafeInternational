@@ -54,6 +54,7 @@ public class BarStool : MonoBehaviour, IMessageSerializable
                     GetComponent<Outline>().UpdateOutlineSprite(card.cardData.cardSprite);
                     card.Player.BarStool = this;
                     PlacedCard = card;
+                    PlaySound.Instance.PlaySoundPlaceCard();
 
                     return true;
                 }
