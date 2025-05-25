@@ -13,6 +13,8 @@ public class Chair : MonoBehaviour, IMessageSerializable
     private Table _firstTable;
     private Table _secondTable;
     public Card PlacedCard { private set; get; }
+    
+    private SceneMessageHandler _sceneMessageHandler;
 
     private void Awake()
     {
@@ -21,6 +23,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
         {
             _secondTable = SecondTableGO.GetComponent<Table>();
         }
+        _sceneMessageHandler = GameObject.Find("Overlay").GetComponentInChildren<SceneMessageHandler>(true);
     }
 
     public List<Table> GetTables()
@@ -39,7 +42,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
         return nationality == Nationality.Joker || _firstTable.nationality == nationality || (_secondTable != null && _secondTable.nationality == nationality);
     }
 
-    public bool CheckPlaceCard(Card card)
+    public bool CheckPlaceCard(Card card, bool displayErrorMessages = false)
     {
         // Check nationality matches the chair
         if (HasPlaceableNationality(card.cardData.nationality))
@@ -52,30 +55,43 @@ public class Chair : MonoBehaviour, IMessageSerializable
                     return true;
                 }
                 // Otherwise the gender has to be checked for the second gender
-                return _secondTable.CheckGenderPlaceable(card.cardData.gender);
+                var secondTableGenderCheck = _secondTable.CheckGenderPlaceable(card.cardData.gender);
+                if (displayErrorMessages && !secondTableGenderCheck)
+                    _sceneMessageHandler.ShowScene("Can´t play card because the gender does not match");
+                
+                return secondTableGenderCheck;
             }
+            if (displayErrorMessages)
+                _sceneMessageHandler.ShowScene("Can´t play card because the gender does not match");
             Debug.Log("Table 1 Gender Fail");
         }
-        else 
+        else
+        {
+            if (displayErrorMessages)
+            {
+                var errMsg = _secondTable != null ? "s" : "";
+                _sceneMessageHandler.ShowScene($"Can´t play card because the nationality does not match the table{errMsg}");
+            }
             Debug.Log("No placable nationality");
+        }
         return false;
     }
 
     public bool PlaceAndCommit(Card card)
     {
-        var hasPlaced = PlaceCard(card);
+        var hasPlaced = PlaceCard(card, true);
         if (hasPlaced)
             TurnHistory.CurrentTurnHistory.AddChair(this);
         return hasPlaced;
     }
     
-    public bool PlaceCard(Card card)
+    public bool PlaceCard(Card card, bool displayErrorMessages = false)
     {
         if (!card.GetIsPlaced() && !card.Player.GetPlayerBlockedByJokerIdentitySelection())
         {
             if (PlacedCard == null)
             {
-                if (CheckPlaceCard(card))
+                if (CheckPlaceCard(card, displayErrorMessages))
                 {
                     if (card.UpdateIsPlaced(1))
                     {
@@ -93,7 +109,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
                         {
                             if (_secondTable != null && _firstTable.nationality != _secondTable.nationality)
                             {
-                                SelectJokerIndentity();
+                                SelectJokerIdentity();
                             }
                             else
                             {
@@ -102,6 +118,8 @@ public class Chair : MonoBehaviour, IMessageSerializable
                         }
                         return true;
                     }
+                    if (displayErrorMessages)
+                        _sceneMessageHandler.ShowScene("Can´t play card because to many cards have already been played this turn");
                 }
             }
             else if (PlacedCard.cardData.nationality == Nationality.Joker 
@@ -114,14 +132,18 @@ public class Chair : MonoBehaviour, IMessageSerializable
                 ReplaceJoker(card);
                 return true;
             }
+            else if (displayErrorMessages)
+                _sceneMessageHandler.ShowScene("Can´t play card because the chair is not empty");
         }
+        else if (displayErrorMessages)
+            _sceneMessageHandler.ShowScene("Can´t play card because the selection for the joker identity has not been completed");
         return false;
     }
 
     /// <summary>
     /// Open the UI for the selection of the joker identity if necessary
     /// </summary>
-    public void SelectJokerIndentity()
+    public void SelectJokerIdentity()
     {
         if (!PlacedCard.Player.IsBot)
         {
@@ -149,7 +171,6 @@ public class Chair : MonoBehaviour, IMessageSerializable
         card.Player.PlayerHand.Remove(card);
         PlacedCard.Player = card.Player;
         
-
         PlacedCard = card;
     }
 

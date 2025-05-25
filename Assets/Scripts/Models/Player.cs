@@ -178,6 +178,8 @@ namespace Assets.Scripts.Models
             {
                 _playerEliminated = true;
                 PlayerGameBar.GetComponentInParent<CanvasGroup>().alpha = 0.6f;
+                var sceneMessageHandler = GameObject.Find("Overlay").GetComponentInChildren<SceneMessageHandler>(true);
+                sceneMessageHandler.ShowScene($"Player {PlayerName} has no more points left to pay the bar fee and will be terminated");
             }
         }
 
