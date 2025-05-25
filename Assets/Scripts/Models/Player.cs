@@ -66,6 +66,11 @@ namespace Assets.Scripts.Models
             _playerManager = playerManager;
         }
 
+        public void SetPlayerEliminated(bool playerEliminated)
+        {
+            _playerEliminated = playerEliminated;
+        }
+
         public bool IsPlayerEliminated()
         {
             return _playerEliminated;
