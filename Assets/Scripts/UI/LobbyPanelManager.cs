@@ -131,6 +131,8 @@ public class LobbyPanelManager : MonoBehaviour
     /// </summary>
     public void SetPlayerNames()
     {
+        LobbyStorage.Instance.SetPlayerSprites();
+
         Debug.Log("[LobbyPanelManager] SetPlayerNames: Updating UI with player data");
 
         var players = LobbyStorage.Instance.ActivePlayers;

@@ -82,9 +82,6 @@ namespace Assets.Scripts.Models
             ActivePlayers.Add(hostPlayer);
             Debug.Log("[LobbyStorage] Host player added to ActivePlayers.");
 
-            MainMenuHelper.AssignPlayerSprite(hostPlayer, ActivePlayers.IndexOf(hostPlayer));
-            Debug.Log("[LobbyStorage] Assigned sprite to host player.");
-
             // Fill remaining slots with bots
             for (var i = ActivePlayers.Count; i < 4; i++)
             {
@@ -92,11 +89,19 @@ namespace Assets.Scripts.Models
                 var botPlayer = new Player(botName, 0, true, false, BotType.IsMischiefBot);
                 ActivePlayers.Add(botPlayer);
                 Debug.Log($"[LobbyStorage] Added bot player '{botName}' to ActivePlayers.");
-                MainMenuHelper.AssignPlayerSprite(botPlayer, ActivePlayers.IndexOf(botPlayer));
-                Debug.Log("[LobbyStorage] Assigned sprite to botPlayer.");
             }
+
+            SetPlayerSprites();
+            Debug.Log("[LobbyStorage] Assigned sprite to  player.");
         }
 
+        public void SetPlayerSprites()
+        {
+            foreach (var player in ActivePlayers)
+            {
+                MainMenuHelper.AssignPlayerSprite(player, ActivePlayers.IndexOf(player));
+            }
+        }
         /// <summary>
         /// Shuffles the players turn sequence  
         /// </summary>

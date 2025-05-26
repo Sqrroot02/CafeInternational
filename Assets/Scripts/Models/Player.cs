@@ -225,7 +225,6 @@ namespace Assets.Scripts.Models
             message.AddBool(_playerEliminated);
             message.AddBool(IsBot);
             message.AddString(PlayerId);
-            message.AddString(PlayerSpritePath);
             message.AddInt((int) BotType);
         }
 
@@ -238,7 +237,6 @@ namespace Assets.Scripts.Models
             _playerEliminated = message.GetBool();
             IsBot = message.GetBool();
             PlayerId = message.GetString();
-            PlayerSpritePath = message.GetString();
             BotType = (BotType) message.GetInt();
         }
     }
