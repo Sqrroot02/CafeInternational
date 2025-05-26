@@ -37,6 +37,8 @@ public class LobbyPanelManager : MonoBehaviour
     {
         Debug.Log("[LobbyPanelManager] InitiateLobby: Initializing lobby display");
 
+        LobbyStorage.Instance.LobbyIp = NetworkUtil.PublicIpAddress();
+
         SetLobbyIPLabel($"Lobby Ip: {LobbyStorage.Instance.LobbyIp}");
         SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.LobbyName);
         SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.LobbyPort);
