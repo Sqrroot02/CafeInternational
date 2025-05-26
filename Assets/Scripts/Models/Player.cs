@@ -226,6 +226,7 @@ namespace Assets.Scripts.Models
             message.AddBool(IsBot);
             message.AddString(PlayerId);
             message.AddInt((int) BotType);
+            message.AddString(PlayerSpritePath);
         }
 
         public void Deserialize(Message message)
@@ -238,6 +239,7 @@ namespace Assets.Scripts.Models
             IsBot = message.GetBool();
             PlayerId = message.GetString();
             BotType = (BotType) message.GetInt();
+            PlayerSpritePath = message.GetString();
         }
     }
 }

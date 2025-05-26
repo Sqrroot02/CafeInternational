@@ -77,6 +77,7 @@ namespace Assets.Scripts.Game
             foreach (var player in Players)
             {
                 player.SetPlayerManager(this);
+                Debug.Log("PlayersSpritePath: " + player.PlayerSpritePath);
             }
         
             if (CurrentPlayer.IsBot)

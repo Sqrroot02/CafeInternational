@@ -44,6 +44,26 @@ public class LobbyPanelManager : MonoBehaviour
         SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.LobbyPort);
 
         SetPlayerNames();
+        if(LobbyStorage.Instance.IsMuliplayerLobby) initMultiplayerLobby();
+    }
+
+    private void initMultiplayerLobby()
+    {
+        Debug.Log("[LobbyPanelManager] InitiateMultiplayerLobby");
+        lobbyIPTMP.gameObject.SetActive(true);
+        lobbyPortTMP.gameObject.SetActive(true);
+
+        foreach (var slot in playerSlots) {
+            slot.InitMultiplayerLobby();
+        }
+
+        if (LobbyStorage.Instance.ActivePlayers.Any(p => p.PlayerId == LobbyStorage.Instance.ClientPlayerId && p.LobbyHost))
+        {
+            foreach (var slot in playerSlots)
+            {
+                slot.ActivateInteractives();
+            }
+        }
     }
 
     /// <summary>
@@ -65,6 +85,8 @@ public class LobbyPanelManager : MonoBehaviour
                 Debug.Log($"[LobbyPanelManager] ResetLobbyTMPs: Resetting bot strength dropdown for slot {i}");
                 slot.ResetBotStrengthDropDown();
             }
+
+            if (slot.actionButton != null) slot.actionButton.gameObject.SetActive(true);
 
             Debug.Log($"[LobbyPanelManager] ResetLobbyTMPs: Reactivating slot {i}");
             slot.ActivateInteractives();
@@ -114,19 +136,7 @@ public class LobbyPanelManager : MonoBehaviour
 
         RefreshLobbyNameLabel();
         RefreshLobbyPortLabel();
-        RefreshLobbyIpLabel();
-
-        // Wenn Multiplayer-Lobby und Spieler nicht der Host ist, Interaktivität deaktivieren
-
-        Debug.Log("[LobbyPanelManager] InitiateLobby: Client is not host – deactivating interactivity");
-        if (LobbyStorage.Instance.ActivePlayers.Any(p => p.PlayerId == LobbyStorage.Instance.ClientPlayerId && !p.LobbyHost))
-        {
-            for (int i = 1; i < playerSlots.Count; i++)
-            {
-                playerSlots[i].DeactivateInteractives();
-            }
-        }
-            
+        RefreshLobbyIpLabel(); 
     }
 
     /// <summary>
@@ -213,11 +223,13 @@ public class LobbyPanelManager : MonoBehaviour
     {
         Debug.Log("[LobbyPanelManager] ResetLobbyPortLabel: Resetting lobby port field");
         MainMenuHelper.ResetLabelText(lobbyPortTMP);
+        lobbyPortTMP.gameObject.SetActive(false);
     }
 
     public void ResetLobbyIPLabel()
     {
         Debug.Log("[LobbyPanelManager] ResetLobbyIPLabel: Resetting lobby IP field");
         MainMenuHelper.ResetLabelText(lobbyIPTMP);
+        lobbyIPTMP.gameObject.SetActive(false);
     }
 }

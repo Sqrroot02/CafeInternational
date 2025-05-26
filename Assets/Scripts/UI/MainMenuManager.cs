@@ -80,6 +80,7 @@ public class MainMenuManager : MonoBehaviour
         joinLobbyPanelManager.ResetJoinLobbyTMPs();
         createLobbyPanelManager.ResetCreateLobbyPanel();
         lobbyPanelManager.ResetLobbyTMPs();
+        LobbyStorage.Instance.ResetLobbyStorage();
     }
 
     // Lobby-Panel anzeigen

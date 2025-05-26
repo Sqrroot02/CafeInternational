@@ -44,8 +44,6 @@ namespace Assets.Scripts.Models
 
         public string CardPath { get; set; } = "Normal/";
 
-        private string globalLobbyName;
-        private string globalLobbyIp;
         public bool IsMuliplayerLobby { get; set; }
 
         void Awake()
@@ -62,6 +60,15 @@ namespace Assets.Scripts.Models
             Instance = this;
             DontDestroyOnLoad(gameObject);
             Debug.Log("[LobbyStorage] Singleton instance assigned and marked to not destroy on load.");
+        }
+
+        public void ResetLobbyStorage()
+        {
+            CurrentPlayer = null;
+            ClientPlayerId = null;
+            LobbyIp = null;
+            IsMuliplayerLobby = false;
+            ActivePlayers.Clear();
         }
 
         public void InitializeLobby(string localPlayerName, string lobbyName, bool isMulitplayerLobby)

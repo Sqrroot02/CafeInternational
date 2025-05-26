@@ -44,7 +44,7 @@ public class PlayerSlotHelper : MonoBehaviour
         Debug.Log($"[PlayerSlotHelper] SetUp: Assigned name '{assignedPlayer.PlayerName}'");
 
         // Wenn Spieler kein Host ist, Buttons und Dropdowns entsprechend setzen
-        if (!assignedPlayer.LobbyHost)
+        if (!assignedPlayer.LobbyHost && !LobbyStorage.Instance.IsMuliplayerLobby && botStrengthDropdown != null && actionButton != null)
         {
             string label = player.IsBot ? "Add Player" : "Add Bot";
             actionButton.GetComponentInChildren<TMP_Text>().text = label;
@@ -54,6 +54,18 @@ public class PlayerSlotHelper : MonoBehaviour
             placeHolder.SetActive(!player.IsBot);
             Debug.Log($"[PlayerSlotHelper] SetUp: Bot dropdown active = {player.IsBot}, Placeholder active = {!player.IsBot}");
         }
+    }
+
+    /// <summary>
+    /// Setzt den Bot-Stärkedropdown auf den Standardwert zurück.
+    /// </summary>
+    public void InitMultiplayerLobby()
+    {
+        Debug.Log("[PlayerSlotHelper] Init Multiplayer Lobby.");
+        DeactivateInteractives();
+        if (actionButton != null) actionButton.gameObject.SetActive(false);
+        if (placeHolder != null) placeHolder.gameObject.SetActive(true);
+        
     }
 
     /// <summary>
@@ -166,9 +178,9 @@ public class PlayerSlotHelper : MonoBehaviour
     public void DeactivateInteractives()
     {
         Debug.Log("[PlayerSlotHelper] DeactivateInteractives: Disabling inputs");
-        nameText.interactable = false;
-        botStrengthDropdown.interactable = false;
-        actionButton.interactable = false;
+        if (nameText != null) nameText.interactable = false;
+        if (botStrengthDropdown != null) botStrengthDropdown.interactable = false;
+        if (actionButton != null) actionButton.interactable = false;
     }
 
     /// <summary>
@@ -177,8 +189,8 @@ public class PlayerSlotHelper : MonoBehaviour
     public void ActivateInteractives()
     {
         Debug.Log("[PlayerSlotHelper] ActivateInteractives: Enabling inputs");
-        nameText.interactable = true;
-        botStrengthDropdown.interactable = true;
-        actionButton.interactable = true;
+        if (nameText != null) nameText.interactable = true;
+        if (botStrengthDropdown != null) botStrengthDropdown.interactable = true;
+        if (actionButton != null) actionButton.interactable = true;
     }
 }
