@@ -119,9 +119,9 @@ public class LobbyPanelManager : MonoBehaviour
         // Wenn Multiplayer-Lobby und Spieler nicht der Host ist, Interaktivität deaktivieren
 
         Debug.Log("[LobbyPanelManager] InitiateLobby: Client is not host – deactivating interactivity");
-        foreach (var playerSlot in playerSlots)
+        for (int i = 1; i< playerSlots.Count; i++)
         {
-            playerSlot.DeactivateInteractives();
+            playerSlots[i].DeactivateInteractives();
         }
     }
 
