@@ -11,6 +11,9 @@ using System.Net.Sockets;
 
 namespace Assets.Scripts.UI
 {
+    /// <summary>
+    /// Helferklasse für Menüfunktionen: Eingaben, Validierung, Labels, Spieler-Namen/Sprites, u.v.m.
+    /// </summary>
     public static class MainMenuHelper
     {
         public static readonly string[] RandomPlayerNames = {
@@ -18,23 +21,16 @@ namespace Assets.Scripts.UI
         };
 
         public static readonly string[] FunnyBotNames = {
-            "Botzilla",
-            "KaffeeKarl",
-            "LatteLarry",
-            "Espressina",
-            "Toastinator",
-            "SchnitzelBot",
-            "BrötchenBob",
-            "WurstWilli",
-            "Botfried",
-            "Kekskrümel",
-            "MokkaManni"
+            "Botzilla", "KaffeeKarl", "LatteLarry", "Espressina", "Toastinator",
+            "SchnitzelBot", "BrötchenBob", "WurstWilli", "Botfried", "Kekskrümel", "MokkaManni"
         };
 
         private static readonly System.Random random = new(31415);
-
         private static string SymbolSprites = "MainMenu/PlayerSymbols";
 
+        /// <summary>
+        /// Setzt den Placeholder-Text eines InputFields.
+        /// </summary>
         public static void SetPlaceholder(TMP_InputField field, string text)
         {
             if (field.placeholder is TextMeshProUGUI placeholder)
@@ -44,30 +40,45 @@ namespace Assets.Scripts.UI
             }
         }
 
+        /// <summary>
+        /// Gibt den aktuellen Text eines InputFields zurück.
+        /// </summary>
         public static string GetInputText(TMP_InputField field)
         {
             Debug.Log($"[MainMenuHelper] Retrieved input text: '{field.text}'");
             return field.text;
         }
 
+        /// <summary>
+        /// Setzt ein InputField auf einen leeren Text zurück.
+        /// </summary>
         public static void ResetInputText(TMP_InputField field)
         {
-            Debug.Log($"[MainMenuHelper] Reset input field.");
+            Debug.Log("[MainMenuHelper] Reset input field.");
             field.text = "";
         }
 
+        /// <summary>
+        /// Setzt den Text eines Labels.
+        /// </summary>
         public static void SetLabelText(TMP_Text field, string text)
         {
             Debug.Log($"[MainMenuHelper] Set label text to: '{text}'");
             field.text = text;
         }
 
+        /// <summary>
+        /// Gibt den Text eines Labels zurück.
+        /// </summary>
         public static string GetLabelText(TMP_Text field)
         {
             Debug.Log($"[MainMenuHelper] Retrieved label text: '{field.text}'");
             return field.text;
         }
 
+        /// <summary>
+        /// Extrahiert eine Portnummer aus einem InputField (Text).
+        /// </summary>
         public static int GetNumberFromLobbyPortTMP(TMP_InputField lobbyPortTMP)
         {
             if (int.TryParse(lobbyPortTMP.text, out int result))
@@ -82,6 +93,9 @@ namespace Assets.Scripts.UI
             }
         }
 
+        /// <summary>
+        /// Prüft, ob die angegebene IP-Adresse gültig ist (IPv4 oder IPv6).
+        /// </summary>
         public static bool ValidateIp(string input)
         {
             if (input.Length < 7)
@@ -108,12 +122,18 @@ namespace Assets.Scripts.UI
             return false;
         }
 
+        /// <summary>
+        /// Setzt ein Label zurück (Text = "").
+        /// </summary>
         public static void ResetLabelText(TMP_Text field)
         {
             Debug.Log("[MainMenuHelper] Label text reset.");
             field.text = "";
         }
 
+        /// <summary>
+        /// Gibt eine Fehlermeldung bei ungültigem Nicknamen zurück.
+        /// </summary>
         public static string CreateNicknameLobbyErrorMsg(string invalid)
         {
             string msg = $"An invalid {invalid} has been entered. Try to use a {invalid} that has at least 1 and maximum 15 characters and only contains letters.";
@@ -121,6 +141,9 @@ namespace Assets.Scripts.UI
             return msg;
         }
 
+        /// <summary>
+        /// Gibt eine Fehlermeldung bei ungültiger IP zurück.
+        /// </summary>
         public static string GetIPErrorMsg()
         {
             const string msg = "An semantic invalid IP has been entered.";
@@ -128,6 +151,9 @@ namespace Assets.Scripts.UI
             return msg;
         }
 
+        /// <summary>
+        /// Gibt eine Fehlermeldung bei ungültigem Port zurück.
+        /// </summary>
         public static string GetPortErrorMsg()
         {
             const string msg = "An invalid Port has been entered. Enter a Port between 1024 and 65535.";
@@ -135,6 +161,9 @@ namespace Assets.Scripts.UI
             return msg;
         }
 
+        /// <summary>
+        /// Validiert, ob ein Nickname oder Lobbyname gültig ist (nur Buchstaben, max. 15 Zeichen).
+        /// </summary>
         public static bool IsValidNicknameOrLobbyName(string input)
         {
             Debug.Log("[MainMenuHelper] Validating nickname or lobby name.");
@@ -158,6 +187,9 @@ namespace Assets.Scripts.UI
             return true;
         }
 
+        /// <summary>
+        /// Prüft, ob ein Port im gültigen Bereich liegt (1024–65535).
+        /// </summary>
         public static bool IsValidUserPort(int port)
         {
             bool isValid = port >= 1024 && port <= 65535;
@@ -165,6 +197,9 @@ namespace Assets.Scripts.UI
             return isValid;
         }
 
+        /// <summary>
+        /// Interne Methode zur Validierung von Eingabefeldern für Buttons.
+        /// </summary>
         private static void ValidateFieldsAndToggleButton(Button button, params TMP_InputField[] fields)
         {
             bool allFilled = true;
@@ -181,6 +216,9 @@ namespace Assets.Scripts.UI
             Debug.Log($"[MainMenuHelper] Button interactivity set to: {allFilled}");
         }
 
+        /// <summary>
+        /// Aktiviert/Deaktiviert einen Button basierend auf InputField-Inhalten.
+        /// </summary>
         public static void SetupButtonActivationValidation(Button button, params TMP_InputField[] fields)
         {
             foreach (var field in fields)
@@ -195,6 +233,9 @@ namespace Assets.Scripts.UI
             ValidateFieldsAndToggleButton(button, fields);
         }
 
+        /// <summary>
+        /// Weist einem Spieler das passende Bild zu (Bot oder Spielername).
+        /// </summary>
         public static void AssignPlayerSprite(Player player, int playerIndex)
         {
             if (player.IsBot)
@@ -223,6 +264,9 @@ namespace Assets.Scripts.UI
             }
         }
 
+        /// <summary>
+        /// Generiert einen einzigartigen Spielernamen, abhängig davon ob es ein Bot ist oder nicht.
+        /// </summary>
         public static string GenerateName(bool isBot)
         {
             List<Player> activePlayers = LobbyStorage.Instance.ActivePlayers;

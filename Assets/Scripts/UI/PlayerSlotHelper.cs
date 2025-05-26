@@ -7,6 +7,10 @@ using Assets.Scripts.Models;
 using UnityEngine.UI;
 using Player = Assets.Scripts.Models.Player;
 
+/// <summary>
+/// Unterstützt die Darstellung und Interaktion eines einzelnen Spieler-Slots im Lobby-Menü.
+/// Handhabt Zuweisung, Bot-Status, Namen, Avatare und Interaktivität.
+/// </summary>
 public class PlayerSlotHelper : MonoBehaviour
 {
     public TMP_InputField nameText;
@@ -19,11 +23,15 @@ public class PlayerSlotHelper : MonoBehaviour
 
     private Player assignedPlayer;
 
+    /// <summary>
+    /// Initialisiert diesen Slot mit einem gegebenen Spielerobjekt.
+    /// </summary>
     public void SetUp(Player player)
     {
         Debug.Log($"[PlayerSlotHelper] SetUp: Initializing slot for player '{player.PlayerName}'");
         assignedPlayer = player;
 
+        // Lade das Spielerbild
         Sprite sprite = Resources.Load<Sprite>(player.PlayerSpritePath);
         if (sprite == null)
         {
@@ -31,19 +39,26 @@ public class PlayerSlotHelper : MonoBehaviour
         }
         playerPicture.sprite = sprite;
 
+        // Zeige Spielernamen im Eingabefeld an
         nameText.text = player.PlayerName;
         Debug.Log($"[PlayerSlotHelper] SetUp: Assigned name '{assignedPlayer.PlayerName}'");
 
+        // Wenn Spieler kein Host ist, Buttons und Dropdowns entsprechend setzen
         if (!assignedPlayer.LobbyHost)
         {
-            actionButton.GetComponentInChildren<TMP_Text>().text = player.IsBot ? "Add Player" : "Add Bot";
-        Debug.Log($"[PlayerSlotHelper] SetUp: Action button set to '{actionButton.GetComponentInChildren<TMP_Text>().text}'");
+            string label = player.IsBot ? "Add Player" : "Add Bot";
+            actionButton.GetComponentInChildren<TMP_Text>().text = label;
+            Debug.Log($"[PlayerSlotHelper] SetUp: Action button set to '{label}'");
+
             botStrengthDropdown.gameObject.SetActive(player.IsBot);
             placeHolder.SetActive(!player.IsBot);
-        Debug.Log($"[PlayerSlotHelper] SetUp: Bot dropdown active = {player.IsBot}, Placeholder active = {!player.IsBot}");
+            Debug.Log($"[PlayerSlotHelper] SetUp: Bot dropdown active = {player.IsBot}, Placeholder active = {!player.IsBot}");
         }
     }
 
+    /// <summary>
+    /// Setzt den Bot-Stärkedropdown auf den Standardwert zurück.
+    /// </summary>
     public void ResetBotStrengthDropDown()
     {
         Debug.Log("[PlayerSlotHelper] ResetBotStrengthDropDown: Resetting dropdown to default value.");
@@ -51,6 +66,9 @@ public class PlayerSlotHelper : MonoBehaviour
         botStrengthDropdown.RefreshShownValue();
     }
 
+    /// <summary>
+    /// Wird aufgerufen, wenn die Bot-Stärke geändert wurde.
+    /// </summary>
     public void OnBotStrengthChanged()
     {
         Debug.Log("[PlayerSlotHelper] OnBotStrengthChanged: Called.");
@@ -58,26 +76,40 @@ public class PlayerSlotHelper : MonoBehaviour
         if (assignedPlayer != null && assignedPlayer.IsBot)
         {
             string selected = botStrengthDropdown.options[botStrengthDropdown.value].text;
-            assignedPlayer.BotType = (botStrengthDropdown.value == 0) ? BotType.IsWeakBot : (botStrengthDropdown.value == 1) ? BotType.IsMischiefBot : BotType.IsScoringBot;
+            Debug.Log($"[PlayerSlotHelper] OnBotStrengthChanged: Selected value '{selected}'");
+
+            // Weise neuen Bottyp zu
+            assignedPlayer.BotType = (botStrengthDropdown.value == 0) ? BotType.IsWeakBot :
+                                     (botStrengthDropdown.value == 1) ? BotType.IsMischiefBot :
+                                     BotType.IsScoringBot;
+
+            Debug.Log($"[PlayerSlotHelper] OnBotStrengthChanged: Bot type set to {assignedPlayer.BotType}");
         }
     }
 
+    /// <summary>
+    /// Wird aufgerufen, wenn der Add Player / Add Bot Button gedrückt wird.
+    /// </summary>
     public void OnActionButtonClicked()
     {
         Debug.Log("[PlayerSlotHelper] OnActionButtonClicked: Called.");
 
         if (assignedPlayer != null)
         {
+            // Botstatus toggeln
             assignedPlayer.IsBot = !assignedPlayer.IsBot;
             Debug.Log($"[PlayerSlotHelper] OnActionButtonClicked: Bot status toggled to {assignedPlayer.IsBot}");
 
+            // Neuen Namen generieren
             string playerName = MainMenuHelper.GenerateName(assignedPlayer.IsBot);
             assignedPlayer.PlayerName = playerName;
             Debug.Log($"[PlayerSlotHelper] OnActionButtonClicked: New name assigned: '{assignedPlayer.PlayerName}'");
 
+            // Neues Bild zuweisen
             MainMenuHelper.AssignPlayerSprite(assignedPlayer, LobbyStorage.Instance.ActivePlayers.IndexOf(assignedPlayer));
             playerPicture.sprite = Resources.Load<Sprite>(assignedPlayer.PlayerSpritePath);
 
+            // Slot erneut setzen
             SetUp(assignedPlayer);
         }
         else
@@ -86,6 +118,9 @@ public class PlayerSlotHelper : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Wird aufgerufen, wenn der Name im Eingabefeld geändert wird.
+    /// </summary>
     public void OnNameChanged()
     {
         Debug.Log("[PlayerSlotHelper] OnNameChanged: Called.");
@@ -93,6 +128,7 @@ public class PlayerSlotHelper : MonoBehaviour
         if (assignedPlayer != null)
         {
             string newName = nameText.text;
+            Debug.Log($"[PlayerSlotHelper] OnNameChanged: Input received: '{newName}'");
 
             if (MainMenuHelper.IsValidNicknameOrLobbyName(newName))
             {
@@ -101,8 +137,8 @@ public class PlayerSlotHelper : MonoBehaviour
                     newName = "Bot " + newName;
                 }
 
-                Debug.Log($"[PlayerSlotHelper] OnNameChanged: Valid name entered: '{newName}'");
                 assignedPlayer.PlayerName = newName;
+                Debug.Log($"[PlayerSlotHelper] OnNameChanged: Valid name assigned: '{assignedPlayer.PlayerName}'");
 
                 MainMenuHelper.AssignPlayerSprite(assignedPlayer, LobbyStorage.Instance.ActivePlayers.IndexOf(assignedPlayer));
                 playerPicture.sprite = Resources.Load<Sprite>(assignedPlayer.PlayerSpritePath);
@@ -115,7 +151,7 @@ public class PlayerSlotHelper : MonoBehaviour
                 sceneMessageHandler.ShowScene(MainMenuHelper.CreateNicknameLobbyErrorMsg("Nickname"));
             }
 
-            // Update field visually to current name (in case of rejection)
+            // Aktuellen Namen (ggf. korrigiert) zurück ins UI setzen
             nameText.text = assignedPlayer.PlayerName;
         }
         else
@@ -124,18 +160,25 @@ public class PlayerSlotHelper : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Macht alle UI-Elemente dieses Slots nicht interaktiv.
+    /// </summary>
     public void DeactivateInteractives()
     {
+        Debug.Log("[PlayerSlotHelper] DeactivateInteractives: Disabling inputs");
         nameText.interactable = false;
         botStrengthDropdown.interactable = false;
         actionButton.interactable = false;
     }
 
+    /// <summary>
+    /// Macht alle UI-Elemente dieses Slots wieder interaktiv.
+    /// </summary>
     public void ActivateInteractives()
     {
+        Debug.Log("[PlayerSlotHelper] ActivateInteractives: Enabling inputs");
         nameText.interactable = true;
         botStrengthDropdown.interactable = true;
         actionButton.interactable = true;
     }
-    
 }

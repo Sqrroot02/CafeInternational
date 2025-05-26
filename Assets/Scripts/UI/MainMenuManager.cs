@@ -6,117 +6,135 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+    // Referenzen zu UI-Elementen
     public GameObject createLobbyPanel;
-
     public GameObject mainMenuContainer;
-
     public GameObject lobbyPanel;
-
     public GameObject joinLobbyPanel;
-
     public GameObject rulesPanel;
 
+    // Referenzen zu Panel-Managern
     public JoinLobbyPanelManager joinLobbyPanelManager;
-
     public CreateLobbyPanelManager createLobbyPanelManager;
-
     public LobbyPanelManager lobbyPanelManager;
 
+    // Nachrichtenanzeige-Handler für UI-Texte
     public SceneMessageHandler sceneMessageHandler;
-
 
     void Awake()
     {
+        // Event abonnieren, um auf Verbindungsabbrüche zu reagieren
         NetworkClientAdapter.Instance.Disconnected += InstanceOnDisconnected;
+        Debug.Log("[MainMenuManager] Awake - Subscribed to Disconnected event.");
     }
 
-    private void InstanceOnDisconnected(object sender, EventArgs e) => ShowMainMenu();
+    // Event-Handler für Verbindungsabbruch
+    private void InstanceOnDisconnected(object sender, EventArgs e)
+    {
+        Debug.Log("[MainMenuManager] Disconnected from server. Returning to main menu.");
+        ShowMainMenu();
+    }
 
+    // Anwendung beenden
     public void QuitGame()
     {
+        Debug.Log("[MainMenuManager] QuitGame - Exiting game.");
         Application.Quit();
-        Debug.Log("Exit game"); 
     }
 
+    // Erstellen-Lobby-Panel anzeigen
     public void ShowCreateLobbyPanel()
     {
+        Debug.Log("[MainMenuManager] ShowCreateLobbyPanel - Displaying create lobby panel.");
         createLobbyPanel.SetActive(true);
         mainMenuContainer.SetActive(false);
         lobbyPanel.SetActive(false);
         joinLobbyPanel.SetActive(false);
-        Debug.Log("Show Create Lobby Panel");
     }
 
     /// <summary>
-    /// Disconnects from the current lobby
+    /// Trennt von der aktuellen Lobby und stoppt ggf. den Server.
     /// </summary>
     public void DisconnectLobby()
     {
-        Debug.Log("Disconnect Lobby");
+        Debug.Log("[MainMenuManager] DisconnectLobby - Disconnecting from lobby and shutting down server if running.");
         NetworkClientAdapter.Instance.Disconnect();
+
         if (NetworkServerAdapter.Instance.Server.IsRunning)
+        {
+            Debug.Log("[MainMenuManager] DisconnectLobby - Server is running. Tearing down.");
             NetworkServerAdapter.Instance.TearDown();
+        }
     }
-    
+
+    // Hauptmenü anzeigen und Panels zurücksetzen
     public void ShowMainMenu()
     {
+        Debug.Log("[MainMenuManager] ShowMainMenu - Returning to main menu.");
         rulesPanel.SetActive(false);
         createLobbyPanel.SetActive(false);
         mainMenuContainer.SetActive(true);
         lobbyPanel.SetActive(false);
         joinLobbyPanel.SetActive(false);
+
         joinLobbyPanelManager.ResetJoinLobbyTMPs();
         createLobbyPanelManager.ResetCreateLobbyPanel();
         lobbyPanelManager.ResetLobbyTMPs();
-        Debug.Log("Show Main Menu");
-
     }
 
+    // Lobby-Panel anzeigen
     public void ShowLobby()
     {
+        Debug.Log("[MainMenuManager] ShowLobby - Showing lobby panel.");
         createLobbyPanel.SetActive(false);
         mainMenuContainer.SetActive(false);
         lobbyPanel.SetActive(true);
         joinLobbyPanel.SetActive(false);
+
         lobbyPanelManager.InitiateLobby();
-        Debug.Log("Show Lobby Panel");
     }
 
+    // Join-Lobby-Panel anzeigen
     public void ShowJoinLobbyPanel()
     {
+        Debug.Log("[MainMenuManager] ShowJoinLobbyPanel - Displaying join lobby panel.");
         createLobbyPanel.SetActive(false);
         mainMenuContainer.SetActive(false);
         lobbyPanel.SetActive(false);
         joinLobbyPanel.SetActive(true);
-        Debug.Log("Show Join Lobby Panel");
     }
 
+    // Regel-Panel anzeigen
     public void ShowRulesPanel()
     {
+        Debug.Log("[MainMenuManager] ShowRulesPanel - Showing rules panel.");
         createLobbyPanel.SetActive(false);
         mainMenuContainer.SetActive(false);
         lobbyPanel.SetActive(false);
         joinLobbyPanel.SetActive(false);
         rulesPanel.SetActive(true);
-        Debug.Log("Show Rules Panel");
     }
 
+    // Wechselt zwischen verschiedenen Karten-Designs
     public void SetCardPathOnButtonClick()
     {
         string cardPath = LobbyStorage.Instance.CardPath;
 
+        Debug.Log("[MainMenuManager] SetCardPathOnButtonClick - Current card path: " + cardPath);
+
         if (cardPath == "Normal/")
         {
             cardPath = "StickmanCards/";
+            Debug.Log("[MainMenuManager] SetCardPathOnButtonClick - Switching to StickmanCards.");
         }
         else if (cardPath == "StickmanCards/")
         {
             cardPath = "Normal/";
+            Debug.Log("[MainMenuManager] SetCardPathOnButtonClick - Switching to Normal cards.");
         }
 
         LobbyStorage.Instance.CardPath = cardPath;
-
-        Debug.Log("Card Path: " + LobbyStorage.Instance.CardPath);
+        Debug.Log("[MainMenuManager] SetCardPathOnButtonClick - New card path: " + LobbyStorage.Instance.CardPath);
 
         if (cardPath == "Normal/")
         {
@@ -126,7 +144,5 @@ public class MainMenuManager : MonoBehaviour
         {
             sceneMessageHandler.ShowScene("The DLC has been activated :)");
         }
-
-
     }
 }

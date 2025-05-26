@@ -9,19 +9,30 @@ using Assets.Scripts.Network.Messages.PlayerLobbyAction;
 using Assets.Scripts.Network.Messages.StartGame;
 using Assets.Scripts.UI;
 
+/// <summary>
+/// Verwalter-Logik für das LobbyPanel. Zuständig für das Setzen von UI-Elementen,
+/// Synchronisation mit dem Lobby-Zustand und das Starten des Spiels.
+/// </summary>
 public class LobbyPanelManager : MonoBehaviour
 {
+    // Referenzen zu den UI-Feldern
     public TMP_Text lobbyNameTMP;
     public TMP_Text lobbyPortTMP;
     public TMP_Text lobbyIPTMP;
+
+    // Liste der Spieler-Slots (UI-Elemente)
     public List<PlayerSlotHelper> playerSlots;
 
     void Awake()
     {
         Debug.Log("[LobbyPanelManager] Awake: Assigning self to PlayerLobbyActionHandler");
+        // Registrierung bei PlayerLobbyActionHandler
         PlayerLobbyActionHandler.Manager = this;
     }
 
+    /// <summary>
+    /// Initialisiert das Lobby-UI beim Betreten der Lobby.
+    /// </summary>
     public void InitiateLobby()
     {
         Debug.Log("[LobbyPanelManager] InitiateLobby: Initializing lobby display");
@@ -29,16 +40,24 @@ public class LobbyPanelManager : MonoBehaviour
         SetLobbyIPLabel($"Lobby Ip: {LobbyStorage.Instance.LobbyIp}");
         SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.LobbyName);
         SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.LobbyPort);
+
         SetPlayerNames();
 
-        if (LobbyStorage.Instance.IsMuliplayerLobby && !LobbyStorage.Instance.ActivePlayers.FirstOrDefault(p => p.PlayerId == LobbyStorage.Instance.ClientPlayerId).LobbyHost)
+        // Wenn Multiplayer-Lobby und Spieler nicht der Host ist, Interaktivität deaktivieren
+        if (LobbyStorage.Instance.IsMuliplayerLobby &&
+            !LobbyStorage.Instance.ActivePlayers.FirstOrDefault(p => p.PlayerId == LobbyStorage.Instance.ClientPlayerId).LobbyHost)
         {
-            foreach (var playerSlot in playerSlots) {
+            Debug.Log("[LobbyPanelManager] InitiateLobby: Client is not host – deactivating interactivity");
+            foreach (var playerSlot in playerSlots)
+            {
                 playerSlot.DeactivateInteractives();
             }
         }
     }
 
+    /// <summary>
+    /// Setzt UI-Elemente zurück, wenn Lobby verlassen wird.
+    /// </summary>
     public void ResetLobbyTMPs()
     {
         Debug.Log("[LobbyPanelManager] ResetLobbyTMPs: Resetting all lobby UI fields");
@@ -47,17 +66,23 @@ public class LobbyPanelManager : MonoBehaviour
         ResetLobbyNameLabel();
         ResetLobbyPortLabel();
 
-        for (int i = 1; i < playerSlots.Count; i++) {
+        for (int i = 1; i < playerSlots.Count; i++)
+        {
             var slot = playerSlots[i];
             if (slot.botStrengthDropdown != null)
             {
-                Debug.Log("[LobbyPanelManager] ResetLobbyTMPs: Resetting bot strength dropdown");
+                Debug.Log($"[LobbyPanelManager] ResetLobbyTMPs: Resetting bot strength dropdown for slot {i}");
                 slot.ResetBotStrengthDropDown();
             }
+
+            Debug.Log($"[LobbyPanelManager] ResetLobbyTMPs: Reactivating slot {i}");
             slot.ActivateInteractives();
         }
     }
 
+    /// <summary>
+    /// Startet das Spiel und sendet die Spiel-Startnachricht an den Server.
+    /// </summary>
     public void StartGame()
     {
         Debug.Log("[LobbyPanelManager] StartGame: Preparing and sending start game message");
@@ -76,6 +101,9 @@ public class LobbyPanelManager : MonoBehaviour
         NetworkRouter.SendToServer(message, MessageType.StartGame);
     }
 
+    /// <summary>
+    /// Wird vom Netzwerk-Handler aufgerufen, um das UI mit neuen Lobbydaten zu aktualisieren.
+    /// </summary>
     public void LobbyUpdate(PlayerLobbyActionMessage message)
     {
         Debug.Log("[LobbyPanelManager] LobbyUpdate: Received new lobby state from server");
@@ -83,6 +111,7 @@ public class LobbyPanelManager : MonoBehaviour
         // Update player list
         LobbyStorage.Instance.ActivePlayers = message.Players.ToList();
         Debug.Log($"[LobbyPanelManager] LobbyUpdate: Updated active players list, count = {message.Players.Length}");
+
         SetPlayerNames();
 
         // Update lobby metadata
@@ -97,6 +126,9 @@ public class LobbyPanelManager : MonoBehaviour
         RefreshLobbyIpLabel();
     }
 
+    /// <summary>
+    /// Weist den PlayerSlots die Namen und Daten der Spieler zu.
+    /// </summary>
     public void SetPlayerNames()
     {
         Debug.Log("[LobbyPanelManager] SetPlayerNames: Updating UI with player data");
@@ -119,7 +151,10 @@ public class LobbyPanelManager : MonoBehaviour
         }
     }
 
-    // UI Label setters using MainMenuHelper
+    // ------------------------------
+    // UI Label Helper
+    // ------------------------------
+
     public void SetLobbyNameLabel(string text)
     {
         Debug.Log($"[LobbyPanelManager] SetLobbyNameLabel: '{text}'");
