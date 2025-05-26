@@ -1473,6 +1473,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1616470259}
     - target: {fileID: 5886509717362934938, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
+      propertyPath: sceneMessageHandler
+      value: 
+      objectReference: {fileID: 149616648}
+    - target: {fileID: 5886509717362934938, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: joinLobbyPanelManager
       value: 
       objectReference: {fileID: 196356637}
@@ -4273,6 +4277,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1616470259}
     - target: {fileID: 5886509717362934938, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
+      propertyPath: sceneMessageHandler
+      value: 
+      objectReference: {fileID: 149616648}
+    - target: {fileID: 5886509717362934938, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: joinLobbyPanelManager
       value: 
       objectReference: {fileID: 196356637}
@@ -4418,6 +4426,10 @@ PrefabInstance:
       propertyPath: mainMenuContainer
       value: 
       objectReference: {fileID: 1616470259}
+    - target: {fileID: 5886509717362934938, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
+      propertyPath: sceneMessageHandler
+      value: 
+      objectReference: {fileID: 149616648}
     - target: {fileID: 5886509717362934938, guid: 290cc09105e5ada459a2766cac99af75, type: 3}
       propertyPath: joinLobbyPanelManager
       value: 
