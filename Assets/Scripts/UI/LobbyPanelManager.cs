@@ -117,14 +117,11 @@ public class LobbyPanelManager : MonoBehaviour
         RefreshLobbyIpLabel();
 
         // Wenn Multiplayer-Lobby und Spieler nicht der Host ist, Interaktivität deaktivieren
-        if (LobbyStorage.Instance.IsMuliplayerLobby &&
-            !LobbyStorage.Instance.ActivePlayers.FirstOrDefault(p => p.PlayerId == LobbyStorage.Instance.ClientPlayerId).LobbyHost)
+
+        Debug.Log("[LobbyPanelManager] InitiateLobby: Client is not host – deactivating interactivity");
+        foreach (var playerSlot in playerSlots)
         {
-            Debug.Log("[LobbyPanelManager] InitiateLobby: Client is not host – deactivating interactivity");
-            foreach (var playerSlot in playerSlots)
-            {
-                playerSlot.DeactivateInteractives();
-            }
+            playerSlot.DeactivateInteractives();
         }
     }
 
