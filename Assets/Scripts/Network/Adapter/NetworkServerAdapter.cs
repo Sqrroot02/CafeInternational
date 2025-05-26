@@ -176,6 +176,7 @@ public class NetworkServerAdapter : MonoBehaviour
 			LobbyHost = false,
 			IsBot = false,
 			PlayerId = payload.PlayerId,
+			PlayerSpritePath = payload.PlayerSpritePath,
 		};
 		
 		Debug.Log($"Player {player.PlayerName} [{player.PlayerId}] will be added to session");
