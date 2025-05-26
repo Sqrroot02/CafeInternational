@@ -7,10 +7,10 @@ namespace Assets.Scripts.TestHelper
 	{
 		public static List<Player> Players = new()
 		{
-			new("Test-Player", 0, true, false, false),
-			new("Alex", 0, true, false, false),
-			new("Joel", 0, true, false, false),
-			new("Lars", 0, false, false, false)
+			new("Test-Player", 0, true, false, BotType.IsWeakBot),
+			new("Alex", 0, true, false, BotType.IsWeakBot),
+			new("Joel", 0, true, false, BotType.IsWeakBot),
+			new("Lars", 0, false, false, BotType.IsWeakBot)
 		};
 	}
 }

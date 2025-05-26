@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Assets.Scripts.UI;
 using UnityEngine;
+using Assets.Scripts.Models;
 
 namespace Assets.Scripts.Models
 {
@@ -45,6 +46,7 @@ namespace Assets.Scripts.Models
 
         private string globalLobbyName;
         private string globalLobbyIp;
+        public bool IsMuliplayerLobby { get; set; }
 
         void Awake()
         {
@@ -62,8 +64,10 @@ namespace Assets.Scripts.Models
             Debug.Log("[LobbyStorage] Singleton instance assigned and marked to not destroy on load.");
         }
 
-        public void InitializeLobby(string localPlayerName, string lobbyName)
+        public void InitializeLobby(string localPlayerName, string lobbyName, bool isMulitplayerLobby)
         {
+            this.IsMuliplayerLobby = isMulitplayerLobby;
+
             Debug.Log($"[LobbyStorage] InitializeLobby called with localPlayerName: '{localPlayerName}', lobbyName: '{lobbyName}'");
 
             LobbyName = lobbyName;
@@ -71,7 +75,7 @@ namespace Assets.Scripts.Models
             ActivePlayers.Clear();
             Debug.Log("[LobbyStorage] ActivePlayers list cleared.");
 
-            var hostPlayer = new Player(localPlayerName, 0, false, true, false);
+            var hostPlayer = new Player(localPlayerName, 0, false, true, BotType.IsWeakBot);
             ClientPlayerId = hostPlayer.PlayerId;
             Debug.Log($"[LobbyStorage] Host player created with PlayerId: {ClientPlayerId}");
 
@@ -85,7 +89,7 @@ namespace Assets.Scripts.Models
             for (var i = ActivePlayers.Count; i < 4; i++)
             {
                 var botName = MainMenuHelper.GenerateName(true);
-                var botPlayer = new Player(botName, 0, true, false, false);
+                var botPlayer = new Player(botName, 0, true, false, BotType.IsMischiefBot);
                 ActivePlayers.Add(botPlayer);
                 Debug.Log($"[LobbyStorage] Added bot player '{botName}' to ActivePlayers.");
                 MainMenuHelper.AssignPlayerSprite(botPlayer, ActivePlayers.IndexOf(botPlayer));

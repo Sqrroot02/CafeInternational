@@ -116,7 +116,7 @@ namespace Assets.Scripts.UI
 
         public static string CreateNicknameLobbyErrorMsg(string invalid)
         {
-            string msg = $"An invalid {invalid} has been entered. Try to use a {invalid} that has at least 1 and maximum 10 characters and only contains letters.";
+            string msg = $"An invalid {invalid} has been entered. Try to use a {invalid} that has at least 1 and maximum 15 characters and only contains letters.";
             Debug.Log($"[MainMenuHelper] Created error message: {msg}");
             return msg;
         }
@@ -139,7 +139,7 @@ namespace Assets.Scripts.UI
         {
             Debug.Log("[MainMenuHelper] Validating nickname or lobby name.");
 
-            if (string.IsNullOrEmpty(input) || input.Length > 10)
+            if (string.IsNullOrEmpty(input) || input.Length > 15)
             {
                 Debug.LogWarning("[MainMenuHelper] Input is null, empty or too long.");
                 return false;

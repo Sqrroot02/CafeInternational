@@ -39,6 +39,8 @@ namespace Assets.Scripts.Models
         /// Determines if the player is a bot or not
         /// </summary>
         public bool IsBot { get; set; }
+
+        public BotType BotType { get; set; }
         
         /// <summary>
         /// The associated Game bar of the player
@@ -52,16 +54,14 @@ namespace Assets.Scripts.Models
             
         }
         
-        public Player(string playerName, int playerScore, bool isBot, bool lobbyHost, bool isStrongBot)
+        public Player(string playerName, int playerScore, bool isBot, bool lobbyHost, BotType botType)
         {
             PlayerName = playerName;
             PlayerScore = playerScore;
             IsBot = isBot;
             LobbyHost = lobbyHost;
-            IsStrongBot = isStrongBot;
+            this.BotType = botType;
         }
-
-        public bool IsStrongBot { get; set; }
 
         public void SetPlayerManager(PlayerManager playerManager)
         {
@@ -225,8 +225,8 @@ namespace Assets.Scripts.Models
             message.AddBool(_playerEliminated);
             message.AddBool(IsBot);
             message.AddString(PlayerId);
-            message.AddBool(IsStrongBot);
             message.AddString(PlayerSpritePath);
+            message.AddInt((int) BotType);
         }
 
         public void Deserialize(Message message)
@@ -238,8 +238,8 @@ namespace Assets.Scripts.Models
             _playerEliminated = message.GetBool();
             IsBot = message.GetBool();
             PlayerId = message.GetString();
-            IsStrongBot = message.GetBool();
             PlayerSpritePath = message.GetString();
+            BotType = (BotType) message.GetInt();
         }
     }
 }

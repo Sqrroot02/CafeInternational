@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Assets.Scripts.UI;
 using Assets.Scripts.Models;
 using UnityEngine.UI;
-using UnityEngine.UI;
 using Player = Assets.Scripts.Models.Player;
 
 public class PlayerSlotHelper : MonoBehaviour
@@ -38,10 +37,10 @@ public class PlayerSlotHelper : MonoBehaviour
         if (!assignedPlayer.LobbyHost)
         {
             actionButton.GetComponentInChildren<TMP_Text>().text = player.IsBot ? "Add Player" : "Add Bot";
-            Debug.Log($"[PlayerSlotHelper] SetUp: Action button set to '{actionButton.GetComponentInChildren<TMP_Text>().text}'");
+        Debug.Log($"[PlayerSlotHelper] SetUp: Action button set to '{actionButton.GetComponentInChildren<TMP_Text>().text}'");
             botStrengthDropdown.gameObject.SetActive(player.IsBot);
             placeHolder.SetActive(!player.IsBot);
-            Debug.Log($"[PlayerSlotHelper] SetUp: Bot dropdown active = {player.IsBot}, Placeholder active = {!player.IsBot}");
+        Debug.Log($"[PlayerSlotHelper] SetUp: Bot dropdown active = {player.IsBot}, Placeholder active = {!player.IsBot}");
         }
     }
 
@@ -59,8 +58,7 @@ public class PlayerSlotHelper : MonoBehaviour
         if (assignedPlayer != null && assignedPlayer.IsBot)
         {
             string selected = botStrengthDropdown.options[botStrengthDropdown.value].text;
-            assignedPlayer.IsStrongBot = selected == "Strong";
-            Debug.Log($"[PlayerSlotHelper] OnBotStrengthChanged: Strength set to '{selected}', IsStrongBot = {assignedPlayer.IsStrongBot}");
+            assignedPlayer.BotType = (botStrengthDropdown.value == 0) ? BotType.IsWeakBot : (botStrengthDropdown.value == 1) ? BotType.IsMischiefBot : BotType.IsScoringBot;
         }
     }
 
@@ -125,4 +123,19 @@ public class PlayerSlotHelper : MonoBehaviour
             Debug.LogWarning("[PlayerSlotHelper] OnNameChanged: No player assigned.");
         }
     }
+
+    public void DeactivateInteractives()
+    {
+        nameText.interactable = false;
+        botStrengthDropdown.interactable = false;
+        actionButton.interactable = false;
+    }
+
+    public void ActivateInteractives()
+    {
+        nameText.interactable = true;
+        botStrengthDropdown.interactable = true;
+        actionButton.interactable = true;
+    }
+    
 }

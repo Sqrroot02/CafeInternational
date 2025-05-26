@@ -30,6 +30,13 @@ public class LobbyPanelManager : MonoBehaviour
         SetLobbyNameLabel("Lobbyname: " + LobbyStorage.Instance.LobbyName);
         SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.LobbyPort);
         SetPlayerNames();
+
+        if (LobbyStorage.Instance.IsMuliplayerLobby && !LobbyStorage.Instance.ActivePlayers.FirstOrDefault(p => p.PlayerId == LobbyStorage.Instance.ClientPlayerId).LobbyHost)
+        {
+            foreach (var playerSlot in playerSlots) {
+                playerSlot.DeactivateInteractives();
+            }
+        }
     }
 
     public void ResetLobbyTMPs()
@@ -40,13 +47,14 @@ public class LobbyPanelManager : MonoBehaviour
         ResetLobbyNameLabel();
         ResetLobbyPortLabel();
 
-        foreach (var slot in playerSlots)
-        {
+        for (int i = 1; i < playerSlots.Count; i++) {
+            var slot = playerSlots[i];
             if (slot.botStrengthDropdown != null)
             {
                 Debug.Log("[LobbyPanelManager] ResetLobbyTMPs: Resetting bot strength dropdown");
                 slot.ResetBotStrengthDropDown();
             }
+            slot.ActivateInteractives();
         }
     }
 

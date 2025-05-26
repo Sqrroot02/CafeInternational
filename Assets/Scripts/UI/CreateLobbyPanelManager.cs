@@ -20,6 +20,8 @@ public class CreateLobbyPanelManager : MonoBehaviour
 
     public SceneMessageHandler sceneMessageHandler;
 
+    public TMP_Dropdown lobbyTypeDropdown;
+
     private string nickNamePlacerholderValue = "Enter Nickname...";
 
     private string lobbyNamePlaceholderValue = "Enter Lobby Name...";
@@ -50,7 +52,7 @@ public class CreateLobbyPanelManager : MonoBehaviour
         }
         else
         {
-            LobbyStorage.Instance.InitializeLobby(enteredNickname, enteredLobbyName);
+            LobbyStorage.Instance.InitializeLobby(enteredNickname, enteredLobbyName, lobbyTypeDropdown.value == 0 ? false: true);
             InitAndRunServerSession();
         }
     }
@@ -105,6 +107,7 @@ public class CreateLobbyPanelManager : MonoBehaviour
         Debug.Log("Reset Create Lobby Panel");
         ResetLobbyNameText();
         ResetNicknameText();
+        ResetLobbyTypeDropDown();
     }
 
     public void SetLobbyNamePlaceholder(string text) => MainMenuHelper.SetPlaceholder(lobbyNameInput, text);
@@ -116,5 +119,6 @@ public class CreateLobbyPanelManager : MonoBehaviour
 
     public void ResetLobbyNameText() => MainMenuHelper.ResetInputText(lobbyNameInput);
     public void ResetNicknameText() => MainMenuHelper.ResetInputText(nicknameInputField);
+    public void ResetLobbyTypeDropDown() => lobbyTypeDropdown.value = 0;
 
 }

@@ -253,7 +253,8 @@ namespace Assets.Scripts.Game
         IEnumerator WaitForBotPlay(int seconds = 2)
         {
             yield return new WaitForSeconds(seconds);
-            if (CurrentPlayer.IsStrongBot)
+            //TODO: für lars -> richtiges bot beahviour reinpacken 
+            if (CurrentPlayer.BotType == BotType.IsMischiefBot)
                 _complexBotBehaviour.MakeComplexTurn(CurrentPlayer, Players, _firstMove);
             else
                 _easyBotBehaviour.Play(CurrentPlayer, _firstMove);

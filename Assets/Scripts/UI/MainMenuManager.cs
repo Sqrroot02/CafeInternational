@@ -14,6 +14,8 @@ public class MainMenuManager : MonoBehaviour
 
     public GameObject joinLobbyPanel;
 
+    public GameObject rulesPanel;
+
     public JoinLobbyPanelManager joinLobbyPanelManager;
 
     public CreateLobbyPanelManager createLobbyPanelManager;
@@ -58,6 +60,7 @@ public class MainMenuManager : MonoBehaviour
     
     public void ShowMainMenu()
     {
+        rulesPanel.SetActive(false);
         createLobbyPanel.SetActive(false);
         mainMenuContainer.SetActive(true);
         lobbyPanel.SetActive(false);
@@ -86,6 +89,16 @@ public class MainMenuManager : MonoBehaviour
         lobbyPanel.SetActive(false);
         joinLobbyPanel.SetActive(true);
         Debug.Log("Show Join Lobby Panel");
+    }
+
+    public void ShowRulesPanel()
+    {
+        createLobbyPanel.SetActive(false);
+        mainMenuContainer.SetActive(false);
+        lobbyPanel.SetActive(false);
+        joinLobbyPanel.SetActive(false);
+        rulesPanel.SetActive(true);
+        Debug.Log("Show Rules Panel");
     }
 
     public void SetCardPathOnButtonClick()
