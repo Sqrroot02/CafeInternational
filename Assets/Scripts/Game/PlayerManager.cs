@@ -205,7 +205,7 @@ namespace Assets.Scripts.Game
         public void IncrementCountCardsPlayed(int increment)
         {
             CountCardsPlayed += increment;
-            _endTurnButton.interactable = true;
+            _endTurnButton.interactable = CurrentPlayerIsAllowedToPlay();
         }
     
         private void FillPlayerHand(Player player)
@@ -283,10 +283,10 @@ namespace Assets.Scripts.Game
         {
             yield return new WaitForSeconds(seconds);
             //TODO: für lars -> richtiges bot beahviour reinpacken 
-            if (CurrentPlayer.BotType == BotType.IsMischiefBot)
-                _complexBotBehaviour.MakeComplexTurn(CurrentPlayer, Players, _firstMove);
-            else
+            if (CurrentPlayer.BotType == BotType.IsWeakBot)
                 _easyBotBehaviour.Play(CurrentPlayer, _firstMove);
+            else
+                _complexBotBehaviour.MakeComplexTurn(CurrentPlayer, Players, _firstMove, CurrentPlayer.BotType == BotType.IsMischiefBot);
         }
     
         IEnumerator WaitForUpdate(int seconds = 5)
@@ -400,6 +400,20 @@ namespace Assets.Scripts.Game
         public BarStool GetBarStoolFromId(int id)
         {
             return _bar.BarStools[id];
+        }
+
+        /// <summary>
+        /// Checks if the current player is allowed to make a move
+        /// </summary>
+        /// <returns>true if the current player is allowed to make the turn</returns>
+        public static bool CurrentPlayerIsAllowedToPlay()
+        {
+            if (LobbyStorage.Instance.CurrentPlayer.IsBot) // Can never play for bots
+                return false;
+            if (LobbyStorage.Instance.IsMuliplayerLobby && // If it is multiplayer only a single player is allowed per host
+                LobbyStorage.Instance.ClientPlayerId != LobbyStorage.Instance.CurrentPlayer.PlayerId)
+                return false;
+            return true; // For Hot-Seat all players and for multiplayer only the player attached to the current host 
         }
     }
 }

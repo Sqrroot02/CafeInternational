@@ -93,7 +93,7 @@ namespace Assets.Scripts.Models
             for (var i = ActivePlayers.Count; i < 4; i++)
             {
                 var botName = MainMenuHelper.GenerateName(true);
-                var botPlayer = new Player(botName, 0, true, false, BotType.IsMischiefBot);
+                var botPlayer = new Player(botName, 0, true, false, BotType.IsWeakBot);
                 ActivePlayers.Add(botPlayer);
                 Debug.Log($"[LobbyStorage] Added bot player '{botName}' to ActivePlayers.");
             }

@@ -16,7 +16,7 @@ public class DropCard : MonoBehaviour, IDropHandler
     {
         GameObject droppedObject = eventData.pointerDrag;
 
-        if (droppedObject != null && droppedObject.GetComponent<Card>().Player == _playerManager.CurrentPlayer && Place(droppedObject.GetComponent<Card>()))
+        if (droppedObject != null && PlayerManager.CurrentPlayerIsAllowedToPlay() && droppedObject.GetComponent<Card>().Player == _playerManager.CurrentPlayer && Place(droppedObject.GetComponent<Card>()))
         {
             CanvasGroup canvasGroup = droppedObject.GetComponent<Card>().GetComponent<CanvasGroup>();
             canvasGroup.alpha = 1f;

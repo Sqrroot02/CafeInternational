@@ -71,7 +71,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!_isPlaced && _playerManager.CurrentPlayer == Player) {
+        if (!_isPlaced && _playerManager.CurrentPlayer == Player && PlayerManager.CurrentPlayerIsAllowedToPlay()) {
             _originalParent = transform.parent;
             transform.SetParent(_canvas.transform);
             _canvasGroup.blocksRaycasts = false;
@@ -81,7 +81,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!_isPlaced && _playerManager.CurrentPlayer == Player)
+        if (!_isPlaced && _playerManager.CurrentPlayer == Player && PlayerManager.CurrentPlayerIsAllowedToPlay())
         {
             _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
         }
@@ -89,7 +89,7 @@ public class Card: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandl
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!_isPlaced && _playerManager.CurrentPlayer == Player && _playerManager.CurrentPlayer.PlayerId == LobbyStorage.Instance.ClientPlayerId)
+        if (!_isPlaced && _playerManager.CurrentPlayer == Player && PlayerManager.CurrentPlayerIsAllowedToPlay())
         {
             _canvasGroup.blocksRaycasts = true;
             _canvasGroup.alpha = 1f;

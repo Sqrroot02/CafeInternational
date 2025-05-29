@@ -570,7 +570,14 @@ namespace Game.BotBehaviour
             }
         }
 
-        public void MakeComplexTurn(Player bot, List<Player> players, bool firstTurn = false)
+        /// <summary>
+        /// Finds and plays a complex turn
+        /// </summary>
+        /// <param name="bot">The bot to play for</param>
+        /// <param name="players">A list with all players</param>
+        /// <param name="firstTurn">true if it is the first turn</param>
+        /// <param name="mischiefBot">true if the bot should prioritize mischief over scoring</param>
+        public void MakeComplexTurn(Player bot, List<Player> players, bool firstTurn, bool mischiefBot)
         {
             Debug.Log($"MakeComplexTurn for bot {bot.PlayerName}");
             var turnsBot = GetAllPossibleTurns(bot, firstTurn);
@@ -578,7 +585,7 @@ namespace Game.BotBehaviour
             {
                 var bestTurn = FindBestTurn(turnsBot, false);
                 Debug.Log($"Best turn: {bestTurn}");
-                if (DecideFindMischievousBehaviour(bestTurn))
+                if (mischiefBot || DecideFindMischievousBehaviour(bestTurn))
                 {
                     Debug.Log("Decided to find mischievous behaviour");
                     var mischiefBehaviour = FindMostMischievousBehaviour(turnsBot, bot, players);
@@ -586,9 +593,7 @@ namespace Game.BotBehaviour
                     {
                         Debug.Log(
                             $"Found mischievous behaviour for {mischiefBehaviour.Value.Item1} with {mischiefBehaviour.Value.Item3} blocked points and {mischiefBehaviour.Value.Item4} blocked completedNationalities");
-                        PlayTurn(DecideUseMischievousBehaviour(bestTurn, mischiefBehaviour.Value)
-                            ? mischiefBehaviour.Value.Item1
-                            : bestTurn);
+                        PlayTurn(mischiefBot || DecideUseMischievousBehaviour(bestTurn, mischiefBehaviour.Value) ? mischiefBehaviour.Value.Item1 : bestTurn);
                     }
                     else
                     {

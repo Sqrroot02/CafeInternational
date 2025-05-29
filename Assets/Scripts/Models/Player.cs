@@ -60,7 +60,7 @@ namespace Assets.Scripts.Models
             PlayerScore = playerScore;
             IsBot = isBot;
             LobbyHost = lobbyHost;
-            this.BotType = botType;
+            BotType = botType;
         }
 
         public void SetPlayerManager(PlayerManager playerManager)
