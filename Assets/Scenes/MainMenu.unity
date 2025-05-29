@@ -7477,27 +7477,55 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Zusammenfassung der Spielregeln\n\nZiel des Spiels\nDurch das geschickte
+  m_Text: "Zusammenfassung der Spielregeln\r\n\r\nZiel des Spiels\r\nDurch das geschickte
     Platzieren von G\xE4stek\xE4rtchen an Tischen und an der Bar m\xF6glichst viele
-    Punkte sammeln. Wer am Ende die meisten Punkte hat, gewinnt.\n\n\n\nSpielkomponenten\n1
-    Spielplan mit 24 Tischen (je 4 Pl\xE4tze) und einer Bar (20 Pl\xE4tze)\n100 G\xE4stek\xE4rtchen
-    (je 48 Damen & Herren aus 12 Nationen + 4 Joker)\nPunkte-Chips (1, 5, 10 Punkte)\n\n\nSpielablauf\nJeder
+    Punkte sammeln. Wer am Ende die meisten Punkte hat, gewinnt.\r\n\r\n\r\n\r\nSpielkomponenten\r\n1
+    Spielplan mit 24 Tischen (je 4 Pl\xE4tze) und einer Bar (20 Pl\xE4tze)\r\n100
+    G\xE4stek\xE4rtchen (je 48 Damen & Herren aus 12 Nationen + 4 Joker)\r\n\r\n\r\nSpielablauf\r\nJeder
     Spieler hat 5 G\xE4stek\xE4rtchen. Reihum kann ein Spieler eine der folgenden
-    Aktionen ausf\xFChren:\n-1\u20132 G\xE4stek\xE4rtchen an Tischen ablegen\n-1
-    G\xE4stek\xE4rtchen an der Bar ablegen\n-1 Joker gegen passendes G\xE4stek\xE4rtchen
-    austauschen\n\nEs gelten Regeln f\xFCr Nationalit\xE4t und Geschlechterverh\xE4ltnis
-    (max. 2 Damen + 2 Herren pro Tisch)\n\nPunkte je nach Kombination:\nUnterschiedliche
-    Nationalit\xE4ten: 2\u20134 Punkte pro K\xE4rtchen\nGleiche Nationalit\xE4t:
-    4\u20138 Punkte pro K\xE4rtchen\nKein Platz n\xF6tig, aber Bar bringt meist Minuspunkte,\nJoker
-    d\xFCrfen nicht an die Bar.\nKein Punktgewinn, keine Nachziehkarte.\n\nNach dem
-    Ablegen werden G\xE4stek\xE4rtchen nachgezogen, bis man wieder 5 hat. Ausnahme:
-    Wenn ein Tisch aus einer Nation vollendet wurde, darf man weniger nachziehen.\n\n\nSpielende\nDas
-    Spiel endet, wenn eine der folgenden Bedingungen eintritt:\n\nAlle St\xFChle
-    sind belegt\n\nBarplatz ist belegt\n\nEin Spieler hat keine Karten mehr\n\nNur
-    noch 3 K\xE4rtchen im Beutel\n\nAm Ende werden Punkte-Chips gez\xE4hlt, Minuspunkte
-    f\xFCr verbliebene G\xE4stek\xE4rtchen (\u22125) und Joker (\u221210) abgezogen.\n\n\nVariante:
-    Kaffeekr\xE4nzchen & Stammtisch\n4 Damen oder 4 Herren auf einmal legen erlaubt\n\n20
-    Punkte (unterschiedliche Nationen) bzw. 40 Punkte (gleiche Nation)\n\n"
+    Aktionen ausf\xFChren:\r\n-1-2 G\xE4stek\xE4rtchen an Tischen ablegen\r\n-1 G\xE4stek\xE4rtchen
+    an der Bar ablegen\r\n-1 Joker gegen passendes G\xE4stek\xE4rtchen austauschen\r\n\r\nEs
+    gelten Regeln f\xFCr Nationalit\xE4t und Geschlechterverh\xE4ltnis:\r\n-An einem
+    Tisch darf die Anzahl an M\xE4nnern und Frauen sich maximal um 1 unterscheiden,
+    also beispielsweise 1 Mann und 2 Frauen\r\n-Eine Karte darf nicht ohne eine andere
+    Karte am Tisch gesetzt werden\r\n    -Wenn die Karte zwischen 2 Tischen ist reicht
+    eine andere Karte an einem der beiden Tische\r\n    -Zwei Karten k\xF6nnen in
+    einem Zug an den gleichen Tisch gespielt werden, ohne das daran vorher andere
+    Karten sitzen m\xFCssen\r\n    -Im allerersten Zug darf genau eine Karte gespielt
+    werden, die diese Regel nicht erf\xFCllt\r\n-Eine Karte darf nur auf einen Stuhl
+    platziert werden, wenn die Nationalit\xE4t des Tisches mit der Nationalit\xE4t
+    der Karte \xFCbereinstimmt\r\n-Bei einem Stuhl an zwei Tischen muss die Nationalit\xE4t
+    der Karte einer der Nationalit\xE4ten des Tisches entsprechen\r\n\r\nPunkte je
+    nach Kombination:\r\n-Wenn alle Karten am Tisch die gleiche Nationalit\xE4t haben
+    gibt es pro Karte 2 Punkte\r\n-Wenn nicht alle Karten am Tisch die gleiche Nationalit\xE4t
+    haben gibt es pro Karte 1 Punkt\r\n-F\xFCr eine einzelne Karte gibt es keine
+    Punkte\r\n-Punkte f\xFCr Karten an der Bar werden je nach dem Platz verteilt
+    oder abgezogen\r\n\r\nNach dem Ablegen werden G\xE4stek\xE4rtchen nachgezogen,
+    bis man wieder 5 hat. Ausnahme: Pro vollendetem Tisch aus einer Nation, darf
+    man eine Karte weniger nachziehen.\r\n\r\nDie Punkte werden nach dem vollenden
+    des Zugs ausgeteilt. Dabei gibt es f\xFCr jede einzelne Karte die platziert wurde
+    Punkte.\r\nDie Punkte werden f\xFCr jeden Tisch an dem die Karte liegt verteilt.
+    Bei einer Karte an zwei Tischen werden also f\xFCr beide Tische Punkte vergeben.\r\nWenn
+    zwei Karten gespielt werden, werden die Punkte nach der gespielten Reihenfolge
+    vergeben. Die Punkte der ersten Karte werden dabei vergeben, ohne die zweite
+    Karte mitzuz\xE4hlen.\r\nWenn also beispielsweise die erste Karte der Nationalit\xE4t
+    des Tisches entspricht und die zweite nicht, gibt es f\xFCr die erste Karte 2
+    Punkte je Karte und f\xFCr die zweite nur 1.\r\n\r\nWenn die Punkte eines Spielers
+    negativ werden durch das ablegen an der Bar, dann scheidet dieser Spieler aus.\r\nDieser
+    Spieler darf dann keine Karten mehr legen und zieht auch keine weiteren Karten
+    nach.\r\n\r\nJoker:\r\n-Joker d\xFCrfen nicht an die Bar abgelegt werden\r\n-Joker
+    k\xF6nnen jede Nationalit\xE4t annehmen, ihr Geschlecht ist jedoch fest\r\n-Wenn
+    ein Joker zwischen zwei Tischen mit verschiedenen Nationalit\xE4ten platziert
+    wird, muss entschieden werden welche Nationalit\xE4t der Joker annimmt\r\n-Ein
+    Joker darf nicht durch einen anderen Joker ausgetauscht werden\r\n\r\nWenn ein
+    Spieler keine M\xF6glichkeit hat eine Karte zu spielen scheidet er aus.\r\nDas
+    tritt ein, wenn er nur Joker auf der Hand hat und f\xFCr das Geschlecht des Jokers
+    / der Joker keine freien Pl\xE4tze mehr da sind.\r\n\r\nSpielende\r\nDas Spiel
+    endet, wenn eine der folgenden Bedingungen eintritt:\r\n\r\n-Alle St\xFChle sind
+    belegt\r\n-Alle Barpl\xE4tze sind belegt\r\n-Ein Spieler hat keine Karten mehr
+    und muss keine mehr nachziehen\r\n-Es verbleiben nur noch 3 Karten auf dem Zieh-Stapel\r\n\r\nAm
+    Ende werden Punkte f\xFCr die verbliebenen Karten auf der Hand abgezogen. Pro
+    G\xE4stekarte 5 Punkte und pro Joker 10 Punkte.\n\n"
 --- !u!222 &1724167399
 CanvasRenderer:
   m_ObjectHideFlags: 0
