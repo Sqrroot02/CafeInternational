@@ -77,6 +77,7 @@ namespace Assets.Scripts.Game
             foreach (var player in Players)
             {
                 player.SetPlayerManager(this);
+                Debug.Log("PlayersSpritePath: " + player.PlayerSpritePath);
             }
         
             if (CurrentPlayer.IsBot)
@@ -107,6 +108,11 @@ namespace Assets.Scripts.Game
             {
                 Players[i].PlayerGameBar = GameObject.Find("PlayerGameBarPlayer" + (i + 1)).transform.GetChild(0).gameObject;
                 Players[i].PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().text = Players[i].PlayerName;
+
+                Image img = Players[i].PlayerGameBar.GetComponentsInChildren<Image>(true).FirstOrDefault(x => x.name == "PlayerSymbol");
+
+                if (img != null)
+                    img.sprite = Resources.Load<Sprite>(Players[i].PlayerSpritePath);
             }
         }
 
@@ -276,7 +282,8 @@ namespace Assets.Scripts.Game
         IEnumerator WaitForBotPlay(int seconds = 2)
         {
             yield return new WaitForSeconds(seconds);
-            if (CurrentPlayer.IsStrongBot)
+            //TODO: für lars -> richtiges bot beahviour reinpacken 
+            if (CurrentPlayer.BotType == BotType.IsMischiefBot)
                 _complexBotBehaviour.MakeComplexTurn(CurrentPlayer, Players, _firstMove);
             else
                 _easyBotBehaviour.Play(CurrentPlayer, _firstMove);

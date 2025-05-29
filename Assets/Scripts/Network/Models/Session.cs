@@ -67,7 +67,7 @@ namespace Assets.Scripts.Network.Models
 			if (indexPlayer > 0)
 			{
 				var botName = MainMenuHelper.GenerateName(true);
-				var newBot = new Player($"Bot {botName}", 0, true, false, false);
+				var newBot = new Player($"Bot {botName}", 0, true, false, BotType.IsWeakBot);
 				Players[indexPlayer] = newBot;
 			}
 			

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cf0971507698fe949a689cec955c22b6
+guid: 692a3bebbea109d408b7bd759e29bfd1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5193008220328264485
-    second: Turkey_Stool_0
+      213: 1530004321637725909
+    second: Britain_Italy_Stool_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Turkey_Stool_0
+      name: Britain_Italy_Stool_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 5
-        width: 1024
+        width: 1022
         height: 981
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bdc76af898abee7b0800000000000000
-      internalID: -5193008220328264485
+      spriteID: 5d6770003daab3510800000000000000
+      internalID: 1530004321637725909
       vertices: []
       indices: 
       edges: []
