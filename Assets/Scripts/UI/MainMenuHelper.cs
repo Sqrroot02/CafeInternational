@@ -1,18 +1,16 @@
 using TMPro;
 using UnityEngine;
-using System;
 using UnityEngine.UI;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
-using System.Linq;
 using Assets.Scripts.Models;
 using System.Net;
 using System.Net.Sockets;
+using Assets.Scripts.Util;
 
 namespace Assets.Scripts.UI
 {
     /// <summary>
-    /// Helferklasse für Menüfunktionen: Eingaben, Validierung, Labels, Spieler-Namen/Sprites, u.v.m.
+    /// Helferklasse fï¿½r Menï¿½funktionen: Eingaben, Validierung, Labels, Spieler-Namen/Sprites, u.v.m.
     /// </summary>
     public static class MainMenuHelper
     {
@@ -22,10 +20,9 @@ namespace Assets.Scripts.UI
 
         public static readonly string[] FunnyBotNames = {
             "Botzilla", "KaffeeKarl", "LatteLarry", "Espressina", "Toastinator",
-            "SchnitzelBot", "BrötchenBob", "WurstWilli", "Botfried", "Kekskrümel", "MokkaManni"
+            "SchnitzelBot", "Brï¿½tchenBob", "WurstWilli", "Botfried", "Kekskrï¿½mel", "MokkaManni"
         };
-
-        private static readonly System.Random random = new(31415);
+        
         private static string SymbolSprites = "MainMenu/PlayerSymbols";
 
         /// <summary>
@@ -41,7 +38,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Gibt den aktuellen Text eines InputFields zurück.
+        /// Gibt den aktuellen Text eines InputFields zurï¿½ck.
         /// </summary>
         public static string GetInputText(TMP_InputField field)
         {
@@ -50,7 +47,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Setzt ein InputField auf einen leeren Text zurück.
+        /// Setzt ein InputField auf einen leeren Text zurï¿½ck.
         /// </summary>
         public static void ResetInputText(TMP_InputField field)
         {
@@ -68,7 +65,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Gibt den Text eines Labels zurück.
+        /// Gibt den Text eines Labels zurï¿½ck.
         /// </summary>
         public static string GetLabelText(TMP_Text field)
         {
@@ -79,9 +76,9 @@ namespace Assets.Scripts.UI
         /// <summary>
         /// Extrahiert eine Portnummer aus einem InputField (Text).
         /// </summary>
-        public static int GetNumberFromLobbyPortTMP(TMP_InputField lobbyPortTMP)
+        public static int GetNumberFromLobbyPortTMP(TMP_InputField lobbyPortTmp)
         {
-            if (int.TryParse(lobbyPortTMP.text, out int result))
+            if (int.TryParse(lobbyPortTmp.text, out int result))
             {
                 Debug.Log($"[MainMenuHelper] Parsed lobby port: {result}");
                 return result;
@@ -94,7 +91,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Prüft, ob die angegebene IP-Adresse gültig ist (IPv4 oder IPv6).
+        /// Prï¿½ft, ob die angegebene IP-Adresse gï¿½ltig ist (IPv4 oder IPv6).
         /// </summary>
         public static bool ValidateIp(string input)
         {
@@ -123,7 +120,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Setzt ein Label zurück (Text = "").
+        /// Setzt ein Label zurï¿½ck (Text = "").
         /// </summary>
         public static void ResetLabelText(TMP_Text field)
         {
@@ -132,7 +129,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Gibt eine Fehlermeldung bei ungültigem Nicknamen zurück.
+        /// Gibt eine Fehlermeldung bei ungï¿½ltigem Nicknamen zurï¿½ck.
         /// </summary>
         public static string CreateNicknameLobbyErrorMsg(string invalid)
         {
@@ -142,7 +139,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Gibt eine Fehlermeldung bei ungültiger IP zurück.
+        /// Gibt eine Fehlermeldung bei ungï¿½ltiger IP zurï¿½ck.
         /// </summary>
         public static string GetIPErrorMsg()
         {
@@ -152,7 +149,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Gibt eine Fehlermeldung bei ungültigem Port zurück.
+        /// Gibt eine Fehlermeldung bei ungï¿½ltigem Port zurï¿½ck.
         /// </summary>
         public static string GetPortErrorMsg()
         {
@@ -162,7 +159,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Validiert, ob ein Nickname oder Lobbyname gültig ist (nur Buchstaben, max. 15 Zeichen).
+        /// Validiert, ob ein Nickname oder Lobbyname gï¿½ltig ist (nur Buchstaben, max. 15 Zeichen).
         /// </summary>
         public static bool IsValidNicknameOrLobbyName(string input)
         {
@@ -188,7 +185,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Prüft, ob ein Port im gültigen Bereich liegt (1024–65535).
+        /// Prï¿½ft, ob ein Port im gï¿½ltigen Bereich liegt (1024ï¿½65535).
         /// </summary>
         public static bool IsValidUserPort(int port)
         {
@@ -198,7 +195,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Interne Methode zur Validierung von Eingabefeldern für Buttons.
+        /// Interne Methode zur Validierung von Eingabefeldern fï¿½r Buttons.
         /// </summary>
         private static void ValidateFieldsAndToggleButton(Button button, params TMP_InputField[] fields)
         {
@@ -265,7 +262,7 @@ namespace Assets.Scripts.UI
         }
 
         /// <summary>
-        /// Generiert einen einzigartigen Spielernamen, abhängig davon ob es ein Bot ist oder nicht.
+        /// Generiert einen einzigartigen Spielernamen, abhï¿½ngig davon ob es ein Bot ist oder nicht.
         /// </summary>
         public static string GenerateName(bool isBot)
         {
@@ -287,8 +284,8 @@ namespace Assets.Scripts.UI
             do
             {
                 name = isBot
-                    ? "Bot " + FunnyBotNames[random.Next(FunnyBotNames.Length)]
-                    : RandomPlayerNames[random.Next(RandomPlayerNames.Length)];
+                    ? "Bot " + FunnyBotNames[RandomUtil.NextFix(FunnyBotNames.Length)]
+                    : RandomPlayerNames[RandomUtil.NextFix(RandomPlayerNames.Length)];
             } while (usedNames.Contains(name));
 
             Debug.Log($"[MainMenuHelper] Generated {(isBot ? "bot" : "player")} name: {name}");

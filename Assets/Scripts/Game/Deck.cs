@@ -3,11 +3,10 @@ using UnityEngine;
 using System;
 using Assets.Scripts.Game;
 using Assets.Scripts.Models;
-using Random = System.Random;
+using Assets.Scripts.Util;
 
 public class Deck : MonoBehaviour
 {
-    private Random random = new(31415);
     private Stack<CardData> deckStack;
 
     public GameObject cardPrefab;
@@ -57,7 +56,7 @@ public class Deck : MonoBehaviour
 
         while (tempDeck.Count > 0)
         {
-            var index = random.Next(0, tempDeck.Count);
+            var index = RandomUtil.Next(0, tempDeck.Count);
             deckStack.Push(tempDeck[index]);
             tempDeck.RemoveAt(index);
         }

@@ -8,9 +8,10 @@ using Assets.Scripts.Network.Messages;
 using Assets.Scripts.Network.Messages.PlayerLobbyAction;
 using Assets.Scripts.Network.Messages.StartGame;
 using Assets.Scripts.UI;
+using Random = System.Random;
 
 /// <summary>
-/// Verwalter-Logik für das LobbyPanel. Zuständig für das Setzen von UI-Elementen,
+/// Verwalter-Logik fï¿½r das LobbyPanel. Zustï¿½ndig fï¿½r das Setzen von UI-Elementen,
 /// Synchronisation mit dem Lobby-Zustand und das Starten des Spiels.
 /// </summary>
 public class LobbyPanelManager : MonoBehaviour
@@ -67,7 +68,7 @@ public class LobbyPanelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Setzt UI-Elemente zurück, wenn Lobby verlassen wird.
+    /// Setzt UI-Elemente zurï¿½ck, wenn Lobby verlassen wird.
     /// </summary>
     public void ResetLobbyTMPs()
     {
@@ -103,11 +104,14 @@ public class LobbyPanelManager : MonoBehaviour
         LobbyStorage.Instance.ShufflePlayers();
         Debug.Log("[LobbyPanelManager] StartGame: Players shuffled");
 
+        var rnd = new Random();
+        
         var message = new StartGameMessage
         {
             LobbyName = LobbyStorage.Instance.LobbyName,
             Players = LobbyStorage.Instance.ActivePlayers.ToArray(),
-            Starter = LobbyStorage.Instance.ActivePlayers[0]
+            Starter = LobbyStorage.Instance.ActivePlayers[0],
+            Seed = rnd.Next()
         };
 
         Debug.Log($"[LobbyPanelManager] StartGame: Sending StartGameMessage for lobby '{message.LobbyName}' with {message.Players.Length} players.");
