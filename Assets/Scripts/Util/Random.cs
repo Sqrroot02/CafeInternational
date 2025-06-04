@@ -15,6 +15,15 @@ namespace Assets.Scripts.Util
 		/// <summary>
 		/// Random generator with identical seed for all session participants
 		/// </summary>
-		public static readonly Random Random;
+		public static Random Random;
+
+		private static readonly Random FixRandom = new Random(31415);
+		
+		public static int Next(int min, int max) => Random.Next(min, max);
+		public static int Next(int max) => Random.Next(max);
+		public static double NextDouble() => Random.NextDouble();
+		public static int NextDouble(int max) => Random.Next(max);
+		public static int NextFix(int max) => FixRandom.Next(max);
+		
 	}
 }

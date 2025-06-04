@@ -13,6 +13,7 @@ namespace Assets.Scripts.Network.Messages.PlayerLobbyAction
 		public string LobbyName { get; set; }
 		public string LobbyIp { get; set; }
 		public int LobbyPort { get; set; }
+		public bool SessionStarted { get; set; }
 		
 		public void Serialize(Message message)
 		{
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Network.Messages.PlayerLobbyAction
 			message.AddString(LobbyName);
 			message.AddString(LobbyIp);
 			message.AddInt(LobbyPort);
+			message.AddBool(SessionStarted);
 		}
 
 		public void Deserialize(Message message)
@@ -28,6 +30,7 @@ namespace Assets.Scripts.Network.Messages.PlayerLobbyAction
 			LobbyName = message.GetString();
 			LobbyIp = message.GetString();
 			LobbyPort = message.GetInt();
+			SessionStarted = message.GetBool();
 		}
 	}
 }

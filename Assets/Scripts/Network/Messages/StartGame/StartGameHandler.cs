@@ -1,8 +1,10 @@
 ﻿using System.Linq;
 using Assets.Scripts.Models;
+using Assets.Scripts.Util;
 using Riptide;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = System.Random;
 
 namespace Assets.Scripts.Network.Messages.StartGame
 {
@@ -22,12 +24,19 @@ namespace Assets.Scripts.Network.Messages.StartGame
 			
 			// Init Players
 			LobbyStorage.Instance.ActivePlayers = obj.Players.ToList();
+			LobbyStorage.Instance.Seed = obj.Seed;
+			
+			RandomUtil.Random = new Random(obj.Seed);
+			
 			Debug.Log($"Start Game with players: : {string.Join(',', obj.Players.Select(x => x.PlayerName))}");
 			
 			// Start Game
 			Debug.Log($"Starting the Game. Lobby: {obj.LobbyName}");
 			SceneManager.LoadScene("Game");
 			// SceneManager.UnloadSceneAsync("MainMenu");
+			
+			if (NetworkServerAdapter.Instance.Session != null)
+				NetworkServerAdapter.Instance.Session.HasStarted = true;
 		}
 	}
 }

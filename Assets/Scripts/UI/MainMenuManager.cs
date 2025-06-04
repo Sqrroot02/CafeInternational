@@ -1,35 +1,35 @@
 using System;
 using Assets.Scripts.Models;
 using Assets.Scripts.Network.Adapter;
+using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
     // Referenzen zu UI-Elementen
-    public GameObject createLobbyPanel;
-    public GameObject mainMenuContainer;
-    public GameObject lobbyPanel;
-    public GameObject joinLobbyPanel;
-    public GameObject rulesPanel;
+    [CanBeNull] public GameObject createLobbyPanel;
+    [CanBeNull] public GameObject mainMenuContainer;
+    [CanBeNull] public GameObject lobbyPanel;
+    [CanBeNull] public GameObject joinLobbyPanel;
+    [CanBeNull] public GameObject rulesPanel;
 
     // Referenzen zu Panel-Managern
     public JoinLobbyPanelManager joinLobbyPanelManager;
     public CreateLobbyPanelManager createLobbyPanelManager;
     public LobbyPanelManager lobbyPanelManager;
 
-    // Nachrichtenanzeige-Handler für UI-Texte
+    // Nachrichtenanzeige-Handler fï¿½r UI-Texte
     public SceneMessageHandler sceneMessageHandler;
 
     void Awake()
     {
-        // Event abonnieren, um auf Verbindungsabbrüche zu reagieren
-        NetworkClientAdapter.Instance.Disconnected += InstanceOnDisconnected;
+        // Event abonnieren, um auf Verbindungsabbrï¿½che zu reagieren
+        NetworkClientAdapter.Instance.Disconnected += OnDisconnected;
         Debug.Log("[MainMenuManager] Awake - Subscribed to Disconnected event.");
     }
 
-    // Event-Handler für Verbindungsabbruch
-    private void InstanceOnDisconnected(object sender, EventArgs e)
+    // Event-Handler fï¿½r Verbindungsabbruch
+    private void OnDisconnected(object sender, EventArgs e)
     {
         Debug.Log("[MainMenuManager] Disconnected from server. Returning to main menu.");
         ShowMainMenu();
@@ -46,10 +46,10 @@ public class MainMenuManager : MonoBehaviour
     public void ShowCreateLobbyPanel()
     {
         Debug.Log("[MainMenuManager] ShowCreateLobbyPanel - Displaying create lobby panel.");
-        createLobbyPanel.SetActive(true);
-        mainMenuContainer.SetActive(false);
-        lobbyPanel.SetActive(false);
-        joinLobbyPanel.SetActive(false);
+        createLobbyPanel?.SetActive(true);
+        mainMenuContainer?.SetActive(false);
+        lobbyPanel?.SetActive(false);
+        joinLobbyPanel?.SetActive(false);
     }
 
     /// <summary>
@@ -67,19 +67,19 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    // Hauptmenü anzeigen und Panels zurücksetzen
+    // Hauptmenï¿½ anzeigen und Panels zurï¿½cksetzen
     public void ShowMainMenu()
     {
         Debug.Log("[MainMenuManager] ShowMainMenu - Returning to main menu.");
-        rulesPanel.SetActive(false);
-        createLobbyPanel.SetActive(false);
-        mainMenuContainer.SetActive(true);
-        lobbyPanel.SetActive(false);
-        joinLobbyPanel.SetActive(false);
+        rulesPanel?.SetActive(false);   
+        createLobbyPanel?.SetActive(false);
+        mainMenuContainer?.SetActive(true);
+        lobbyPanel?.SetActive(false);
+        joinLobbyPanel?.SetActive(false);
 
-        joinLobbyPanelManager.ResetJoinLobbyTMPs();
-        createLobbyPanelManager.ResetCreateLobbyPanel();
-        lobbyPanelManager.ResetLobbyTMPs();
+        joinLobbyPanelManager?.ResetJoinLobbyTMPs();
+        createLobbyPanelManager?.ResetCreateLobbyPanel();
+        lobbyPanelManager?.ResetLobbyTMPs();
         LobbyStorage.Instance.ResetLobbyStorage();
     }
 
@@ -87,10 +87,10 @@ public class MainMenuManager : MonoBehaviour
     public void ShowLobby()
     {
         Debug.Log("[MainMenuManager] ShowLobby - Showing lobby panel.");
-        createLobbyPanel.SetActive(false);
-        mainMenuContainer.SetActive(false);
-        lobbyPanel.SetActive(true);
-        joinLobbyPanel.SetActive(false);
+        createLobbyPanel?.SetActive(false);
+        mainMenuContainer?.SetActive(false);
+        lobbyPanel?.SetActive(true);
+        joinLobbyPanel?.SetActive(false);
 
         lobbyPanelManager.InitiateLobby();
     }
@@ -99,21 +99,21 @@ public class MainMenuManager : MonoBehaviour
     public void ShowJoinLobbyPanel()
     {
         Debug.Log("[MainMenuManager] ShowJoinLobbyPanel - Displaying join lobby panel.");
-        createLobbyPanel.SetActive(false);
-        mainMenuContainer.SetActive(false);
-        lobbyPanel.SetActive(false);
-        joinLobbyPanel.SetActive(true);
+        createLobbyPanel?.SetActive(false);
+        mainMenuContainer?.SetActive(false);
+        lobbyPanel?.SetActive(false);
+        joinLobbyPanel?.SetActive(true);
     }
 
     // Regel-Panel anzeigen
     public void ShowRulesPanel()
     {
         Debug.Log("[MainMenuManager] ShowRulesPanel - Showing rules panel.");
-        createLobbyPanel.SetActive(false);
-        mainMenuContainer.SetActive(false);
-        lobbyPanel.SetActive(false);
-        joinLobbyPanel.SetActive(false);
-        rulesPanel.SetActive(true);
+        createLobbyPanel?.SetActive(false);
+        mainMenuContainer?.SetActive(false);
+        lobbyPanel?.SetActive(false);
+        joinLobbyPanel?.SetActive(false);
+        rulesPanel?.SetActive(true);
     }
 
     // Wechselt zwischen verschiedenen Karten-Designs

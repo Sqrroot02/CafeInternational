@@ -11,12 +11,14 @@ namespace Assets.Scripts.Network.Messages.StartGame
 		public Player[] Players { get; set; }
 		public string LobbyName { get; set; }
 		public Player Starter { get; set; }
+		public int Seed { get; set; }
 		
 		public void Serialize(Message message)
 		{
 			message.AddSerializables(Players);
 			message.AddString(LobbyName);
 			message.AddSerializable(Starter);
+			message.AddInt(Seed);
 		}
 
 		public void Deserialize(Message message)
@@ -24,6 +26,7 @@ namespace Assets.Scripts.Network.Messages.StartGame
 			Players = message.GetSerializables<Player>();
 			LobbyName = message.GetString();
 			Starter = message.GetSerializable<Player>();
+			Seed = message.GetInt();
 		}
 	}
 }

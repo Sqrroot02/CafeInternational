@@ -22,6 +22,11 @@ namespace Assets.Scripts.Network.Models
 		/// </summary>
 		public string Name { get; set; }
 		
+		/// <summary>
+		/// True, if the session has been started
+		/// </summary>
+		public bool HasStarted { get; set; }
+		
 		public Session(string name, ObservableCollection<Player> players)
 		{
 			Players = players;
@@ -52,7 +57,8 @@ namespace Assets.Scripts.Network.Models
 				Players = Players.ToArray(),
 				LobbyName = Name,
 				LobbyPort = LobbyStorage.Instance.LobbyPort,
-				LobbyIp = LobbyStorage.Instance.LobbyIp
+				LobbyIp = LobbyStorage.Instance.LobbyIp,
+				SessionStarted = HasStarted
 			};
 			NetworkRouter.Broadcast(lobbyActionMessage, MessageType.PlayerLobbyAction);
 		}
@@ -63,15 +69,22 @@ namespace Assets.Scripts.Network.Models
 		/// <param name="clientId">The unique identifier of the player to be removed.</param>
 		public void RemovePlayer(int clientId)
 		{
-			var indexPlayer = Players.IndexOf(Players.First(x => x.ClientId == clientId));
-			if (indexPlayer > 0)
+			if (Players.Count > 0)
 			{
-				var botName = MainMenuHelper.GenerateName(true);
-				var newBot = new Player($"Bot {botName}", 0, true, false, BotType.IsWeakBot);
-				Players[indexPlayer] = newBot;
-			}
+				var player = Players.FirstOrDefault(x => x.ClientId == clientId);
+				if (player != null)
+				{
+					var indexPlayer = Players.IndexOf(player);
+					if (indexPlayer > 0)
+					{
+						var botName = MainMenuHelper.GenerateName(true);
+						var newBot = new Player($"Bot {botName}", 0, true, false, BotType.IsWeakBot);
+						Players[indexPlayer] = newBot;
+					}
 			
-			SendUpdate();
+					SendUpdate();	
+				}
+			}
 		}
 		
 		/// <summary>

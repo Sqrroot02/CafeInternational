@@ -43,6 +43,11 @@ namespace Assets.Scripts.Models
         public string LobbyIp { get; set; }
 
         public string CardPath { get; set; } = "Normal/";
+        
+        /// <summary>
+        /// The committed seed that is in force for all players    
+        /// </summary>
+        public int Seed { get; set; }
 
         public bool IsMuliplayerLobby { get; set; }
 

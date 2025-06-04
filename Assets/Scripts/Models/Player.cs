@@ -237,7 +237,18 @@ namespace Assets.Scripts.Models
             message.AddBool(IsBot);
             message.AddString(PlayerId);
             message.AddInt((int) BotType);
-            message.AddString(PlayerSpritePath);
+            
+            // Write Sprite Path, if exists
+            if (PlayerSpritePath == null)
+            {
+                Debug.Log("Cannot transfer Sprite-Path. NULL");
+                message.AddBool(false);
+            }
+            else
+            {
+                message.AddBool(true);
+                message.AddString(PlayerSpritePath);
+            }
         }
 
         public void Deserialize(Message message)
@@ -250,7 +261,9 @@ namespace Assets.Scripts.Models
             IsBot = message.GetBool();
             PlayerId = message.GetString();
             BotType = (BotType) message.GetInt();
-            PlayerSpritePath = message.GetString();
+            
+            if (message.GetBool())
+                PlayerSpritePath = message.GetString();   
         }
     }
 }
