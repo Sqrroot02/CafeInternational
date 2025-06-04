@@ -3,8 +3,8 @@ guid: e6a14615bc1a5714ca0bb5350eaac2f1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6754128020979028317
-    second: Red_Robot-modified (1)_0
+      213: -7280761416375073655
+    second: Bot_4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,11 +96,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Red_Robot-modified (1)_0
+      name: Bot_4_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3ae680e89548442a0800000000000000
-      internalID: -6754128020979028317
+      spriteID: 9840892211a85fa90800000000000000
+      internalID: -7280761416375073655
       vertices: []
       indices: 
       edges: []
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Red_Robot-modified (1)_0: -6754128020979028317
+      Bot_4_0: -7280761416375073655
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

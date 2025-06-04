@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 32dd9b5fef77eed47843e10a5f71db50
+guid: 1775df577980da2449d4feac0ad3efba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2168397037705100118
-    second: 20250505_1928_Lieblicher Cartoon-Roboter_simple_compose_01jtgqvspvf8z8y8ax2h0d1k60-modified_0
+      213: -1608172361044540827
+    second: Wolli-modified_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 20250505_1928_Lieblicher Cartoon-Roboter_simple_compose_01jtgqvspvf8z8y8ax2h0d1k60-modified_0
+      name: Wolli-modified_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa40493026e48e1e0800000000000000
-      internalID: -2168397037705100118
+      spriteID: 562c65212cf9ea9e0800000000000000
+      internalID: -1608172361044540827
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      20250505_1928_Lieblicher Cartoon-Roboter_simple_compose_01jtgqvspvf8z8y8ax2h0d1k60-modified_0: -2168397037705100118
+      Wolli-modified_0: -1608172361044540827
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -20,6 +20,6 @@ namespace Assets.Scripts.Network.Messages.PlayerSalutation
 		{
 			PlayerName = message.GetString();
 			PlayerId = message.GetString();
-		}
-	}
+        }
+    }
 }

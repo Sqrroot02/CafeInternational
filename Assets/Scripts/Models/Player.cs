@@ -39,31 +39,38 @@ namespace Assets.Scripts.Models
         /// Determines if the player is a bot or not
         /// </summary>
         public bool IsBot { get; set; }
+
+        public BotType BotType { get; set; }
         
         /// <summary>
         /// The associated Game bar of the player
         /// </summary>
         public GameObject PlayerGameBar { get; set; }
-        
+
+        public string PlayerSpritePath { get; set; }
+
         public Player()
-        {
+        { 
             
         }
         
-        public Player(string playerName, int playerScore, bool isBot, bool lobbyHost, bool isStrongBot)
+        public Player(string playerName, int playerScore, bool isBot, bool lobbyHost, BotType botType)
         {
             PlayerName = playerName;
             PlayerScore = playerScore;
             IsBot = isBot;
             LobbyHost = lobbyHost;
-            IsStrongBot = isStrongBot;
+            BotType = botType;
         }
-    
-        public bool IsStrongBot { get; set; }
 
         public void SetPlayerManager(PlayerManager playerManager)
         {
             _playerManager = playerManager;
+        }
+
+        public void SetPlayerEliminated(bool playerEliminated)
+        {
+            _playerEliminated = playerEliminated;
         }
 
         public bool IsPlayerEliminated()
@@ -98,6 +105,8 @@ namespace Assets.Scripts.Models
                 {
                     if (chair.OnlyCardAtTheTable())
                     {
+                        var sceneMessageHandler = GameObject.Find("Overlay").GetComponentInChildren<SceneMessageHandler>(true);
+                        sceneMessageHandler.ShowScene($"The move is invalid because the card {chair.PlacedCard.cardData.nationality} {chair.PlacedCard.cardData.gender} is placed with no neighbours");
                         return false;
                     }
                 }
@@ -173,6 +182,10 @@ namespace Assets.Scripts.Models
             {
                 _playerEliminated = true;
                 PlayerGameBar.GetComponentInParent<CanvasGroup>().alpha = 0.6f;
+                var sceneMessageHandler = GameObject.Find("Overlay").GetComponentInChildren<SceneMessageHandler>(true);
+                sceneMessageHandler.ShowScene($"Player {PlayerName} has no more points left to pay the bar fee and will be terminated");
+                
+                PlaySound.Instance.PlaySoundTerminated();
             }
         }
 
@@ -223,7 +236,8 @@ namespace Assets.Scripts.Models
             message.AddBool(_playerEliminated);
             message.AddBool(IsBot);
             message.AddString(PlayerId);
-            message.AddBool(IsStrongBot);
+            message.AddInt((int) BotType);
+            message.AddString(PlayerSpritePath);
         }
 
         public void Deserialize(Message message)
@@ -235,7 +249,8 @@ namespace Assets.Scripts.Models
             _playerEliminated = message.GetBool();
             IsBot = message.GetBool();
             PlayerId = message.GetString();
-            IsStrongBot = message.GetBool();
+            BotType = (BotType) message.GetInt();
+            PlayerSpritePath = message.GetString();
         }
     }
 }

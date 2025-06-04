@@ -77,6 +77,7 @@ namespace Assets.Scripts.Game
             foreach (var player in Players)
             {
                 player.SetPlayerManager(this);
+                Debug.Log("PlayersSpritePath: " + player.PlayerSpritePath);
             }
         
             if (CurrentPlayer.IsBot)
@@ -107,6 +108,11 @@ namespace Assets.Scripts.Game
             {
                 Players[i].PlayerGameBar = GameObject.Find("PlayerGameBarPlayer" + (i + 1)).transform.GetChild(0).gameObject;
                 Players[i].PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().text = Players[i].PlayerName;
+
+                Image img = Players[i].PlayerGameBar.GetComponentsInChildren<Image>(true).FirstOrDefault(x => x.name == "PlayerSymbol");
+
+                if (img != null)
+                    img.sprite = Resources.Load<Sprite>(Players[i].PlayerSpritePath);
             }
         }
 
@@ -137,44 +143,55 @@ namespace Assets.Scripts.Game
                         GameEnded();
                     }
                     
-                        CurrentPlayer.CountPlayerScore();
-                        if (!CurrentPlayer.IsPlayerEliminated()) // Only fill the players cards if the player is not eliminated
+                    CurrentPlayer.CountPlayerScore();
+                    if (!CurrentPlayer.IsPlayerEliminated()) // Only fill the players cards if the player is not eliminated
+                    {
+                        FillPlayerHand(CurrentPlayer);
+                    }
+
+                    CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+                    CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 2;
+
+                    for (int i = 0; i < Players.Count; i++)
+                    {
+                        CurrentPlayerIndex = (CurrentPlayerIndex + 1) % Players.Count;
+                        if (!Players[CurrentPlayerIndex].IsPlayerEliminated()) // Check if the player is eliminated and only continue if not
                         {
-                            FillPlayerHand(CurrentPlayer);
+                            break;
                         }
 
-                        CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-                        CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 2;
-
-                        for (int i = 0; i < Players.Count; i++)
+                        if (i == Players.Count - 1) // If the 4th player is reached and also eliminated the game ends because no active players remain
                         {
-                            CurrentPlayerIndex = (CurrentPlayerIndex + 1) % Players.Count;
-                            if (!Players[CurrentPlayerIndex].IsPlayerEliminated()) // Check if the player is eliminated and only continue if not
-                            {
-                                break;
-                            }
-
-                            if (i == Players.Count - 1) // If the 4th player is reached and also eliminated the game ends because no active players remain
-                            {
-                                GameEnded();
-                            }
+                            GameEnded();
                         }
-                        
-                        var nextPlayer = Players[CurrentPlayerIndex];
-                        LobbyStorage.Instance.CurrentPlayer = nextPlayer;
-                        
-                        CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-                        CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 3;
-                        CountCardsPlayed = 0;
+                    }
+                    
+                    var nextPlayer = Players[CurrentPlayerIndex];
+                    LobbyStorage.Instance.CurrentPlayer = nextPlayer;
+                    
+                    CurrentPlayer.PlayerGameBar.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                    CurrentPlayer.PlayerGameBar.transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 3;
+                    CountCardsPlayed = 0;
                     
                     _endTurnButton.interactable = false;
                     _scoreTable.UpdateScores(Players);
                     _firstMove = false;
-                    if (CurrentPlayer.IsBot)
+
+                    if (!CheckPlayerHasPlaceableCards())
                     {
-                        StartCoroutine(WaitForBotPlay());
-                        StartCoroutine(WaitForUpdate());
+                        CurrentPlayer.SetPlayerEliminated(true);
+                        UpdatePlayer();
                     }
+                    else
+                    {
+                        if (CurrentPlayer.IsBot)
+                        {
+                            StartCoroutine(WaitForBotPlay());
+                            StartCoroutine(WaitForUpdate());
+                        }
+                    }
+                    
+                    
                 }
                 else
                 {
@@ -188,7 +205,7 @@ namespace Assets.Scripts.Game
         public void IncrementCountCardsPlayed(int increment)
         {
             CountCardsPlayed += increment;
-            _endTurnButton.interactable = true;
+            _endTurnButton.interactable = CurrentPlayerIsAllowedToPlay();
         }
     
         private void FillPlayerHand(Player player)
@@ -244,14 +261,32 @@ namespace Assets.Scripts.Game
             }
             return false;
         }
+
+        /// <summary>
+        /// Checks if the current player has placeable cards. Used to find situations where only a joker remains and no chairs have the jokers gender placeable
+        /// </summary>
+        /// <returns>true if any card can be placed</returns>
+        private bool CheckPlayerHasPlaceableCards()
+        {
+            foreach (var card in CurrentPlayer.PlayerHand)
+            {
+                if (card.cardData.nationality != Nationality.Joker)
+                    return true;
+
+                if (_chairs.Any(chair => chair.CheckPlaceCard(card)))
+                    return true;
+            }
+            return false;
+        }
     
         IEnumerator WaitForBotPlay(int seconds = 2)
         {
             yield return new WaitForSeconds(seconds);
-            if (CurrentPlayer.IsStrongBot)
-                _complexBotBehaviour.MakeComplexTurn(CurrentPlayer, Players, _firstMove);
-            else
+            //TODO: für lars -> richtiges bot beahviour reinpacken 
+            if (CurrentPlayer.BotType == BotType.IsWeakBot)
                 _easyBotBehaviour.Play(CurrentPlayer, _firstMove);
+            else
+                _complexBotBehaviour.MakeComplexTurn(CurrentPlayer, Players, _firstMove, CurrentPlayer.BotType == BotType.IsMischiefBot);
         }
     
         IEnumerator WaitForUpdate(int seconds = 5)
@@ -365,6 +400,20 @@ namespace Assets.Scripts.Game
         public BarStool GetBarStoolFromId(int id)
         {
             return _bar.BarStools[id];
+        }
+
+        /// <summary>
+        /// Checks if the current player is allowed to make a move
+        /// </summary>
+        /// <returns>true if the current player is allowed to make the turn</returns>
+        public static bool CurrentPlayerIsAllowedToPlay()
+        {
+            if (LobbyStorage.Instance.CurrentPlayer.IsBot) // Can never play for bots
+                return false;
+            if (LobbyStorage.Instance.IsMuliplayerLobby && // If it is multiplayer only a single player is allowed per host
+                LobbyStorage.Instance.ClientPlayerId != LobbyStorage.Instance.CurrentPlayer.PlayerId)
+                return false;
+            return true; // For Hot-Seat all players and for multiplayer only the player attached to the current host 
         }
     }
 }
