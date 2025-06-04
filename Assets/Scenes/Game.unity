@@ -5994,9 +5994,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaeabc93ccc1f664eab2bdab828694b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terminatedSound: {fileID: 8300000, guid: b8d3be6692fa151478665968639f7d01, type: 3}
+  terminatedSound: {fileID: 8300000, guid: 2ab31aa73968e674d9b0c8027782ef1b, type: 3}
   playCardSounds:
   - {fileID: 8300000, guid: fcd3ecc20f66da5459133437b0a0cc64, type: 3}
+  - {fileID: 8300000, guid: 55dc1dc7cec90d649928946924ee06f4, type: 3}
 --- !u!1001 &663368177
 PrefabInstance:
   m_ObjectHideFlags: 0
