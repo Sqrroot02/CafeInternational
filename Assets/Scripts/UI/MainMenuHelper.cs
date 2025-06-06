@@ -22,7 +22,7 @@ namespace Assets.Scripts.UI
 
         public static readonly string[] FunnyBotNames = {
             "Botzilla", "KaffeeKarl", "LatteLarry", "Espressina", "Toastinator",
-            "SchnitzelBot", "BrötchenBob", "WurstWilli", "Botfried", "Kekskrümel", "MokkaManni"
+            "SchnitzelBot", "BroetchenBob", "WurstWilli", "Botfried", "Kekskruemel", "MokkaManni"
         };
 
         private static readonly System.Random random = new(31415);
