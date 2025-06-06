@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3550c22d3f8196e44846b988e31e1dbc
+guid: 986a080150ef6e7419ca61c3e11f3219
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5883983530115290027
-    second: India_Britain_Stool_0
+      213: 8749990629417176002
+    second: Bar_img_new_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: India_Britain_Stool_0
+      name: Bar_img_new_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 1024
-        height: 1024
+        height: 820
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 55caa3f6724e75ea0800000000000000
-      internalID: -5883983530115290027
+      spriteID: 2cb48663e163e6970800000000000000
+      internalID: 8749990629417176002
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      India_Britain_Stool_0: -5883983530115290027
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

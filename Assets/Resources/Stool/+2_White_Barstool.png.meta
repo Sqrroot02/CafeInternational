@@ -559,7 +559,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      +2_White_Barstool_0: 4874508862457687729
+      +2_White_Barstool_1: 28189453046239374
+      +2_White_Barstool_10: 8652878263834177608
+      +2_White_Barstool_11: 1342796830819017942
+      +2_White_Barstool_12: -6133907455133015355
+      +2_White_Barstool_13: 107338924591797425
+      +2_White_Barstool_14: -8499399663737741911
+      +2_White_Barstool_15: 3149282523640320237
+      +2_White_Barstool_16: 2622525144191093905
+      +2_White_Barstool_17: -8283281760259199897
+      +2_White_Barstool_2: -7617871345781470360
+      +2_White_Barstool_3: -8853960766640701073
+      +2_White_Barstool_4: 8964014825582081738
+      +2_White_Barstool_5: -7349016755924230818
+      +2_White_Barstool_6: -4598628861460160766
+      +2_White_Barstool_7: 8081617172459821079
+      +2_White_Barstool_8: 5481947240866946662
+      +2_White_Barstool_9: -1195404472624283192
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

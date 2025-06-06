@@ -43,6 +43,11 @@ namespace Assets.Scripts.Models
         public string LobbyIp { get; set; }
 
         public string CardPath { get; set; } = "Normal/";
+        
+        /// <summary>
+        /// The committed seed that is in force for all players    
+        /// </summary>
+        public int Seed { get; set; }
 
         public bool IsMuliplayerLobby { get; set; }
 
@@ -93,7 +98,7 @@ namespace Assets.Scripts.Models
             for (var i = ActivePlayers.Count; i < 4; i++)
             {
                 var botName = MainMenuHelper.GenerateName(true);
-                var botPlayer = new Player(botName, 0, true, false, BotType.IsMischiefBot);
+                var botPlayer = new Player(botName, 0, true, false, BotType.IsWeakBot);
                 ActivePlayers.Add(botPlayer);
                 Debug.Log($"[LobbyStorage] Added bot player '{botName}' to ActivePlayers.");
             }

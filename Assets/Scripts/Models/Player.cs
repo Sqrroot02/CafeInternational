@@ -50,7 +50,7 @@ namespace Assets.Scripts.Models
         public string PlayerSpritePath { get; set; }
 
         public Player()
-        {
+        { 
             
         }
         
@@ -60,12 +60,17 @@ namespace Assets.Scripts.Models
             PlayerScore = playerScore;
             IsBot = isBot;
             LobbyHost = lobbyHost;
-            this.BotType = botType;
+            BotType = botType;
         }
 
         public void SetPlayerManager(PlayerManager playerManager)
         {
             _playerManager = playerManager;
+        }
+
+        public void SetPlayerEliminated(bool playerEliminated)
+        {
+            _playerEliminated = playerEliminated;
         }
 
         public bool IsPlayerEliminated()
@@ -100,6 +105,8 @@ namespace Assets.Scripts.Models
                 {
                     if (chair.OnlyCardAtTheTable())
                     {
+                        var sceneMessageHandler = GameObject.Find("Overlay").GetComponentInChildren<SceneMessageHandler>(true);
+                        sceneMessageHandler.ShowScene($"The move is invalid because the card {chair.PlacedCard.cardData.nationality} {chair.PlacedCard.cardData.gender} is placed with no neighbours");
                         return false;
                     }
                 }
@@ -175,6 +182,10 @@ namespace Assets.Scripts.Models
             {
                 _playerEliminated = true;
                 PlayerGameBar.GetComponentInParent<CanvasGroup>().alpha = 0.6f;
+                var sceneMessageHandler = GameObject.Find("Overlay").GetComponentInChildren<SceneMessageHandler>(true);
+                sceneMessageHandler.ShowScene($"Player {PlayerName} has no more points left to pay the bar fee and will be terminated");
+                
+                PlaySound.Instance.PlaySoundTerminated();
             }
         }
 
@@ -226,7 +237,18 @@ namespace Assets.Scripts.Models
             message.AddBool(IsBot);
             message.AddString(PlayerId);
             message.AddInt((int) BotType);
-            message.AddString(PlayerSpritePath);
+            
+            // Write Sprite Path, if exists
+            if (PlayerSpritePath == null)
+            {
+                Debug.Log("Cannot transfer Sprite-Path. NULL");
+                message.AddBool(false);
+            }
+            else
+            {
+                message.AddBool(true);
+                message.AddString(PlayerSpritePath);
+            }
         }
 
         public void Deserialize(Message message)
@@ -239,7 +261,9 @@ namespace Assets.Scripts.Models
             IsBot = message.GetBool();
             PlayerId = message.GetString();
             BotType = (BotType) message.GetInt();
-            PlayerSpritePath = message.GetString();
+            
+            if (message.GetBool())
+                PlayerSpritePath = message.GetString();   
         }
     }
 }

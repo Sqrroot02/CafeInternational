@@ -16,7 +16,7 @@ public class DropCard : MonoBehaviour, IDropHandler
     {
         GameObject droppedObject = eventData.pointerDrag;
 
-        if (droppedObject != null && droppedObject.GetComponent<Card>().Player == _playerManager.CurrentPlayer && Place(droppedObject.GetComponent<Card>()))
+        if (droppedObject != null && PlayerManager.CurrentPlayerIsAllowedToPlay() && droppedObject.GetComponent<Card>().Player == _playerManager.CurrentPlayer && Place(droppedObject.GetComponent<Card>()))
         {
             CanvasGroup canvasGroup = droppedObject.GetComponent<Card>().GetComponent<CanvasGroup>();
             canvasGroup.alpha = 1f;
@@ -31,7 +31,6 @@ public class DropCard : MonoBehaviour, IDropHandler
             droppedRect.pivot = new Vector2(0.5f, 0.5f);
             droppedRect.sizeDelta = Vector2.zero;
             droppedRect.localScale = Vector3.one;
-
         }
     }
 

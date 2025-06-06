@@ -1,8 +1,5 @@
-using System;
 using Assets.Scripts.Models;
-using Assets.Scripts.Network;
 using Assets.Scripts.Network.Adapter;
-using Assets.Scripts.Network.Messages;
 using Assets.Scripts.Network.Messages.PlayerSalutation;
 using Assets.Scripts.Network.Models;
 using JetBrains.Annotations;
