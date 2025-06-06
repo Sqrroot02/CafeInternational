@@ -20,7 +20,7 @@ namespace Assets.Scripts.UI
 
         public static readonly string[] FunnyBotNames = {
             "Botzilla", "KaffeeKarl", "LatteLarry", "Espressina", "Toastinator",
-            "SchnitzelBot", "Br�tchenBob", "WurstWilli", "Botfried", "Kekskr�mel", "MokkaManni"
+            "SchnitzelBot", "BroetchenBob", "WurstWilli", "Botfried", "Kekskruemel", "MokkaManni"
         };
         
         private static string SymbolSprites = "MainMenu/PlayerSymbols";

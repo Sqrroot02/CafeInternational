@@ -71,7 +71,7 @@ public class MainMenuManager : MonoBehaviour
     public void ShowMainMenu()
     {
         Debug.Log("[MainMenuManager] ShowMainMenu - Returning to main menu.");
-        rulesPanel?.SetActive(false);   
+        rulesPanel?.SetActive(false);
         createLobbyPanel?.SetActive(false);
         mainMenuContainer?.SetActive(true);
         lobbyPanel?.SetActive(false);

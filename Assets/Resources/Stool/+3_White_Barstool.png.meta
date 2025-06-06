@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: b7bd240b379a2ab4e8c3419ab41be367
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4672874364868231689
+    second: +3_White_Barstool_0
+  - first:
+      213: -1338648682936771712
+    second: +3_White_Barstool_1
+  - first:
+      213: -5609132709531743662
+    second: +3_White_Barstool_2
+  - first:
+      213: 8224178484439350901
+    second: +3_White_Barstool_3
+  - first:
+      213: -1415097362420740926
+    second: +3_White_Barstool_4
+  - first:
+      213: -6407955988805598071
+    second: +3_White_Barstool_5
+  - first:
+      213: 5324292328649436466
+    second: +3_White_Barstool_6
+  - first:
+      213: -4324593991756896565
+    second: +3_White_Barstool_7
+  - first:
+      213: -5361597649158385441
+    second: +3_White_Barstool_8
+  - first:
+      213: -1051257017029094600
+    second: +3_White_Barstool_9
+  - first:
+      213: -3346670644421599455
+    second: +3_White_Barstool_10
+  - first:
+      213: -210344350895563891
+    second: +3_White_Barstool_11
+  - first:
+      213: -6234141966678676264
+    second: +3_White_Barstool_12
+  - first:
+      213: 1921403102920595529
+    second: +3_White_Barstool_13
+  - first:
+      213: -363313646433459705
+    second: +3_White_Barstool_14
+  - first:
+      213: -5834955634203879737
+    second: +3_White_Barstool_15
+  - first:
+      213: -260602961497159446
+    second: +3_White_Barstool_16
+  - first:
+      213: -8920497835961313842
+    second: +3_White_Barstool_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: +3_White_Barstool_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 1021
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fdfff9e58d962fb0800000000000000
+      internalID: -4672874364868231689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_1
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 901
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08b52868d1a2c6de0800000000000000
+      internalID: -1338648682936771712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_2
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 20
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25a0656e48b5822b0800000000000000
+      internalID: -5609132709531743662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_3
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 20
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57efa6e02c6222270800000000000000
+      internalID: 8224178484439350901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_4
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 18
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ccc15642709c5ce0800000000000000
+      internalID: -1415097362420740926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_5
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 9
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 984c7ee9afd5217a0800000000000000
+      internalID: -6407955988805598071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_6
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 12
+        width: 63
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23dac71e9afa3e940800000000000000
+      internalID: 5324292328649436466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_7
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 5
+        width: 25
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc6aa8b5da4fbf3c0800000000000000
+      internalID: -4324593991756896565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_8
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 17
+        width: 18
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd058555857c795b0800000000000000
+      internalID: -5361597649158385441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_9
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 20
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8331854105f2961f0800000000000000
+      internalID: -1051257017029094600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_10
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 20
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12fd503c7cc3e81d0800000000000000
+      internalID: -3346670644421599455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_11
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 20
+        width: 13
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8b1c546de4b41df0800000000000000
+      internalID: -210344350895563891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_12
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 2
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dc23c449e0eb79a0800000000000000
+      internalID: -6234141966678676264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_13
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 5
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9485aeb21f13aaa10800000000000000
+      internalID: 1921403102920595529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_14
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 0
+        width: 28
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 702284ad92045faf0800000000000000
+      internalID: -363313646433459705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_15
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 4
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c61d1ff3c2160fa0800000000000000
+      internalID: -5834955634203879737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_16
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 10
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae80c8cbcf6226cf0800000000000000
+      internalID: -260602961497159446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: +3_White_Barstool_17
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 0
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec592e32b76043480800000000000000
+      internalID: -8920497835961313842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      +3_White_Barstool_0: -4672874364868231689
+      +3_White_Barstool_1: -1338648682936771712
+      +3_White_Barstool_10: -3346670644421599455
+      +3_White_Barstool_11: -210344350895563891
+      +3_White_Barstool_12: -6234141966678676264
+      +3_White_Barstool_13: 1921403102920595529
+      +3_White_Barstool_14: -363313646433459705
+      +3_White_Barstool_15: -5834955634203879737
+      +3_White_Barstool_16: -260602961497159446
+      +3_White_Barstool_17: -8920497835961313842
+      +3_White_Barstool_2: -5609132709531743662
+      +3_White_Barstool_3: 8224178484439350901
+      +3_White_Barstool_4: -1415097362420740926
+      +3_White_Barstool_5: -6407955988805598071
+      +3_White_Barstool_6: 5324292328649436466
+      +3_White_Barstool_7: -4324593991756896565
+      +3_White_Barstool_8: -5361597649158385441
+      +3_White_Barstool_9: -1051257017029094600
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
