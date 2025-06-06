@@ -23,8 +23,6 @@ public class MainMenuManager : MonoBehaviour
 
     void Awake()
     {
-        // Event abonnieren, um auf Verbindungsabbr�che zu reagieren
-        NetworkClientAdapter.Instance.Disconnected += OnDisconnected;
         Debug.Log("[MainMenuManager] Awake - Subscribed to Disconnected event.");
     }
 
