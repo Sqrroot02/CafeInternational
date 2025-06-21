@@ -182,7 +182,7 @@ namespace Game.BotBehaviour
         /// <summary>
         /// Fills the dictionary _nationalityToChairListDictionary with nationalities as keys and List of Chairs as values
         /// </summary>
-        private void MapNationalityToChairListDictionary()
+        public void MapNationalityToChairListDictionary()
         {
             _nationalityToChairListDictionary.Add(Nationality.Joker, new List<Chair>(_chairs)); // The Joker Nationality is placeable at every chair, so every chair is saved in the list
             foreach (Chair chair in _chairs)

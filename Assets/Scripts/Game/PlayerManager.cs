@@ -84,7 +84,7 @@ namespace Assets.Scripts.Game
             {
                 StartCoroutine(WaitForBotPlay(4));
                 StartCoroutine(WaitForUpdate(5));
-            }        
+            }
             Instance = this;
         }
 
@@ -282,7 +282,6 @@ namespace Assets.Scripts.Game
         IEnumerator WaitForBotPlay(int seconds = 2)
         {
             yield return new WaitForSeconds(seconds);
-            //TODO: für lars -> richtiges bot beahviour reinpacken 
             if (CurrentPlayer.BotType == BotType.IsWeakBot)
                 _easyBotBehaviour.Play(CurrentPlayer, _firstMove);
             else

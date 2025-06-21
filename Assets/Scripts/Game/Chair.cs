@@ -10,13 +10,18 @@ public class Chair : MonoBehaviour, IMessageSerializable
     public GameObject FirstTableGO;
     public GameObject SecondTableGO; // Can be null
     public int ChairID;
-    private Table _firstTable;
-    private Table _secondTable;
+    public Table _firstTable;
+    public Table _secondTable;
     public Card PlacedCard { private set; get; }
     
     private SceneMessageHandler _sceneMessageHandler;
 
-    private void Awake()
+    public void Awake()
+    {
+        Initialize();
+    }
+
+    protected virtual void Initialize()
     {
         _firstTable = FirstTableGO.GetComponent<Table>();
         if (SecondTableGO != null)

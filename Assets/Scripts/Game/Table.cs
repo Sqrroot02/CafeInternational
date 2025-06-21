@@ -16,6 +16,11 @@ public class Table : MonoBehaviour, IMessageSerializable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Initialize();
+    }
+
+    protected virtual void Initialize()
+    {
         placedCards = new List<Card>();
         _tableImage = GetComponent<Image>();
         string spriteName = "Table/" + nationality + "_Table";
