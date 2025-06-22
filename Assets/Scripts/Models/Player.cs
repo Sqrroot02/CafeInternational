@@ -119,6 +119,7 @@ namespace Assets.Scripts.Models
             foreach (var chair in Chairs)
             {
                 TurnHistory.CurrentTurnHistory.AddChair(chair);
+                chair.PlacedCard.JokerIdentity = Nationality.Joker;
                 chair.PlacedCard.ResetCardPosition();
                 chair.RemovePlacedCard();
             }
