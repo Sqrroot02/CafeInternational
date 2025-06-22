@@ -43,7 +43,10 @@ namespace Assets.Scripts.Game
         private EasyBotBehaviour _easyBotBehaviour;
         private ComplexBotBehaviour _complexBotBehaviour;
         private Bar _bar;
-        public bool BoolGameEnded { get; private set; }
+        public static bool BoolGameEnded { get; private set; }
+
+        public static float DefaultWaitForBotPlay = 2f;
+        public static float DefaultWaitForUpdate = 5f;
 
         private void Awake()
         {
@@ -84,8 +87,8 @@ namespace Assets.Scripts.Game
         
             if (CurrentPlayer.IsBot)
             {
-                StartCoroutine(WaitForBotPlay(4));
-                StartCoroutine(WaitForUpdate(5));
+                StartCoroutine(WaitForBotPlay(DefaultWaitForBotPlay + 2));
+                StartCoroutine(WaitForUpdate(DefaultWaitForUpdate + 2));
             }
         }
 
@@ -187,8 +190,8 @@ namespace Assets.Scripts.Game
                     {
                         if (CurrentPlayer.IsBot)
                         {
-                            StartCoroutine(WaitForBotPlay());
-                            StartCoroutine(WaitForUpdate());
+                            StartCoroutine(WaitForBotPlay(DefaultWaitForBotPlay));
+                            StartCoroutine(WaitForUpdate(DefaultWaitForUpdate));
                         }
                     }
                 }
@@ -279,7 +282,7 @@ namespace Assets.Scripts.Game
             return false;
         }
     
-        IEnumerator WaitForBotPlay(int seconds = 2)
+        IEnumerator WaitForBotPlay(float seconds = 2)
         {
             yield return new WaitForSeconds(seconds);
             if (CurrentPlayer.BotType == BotType.IsWeakBot)
@@ -288,7 +291,7 @@ namespace Assets.Scripts.Game
                 _complexBotBehaviour.MakeComplexTurn(CurrentPlayer, Players, _firstMove, CurrentPlayer.BotType == BotType.IsMischiefBot);
         }
     
-        IEnumerator WaitForUpdate(int seconds = 5)
+        IEnumerator WaitForUpdate(float seconds = 5)
         {
             yield return new WaitForSeconds(seconds);
             UpdatePlayer();

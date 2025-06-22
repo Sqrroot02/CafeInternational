@@ -19,7 +19,11 @@ namespace Assets.Tests
                 player.BotType = BotType.IsScoringBot;
             }
             UnityEngine.SceneManagement.SceneManager.LoadScene("Game"); // Launch the game
-            yield return new WaitUntil(() => PlayerManager.Instance.BoolGameEnded);
+            
+            PlayerManager.DefaultWaitForBotPlay = 0.1f;
+            PlayerManager.DefaultWaitForUpdate = 0.2f;
+            
+            yield return new WaitUntil(() => PlayerManager.BoolGameEnded);
         }
     }
 }
