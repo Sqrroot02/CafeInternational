@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
-
-namespace Tests.PlayMode.ComplexBotBehaviourTest
+namespace Tests.ComplexBotBehaviourTest
 {
     public class TestChair : Chair
     {

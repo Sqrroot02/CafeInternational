@@ -1,9 +1,8 @@
 using NUnit.Framework;
 using Assets.Scripts.Models;
 using UnityEngine;
-using Tests.EditMode.ComplexBotBehaviourTest;
 
-namespace Tests.PlayMode.ComplexBotBehaviourTest
+namespace Tests.ComplexBotBehaviourTest
 {
     public class ChairMappingTests
     {

@@ -43,9 +43,11 @@ namespace Assets.Scripts.Game
         private EasyBotBehaviour _easyBotBehaviour;
         private ComplexBotBehaviour _complexBotBehaviour;
         private Bar _bar;
+        public bool BoolGameEnded { get; private set; }
 
         private void Awake()
         {
+            Instance = this;
             // Assign TurnCommit Handler this Manager for operating after turns of other players
             TurnCommitHandler.Manager = this;
             
@@ -85,7 +87,6 @@ namespace Assets.Scripts.Game
                 StartCoroutine(WaitForBotPlay(4));
                 StartCoroutine(WaitForUpdate(5));
             }
-            Instance = this;
         }
 
         /// <summary>
@@ -190,8 +191,6 @@ namespace Assets.Scripts.Game
                             StartCoroutine(WaitForUpdate());
                         }
                     }
-                    
-                    
                 }
                 else
                 {
@@ -224,6 +223,7 @@ namespace Assets.Scripts.Game
     
         public void GameEnded()
         {
+            BoolGameEnded = true;
             Debug.Log("Game ended");
         
             SubtractPlayerCardPoints();

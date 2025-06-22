@@ -1,0 +1,7 @@
+{
+  "name": "Scripts",
+  "references": [
+    "Unity.TextMeshPro",
+    "Unity.Mathematics"
+  ]
+}

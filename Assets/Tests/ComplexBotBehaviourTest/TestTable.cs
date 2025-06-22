@@ -1,4 +1,4 @@
-namespace Tests.PlayMode.ComplexBotBehaviourTest
+namespace Tests.ComplexBotBehaviourTest
 {
     public class TestTable : Table
     {

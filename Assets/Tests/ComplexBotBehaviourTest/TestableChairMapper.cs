@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Models;
 using UnityEngine;
 
-namespace Tests.EditMode.ComplexBotBehaviourTest
+namespace Tests.ComplexBotBehaviourTest
 {
     public class TestableChairMapper : MonoBehaviour
     {

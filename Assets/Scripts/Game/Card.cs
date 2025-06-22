@@ -2,7 +2,6 @@ using System;
 using Assets.Scripts.Game;
 using Assets.Scripts.Models;
 using Riptide;
-using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

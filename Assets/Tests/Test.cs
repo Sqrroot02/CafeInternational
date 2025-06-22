@@ -1,15 +1,15 @@
 using System.Collections;
-using NUnit.Framework;
+using Assets.Scripts.Game;
 using Assets.Scripts.Models;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Tests.PlayMode.ExploroationTests
+namespace Assets.Tests
 {
-    public class OnlyBotRound
+    public class Test
     {
-        [Test]
-        public void TestPlayBotsVsBots()
+        [UnityTest]
+        public IEnumerator TestPlayBotsVsBots()
         {
             new GameObject().AddComponent<LobbyStorage>(); // Instantiate LobbyStorage
             LobbyStorage.Instance.InitializeLobby("TestPlayer", "TestLobby", false); // Setup the lobby
@@ -19,6 +19,7 @@ namespace Tests.PlayMode.ExploroationTests
                 player.BotType = BotType.IsScoringBot;
             }
             UnityEngine.SceneManagement.SceneManager.LoadScene("Game"); // Launch the game
+            yield return new WaitUntil(() => PlayerManager.Instance.BoolGameEnded);
         }
     }
 }
