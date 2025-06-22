@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Assets.Scripts.Game;
 using Assets.Scripts.Models;
 using Assets.Scripts.Network.Messages.StartGame;
@@ -32,7 +33,17 @@ namespace Assets.Scripts.Network.Messages.TurnCommit
 				if (change.Action == TurnCommitAction.PlaceCardOnChair)
 				{
 					if (change.ChairContext > -1 && change.CardContext > -1)
-						Manager.PlayCard(change.CardContext, change.ChairContext, -1, obj.Player.PlayerId);
+					{
+						if (change.JokerIdentity != null)
+						{
+							var identity = Enum.Parse<Nationality>(change.JokerIdentity);
+							Manager.PlayCard(change.CardContext, change.ChairContext, -1, obj.Player.PlayerId, identity);	
+						}
+						else
+						{
+							Manager.PlayCard(change.CardContext, change.ChairContext, -1, obj.Player.PlayerId);	
+						}
+					}
 				}
 
 				if (change.Action == TurnCommitAction.PlaceCardOnBar)

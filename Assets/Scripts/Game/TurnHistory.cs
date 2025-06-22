@@ -77,7 +77,8 @@ namespace Assets.Scripts.Game
 			{
 				Action = TurnCommitAction.PlaceCardOnChair,
 				ChairContext = x.ChairID,
-				CardContext = x.PlacedCard.cardData.cardID
+				CardContext = x.PlacedCard.cardData.cardID,
+				JokerIdentity = x.PlacedCard.JokerIdentity != Nationality.Joker ? x.PlacedCard.JokerIdentity.ToString() : null
 			}).ToList();
 
 		public List<TurnCommitChangeMessage> MessagesOfBarStool =>

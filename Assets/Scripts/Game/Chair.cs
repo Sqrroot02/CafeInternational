@@ -105,7 +105,7 @@ public class Chair : MonoBehaviour, IMessageSerializable
                             _secondTable.AddPlacedCard(card);
                         }
 
-                        if (card.cardData.nationality == Nationality.Joker)
+                        if (card.cardData.nationality == Nationality.Joker && card.JokerIdentity == Nationality.Joker)
                         {
                             if (_secondTable != null && _firstTable.nationality != _secondTable.nationality)
                             {
@@ -166,7 +166,8 @@ public class Chair : MonoBehaviour, IMessageSerializable
             _secondTable.placedCards.Remove(PlacedCard);
             _secondTable.AddPlacedCard(card);
         }
-
+        
+        PlacedCard.JokerIdentity = Nationality.Joker;
         PlacedCard.PlayerBarSlot = card.PlayerBarSlot;
         PlacedCard.ResetCardPosition();
         card.Player.PlayerHand.Add(PlacedCard);
