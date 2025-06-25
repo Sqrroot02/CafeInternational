@@ -18,6 +18,7 @@ public class PlayerSlotHelper : MonoBehaviour
     public TMP_Dropdown botStrengthDropdown;
     public LobbyPanelManager lobbyPanelManager;
     public GameObject placeHolder;
+    public GameObject placeHolder2;
     public SceneMessageHandler sceneMessageHandler;
     public Image playerPicture;
 
@@ -52,6 +53,7 @@ public class PlayerSlotHelper : MonoBehaviour
 
             botStrengthDropdown.gameObject.SetActive(player.IsBot);
             placeHolder.SetActive(!player.IsBot);
+
             Debug.Log($"[PlayerSlotHelper] SetUp: Bot dropdown active = {player.IsBot}, Placeholder active = {!player.IsBot}");
         }
     }
@@ -62,10 +64,49 @@ public class PlayerSlotHelper : MonoBehaviour
     public void InitMultiplayerLobby()
     {
         Debug.Log("[PlayerSlotHelper] Init Multiplayer Lobby.");
+
         DeactivateInteractives();
-        if (actionButton != null) actionButton.gameObject.SetActive(false);
-        if (placeHolder != null) placeHolder.gameObject.SetActive(true);
-        
+        Debug.Log("[PlayerSlotHelper] Interaktive Elemente deaktiviert.");
+
+        if (actionButton != null)
+        {
+            actionButton.gameObject.SetActive(false);
+            Debug.Log("[PlayerSlotHelper] ActionButton deaktiviert.");
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerSlotHelper] ActionButton ist null.");
+        }
+
+        if (placeHolder != null)
+        {
+            placeHolder.gameObject.SetActive(true);
+            Debug.Log($"[PlayerSlotHelper] PlaceHolder {(assignedPlayer.IsBot ? "deaktiviert" : "aktiviert")} (assignedPlayer.IsBot = {assignedPlayer.IsBot}).");
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerSlotHelper] PlaceHolder ist null.");
+        }
+
+        if (botStrengthDropdown != null)
+        {
+            botStrengthDropdown.gameObject.SetActive(assignedPlayer.IsBot);
+            Debug.Log($"[PlayerSlotHelper] BotStrengthDropdown {(assignedPlayer.IsBot ? "aktiviert" : "deaktiviert")} (assignedPlayer.IsBot = {assignedPlayer.IsBot}).");
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerSlotHelper] BotStrengthDropdown ist null.");
+        }
+
+        if (placeHolder2 != null)
+        {
+            placeHolder2.gameObject.SetActive(!assignedPlayer.IsBot);
+            Debug.Log($"[PlayerSlotHelper] PlaceHolder2 {(assignedPlayer.IsBot ? "deaktiviert" : "aktiviert")} (assignedPlayer.IsBot = {assignedPlayer.IsBot}).");
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerSlotHelper] PlaceHolder2 ist null.");
+        }
     }
 
     /// <summary>

@@ -45,7 +45,6 @@ public class LobbyPanelManager : MonoBehaviour
         SetLobbyPortLabel("Lobbyport: " + LobbyStorage.Instance.LobbyPort);
 
         SetPlayerNames();
-        if(LobbyStorage.Instance.IsMuliplayerLobby) initMultiplayerLobby();
     }
 
     private void initMultiplayerLobby()
@@ -129,7 +128,7 @@ public class LobbyPanelManager : MonoBehaviour
         LobbyStorage.Instance.ActivePlayers = message.Players.ToList();
         Debug.Log($"[LobbyPanelManager] LobbyUpdate: Updated active players list, count = {message.Players.Length}");
 
-        SetPlayerNames();
+        initMultiplayerLobby();
 
         // Update lobby metadata
         LobbyStorage.Instance.LobbyName = message.LobbyName;
@@ -156,6 +155,7 @@ public class LobbyPanelManager : MonoBehaviour
         int limit = Mathf.Min(players.Count, playerSlots.Count);
         Debug.Log($"[LobbyPanelManager] SetPlayerNames: Mapping {limit} players to UI slots");
 
+        
         for (int i = 0; i < limit; i++)
         {
             if (players[i] != null)
@@ -168,6 +168,9 @@ public class LobbyPanelManager : MonoBehaviour
                 Debug.LogWarning($"[LobbyPanelManager] SetPlayerNames: Player at index {i} is null");
             }
         }
+
+
+        if (LobbyStorage.Instance.IsMuliplayerLobby) initMultiplayerLobby();
     }
 
     // ------------------------------

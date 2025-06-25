@@ -173,9 +173,9 @@ namespace Assets.Scripts.UI
 
             foreach (char c in input)
             {
-                if (!char.IsLetter(c))
+                if (!char.IsLetter(c) && c != ' ')
                 {
-                    Debug.LogWarning("[MainMenuHelper] Input contains non-letter characters.");
+                    Debug.LogWarning("[MainMenuHelper] Input contains invalid characters (only letters and spaces are allowed).");
                     return false;
                 }
             }
