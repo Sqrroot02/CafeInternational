@@ -128,6 +128,7 @@ public class LobbyPanelManager : MonoBehaviour
         LobbyStorage.Instance.ActivePlayers = message.Players.ToList();
         Debug.Log($"[LobbyPanelManager] LobbyUpdate: Updated active players list, count = {message.Players.Length}");
 
+        SetPlayerNames();
         initMultiplayerLobby();
 
         // Update lobby metadata
