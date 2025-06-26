@@ -107,6 +107,8 @@ public class JoinLobbyPanelManager : MonoBehaviour
 
         NetworkRouter.SendToServer(msg, MessageType.PlayerSalutation);
         LobbyStorage.Instance.ClientPlayerId = msg.PlayerId;
+
+        mainMenuManager.ShowLobby();
     }
 
     /// <summary>
