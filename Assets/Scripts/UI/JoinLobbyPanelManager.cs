@@ -94,8 +94,6 @@ public class JoinLobbyPanelManager : MonoBehaviour
 
         Debug.Log($"[JoinLobbyPanelManager] OnConnected: Connection established to {ip}:{port}");
 
-        mainMenuManager.ShowLobby();
-
         // Ereignis abmelden
         NetworkClientAdapter.Instance.Connected -= OnConnected;
 

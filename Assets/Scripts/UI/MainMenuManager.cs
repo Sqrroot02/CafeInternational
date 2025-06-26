@@ -2,6 +2,7 @@ using System;
 using Assets.Scripts.Models;
 using Assets.Scripts.Network.Adapter;
 using JetBrains.Annotations;
+using Assets.Scripts.Network.Messages.PlayerLobbyAction;
 using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
@@ -24,6 +25,7 @@ public class MainMenuManager : MonoBehaviour
     void Awake()
     {
         Debug.Log("[MainMenuManager] Awake - Subscribed to Disconnected event.");
+        PlayerLobbyActionHandler.mainMenuManager = this;
     }
 
     // Event-Handler f�r Verbindungsabbruch

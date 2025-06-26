@@ -1,6 +1,8 @@
 ﻿using JetBrains.Annotations;
 using Riptide;
 using UnityEngine;
+using Assets.Scripts.Network.Messages.PlayerLobbyAction;
+
 
 namespace Assets.Scripts.Network.Messages.PlayerLobbyAction
 {
@@ -11,6 +13,8 @@ namespace Assets.Scripts.Network.Messages.PlayerLobbyAction
 	{
 		[CanBeNull] 
 		public static LobbyPanelManager Manager;
+
+		public static MainMenuManager mainMenuManager;
 		
 		/// <summary>
 		/// Handles player actions
@@ -27,6 +31,8 @@ namespace Assets.Scripts.Network.Messages.PlayerLobbyAction
 			
 			var obj = message.GetSerializable<PlayerLobbyActionMessage>();
 			Manager.LobbyUpdate(obj);
-		}
+
+            mainMenuManager.ShowLobby();
+        }
 	}
 }
