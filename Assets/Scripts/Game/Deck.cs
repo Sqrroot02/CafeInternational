@@ -72,7 +72,10 @@ public class Deck : MonoBehaviour
             newCardObject.GetComponent<RectTransform>().localScale = new Vector3(0.85f, 0.85f, 1);
             newCardObject.GetComponent<Card>().SetCardData(cardData);
             newCardObject.GetComponent<Card>().Player = player;
-            return newCardObject.GetComponent<Card>();
+            var card = newCardObject.GetComponent<Card>();
+            if (cardData.nationality == Nationality.Joker)
+                card.JokerIdentity = Nationality.Joker;
+            return card;
         }
         // The Game Ends if the 4th last card in the stack is drawn
         _playerManager.GameEnded();
